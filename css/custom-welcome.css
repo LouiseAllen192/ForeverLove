@@ -1,0 +1,52 @@
+
+body {
+    margin-top: 50px;
+}
+.full {
+    background: url('http://gdurl.com/3okf') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+.navbar-nav{
+    margin-top: 30px;
+}
+
+.nav-text ul{
+    text-transform: uppercase;
+    font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.panel-transparent {
+    background: none;
+    float: inherit;
+}
+
+.panel-transparent .panel-body{
+    background: rgba(46, 51, 56, 0.2)!important;
+}
+
+.panel-primary {
+    border-color: #990000;
+}
+
+.panel-body{
+
+    align-content: center;
+    color: white;
+
+}
+
+.btn-info {
+    color: #fff;
+    background-color: #990000;
+    border-color: #8c8c8c;
+}
+
+
+
+
