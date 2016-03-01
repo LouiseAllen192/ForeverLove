@@ -3,7 +3,10 @@
 
 <head>
 
-    <?php include("includes/metatags.html"); ?>
+    <?php
+    require_once 'core/init.php';
+    include("includes/metatags.html");
+    ?>
     <title>Blind Date Page</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/custom-base-page.css" rel="stylesheet">
