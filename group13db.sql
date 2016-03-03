@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 01, 2016 at 08:41 PM
+-- Generation Time: Mar 03, 2016 at 01:25 PM
 -- Server version: 5.7.9
--- PHP Version: 7.0.0
+-- PHP Version: 5.6.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -65,7 +65,9 @@ CREATE TABLE IF NOT EXISTS `banned_reports` (
   `Reportee_id` int(11) NOT NULL,
   `Content` text NOT NULL,
   `Resolved` tinyint(1) NOT NULL,
-  PRIMARY KEY (`Report_id`)
+  PRIMARY KEY (`Report_id`),
+  KEY `Reporter_id` (`Reporter_id`),
+  KEY `Reportee_id` (`Reportee_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -80,7 +82,8 @@ CREATE TABLE IF NOT EXISTS `banned_users` (
   `Report_id` int(11) NOT NULL,
   `Start_Date` date NOT NULL,
   `End_Date` date NOT NULL,
-  PRIMARY KEY (`User_id`)
+  PRIMARY KEY (`User_id`),
+  KEY `Report_id` (`Report_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -159,7 +162,9 @@ CREATE TABLE IF NOT EXISTS `messages` (
   `Date_Received` datetime NOT NULL,
   `Message_Text` text NOT NULL,
   `Profile_Visable` tinyint(1) NOT NULL,
-  PRIMARY KEY (`Message_id`)
+  PRIMARY KEY (`Message_id`),
+  KEY `Sender_id` (`Sender_id`),
+  KEY `Recipient_id` (`Recipient_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
