@@ -3,25 +3,9 @@
 
 class UserPrefrences{
 
-    private $userID;
-    private $tagLine;
-    private $city;
-    private $gender;
-    private $seeking;
-    private $intent;
-    private $dateob;
-    private $heigth;
-    private $ethnicity;
-    private $bodyType;
-    private $religion;
-    private $maritalStatus;
-    private $income;
-    private $hasChildren;
-    private $wantsChildren;
-    private $smoker;
-    private $drinker;
-    private $aboutMe;
-
+    private $userID, $tagLine, $city, $gender, $seeking, $intent, $dateob;
+    private $heigth, $ethnicity, $bodyType, $religion, $maritalStatus, $income;
+    private $hasChildren, $wantsChildren, $smoker, $drinker, $aboutMe;
 
     public function __construct($uid, $tLine, $cy, $gen, $seek, $i, $dob, $ht, $eth,
                                 $btype, $rel, $mstat, $inc, $hChil, $wChil, $smk, $drk, $abMe)

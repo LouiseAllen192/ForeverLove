@@ -3,46 +3,12 @@
 
 class Hobbies{
 
-    private $userID;
-    private $reading;
-    private $cinema;
-    private $shopping;
-    private $socializing;
-    private $travelling;
-    private $walking;
-    private $exercise;
-    private $soccer;
-    private $dancing;
-    private $horses;
-    private $running;
-    private $eatingOut;
-    private $painting;
-    private $cooking;
-    private $computers;
-    private $bowling;
-    private $writing;
-    private $skiing;
-    private $crafts;
-    private $golf;
-    private $chess;
-    private $gymnastics;
-    private $cycling;
-    private $swimming;
-    private $surfing;
-    private $hiking;
-    private $videoGames;
-    private $vollyball;
-    private $badminton;
-    private $gym;
-    private $parkour;
-    private $fashion;
-    private $yoga;
-    private $basketball;
-    private $boxing;
+    private $userID, $reading, $cinema, $shopping, $socializing, $travelling, $walking;
+    private $exercise, $soccer, $dancing, $horses, $running, $eatingOut, $painting, $cooking;
+    private $computers, $bowling, $writing, $skiing, $crafts, $golf, $chess, $gymnastics;
+    private $cycling, $swimming, $surfing, $hiking, $videoGames, $vollyball, $badminton;
+    private $gym, $parkour, $fashion, $yoga, $basketball, $boxing;
     private $uniqueHobby;
-
-
-
 
 
     public function __construct($uid, $red, $cin, $shop, $soci, $trav, $walk, $ex, $soc, $dan, $hor, $run,
