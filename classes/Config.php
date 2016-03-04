@@ -2,7 +2,7 @@
 class Config{
     /*
      * Access the GLOBALS config array using a directory path
-     * (easier to remember eg. mysql/username
+     * (easier to remember eg. get(mysql/username)
      */
     public static function get($path = null){
         if($path){

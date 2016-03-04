@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 03, 2016 at 01:25 PM
+-- Generation Time: Mar 04, 2016 at 09:20 PM
 -- Server version: 5.7.9
 -- PHP Version: 5.6.16
 
@@ -49,7 +49,8 @@ CREATE TABLE IF NOT EXISTS `admiin` (
   `Last_Name` varchar(32) NOT NULL,
   `Password` varchar(32) NOT NULL,
   `Email` varchar(128) NOT NULL,
-  PRIMARY KEY (`Admin_id`)
+  PRIMARY KEY (`Admin_id`),
+  UNIQUE KEY `Email` (`Email`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -210,7 +211,8 @@ CREATE TABLE IF NOT EXISTS `registration_details` (
   `Last_Name` varchar(32) NOT NULL,
   `Password` varchar(32) NOT NULL,
   `Email` varchar(128) NOT NULL,
-  PRIMARY KEY (`User_id`)
+  PRIMARY KEY (`User_id`),
+  UNIQUE KEY `Username` (`Username`,`Email`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
