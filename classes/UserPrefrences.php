@@ -7,27 +7,29 @@ class UserPrefrences{
     private $heigth, $ethnicity, $bodyType, $religion, $maritalStatus, $income;
     private $hasChildren, $wantsChildren, $smoker, $drinker, $aboutMe;
 
-    public function __construct($uid, $tLine, $cy, $gen, $seek, $i, $dob, $ht, $eth,
-                                $btype, $rel, $mstat, $inc, $hChil, $wChil, $smk, $drk, $abMe)
-    {
+    public function __construct($uid){
         $this->userID = $uid;
-        $this->tagLine = $tLine;
-        $this->city = $cy;
-        $this->gender = $gen;
-        $this->seeking = $seek;
-        $this->intent = $i;
-        $this->dateob = $dob;
-        $this->heigth = $ht;
-        $this->ethnicity = $eth;
-        $this->bodyType = $btype;
-        $this->religion = $rel;
-        $this->maritalStatus = $mstat;
-        $this->income = $inc;
-        $this->hasChildren = $hChil;
-        $this->wantsChildren = $wChil;
-        $this->smoker = $smk;
-        $this->drinker = $drk;
-        $this->aboutMe = $abMe;
+        setPreferences(DB::getInstance()->get('preference_details', ['User_id', '=', $uid])->results()[0]);
+    }
+
+    private function setPreferences($preferences){
+        $this->tagLine = $preferences->Tag_Line;
+        $this->city = $preferences->City;
+        $this->gender = $preferences->Gender;
+        $this->seeking = $preferences->Seeking;
+        $this->intent = $preferences->Intent;
+        $this->dateob = $preferences->Date_Of_Birth;
+        $this->heigth = $preferences->Height;
+        $this->ethnicity = $preferences->Ethnicity;
+        $this->bodyType = $preferences->Body_Type;
+        $this->religion = $preferences->Religion;
+        $this->maritalStatus = $preferences->Marital_Status;
+        $this->income = $preferences->Income;
+        $this->hasChildren = $preferences->Has_Children;
+        $this->wantsChildren = $preferences->Wants_Children;
+        $this->smoker = $preferences->Smoker;
+        $this->drinker = $preferences->Drinker;
+        $this->aboutMe = $preferences->About_Me;
     }
 
 

@@ -8,23 +8,26 @@ class User{
     private $lastName;
     private $password;
     private $email;
-    private $accDetails;
-    private $prefrences;
-    private $userHobbies;
+    private $accDetails; // UserAcountDetails Object
+    private $prefrences; // UserPrefrences Object
+    private $userHobbies; // UserHobbies Object
 
 
-    public function __construct($uid, $uname, $fname, $lname, $passw, $em, $accDet, $pref, $hobb){
+    public function __construct($uid, $accDet, $uPref, $uHob){
         $this->userID = $uid;
-        $this->userName = $uname;
-        $this->firstName = $fname;
-        $this->lastName = $lname;
-        $this->password = $passw;
-        $this->email = $em;
         $this->accDetails = $accDet;
-        $this->prefrences = $pref;
-        $this->userHobbies = $hobb;
+        $this->prefrences = $uPref;
+        $this->userHobbies = $uHob;
+        setUserDetails(DB::getInstance()->get('registration_details', ['User_id', '=', $uid])->results()[0]);
     }
 
+    private function setUserDetails($details){
+        $this->userName = $details->Username;
+        $this->firstName = $details->First_Name;
+        $this->lastName = $details->ULast_Name;
+        $this->password = $details->Password;
+        $this->email = $details->Email;
+    }
 
     public function getUserId(){
         return $this->userID;

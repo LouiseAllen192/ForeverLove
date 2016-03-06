@@ -11,49 +11,48 @@ class Hobbies{
     private $uniqueHobby;
 
 
-    public function __construct($uid, $red, $cin, $shop, $soci, $trav, $walk, $ex, $soc, $dan, $hor, $run,
-                                $eato, $paint, $cook, $comp, $bowl, $writ, $ski, $cra, $gol, $che, $gymna,
-                                $cyc, $swim, $surf, $hik, $vidg, $volly, $badm, $gy, $park, $fas, $yog,
-                                $baskb, $box, $uni){
+    public function __construct($uid){
         $this->userID = $uid;
-        $this->reading = $red;
-        $this->cinema = $cin;
-        $this->shopping = $shop;
-        $this->socializing = $soci;
-        $this->travelling = $trav;
-        $this->walking = $walk;
-        $this->exercise = $ex;
-        $this->soccer = $soc;
-        $this->dancing = $dan;
-        $this->horses = $hor;
-        $this->running = $run;
-        $this->eatingOut = $eato;
-        $this->painting = $paint;
-        $this->cooking = $cook;
-        $this->computers = $comp;
-        $this->bowling = $bowl;
-        $this->writing = $writ;
-        $this->skiing = $ski;
-        $this->crafts = $cra;
-        $this->golf = $gol;
-        $this->chess = $che;
-        $this->gymnastics = $gymna;
-        $this->cycling = $cyc;
-        $this->swimming = $swim;
-        $this->surfing = $surf;
-        $this->hiking = $hik;
-        $this->videoGames = $vidg;
-        $this->vollyball = $volly;
-        $this->badminton = $badm;
-        $this->gym = $gy;
-        $this->parkour = $park;
-        $this->fashion = $fas;
-        $this->yoga = $yog;
-        $this->basketball = $baskb;
-        $this->boxing = $box;
-        $this->uniqueHobby = $uni;
+        setHobbies(DB::getInstance()->get('hobbies', ['User_id', '=', $uid])->results()[0]);
+    }
 
-
+    private function setHobbies($hobbies){
+        $this->reading = $hobbies->Reading;
+        $this->cinema = $hobbies->Cinema;
+        $this->shopping = $hobbies->Shopping;
+        $this->socializing = $hobbies->Socializing;
+        $this->travelling = $hobbies->Travelling;
+        $this->walking = $hobbies->Walking;
+        $this->exercise = $hobbies->Exercise;
+        $this->soccer = $hobbies->Soccer;
+        $this->dancing = $hobbies->Dancing;
+        $this->horses = $hobbies->Horses;
+        $this->running = $hobbies->Running;
+        $this->eatingOut = $hobbies->Eating_Out;
+        $this->painting = $hobbies->Painting;
+        $this->cooking = $hobbies->Cooking;
+        $this->computers = $hobbies->Computers;
+        $this->bowling = $hobbies->Bowling;
+        $this->writing = $hobbies->Writing;
+        $this->skiing = $hobbies->Skiing;
+        $this->crafts = $hobbies->Crafts;
+        $this->golf = $hobbies->Golf;
+        $this->chess = $hobbies->Chess;
+        $this->gymnastics = $hobbies->Gymnastics;
+        $this->cycling = $hobbies->Cycling;
+        $this->swimming = $hobbies->Swimming;
+        $this->surfing = $hobbies->Surfing;
+        $this->hiking = $hobbies->Hiking;
+        $this->videoGames = $hobbies->Video_Games;
+        $this->vollyball = $hobbies->VolleyBall;
+        $this->badminton = $hobbies->Badminton;
+        $this->gym = $hobbies->Gym;
+        $this->parkour = $hobbies->Parkour;
+        $this->fashion = $hobbies->Fashion;
+        $this->yoga = $hobbies->Yoga;
+        $this->basketball = $hobbies->Basketball;
+        $this->boxing = $hobbies->Boxing;
+        $this->uniqueHobby = $hobbies->Unique_Hobbie;
     }
 
     public function getUserID(){
