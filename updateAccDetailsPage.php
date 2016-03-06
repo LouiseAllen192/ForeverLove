@@ -7,7 +7,8 @@
     require_once 'core/init.php';
     include("includes/metatags.html");
     ?>
-    <title>Settings Page</title>
+
+    <title>Update Account Details</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/custom-base-page.css" rel="stylesheet">
     <?php include("includes/fonts.html"); ?>
@@ -26,17 +27,14 @@
                 <br><br>
                 <h2>
                     <small>
-                        <strong>Settings</strong>
+                        <strong>Update Account Details</strong>
                     </small>
                 </h2>
                 <hr class="tagline-divider">
                 <p>
 
                     <br><br>
-                    <a href="viewMembershipStatus.php">View membership status</a><br><br>
-                    <a href="updateAccDetailsPage.php">Update your basic account details</a><br><br>
-                    <a href="updatePrefrencesPage.php">Update your prefrences</a><br><br>
-                    <a href="updateHobbiesPage.php">Update your hobbies</a>
+                    Insert Update Account Details page contents here
 
                     <br><br>
                     <br><br>
