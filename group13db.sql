@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `account_details`;
 CREATE TABLE IF NOT EXISTS `account_details` (
   `User_id` int(11) NOT NULL,
-  `Premium` tinyint(1) NOT NULL,
+  `Account_Type` varchar(32) NOT NULL,
   `Free_Trail_Used` tinyint(1) NOT NULL,
   `Account_Expiry` date NOT NULL,
   `P_Code` varchar(64) NOT NULL,

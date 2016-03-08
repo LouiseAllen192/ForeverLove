@@ -101,7 +101,7 @@ class UserServiceMgr
     //to be removed later
     public static function testFunction($changes){
         foreach($changes as $key=>$value){
-            echo $key.' '.$value.'<br>';
+            echo $key.' ---------   '.$value.'<br>';
         }
     }
 

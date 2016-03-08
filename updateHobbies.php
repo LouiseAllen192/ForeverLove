@@ -25,5 +25,6 @@ UserServiceMgr::testFunction($changes);
 
     //userid taken from global values
     //this wont work until database is sorted and working
+
     //UserServiceMgr::updateUserHobbies($userid, $changes);
 ?>
