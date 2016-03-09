@@ -14,17 +14,11 @@
     <?php include("includes/fonts.html"); ?>
 
     <?php
+    include($_SERVER['DOCUMENT_ROOT'].'/classes/ReturnShortcuts.php');
+
     // All to be uncommented and used when database is working/populated
-
-    //    $uid = 001; //needs to be got through global data possibly???
-
-    //$prefrences = DB::getInstance()->get('preference_details', ['User_id', '=', $uid])->results()[0];
-    //    $dbvalue = array("Tag_Line"=>$prefrences->Tag_Line, "City"=>$prefrences->City, "Gender"=>$prefrences->Gender,
-    //                      "Seeking"=>$prefrences->Seeking, "Intent"=>$prefrences->Intent, "Date_Of_Birth"=>$prefrences->Date_Of_Birth,
-    //                      "Height"=>$prefrences->Height, "Ethnicity"=>$prefrences->Ethnicity,"Body_Type"=>$prefrences->Body_Type,
-    //                      "Religion"=>$prefrences->Religion, "Marital_Status"=>$prefrences->Marital_Status,"Income"=>$prefrences->Income,
-    //                      "Has_Children"=>$prefrences->Has_Children, "Wants_Children"=>$prefrences->Wants_Children,
-    //                      "Smoker"=>$prefrences->Smoker, "Drinker"=>$prefrences->Drinker, "About__Me"=>$prefrences->About__Me);
+    //    $uid = 001; //needs to be got properly
+    //    $dbvalue ReturnShortcuts::returnPreferences($uid);
 
     //hardcoded array to be replaced with code above when database working
     $dbvalue = array("Tag_Line"=>"I'm a cool guy", "City"=>"Dublin", "Gender"=>"Male","Seeking"=>"Female", "Intent"=>"Relationship",

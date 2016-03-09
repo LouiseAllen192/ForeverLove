@@ -17,24 +17,11 @@
 
 
     <?php
+    include($_SERVER['DOCUMENT_ROOT'].'/classes/ReturnShortcuts.php');
 
     // All to be uncommented and used when database is working/populated
-
 //    $uid = 001; //needs to be got through global data possibly???
-//
-//    $hobbies = DB::getInstance()->get('hobbies', ['User_id', '=', $uid])->results()[0];
-//    $dbvalue = array("Reading"=>$hobbies->Reading, "Cinema"=>$hobbies->Cinema, "Shopping"=>$hobbies->Shopping,
-//    "Socializing"=>$hobbies->Socializing, "Travelling"=>$hobbies->Travelling, "Walking"=>$hobbies->Walking,
-//        "Exercise"=>$hobbies->Exercise, "Soccer"=>$hobbies->Soccer, "Dance"=>$hobbies->Dance,
-//        "Horses"=>$hobbies->Horses, "Painting"=>$hobbies->Painting, "Running"=>$hobbies->Running,
-//        "Eating_Out"=>$hobbies->Eating_Out, "Cooking"=>$hobbies->Cooking, "Computers"=>$hobbies->Computers,
-//        "Bowling"=>$hobbies->Bowling, "Writing"=>$hobbies->Writing, "Skiing"=>$hobbies->Skiing,
-//        "Crafts"=>$hobbies->Crafts, "Golf"=>$hobbies->Golf, "Chess"=>$hobbies->Chess,
-//        "Gymnastics"=>$hobbies->Gymnastics, "Cycle"=>$hobbies->Cycle, "Swimming"=>$hobbies->Swimming,
-//        "Surf"=>$hobbies->Surfing, "Hiking"=>$hobbies->Hiking, "Video_Games"=>$hobbies->Video_Games,
-//        "Volly_ball"=>$hobbies->Volly_Ball, "Badminton"=>$hobbies->Badminton, "Gym"=>$hobbies->Gym,
-//        "Parkour"=>$hobbies->Parkour, "Fashion"=>$hobbies->Fashion, "Yoga"=>$hobbies->Yoga,
-//        "Basketball"=>$hobbies->Basketball, "Boxing"=>$hobbies->Boxing, "Unique_Hobbie"=>$hobbies->Unique_Hobbie);
+//    $dbvalue = ReturnShortcuts::returnHobbies($uid);
 
 
     //hardcoded array to be replaced with users values from db

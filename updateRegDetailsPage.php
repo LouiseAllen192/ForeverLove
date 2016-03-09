@@ -15,15 +15,10 @@
     <?php include("includes/fonts.html"); ?>
 
     <?php
-
+    include($_SERVER['DOCUMENT_ROOT'].'/classes/ReturnShortcuts.php');
     // All to be uncommented and used when database is working/populated
-
     //    $uid = 001; //needs to be got through global data possibly???
-
-    //$registrationDetails = DB::getInstance()->get('preference_details', ['User_id', '=', $uid])->results()[0];
-    //    $dbvalue = array("Username"=>$registrationDetails->Username, "First_Name"=>$registrationDetails->First_Name,
-    //                      "Last_Name"=>$registrationDetails->Last_Name, "Password"=>$registrationDetails->Password,
-    //                      "Email"=>$registrationDetails->Email);
+    //    $dbvalue ReturnShortcuts::returnDetails($uid);
 
     //hardcoded array to be replaced with code above when database working
     $dbvalue = array("Username"=>"javanator89", "First_Name"=>"Louise", "Last_Name"=>"Allen","Password"=>"1x6f72", "Email"=>"louise.allen192@gmail.com");
