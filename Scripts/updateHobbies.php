@@ -1,5 +1,5 @@
 <?php
-include 'classes/UserServiceMgr.php';
+include($_SERVER['DOCUMENT_ROOT'].'/classes/UserServiceMgr.php');
 
 $changes = array();
 

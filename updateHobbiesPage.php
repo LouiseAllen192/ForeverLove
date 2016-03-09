@@ -68,7 +68,7 @@
 
 
 
-                <form role ="form" class="form-inline" action="updateHobbies.php" method="get">
+                <form role ="form" class="form-inline" action="scripts/updateHobbies.php" method="get">
                     <div class="row">
                         <div class="col-md-12">
                             <fieldset>

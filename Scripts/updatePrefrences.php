@@ -1,5 +1,5 @@
 <?php
-include 'classes/UserServiceMgr.php';
+include($_SERVER['DOCUMENT_ROOT'].'/classes/UserServiceMgr.php');
 
 
 // About me not sending - TO BE FIXED!!!!!!
@@ -20,7 +20,6 @@ if($_GET['Send']== 'Apply Changes'){
 
 //to be deleted when database working
 UserServiceMgr::testFunction($_GET);
-
 
 //userid taken from global values
 

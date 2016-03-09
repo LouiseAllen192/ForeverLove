@@ -13,11 +13,16 @@ class User{
     private $userHobbies; // UserHobbies Object
 
 
-    public function __construct($uid, $accDet, $uPref, $uHob){
+    public function __construct($uid){
         $this->userID = $uid;
-        $this->accDetails = $accDet;
-        $this->prefrences = $uPref;
-        $this->userHobbies = $uHob;
+
+        $acc = DB::getInstance()->get('account_details', ['User_id', '=', $uid])->results()[0];
+        $pref = DB::getInstance()->get('preference_details', ['User_id', '=', $uid])->results()[0];
+        $hob = DB::getInstance()->get('hobbies', ['User_id', '=', $uid])->results()[0];
+
+        $this->accDetails = new UserAccountDetails($uid, $acc);
+        $this->prefrences = new UserPrefrences($uid, $pref);
+        $this->userHobbies = new UserHobbies($uid, $hob);
         setUserDetails(DB::getInstance()->get('registration_details', ['User_id', '=', $uid])->results()[0]);
     }
 

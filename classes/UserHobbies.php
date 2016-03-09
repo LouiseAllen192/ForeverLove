@@ -11,12 +11,8 @@ class Hobbies{
     private $uniqueHobby;
 
 
-    public function __construct($uid){
+    public function __construct($uid, $hobbies){
         $this->userID = $uid;
-        setHobbies(DB::getInstance()->get('hobbies', ['User_id', '=', $uid])->results()[0]);
-    }
-
-    private function setHobbies($hobbies){
         $this->reading = $hobbies->Reading;
         $this->cinema = $hobbies->Cinema;
         $this->shopping = $hobbies->Shopping;
@@ -53,6 +49,7 @@ class Hobbies{
         $this->basketball = $hobbies->Basketball;
         $this->boxing = $hobbies->Boxing;
         $this->uniqueHobby = $hobbies->Unique_Hobbie;
+
     }
 
     public function getUserID(){

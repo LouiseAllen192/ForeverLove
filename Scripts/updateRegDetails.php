@@ -1,5 +1,7 @@
 <?php
-include 'classes/UserServiceMgr.php';
+
+include($_SERVER['DOCUMENT_ROOT'].'/classes/UserServiceMgr.php');
+
 
 
 // Can not send sensitive info via GET  - TO BE FIXED!!!!!!

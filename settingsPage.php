@@ -33,7 +33,7 @@
                 <p>
 
                     <br><br>
-                    <a href="viewMembershipStatus.php">View membership status</a><br><br>
+                    <a href="viewMembershipStatusPage.php">View membership status</a><br><br>
                     <a href="updateRegDetailsPage.php">Update your basic account details</a><br><br>
                     <a href="updatePrefrencesPage.php">Update your prefrences</a><br><br>
                     <a href="updateHobbiesPage.php">Update your hobbies</a>

@@ -50,7 +50,7 @@
                 <p>
                 <br><br>
 
-                <form id="userRegDetails" action="updateRegDetails.php" id="updateRD" method="get">
+                <form id="userRegDetails" action="scripts/updateRegDetails.php" id="updateRD" method="get">
                     <fieldset class="form-group">
                         <label for="Username">Username</label>
                         <input type="text"  class="form-control" maxlength="32" name="Username" placeholder= "<?php echo ($dbvalue['Username']);?>" ><br /><br>

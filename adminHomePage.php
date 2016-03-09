@@ -33,8 +33,8 @@
                 <p>
 
                     <br><br>
-                    <a href="viewReportedCases.php">View Reported Cases</a><br><br>
-                    <a href="adminLogin.php">Logout</a><br><br>
+                    <a href="viewReportedCasesPage.php">View Reported Cases</a><br><br>
+                    <a href="adminLoginPage.php">Logout</a><br><br>
                     <br><br>
                     <br><br>
                 </p>

@@ -84,7 +84,7 @@
                 <hr class="tagline-divider">
                 <p>
                     <br>
-                <form id="prefrences" action="updatePrefrences.php" id="updateP" method="get">
+                <form id="prefrences" action="scripts/updatePrefrences.php" id="updateP" method="get">
                     <fieldset class="form-group">
                         <label for="Tag_Line">Tag Line</label>
                         <input type="text"  class="form-control" maxlength="256" name="Tag_Line" placeholder= "<?php echo ($dbvalue['Tag_Line']);?>" ><br /><br>
@@ -93,6 +93,7 @@
                         <label for="City">City</label>
                         <input type="text"  class="form-control" maxlength="64" name="City" placeholder="<?php echo ($dbvalue['City']);?>"><br /><br>
                     </fieldset>
+                    <fieldset class="form-group">
                     <fieldset class="form-group">
                         <label for="genderLabel">Gender</label>
                         <?php
@@ -170,13 +171,15 @@
                     <fieldset class="form-group">
                         <label for="wantsChildrenLabel">Wants Children</label>
                         <?php
-                        generateSelectBoolean($name = 'Wants_Children', $dbvalue['Wants_Children']);
+                        $wantsChildrenOptions = array("Yes", "No", "Maybe");
+                        generateSelect('Wants_Children', $wantsChildrenOptions, $dbvalue['Wants_Children']);
                         ?>
                     </fieldset>
                     <fieldset class="form-group">
                         <label for="smokerLabel">Smoker</label>
                         <?php
-                        generateSelectBoolean($name = 'Smoker', $dbvalue['Smoker']);
+
+                        generateSelectBoolean('Smoker', $dbvalue['Smoker']);
                         ?>
                     </fieldset>
                     <fieldset class="form-group">

@@ -7,12 +7,8 @@ class UserPrefrences{
     private $heigth, $ethnicity, $bodyType, $religion, $maritalStatus, $income;
     private $hasChildren, $wantsChildren, $smoker, $drinker, $aboutMe;
 
-    public function __construct($uid){
+    public function __construct($uid, $preferences){
         $this->userID = $uid;
-        setPreferences(DB::getInstance()->get('preference_details', ['User_id', '=', $uid])->results()[0]);
-    }
-
-    private function setPreferences($preferences){
         $this->tagLine = $preferences->Tag_Line;
         $this->city = $preferences->City;
         $this->gender = $preferences->Gender;
