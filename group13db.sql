@@ -1,49 +1,25 @@
--- phpMyAdmin SQL Dump
--- version 4.5.2
--- http://www.phpmyadmin.net
---
--- Host: 127.0.0.1
--- Generation Time: Mar 08, 2016 at 10:39 PM
--- Server version: 5.7.9
--- PHP Version: 5.6.16
-
+SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
-
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
---
--- Database: `group13db`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `account_details`
---
 
 DROP TABLE IF EXISTS `account_details`;
 CREATE TABLE IF NOT EXISTS `account_details` (
   `User_id` int(11) NOT NULL,
-  `Premium` varchar(64) DEFAULT NULL,
+  `Account_Type` varchar(64) DEFAULT NULL,
   `Free_Trail_Used` tinyint(1) DEFAULT NULL,
   `Account_Expiry` tinyint(1) DEFAULT NULL,
   `P_Code` varchar(64) DEFAULT NULL,
   KEY `User_id` (`User_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `admiin`
---
-
-DROP TABLE IF EXISTS `admiin`;
-CREATE TABLE IF NOT EXISTS `admiin` (
+DROP TABLE IF EXISTS `admin`;
+CREATE TABLE IF NOT EXISTS `admin` (
   `Admin_id` int(11) NOT NULL AUTO_INCREMENT,
   `First_Name` varchar(32) NOT NULL,
   `Last_Name` varchar(32) NOT NULL,
@@ -52,12 +28,6 @@ CREATE TABLE IF NOT EXISTS `admiin` (
   PRIMARY KEY (`Admin_id`),
   UNIQUE KEY `Email` (`Email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `banned_reports`
---
 
 DROP TABLE IF EXISTS `banned_reports`;
 CREATE TABLE IF NOT EXISTS `banned_reports` (
@@ -71,11 +41,25 @@ CREATE TABLE IF NOT EXISTS `banned_reports` (
   KEY `Reportee_id` (`Reportee_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
+DROP TABLE IF EXISTS `banned_users`;
+CREATE TABLE IF NOT EXISTS `banned_users` (
+  `User_id` int(11) NOT NULL,
+  `Report_id` int(11) NOT NULL,
+  `Start_Date` date NOT NULL,
+  `End_Date` date NOT NULL,
+  KEY `User_id` (`User_id`),
+  KEY `Report_id` (`Report_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Table structure for table `hobbies`
---
+DROP TABLE IF EXISTS `converstaions`;
+CREATE TABLE IF NOT EXISTS `converstaions` (
+  `Conversation_id` int(11) NOT NULL AUTO_INCREMENT,
+  `User1_id` int(11) NOT NULL,
+  `User2_id` int(11) NOT NULL,
+  PRIMARY KEY (`Conversation_id`),
+  KEY `User1_id` (`User1_id`),
+  KEY `User2_id` (`User2_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS `hobbies`;
 CREATE TABLE IF NOT EXISTS `hobbies` (
@@ -119,12 +103,6 @@ CREATE TABLE IF NOT EXISTS `hobbies` (
   KEY `User_id` (`User_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `images`
---
-
 DROP TABLE IF EXISTS `images`;
 CREATE TABLE IF NOT EXISTS `images` (
   `Image_id` int(11) NOT NULL,
@@ -134,15 +112,10 @@ CREATE TABLE IF NOT EXISTS `images` (
   KEY `User_id` (`User_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `messages`
---
-
 DROP TABLE IF EXISTS `messages`;
 CREATE TABLE IF NOT EXISTS `messages` (
   `Message_id` int(11) NOT NULL AUTO_INCREMENT,
+  `Conversation_id` int(11) NOT NULL,
   `Sender_id` int(11) NOT NULL,
   `Recipient_id` int(11) NOT NULL,
   `Date_Received` datetime NOT NULL,
@@ -150,14 +123,9 @@ CREATE TABLE IF NOT EXISTS `messages` (
   `Profile_Visable` tinyint(1) NOT NULL,
   PRIMARY KEY (`Message_id`),
   KEY `Sender_id` (`Sender_id`),
-  KEY `Recipient_id` (`Recipient_id`)
+  KEY `Recipient_id` (`Recipient_id`),
+  KEY `Conversation_id` (`Conversation_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `preference_details`
---
 
 DROP TABLE IF EXISTS `preference_details`;
 CREATE TABLE IF NOT EXISTS `preference_details` (
@@ -182,12 +150,6 @@ CREATE TABLE IF NOT EXISTS `preference_details` (
   KEY `User_id` (`User_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `registration_details`
---
-
 DROP TABLE IF EXISTS `registration_details`;
 CREATE TABLE IF NOT EXISTS `registration_details` (
   `User_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -200,47 +162,36 @@ CREATE TABLE IF NOT EXISTS `registration_details` (
   UNIQUE KEY `Username` (`Username`,`Email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
---
--- Constraints for dumped tables
---
 
---
--- Constraints for table `account_details`
---
 ALTER TABLE `account_details`
   ADD CONSTRAINT `account_details_ibfk_1` FOREIGN KEY (`User_id`) REFERENCES `registration_details` (`User_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
---
--- Constraints for table `banned_reports`
---
 ALTER TABLE `banned_reports`
   ADD CONSTRAINT `banned_reports_ibfk_1` FOREIGN KEY (`Reporter_id`) REFERENCES `registration_details` (`User_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `banned_reports_ibfk_2` FOREIGN KEY (`Reportee_id`) REFERENCES `registration_details` (`User_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
---
--- Constraints for table `hobbies`
---
+ALTER TABLE `banned_users`
+  ADD CONSTRAINT `banned_users_ibfk_1` FOREIGN KEY (`User_id`) REFERENCES `registration_details` (`User_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `banned_users_ibfk_2` FOREIGN KEY (`Report_id`) REFERENCES `banned_reports` (`Report_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE `converstaions`
+  ADD CONSTRAINT `converstaions_ibfk_1` FOREIGN KEY (`User1_id`) REFERENCES `registration_details` (`User_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `converstaions_ibfk_2` FOREIGN KEY (`User2_id`) REFERENCES `registration_details` (`User_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
 ALTER TABLE `hobbies`
   ADD CONSTRAINT `hobbies_ibfk_1` FOREIGN KEY (`User_id`) REFERENCES `registration_details` (`User_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
---
--- Constraints for table `images`
---
 ALTER TABLE `images`
   ADD CONSTRAINT `images_ibfk_1` FOREIGN KEY (`User_id`) REFERENCES `registration_details` (`User_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
---
--- Constraints for table `messages`
---
 ALTER TABLE `messages`
   ADD CONSTRAINT `messages_ibfk_1` FOREIGN KEY (`Sender_id`) REFERENCES `registration_details` (`User_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `messages_ibfk_2` FOREIGN KEY (`Recipient_id`) REFERENCES `registration_details` (`User_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `messages_ibfk_2` FOREIGN KEY (`Recipient_id`) REFERENCES `registration_details` (`User_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `messages_ibfk_3` FOREIGN KEY (`Conversation_id`) REFERENCES `converstaions` (`Conversation_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
---
--- Constraints for table `preference_details`
---
 ALTER TABLE `preference_details`
   ADD CONSTRAINT `preference_details_ibfk_1` FOREIGN KEY (`User_id`) REFERENCES `registration_details` (`User_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+SET FOREIGN_KEY_CHECKS=1;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
