@@ -38,8 +38,21 @@ class UserServiceMgr
         }
     }
 
-    public static function updateBasicUserDetails($userid){
-        //todo
+    public static function updateBasicUserDetails($userid, $changes){
+        // $changes - should be in format ['username' => 'Kevin', 'name' => 'Kevin O\'Brien']
+        $success = DB::getInstance()->update('registration_details', $userid, $changes);
+        if($success){
+            echo "<div class=\"alert alert-success\">
+                        <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
+                        User Details updated successfully
+                  </div>";
+        }
+        else{
+            echo "<div class=\"alert alert-danger\">
+                       <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
+                        <strong>Error</strong> - User Details update was unsuccessful
+                   </div>";
+        }
     }
 
     public static function updateUserHobbies($userid, $changes){

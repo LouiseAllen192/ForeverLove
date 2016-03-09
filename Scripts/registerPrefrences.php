@@ -1,30 +1,28 @@
 <?php
-
 include($_SERVER['DOCUMENT_ROOT'].'/classes/UserServiceMgr.php');
 
 
+// About me not sending - TO BE FIXED!!!!!!
+if(isset($_GET['About_Me'])){
+    echo "is set!!!!";
+}
 
-// Can not send sensitive info via GET  - TO BE FIXED!!!!!!
+if($_GET['Tag_Line']== ''){
+    $_GET['Tag_Line'] = 'Unselected';
+}
+if($_GET['City']== ''){
+    $_GET['City'] = 'Unselected';
+}
 
 if($_GET['Send']== 'Apply Changes'){
     unset($_GET['Send']);
 }
 
-$keys = array("Username","First_Name", "Last_Name", "Password" , "Email");
-
-for($i=0; $i<count($keys); $i++){
-    if($_GET[$keys[$i]]== ''){
-        unset($_GET[$keys[$i]]);
-    }
-
-}
-
 //to be deleted when database working
 UserServiceMgr::testFunction($_GET);
-
 
 //userid taken from global values
 
 //this wont work until database is sorted and working
-//UserServiceMgr::updateBasicUserDetails($userid, $changes);
+//UserServiceMgr::updateUserPrefrences($userid, $changes);
 ?>
