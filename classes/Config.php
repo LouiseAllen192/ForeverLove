@@ -2,7 +2,7 @@
 class Config{
     /*
      * Access the GLOBALS config array using a directory path
-     * (easier to remember eg. get(mysql/username)
+     * (easier to remember eg. Config::get(session/username)
      */
     public static function get($path = null){
         if($path){
