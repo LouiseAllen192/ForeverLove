@@ -2,12 +2,16 @@
 class BannedReport{
     private $report_id, $reporter_id, $reportee_id, $content, $resolved;
 
-    public function __construct($report_id, $reporter_id, $reportee_id, $content, $resolved){
+    public function __construct($report_id){
         $this->report_id = $report_id;
-        $this->reporter_id = $reporter_id;
-        $this->reportee_id = $reportee_id;
-        $this->content = $content;
-        $this->resolved = $resolved;
+        setParams(DB::getInstance()->get('banned_reports', ['Report_id', '=', $report_id])->results()[0]);
+    }
+
+    private function setParams($params){
+        $this->reporter_id = $params->Reporter_id;
+        $this->reportee_id = $params->Reportee_id;
+        $this->content = $params->Content;
+        $this->resolved = $params->Resolved;
     }
 
     public function getReportId(){

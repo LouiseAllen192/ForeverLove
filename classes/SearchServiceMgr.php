@@ -30,10 +30,15 @@ class SearchServiceMgr{
         }
         $sql .= " ?";
 
+        /*
+         * ********************
+         * ********************
+         * ********************
+         */
         $results = DB::getInstance()->query($sql, $params)->results();
         $viewableProfiles = [];
         foreach($results as $result){
-            $viewableProfiles[] = new ViewableProfile($result->User_id);
+            $viewableProfiles[] = new User($result->User_id);
         }
         return $viewableProfiles;
     }
