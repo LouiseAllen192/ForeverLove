@@ -91,8 +91,37 @@ class DB{
     }
 
     /*
+     * Insert new tuple into tables
+     * e.g. insert('registration_details', ['Username' => 'Kevin', 'Password' => 'password']);
+     */
+    public function registerUser($table, $fields = []){
+        $n = count($fields);
+        if($n){
+            $keys = array_keys($fields);
+            $values = '';
+            $x = 1;
+
+            foreach($fields as $field){
+                $values .= '?';
+                if($x++ < $n)
+                    $values .= ', ';
+            }
+            $sql = "INSERT INTO {$table} (`".implode('`, `', $keys)."`) VALUES ({$values})";
+            if($this->query($sql, $fields)->error()) return false;
+            else if($table === 'registration_details'){
+                $user_id = $this->get('registration_details', ['Username', '=', $fields['Username']])->results()[0]->User_id;
+                $this->registerUser('account_details', ['User_id' => $user_id]);
+                $this->registerUser('preference_details', ['User_id' => $user_id]);
+                $this->registerUser('hobbies', ['User_id' => $user_id]);
+            }
+            else return true;
+        }
+        return false;
+    }
+
+    /*
      * Insert new tuple into table
-     * e.g. insert('users', ['username' => 'Kevin', 'password' => 'password']);
+     * e.g. insert('messages', ['Username' => 'Kevin', 'Password' => 'password']);
      */
     public function insert($table, $fields = []){
         $n = count($fields);
@@ -108,13 +137,14 @@ class DB{
             }
             $sql = "INSERT INTO {$table} (`".implode('`, `', $keys)."`) VALUES ({$values})";
             if(!$this->query($sql, $fields)->error()) return true;
+            else return true;
         }
         return false;
     }
 
     /*
      * Update tuple in table
-     * e.g. update('users', 1, ['username' => 'Kevin', 'name' => 'Kevin O\'Brien']);
+     * e.g. update('registration_details', 1, ['Username' => 'Kevin', 'First_Name' => 'Kevin']);
      */
     public function update($table, $id, $fields = []){
         $n = count($fields);
