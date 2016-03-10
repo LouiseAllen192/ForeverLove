@@ -13,7 +13,7 @@
 </head>
 
 <body class="full">
-<?php include("includes/navbar.html"); ?>
+<?php include("includes/navbarNotLoggedIn.html"); ?>
 
 <!--Main page content-->
 

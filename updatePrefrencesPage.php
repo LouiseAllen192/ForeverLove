@@ -24,7 +24,7 @@
     $dbvalue = array("Tag_Line"=>"I'm a cool guy", "City"=>"Dublin", "Gender"=>"Male","Seeking"=>"Female", "Intent"=>"Relationship",
         "Height"=>"140-150cm", "Ethnicity"=>"White Irish","Body_Type"=>"Slim",
         "Religion"=>"Athiest", "Marital_Status"=>"Single","Income"=>"40k to 60k per year",
-        "Has_Children"=>"0", "Wants_Children"=>"1", "Smoker"=>"0", "Drinker"=>"Social Drinker",
+        "Has_Children"=>"0", "Wants_Children"=>"Yes", "Smoker"=>"0", "Drinker"=>"Social Drinker",
         "About_Me"=>"Dublin guy looking for a relationship. Love long walks on the beach.");
 
 

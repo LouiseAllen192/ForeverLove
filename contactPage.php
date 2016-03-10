@@ -20,39 +20,57 @@
 <!--Main page content-->
 
 <div class="container">
+
     <div class="row">
         <div class="box">
-            <div class="col-lg-12 text-center">
+            <div class="col-lg-12">
                 <br><br>
-                <h2>
-                    <small>
-                        <strong>Contact Us</strong>
-                    </small>
-                </h2>
-                <hr class="tagline-divider">
-                <br><br>
+                <hr>
+                <h2 class="intro-text text-center">Contact Us</h2>
+                <hr>
+                <hr class="visible-xs">
+                <br>
+
+
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div class="col-md-4 text-center">
+                            <img src="includes/pics/telephone.jpg" class="img-circle" alt="telephone" height="250" width="250">
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <p><br>Phone:</p>
+                            <hr class="tagline-divider"><br>
+                            <p>+00-12345678</p><br><br><br>
+                        </div>
+                        <div style="clear:both;"><div></div></div>
+                        <div style="clear:both;"><div></div></div>
+                        <div class="row"><br><br></div>
+                        <div class="col-md-4 text-center">
+                            <img src="includes/pics/email.jpg" class="img-circle" alt="email" height="250" width="250">
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <p>Email:</p>
+                            <hr class="tagline-divider"><br>
+                            <p>info@foreverlove.ie</p><br><br><br>
+                        </div>
+                        <div style="clear:both;"><div></div></div>
+                        <div style="clear:both;"><div></div></div>
+                        <div class="row"><br><br></div>
+                        <div class="col-md-4 text-center">
+                            <img src="includes/pics/address.jpg" class="img-circle" alt="address" height="250" width="250">
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <p>Address</p>
+                            <hr class="tagline-divider"><br>
+                            <p>72 Pearse Street<br>Sallynogin<br>Dublin 1<br>Co.Dublin</p><br><br><br><br>
+                        </div>
+                        <div style="clear:both;"><div></div></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="box">
-            <div class="col-lg-12 text-center">
-                <p><br><br>Phone:</p>
-                <hr class="tagline-divider"><br>
-                <p>+00-12345678</p><br><br><br>
-            </div>
-            <div class="col-lg-12 text-center">
-                <p>Email:</p>
-                <hr class="tagline-divider"><br>
-                <p>info@foreverlove.ie</p><br><br><br>
-            </div>
-            <div class="col-lg-12 text-center">
-                <p>Address</p>
-                <hr class="tagline-divider"><br>
-                <p>72 Pearse Street<br>Sallynogin<br>Dublin 1<br>Co.Dublin</p><br><br><br><br>
-            </div>
-        </div>
-    </div>
+
 
 
 </div>

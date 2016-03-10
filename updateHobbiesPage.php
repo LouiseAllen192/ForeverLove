@@ -23,14 +23,26 @@
 //    $uid = 001; //needs to be got through global data possibly???
 //    $dbvalue = ReturnShortcuts::returnHobbies($uid);
 
-
     //hardcoded array to be replaced with users values from db
-    $dbvalue = array("Reading"=>"0", "Cinema"=>"0", "Shopping"=>"0", "Socializing"=>"1", "Travelling"=>"0", "Walking"=>"1",
+    $dbvalue = array("Reading"=>"1", "Cinema"=>"0", "Shopping"=>"0", "Socializing"=>"1", "Travelling"=>"0", "Walking"=>"1",
         "Exercise"=>"1", "Soccer"=>"0", "Dance"=>"1", "Horses"=>"1", "Painting"=>"0", "Running"=>"0",
         "Eat_Out"=>"0", "Cooking"=>"0", "Computers"=>"0", "Bowling"=>"1", "Writing"=>"0", "Skiing"=>"1",
         "Crafts"=>"1", "Golf"=>"1", "Chess"=>"1", "Gymnastics"=>"1", "Cycle"=>"1", "Swimming"=>"1",
         "Surfing"=>"1", "Hiking"=>"0", "Video_Games"=>"1", "Volly_Ball"=>"1", "Badminton"=>"1", "Gym"=>"1",
         "Parkour"=>"0", "Fashion"=>"1", "Yoga"=>"1", "Basketball"=>"0", "Boxing"=>"0", "Unique_Hobbie"=>"Cutting Turf");
+
+    function createOption($name, $dbvalue){
+        $html = '<div class="col-md-4"'.'>'.'<div class="form-group">'. '<label class="checkbox-inline">';
+        $html .= '<input type="checkbox" name="'.$name.'" id="'.$name.'"'.checked($name, $dbvalue).'>';
+        $html .= str_replace('_', ' ', $name);
+        $html .= '</label></div></div>';
+        echo $html;
+    }
+
+    function checked($name, $dbvalue){
+       return ($dbvalue[$name] == 1 ? 'checked' : '');
+    }
+
     ?>
 
 </head>
@@ -59,263 +71,77 @@
                     <div class="row">
                         <div class="col-md-12">
                             <fieldset>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="checkbox-inline">
-                                            <input type="checkbox" name="Reading" id="readingCheckbox" <?php echo ($dbvalue['Reading']==1 ? 'checked' : '');?> >Reading
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="checkbox-inline">
-                                            <input type="checkbox" name="Cinema" id="cinemaCheckbox" <?php echo ($dbvalue['Cinema']==1 ? 'checked' : '');?> >Cinema
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="checkbox-inline">
-                                            <input type="checkbox" name="Shopping" id="shoppingCheckbox" <?php echo ($dbvalue['Shopping']==1 ? 'checked' : '');?> >Shopping
-                                        </label>
-                                    </div>
-                                </div>
-                                <div style="clear:both;"><div></div></div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                       <label class="checkbox-inline">
-                                           <input type="checkbox" name="Socializing" id="socializingCheckbox" <?php echo ($dbvalue['Socializing']==1 ? 'checked' : '');?> >Socializing
-                                       </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="checkbox-inline">
-                                            <input type="checkbox" name="Travelling" id="travellingCheckbox" <?php echo ($dbvalue['Travelling']==1 ? 'checked' : '');?> >Travelling
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="checkbox-inline">
-                                            <input type="checkbox" name="Walking" id="walkingCheckbox" <?php echo ($dbvalue['Walking']==1 ? 'checked' : '');?> >Walking
-                                        </label>
-                                    </div>
-                                </div>
-                                <div style="clear:both;"><div></div></div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="checkbox-inline">
-                                            <input type="checkbox" name="Exercise" id="exerciseCheckbox" <?php echo ($dbvalue['Exercise']==1 ? 'checked' : '');?> >Exercise
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="checkbox-inline">
-                                            <input type="checkbox" name="Soccer" id="soccerCheckbox" <?php echo ($dbvalue['Soccer']==1 ? 'checked' : '');?> >Soccer
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="checkbox-inline">
-                                            <input type="checkbox" name="Dance" id="DancingCheckbox" <?php echo ($dbvalue['Dance']==1 ? 'checked' : '');?> >Dancing
-                                        </label>
-                                    </div>
-                                </div>
-                                <div style="clear:both;"><div></div></div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="checkbox-inline">
-                                            <input type="checkbox" name="Horses" id="horsesCheckbox" <?php echo ($dbvalue['Horses']==1 ? 'checked' : '');?> >Horses
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="checkbox-inline">
-                                            <input type="checkbox" name="Painting" id="paintingCheckbox" <?php echo ($dbvalue['Painting']==1 ? 'checked' : '');?> >Painting
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="checkbox-inline">
-                                            <input type="checkbox" name="Running" id="runningCheckbox" <?php echo ($dbvalue['Running']==1 ? 'checked' : '');?> >Running
-                                        </label>
-                                    </div>
-                                </div>
-                                <div style="clear:both;"><div></div></div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="checkbox-inline">
-                                            <input type="checkbox" name="Eat_Out" id="eatingOutCheckbox" <?php echo ($dbvalue['Eat_Out']==1 ? 'checked' : '');?> >Eating Out
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="checkbox-inline">
-                                            <input type="checkbox" name="Cooking" id="cookingCheckbox" <?php echo ($dbvalue['Cooking']==1 ? 'checked' : '');?> >Cooking
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="checkbox-inline">
-                                            <input type="checkbox" name="Computers" id="computersCheckbox" <?php echo ($dbvalue['Computers']==1 ? 'checked' : '');?> >Computers
-                                        </label>
-                                    </div>
-                                </div>
-                                <div style="clear:both;"><div></div></div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="checkbox-inline">
-                                            <input type="checkbox" name="Bowling" id="bowlingCheckbox" <?php echo ($dbvalue['Bowling']==1 ? 'checked' : '');?> >Bowling
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="checkbox-inline">
-                                            <input type="checkbox" name="Writing" id="writingCheckbox" <?php echo ($dbvalue['Writing']==1 ? 'checked' : '');?> >Writing
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="checkbox-inline">
-                                            <input type="checkbox" name="Skiing" id="skiingCheckbox" <?php echo ($dbvalue['Skiing']==1 ? 'checked' : '');?> >Skiing
-                                        </label>
-                                    </div>
-                                </div>
-                                <div style="clear:both;"><div></div></div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="checkbox-inline">
-                                            <input type="checkbox" name="Crafts" id="craftsCheckbox" <?php echo ($dbvalue['Crafts']==1 ? 'checked' : '');?> >Crafts
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="checkbox-inline">
-                                            <input type="checkbox" name="Golf" id="golfCheckbox" <?php echo ($dbvalue['Golf']==1 ? 'checked' : '');?> >Golf
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="checkbox-inline">
-                                            <input type="checkbox" name="Chess" id="chessCheckbox" <?php echo ($dbvalue['Chess']==1 ? 'checked' : '');?> >Chess
-                                        </label>
-                                    </div>
-                                </div>
-                                <div style="clear:both;"><div></div></div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="checkbox-inline">
-                                            <input type="checkbox" name="Gymnastics" id="gymnasticsCheckbox" <?php echo ($dbvalue['Gymnastics']==1 ? 'checked' : '');?> >Gymnastics
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="checkbox-inline">
-                                            <input type="checkbox" name="Cycle" id="cyclingCheckbox" <?php echo ($dbvalue['Cycle']==1 ? 'checked' : '');?> >Cycling
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="checkbox-inline">
-                                            <input type="checkbox" name="Swimming" id="swimmingCheckbox" <?php echo ($dbvalue['Swimming']==1 ? 'checked' : '');?> >Swimming
-                                        </label>
-                                    </div>
-                                </div>
-                                <div style="clear:both;"><div></div></div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="checkbox-inline">
-                                            <input type="checkbox" name="Surfing" id="surfingCheckbox" <?php echo ($dbvalue['Surfing']==1 ? 'checked' : '');?> >Surfing
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="checkbox-inline">
-                                            <input type="checkbox" name="Hiking" id="hikingCheckbox" <?php echo ($dbvalue['Hiking']==1 ? 'checked' : '');?> >Hiking
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="checkbox-inline">
-                                            <input type="checkbox" name="Video_Games" id="videoGamesCheckbox" <?php echo ($dbvalue['Video_Games']==1 ? 'checked' : '');?> >Video Games
-                                        </label>
-                                    </div>
-                                </div>
-                                <div style="clear:both;"><div></div></div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="checkbox-inline">
-                                            <input type="checkbox" name="Volly_Ball"" id="volleyballCheckbox" <?php echo ($dbvalue['Volly_Ball']==1 ? 'checked' : '');?> >Volleyball
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="checkbox-inline">
-                                            <input type="checkbox" name="Badminton" id="badmintonCheckbox" <?php echo ($dbvalue['Badminton']==1 ? 'checked' : '');?> >Badminton
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="checkbox-inline">
-                                            <input type="checkbox" name="Gym" id="gymCheckbox" <?php echo ($dbvalue['Gym']==1 ? 'checked' : '');?> >Gym
-                                        </label>
-                                    </div>
-                                </div>
-                                <div style="clear:both;"><div></div></div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="checkbox-inline">
-                                            <input type="checkbox" name="Parkour" id="parkourCheckbox" <?php echo ($dbvalue['Parkour']==1 ? 'checked' : '');?> >Parkour
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="checkbox-inline">
-                                            <input type="checkbox" name="Fashion" id="fashionCheckbox" <?php echo ($dbvalue['Fashion']==1 ? 'checked' : '');?> >Fashion
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="checkbox-inline">
-                                            <input type="checkbox" name="Yoga" id="yogaCheckbox" <?php echo ($dbvalue['Yoga']==1 ? 'checked' : '');?> >Yoga
-                                        </label>
-                                    </div>
-                                </div>
-                                <div style="clear:both;"><div></div></div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="checkbox-inline">
-                                            <input type="checkbox" name="Basketball" id="basketballCheckbox" <?php echo ($dbvalue['Basketball']==1 ? 'checked' : '');?> >Basketball
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="checkbox-inline">
-                                            <input type="checkbox" name="Boxing" id="boxingCheckbox" <?php echo ($dbvalue['Boxing']==1 ? 'checked' : '');?> >Boxing
-                                        </label>
-                                    </div>
-                                </div>
 
+                                <?php
+                                createOption('Reading', $dbvalue);
+                                createOption("Cinema", $dbvalue);
+                                createOption("Shopping", $dbvalue);
+                                ?>
+                                <div style="clear:both;"><div></div></div>
+                                <?php
+                                createOption("Socializing", $dbvalue);
+                                createOption("Travelling", $dbvalue);
+                                createOption("Walking", $dbvalue);
+                                ?>
+                                <div style="clear:both;"><div></div></div>
+                                <?php
+                                createOption("Exercise", $dbvalue);
+                                createOption("Soccer", $dbvalue);
+                                createOption("Dance", $dbvalue);
+                                ?>
+                                <div style="clear:both;"><div></div></div>
+                                <?php
+                                createOption("Horses", $dbvalue);
+                                createOption("Painting", $dbvalue);
+                                createOption("Running", $dbvalue);
+                                ?>
+                                <div style="clear:both;"><div></div></div>
+                                <?php
+                                createOption("Eat_Out", $dbvalue);
+                                createOption("Cooking", $dbvalue);
+                                createOption("Computers", $dbvalue);
+                                ?>
+                                <div style="clear:both;"><div></div></div>
+                                <?php
+                                createOption("Bowling", $dbvalue);
+                                createOption("Writing", $dbvalue);
+                                createOption("Skiing", $dbvalue);
+                                ?>
+                                <div style="clear:both;"><div></div></div>
+                                <?php
+                                createOption("Crafts", $dbvalue);
+                                createOption("Golf", $dbvalue);
+                                createOption("Chess", $dbvalue);
+                                ?>
+                                <div style="clear:both;"><div></div></div>
+                                <?php
+                                createOption("Gymnastics", $dbvalue);
+                                createOption("Cycle", $dbvalue);
+                                createOption("Swimming", $dbvalue);
+                                ?>
+                                <div style="clear:both;"><div></div></div>
+                                <?php
+                                createOption("Surfing", $dbvalue);
+                                createOption("Hiking", $dbvalue);
+                                createOption("Video_Games", $dbvalue);
+                                ?>
+                                <div style="clear:both;"><div></div></div>
+                                <?php
+                                createOption("Volly_Ball", $dbvalue);
+                                createOption("Badminton", $dbvalue);
+                                createOption("Gym", $dbvalue);
+                                ?>
+                                <div style="clear:both;"><div></div></div>
+                                <?php
+                                createOption("Parkour", $dbvalue);
+                                createOption("Fashion", $dbvalue);
+                                createOption("Yoga", $dbvalue);
+                                ?>
+                                <div style="clear:both;"><div></div>
+                                    <?php
+                                    createOption("Basketball", $dbvalue);
+                                    createOption("Boxing", $dbvalue);
+                                    ?>
                             </fieldset>
                             <br>
                             <fieldset class="form-group">
