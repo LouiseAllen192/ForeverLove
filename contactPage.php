@@ -33,6 +33,7 @@
 
 
                 <div class="row">
+
                     <div class="col-md-12 text-center">
                         <div class="col-md-4 text-center">
                             <img src="includes/pics/telephone.jpg" class="img-circle" alt="telephone" height="250" width="250">
