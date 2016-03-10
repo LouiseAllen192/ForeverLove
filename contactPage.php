@@ -26,21 +26,34 @@
                 <br><br>
                 <h2>
                     <small>
-                        <strong>Contact</strong>
+                        <strong>Contact Us</strong>
                     </small>
                 </h2>
                 <hr class="tagline-divider">
-                <p>
-
-                    <br><br>
-                    Insert contact page contents here
-
-                    <br><br>
-                    <br><br>
-                </p>
+                <br><br>
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="box">
+            <div class="col-lg-12 text-center">
+                <p><br><br>Phone:</p>
+                <hr class="tagline-divider"><br>
+                <p>+00-12345678</p><br><br><br>
+            </div>
+            <div class="col-lg-12 text-center">
+                <p>Email:</p>
+                <hr class="tagline-divider"><br>
+                <p>info@foreverlove.ie</p><br><br><br>
+            </div>
+            <div class="col-lg-12 text-center">
+                <p>Address</p>
+                <hr class="tagline-divider"><br>
+                <p>72 Pearse Street<br>Sallynogin<br>Dublin 1<br>Co.Dublin</p><br><br><br><br>
+            </div>
+        </div>
+    </div>
+
 
 </div>
 <?php include("includes/footer.html"); ?>
