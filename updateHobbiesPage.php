@@ -20,8 +20,8 @@
     include($_SERVER['DOCUMENT_ROOT'].'/classes/ReturnShortcuts.php');
 
     // All to be uncommented and used when database is working/populated
-//    $uid = 001; //needs to be got through global data possibly???
-//    $dbvalue = ReturnShortcuts::returnHobbies($uid);
+    //    $uid = 001; //needs to be got through global data possibly???
+    //    $dbvalue = ReturnShortcuts::returnHobbies($uid);
 
     //hardcoded array to be replaced with users values from db
     $dbvalue = array("Reading"=>"1", "Cinema"=>"0", "Shopping"=>"0", "Socializing"=>"1", "Travelling"=>"0", "Walking"=>"1",
@@ -40,7 +40,7 @@
     }
 
     function checked($name, $dbvalue){
-       return ($dbvalue[$name] == 1 ? 'checked' : '');
+        return ($dbvalue[$name] == 1 ? 'checked' : '');
     }
 
     ?>
@@ -156,8 +156,8 @@
                 </form>
 
 
-                    <br><br>
-                    <br><br>
+                <br><br>
+                <br><br>
                 </p>
             </div>
         </div>

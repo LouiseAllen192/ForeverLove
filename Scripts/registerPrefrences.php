@@ -24,5 +24,6 @@ UserServiceMgr::testFunction($_GET);
 //userid taken from global values
 
 //this wont work until database is sorted and working
-//UserServiceMgr::updateUserPrefrences($userid, $changes);
+//UserServiceMgr::updateUserPrefrences($changes, $userid);
+
 ?>

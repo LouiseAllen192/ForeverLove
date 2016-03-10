@@ -14,14 +14,16 @@
 
 </head>
 
+
 <body class="full">
 <?php include("includes/navbar.html"); ?>
 
 <!--Main page content-->
 
 <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
+    <div class="row">
+        <div class="box">
+            <div class="col-lg-12 text-center">
                 <h2 class="page-header">Messages</h2>
             </div>
             <div class="col-lg-6 col-sm-6 text-center">
@@ -34,6 +36,26 @@
                 <a href="existingConversation.php"><h3>Existing Conversation</h3></a>
                 <p><br></p>
             </div>
+                    <br><br>
+                    <br><br>
+                </p>
+            </div>
+        </div>
+    </div>
+
+</div>
+<?php include("includes/footer.html"); ?>
+</body>
+
+
+<
+
+<!--Main page content-->
+
+<div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+
 		</div>
 </div>
 

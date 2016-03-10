@@ -7,6 +7,8 @@ class BannedReport{
         setParams(DB::getInstance()->get('banned_reports', ['Report_id', '=', $report_id])->results()[0]);
     }
 
+
+
     private function setParams($params){
         $this->reporter_id = $params->Reporter_id;
         $this->reportee_id = $params->Reportee_id;
