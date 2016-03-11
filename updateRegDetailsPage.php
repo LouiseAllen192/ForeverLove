@@ -15,9 +15,39 @@
     <?php include("includes/fonts.html"); ?>
 
     <?php
+
+    include($_SERVER['DOCUMENT_ROOT'].'/classes/UserServiceMgr.php');
     include($_SERVER['DOCUMENT_ROOT'].'/classes/ReturnShortcuts.php');
+
+
+    //$uid = $_GLOBAL['User_Id'];
+
+
+    if(!empty($_GET)){
+        // Can not send sensitive info via GET  - TO BE FIXED!!!!!!
+
+        if($_GET['Send']== 'Apply Changes'){
+            unset($_GET['Send']);
+        }
+
+        $keys = array("Username","First_Name", "Last_Name", "Password" , "Email");
+
+        for($i=0; $i<count($keys); $i++){
+            if($_GET[$keys[$i]]== ''){
+                unset($_GET[$keys[$i]]);
+            }
+
+        }
+
+        //to be deleted when database working
+        $success = UserServiceMgr::testFunction($_GET);
+
+        //this wont work until database is sorted and working
+        //$success = UserServiceMgr::updateBasicUserDetails($userid, $changes);
+    }
+
+
     // All to be uncommented and used when database is working/populated
-    //    $uid = 001; //needs to be got through global data possibly???
     //    $dbvalue ReturnShortcuts::returnDetails($uid);
 
     //hardcoded array to be replaced with code above when database working
@@ -45,7 +75,23 @@
                 <p>
                 <br><br>
 
-                <form id="userRegDetails" action="scripts/updateRegDetails.php" id="updateRD" method="get">
+                    <?php
+                    if(!empty($_GET)) {
+                        if ($success) {
+                            echo '<' . 'div class= "alert alert-success" role="alert">
+                                    <a href="settingsPage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                        Account Details updated successfully
+                                    </div>';
+                        } else {
+                            echo '<' . 'div class="alert alert-danger">
+                                    <a href="settingsPage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    <strong>Error</strong> - Account Details update was unsuccessful
+                             </div>';
+                        }
+                    }
+                    ?>
+
+                <form id="userRegDetails" action="updateRegDetailsPage.php" id="updateRD" method="get">
                     <fieldset class="form-group">
                         <label for="Username">Username</label>
                         <input type="text"  class="form-control" maxlength="32" name="Username" placeholder= "<?php echo ($dbvalue['Username']);?>" ><br /><br>

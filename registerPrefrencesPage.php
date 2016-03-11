@@ -14,6 +14,37 @@
     <?php include("includes/fonts.html"); ?>
 
     <?php
+
+    include($_SERVER['DOCUMENT_ROOT'].'/classes/UserServiceMgr.php');
+    include($_SERVER['DOCUMENT_ROOT'].'/classes/ReturnShortcuts.php');
+
+    //$uid = $_GLOBAL['User_Id'];
+
+    if(!empty($_GET)){
+        // About me not sending - TO BE FIXED!!!!!!
+        if(isset($_GET['About_Me'])){
+            echo "is set!!!!";
+        }
+
+        if($_GET['Tag_Line']== ''){
+            $_GET['Tag_Line'] = 'Unselected';
+        }
+        if($_GET['City']== ''){
+            $_GET['City'] = 'Unselected';
+        }
+
+        if($_GET['Send']== 'Apply Changes'){
+            unset($_GET['Send']);
+        }
+
+        //to be deleted when database working
+        $success = UserServiceMgr::testFunction($_GET);
+
+
+        //this wont work until database is sorted and working
+        //$success = UserServiceMgr::updateUserPrefrences($changes, $userid);
+    }
+
     function generateSelect($name = '', $options = array()) {
         $html = '<select name="'.$name.'" class="form-control default="Unselected"">"';
         foreach ($options as $option) {
@@ -57,7 +88,24 @@
                 <hr class="tagline-divider">
                 <p>
                     <br>
-                <form id="prefrences" action="scripts/registerPrefrences.php" id="updateP" method="get">
+
+                    <?php
+                    if(!empty($_GET)) {
+                        if ($success) {
+                            echo '<' . 'div class= "alert alert-success" role="alert">
+                                    <a href="registerPrefrencesPage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                        Account Details updated successfully
+                                    </div>';
+                        } else {
+                            echo '<' . 'div class="alert alert-danger">
+                                    <a href="registerPrefrencesPage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    <strong>Error</strong> - Account Details update was unsuccessful
+                             </div>';
+                        }
+                    }
+                    ?>
+
+                <form id="prefrences" action="registerPrefrencesPage.php" id="registerP" method="get">
                     <fieldset class="form-group">
                         <label for="Tag_Line">Tag Line</label>
                         <input type="text"  class="form-control" maxlength="256" name="Tag_Line" placeholder= "Enter Tag Line here" ><br /><br>

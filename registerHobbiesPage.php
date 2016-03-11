@@ -15,7 +15,44 @@
     <?php include("includes/fonts.html"); ?>
     <?php
 
-        function createOption($name){
+    include($_SERVER['DOCUMENT_ROOT'].'/classes/UserServiceMgr.php');
+    include($_SERVER['DOCUMENT_ROOT'].'/classes/ReturnShortcuts.php');
+
+    //$uid = $_GLOBAL['User_Id'];
+
+    if(!empty($_GET)) {
+        $changes = array();
+        $keys = array('Reading','Cinema','Shopping','Socializing','Travelling',
+            'Walking','Exercise','Soccer','Dancing', 'Horses','Running','Eating_Out',
+            'Painting', 'Cooking', 'Computers', 'Bowling', 'Writing', 'Skiing', 'Crafts',
+            'Golf', 'Chess', 'Gymnastics','Cycling','Swimming','Surfing','Hiking','Video_Games',
+            'Volleyball','Badminton','Gym','Parkour','Fashion','Yoga','Basketball','Boxing', 'Unique_Hobbie');
+
+        for($i=0; $i<count($keys) ; $i++){
+            if(!isset ($_GET[$keys[$i]])) {
+                $changes[$keys[$i]] = "0";
+            } else {
+                $changes[$keys[$i]] = "1";
+            }
+        }
+
+        if(isset ($_GET['Unique_Hobbie'])){ $changes['Unique_Hobbie'] = $_GET['Unique_Hobbie'];}
+        if($changes['Unique_Hobbie']== ''){ unset($changes['Unique_Hobbie']);}
+
+        if($_GET['Send']== 'Apply Changes'){
+            unset($_GET['Send']);
+        }
+
+
+
+        $success = UserServiceMgr::testFunction($changes);
+
+
+        //this wont work until database is sorted and working
+        //$success = UserServiceMgr::updateUserHobbies($userid, $changes);
+    }
+
+    function createOption($name){
             $html = '<div class="col-md-4"'.'>'.'<div class="form-group">'. '<label class="checkbox-inline">';
             $html .= '<input type="checkbox" name="'.$name.'" id="'.$name.'">';
             $html .= str_replace('_', ' ', $name);
@@ -44,9 +81,24 @@
                 <hr class="tagline-divider">
                 <br>
 
+                <?php
+                if(!empty($_GET)) {
+                    if ($success) {
+                        echo '<' . 'div class= "alert alert-success" role="alert">
+                                    <a href="homePage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                        Account Details updated successfully
+                                    </div>';
+                    } else {
+                        echo '<' . 'div class="alert alert-danger">
+                                    <a href="registerHobbiesPage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    <strong>Error</strong> - Account Details update was unsuccessful
+                             </div>';
+                    }
+                }
+                ?>
 
 
-                <form role ="form" class="form-inline" action="scripts/registerHobbies.php" method="get">
+                <form role ="form" class="form-inline" action="registerHobbiesPage.php" method="get">
                     <div class="row">
                         <div class="col-md-12">
                             <fieldset>

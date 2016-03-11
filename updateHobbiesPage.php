@@ -17,10 +17,40 @@
 
 
     <?php
+    include($_SERVER['DOCUMENT_ROOT'].'/classes/UserServiceMgr.php');
     include($_SERVER['DOCUMENT_ROOT'].'/classes/ReturnShortcuts.php');
 
+    //$uid = $_GLOBAL['User_Id'];
+
+    //code to be executed after submit button pressed
+    if(!empty($_GET)){
+        $changes = array();
+
+        $keys = array('Reading','Cinema','Shopping','Socializing','Travelling',
+            'Walking','Exercise','Soccer','Dancing', 'Horses','Running','Eating_Out',
+            'Painting', 'Cooking', 'Computers', 'Bowling', 'Writing', 'Skiing', 'Crafts',
+            'Golf', 'Chess', 'Gymnastics','Cycling','Swimming','Surfing','Hiking','Video_Games',
+            'Volleyball','Badminton','Gym','Parkour','Fashion','Yoga','Basketball','Boxing', 'Unique_Hobbie');
+
+        for($i=0; $i<count($keys) ; $i++){
+            if(!isset ($_GET[$keys[$i]])) {
+                $changes[$keys[$i]] = "0";
+            } else {
+                $changes[$keys[$i]] = "1";
+            }
+        }
+
+        if(isset ($_GET['Unique_Hobbie'])){ $changes['Unique_Hobbie'] = $_GET['Unique_Hobbie'];}
+        if($changes['Unique_Hobbie']== ''){ unset($changes['Unique_Hobbie']);}
+
+
+        $success = UserServiceMgr::testFunction($changes);
+
+        //this wont work until database is sorted and working
+        //$success = UserServiceMgr::updateUserHobbies($userid, $changes);
+    }
+
     // All to be uncommented and used when database is working/populated
-    //    $uid = 001; //needs to be got through global data possibly???
     //    $dbvalue = ReturnShortcuts::returnHobbies($uid);
 
     //hardcoded array to be replaced with users values from db
@@ -65,9 +95,23 @@
                 <hr class="tagline-divider">
                 <br>
 
+                <?php
+                if(!empty($_GET)) {
+                    if ($success) {
+                        echo '<' . 'div class= "alert alert-success" role="alert">
+                                    <a href="settingsPage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                        Account Details updated successfully
+                                    </div>';
+                    } else {
+                        echo '<' . 'div class="alert alert-danger">
+                                    <a href="settingsPage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    <strong>Error</strong> - Account Details update was unsuccessful
+                             </div>';
+                    }
+                }
+                ?>
 
-
-                <form role ="form" class="form-inline" action="scripts/updateHobbies.php" method="get">
+                <form role ="form" class="form-inline" action="updateHobbiesPage.php" method="get">
                     <div class="row">
                         <div class="col-md-12">
                             <fieldset>

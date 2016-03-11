@@ -19,23 +19,9 @@ class UserServiceMgr
     }
 
     public static function updateAccountDetails($changes, $userID){
-
         // $changes - should be in format ['username' => 'Kevin', 'name' => 'Kevin O\'Brien']
-
         $success = DB::getInstance()->update('account_details', $userID, $changes);
-        if($success){
-
-            echo "<div class=\"alert alert-success\">
-                        <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
-                        Account Details updated successfully
-                  </div>";
-        }
-        else{
-            echo "<div class=\"alert alert-danger\">
-                       <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
-                        <strong>Error</strong> - Account Details update was unsuccessful
-                   </div>";
-        }
+        return $success;
     }
 
     public static function updateBasicUserDetails($userid, $changes){
@@ -113,9 +99,8 @@ class UserServiceMgr
 
     //to be removed later
     public static function testFunction($changes){
-        foreach($changes as $key=>$value){
-            echo $key.' ---------   '.$value.'<br>';
-        }
+        return true;
+
     }
 
 

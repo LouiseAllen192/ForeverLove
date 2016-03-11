@@ -4,6 +4,12 @@ form{
     text-align: center;
 }
 
-label{
-
+.alert {
+    padding: 30px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    width: 60%;
+    display: inline-block;
+    text-align: center;
 }
