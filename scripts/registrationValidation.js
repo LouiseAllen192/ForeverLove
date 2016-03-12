@@ -207,4 +207,5 @@ if(page == 'registrationPage.php'){
             }
         });
     });
+
 }
