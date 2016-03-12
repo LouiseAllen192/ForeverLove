@@ -13,3 +13,8 @@ form{
     display: inline-block;
     text-align: center;
 }
+
+.error{
+    font-size: 12px;
+    color: red;
+}
