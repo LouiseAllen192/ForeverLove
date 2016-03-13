@@ -20,8 +20,8 @@ class Validate{
                         }
                     }
                     else if($rule == 'unique'){
-                        $available = $this->db->get($ruleValue, [$item, '=', $value])->count();
-                        if(!$available){
+                        $unavailable = $this->db->get($ruleValue, [$item, '=', $value])->count();
+                        if($unavailable){
                             $this->addError($item, 'Error_Unique');
                         }
                     }
