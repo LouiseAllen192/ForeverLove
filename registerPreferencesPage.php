@@ -93,19 +93,19 @@
                     if(!empty($_GET)) {
                         if ($success) {
                             echo '<' . 'div class= "alert alert-success" role="alert">
-                                    <a href="registerPrefrencesPage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    <a href="registerPreferencesPage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                         Account Details updated successfully
                                     </div>';
                         } else {
                             echo '<' . 'div class="alert alert-danger">
-                                    <a href="registerPrefrencesPage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    <a href="registerPreferencesPage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                     <strong>Error</strong> - Account Details update was unsuccessful
                              </div>';
                         }
                     }
                     ?>
 
-                <form id="prefrences" action="registerPrefrencesPage.php" id="registerP" method="get">
+                <form id="prefrences" action="registerPreferencesPage.php" id="registerP" method="get">
                     <fieldset class="form-group">
                         <label for="Tag_Line">Tag Line</label>
                         <input type="text"  class="form-control" maxlength="256" name="Tag_Line" placeholder= "Enter Tag Line here" ><br /><br>

@@ -9,7 +9,7 @@
 
     if(Input::exists()){
         $validate = new Validate();
-        $validation = $validate->check($_POST, [
+        $validate->check($_POST, [
             'Email' => [
                 'required' => true,
                 'matches' => '/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/',
@@ -42,7 +42,12 @@
             ]
         ]);
 
-        if(!$validate->passed()){
+        if($validate->passed()){
+            DB::getInstance()->registerUser('registration_details', ['Username' => $_POST['Username'], 'Password' => $_POST['Password'], 'First_Name' => $_POST['First_Name'], 'Last_Name' => $_POST['Last_Name'], 'Email' => $_POST['Email']]);
+            header('Location: '.'registerPreferencesPage.php');
+            die();
+        }
+        else{
             $errors = $validate->getErrors();
         }
     }
