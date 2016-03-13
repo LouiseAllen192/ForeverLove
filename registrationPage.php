@@ -4,6 +4,49 @@
     require_once 'core/init.php';
     include("includes/metatags.html");
     include("includes/fonts.html");
+
+    $errors = [];
+
+    if(Input::exists()){
+        $validate = new Validate();
+        $validation = $validate->check($_POST, [
+            'Email' => [
+                'required' => true,
+                'matches' => '/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/',
+                'unique' => 'registration_details'
+            ],
+            'Confirm_Email' => [
+                'required' => true,
+                'matches' => '/\b('.$_POST['Email'].')\b/'
+            ],
+            'Username' => [
+                'required' => true,
+                'matches' => '/^[a-zA-Z0-9_-]{3,32}$/',
+                'unique' => 'registration_details'
+            ],
+            'First_Name' => [
+                'required' => true,
+                'matches' => '/^[a-zA-Z]{2,32}$/'
+            ],
+            'Last_Name' => [
+                'required' => true,
+                'matches' => '/^[a-zA-Z\'-]{2,32}$/'
+            ],
+            'Password' => [
+                'required' => true,
+                'matches' => '/^[a-zA-Z0-9_-]{6,32}$/',
+            ],
+            'Confirm_Password' => [
+                'required' => true,
+                'matches' => '/\b('.$_POST['Password'].')\b/'
+            ]
+        ]);
+
+        if(!$validate->passed()){
+            $errors = $validate->getErrors();
+        }
+    }
+
     ?>
 
     <title>Registration Page</title>
@@ -42,8 +85,9 @@
                                 <input type="email" class="form-control" id="Email" name="Email" maxlength="128" value="<?php echo Input::get('Email');?>">
                             </div>
                             <p class="col-lg-4 col-md-4 col-sm-5"></p>
-                            <span class="hide error" id="Error_1">Invalid format, e.g. kevin@example.com</span>
-                            <span class="hide error" id="Error_2">Email address is already registered...</span>
+                            <span class="<?php if($errors['Email'] == 'Error_Required') : ?>error<?php else : ?>hide<?php endif; ?>" id="Error_Required">Required...</span>
+                            <span class="<?php if($errors['Email'] == 'Error_Regex') : ?>error<?php else : ?>hide<?php endif; ?>" id="Error_Regex">Invalid format, e.g. kevin@example.com</span>
+                            <span class="<?php if($errors['Email'] == 'Error_Unique') : ?>error<?php else : ?>hide<?php endif; ?>" id="Error_Unique">Email address is already registered...</span>
                         </div>
 
                         <div class="form-group" id="Confirm_Email_Group">
@@ -52,7 +96,8 @@
                                 <input type="email" class="form-control" id="Confirm_Email" name="Confirm_Email" maxlength="128" value="">
                             </div>
                             <p class="col-lg-4 col-md-4 col-sm-5"></p>
-                            <span class="hide error" id="Error_1">Email addresses do not match...</span>
+                            <span class="<?php if($errors['Confirm_Email'] == 'Error_Required') : ?>error<?php else : ?>hide<?php endif; ?>" id="Error_Required">Required...</span>
+                            <span class="<?php if($errors['Confirm_Email'] == 'Error_Regex') : ?>error<?php else : ?>hide<?php endif; ?>" id="Error_Regex">Email addresses do not match...</span>
                         </div>
 
                         <div class="form-group" id="Username_Group">
@@ -61,9 +106,9 @@
                                 <input type="text" class="form-control" id="Username" name="Username" maxlength="32" value="<?php echo Input::get('Username');?>">
                             </div>
                             <p class="col-lg-4 col-md-4 col-sm-5"></p>
-                            <span class="hide error" id="Error_1">Username too short, 3 - 32 characters required...</span>
-                            <span class="hide error" id="Error_2">Invalid username, a-zA-Z0-9_- characters only...</span>
-                            <span class="hide error" id="Error_3">Username already in use...</span>
+                            <span class="<?php if($errors['Username'] == 'Error_Required') : ?>error<?php else : ?>hide<?php endif; ?>" id="Error_Required">Required...</span>
+                            <span class="<?php if($errors['Username'] == 'Error_Regex') : ?>error<?php else : ?>hide<?php endif; ?>" id="Error_Regex">Invalid username, 3 - 32 characters(a-zA-Z0-9_-) only...</span>
+                            <span class="<?php if($errors['Username'] == 'Error_Unique') : ?>error<?php else : ?>hide<?php endif; ?>" id="Error_Unique">Username already in use...</span>
                         </div>
 
                         <div class="form-group" id="First_Name_Group">
@@ -72,7 +117,8 @@
                                 <input type="text" class="form-control" id="First_Name" name="First_Name" maxlength="32" value="<?php echo Input::get('First_Name');?>" autocomplete="on">
                             </div>
                             <p class="col-lg-4 col-md-4 col-sm-5"></p>
-                            <span class="hide error" id="Error_1">Invalid format, 2 - 32 alphabetic characters only...</span>
+                            <span class="<?php if($errors['First_Name'] == 'Error_Required') : ?>error<?php else : ?>hide<?php endif; ?>" id="Error_Required">Required...</span>
+                            <span class="<?php if($errors['First_Name'] == 'Error_Regex') : ?>error<?php else : ?>hide<?php endif; ?>" id="Error_Regex">Invalid format, 2 - 32 characters(a-zA-Z) only...</span>
                         </div>
 
                         <div class="form-group" id="Last_Name_Group">
@@ -81,7 +127,8 @@
                                 <input type="text" class="form-control" id="Last_Name" name="Last_Name" maxlength="32" value="<?php echo Input::get('Last_Name');?>" autocomplete="on">
                             </div>
                             <p class="col-lg-4 col-md-4 col-sm-5"></p>
-                            <span class="hide error" id="Error_1">Invalid format, 2 - 32 alphabetic characters only...</span>
+                            <span class="<?php if($errors['Last_Name'] == 'Error_Required') : ?>error<?php else : ?>hide<?php endif; ?>" id="Error_Required">Required...</span>
+                            <span class="<?php if($errors['Last_Name'] == 'Error_Regex') : ?>error<?php else : ?>hide<?php endif; ?>" id="Error_Regex">Invalid format, 2 - 32 characters(a-zA-Z'-) only...</span>
                         </div>
 
                         <div class="form-group" id="Password_Group">
@@ -90,9 +137,8 @@
                                 <input type="password" class="form-control" maxlength="32" id="Password" name="Password" value="">
                             </div>
                             <p class="col-lg-4 col-md-4 col-sm-5"></p>
-                            <span class="hide error" id="Error_1">Password too short, 6 - 32 characters required...</span>
-                            <span class="hide error" id="Error_2">Invalid format, a-zA-Z0-9_- characters only...</span>
-                            <span class="hide error" id="Error_3">Confirm password below...</span>
+                            <span class="<?php if($errors['Password'] == 'Error_Required') : ?>error<?php else : ?>hide<?php endif; ?>" id="Error_Required">Required...</span>
+                            <span class="<?php if($errors['Password'] == 'Error_Regex') : ?>error<?php else : ?>hide<?php endif; ?>" id="Error_Regex">Invalid format, 6 - 32 characters(a-zA-Z0-9_-) only...</span>
                         </div>
 
                         <div class="form-group" id="Confirm_Password_Group">
@@ -101,12 +147,13 @@
                                 <input type="password" class="form-control" maxlength="32" id="Confirm_Password" name="Confirm_Password" value="">
                             </div>
                             <p class="col-lg-4 col-md-4 col-sm-5"></p>
-                            <span class="hide error" id="Error_1">Passwords do not match...</span>
+                            <span class="<?php if($errors['Confirm_Password'] == 'Error_Required') : ?>error<?php else : ?>hide<?php endif; ?>" id="Error_Required">Required...</span>
+                            <span class="<?php if($errors['Confirm_Password'] == 'Error_Regex') : ?>error<?php else : ?>hide<?php endif; ?>" id="Error_Regex">Passwords do not match...</span>
                         </div>
                     </fieldset>
                     <br><br>
                     <a href="welcomePage.php" class="btn btn-info center-inline" role="button">Return</a>
-                    <input class="btn btn-info center-inline" id="Continue_Button" type="submit" disabled value="Continue">
+                    <input class="btn btn-info center-inline" id="Continue_Button" type="submit" value="Continue">
                 </form>
                 <br><br>
                 <br><br>

@@ -1,7 +1,7 @@
 <?php
 class Input{
     public static function exists($type = 'post'){
-        if(type === 'post'){
+        if($type === 'post'){
             return (empty($_POST)) ? false : true;
         }
         elseif($type === 'get'){
