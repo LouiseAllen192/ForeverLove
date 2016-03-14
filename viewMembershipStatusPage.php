@@ -12,6 +12,11 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/custom-base-page.css" rel="stylesheet">
     <?php include("includes/fonts.html"); ?>
+    <?php
+
+        //$uid = $_GLOBAL['Userid'];
+        $uid = 1;
+    ?>
 
 </head>
 

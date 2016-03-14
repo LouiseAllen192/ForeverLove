@@ -9,7 +9,7 @@
     ?>
     <title>Messages Page</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/custom-base-page.css" rel="stylesheet">
+    <link href="css/custom-messages-page.css" rel="stylesheet">
     <?php include("includes/fonts.html"); ?>
 
 </head>
@@ -24,43 +24,37 @@
     <div class="row">
         <div class="box">
             <div class="col-lg-12 text-center">
-                <h2 class="page-header">Messages</h2>
-            </div>
-            <div class="col-lg-6 col-sm-6 text-center">
-                <a href ="newMessage.php"><img class="img-circle img-responsive img-center" src="includes/pics/NewMsg.jpg" alt="New Message Icon"></a>
-                <a href="newMessage.php"><h3>New Message</h3></a>
-                <p><br></p>
-            </div>
-            <div class="col-lg-6 col-sm-6 text-center">
-                <a href = "existingConversation.php"><img class="img-circle img-responsive img-center" src="includes/pics/convo.jpg" alt="Existing Conversation Icon"></a>
-                <a href="existingConversation.php"><h3>Existing Conversation</h3></a>
-                <p><br></p>
-            </div>
-                    <br><br>
-                    <br><br>
-                </p>
+
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2 class="page-header">Messages</h2>
+                    </div>
+                </div>
+                <br><br>
+                <div class="row">
+                    <div class="col-lg-6 col-sm-6 text-center">
+                        <a href ="newMessagePage.php"><img class="img-circle img-responsive img-center" src="includes/pics/NewMsg.jpg" alt="New Message Icon"></a>
+                    </div>
+                    <div class="col-lg-6 col-sm-6 text-center">
+                        <a href = "existingConversationPage.php"><img class="img-circle img-responsive img-center" src="includes/pics/convo.jpg" alt="Existing Conversation Icon"></a>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-lg-6 col-sm-6 text-center">
+                        <a href="newMessagePage.php"><h3>New Message</h3></a>                    </div>
+                    <div class="col-lg-6 col-sm-6 text-center">
+                        <a href="existingConversationPage.php"><h3>Existing Conversation</h3></a>
+                    </div>
+                </div>
+
+
             </div>
         </div>
     </div>
-
 </div>
 <?php include("includes/footer.html"); ?>
 </body>
-
-
-<
-
-<!--Main page content-->
-
-<div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-
-		</div>
-</div>
-
-</div>
-<?php include("includes/footer.html"); ?>
-</body>
-
 </html>

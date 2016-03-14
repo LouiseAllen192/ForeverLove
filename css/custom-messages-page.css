@@ -1,0 +1,118 @@
+body {
+    margin-top: 50px;
+}
+
+.full {
+    background: url('http://gdurl.com/1DKh') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+.navbar-nav{
+    margin-top: 30px;
+}
+
+.profile-pic img{
+    margin: 0 auto;
+    width: 200px;
+    height: auto;
+}
+
+body {
+    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    text-transform: uppercase;
+    font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.nav-text ul{
+    text-transform: uppercase;
+    font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+p {
+    font-size: 1.25em;
+    line-height: 1.6;
+    color: #000;
+}
+
+hr {
+    max-width: 400px;
+    border-color: #999999;
+}
+
+.user-name {
+    text-transform: capitalize;
+    margin: 0;
+    font-size: 4em;
+}
+
+.tagline-divider {
+    margin: 15px auto 3px;
+    max-width: 250px;
+    border-color: #999999;
+}
+
+.box {
+    margin-bottom: 20px;
+    padding: 30px 15px;
+    background: #fff;
+    background: rgba(255,255,255,0.9);
+}
+
+.intro-text {
+    text-transform: uppercase;
+    font-size: 1.25em;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+
+
+footer p {
+    margin: 0;
+    padding: 10px 0;
+    text-align: left;
+    background: #222222;
+    color: white;
+    font-size: x-small;
+}
+
+
+
+@media screen and (min-width:1200px) {
+    .box:after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+}
+
+body {
+    padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+}
+
+.nav-text ul{
+    text-transform: uppercase;
+    font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+h2, h3{
+    text-transform: uppercase;
+    font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.img-center {
+    margin: 0 auto;
+}
