@@ -19,39 +19,13 @@
     include($_SERVER['DOCUMENT_ROOT'].'/classes/UserServiceMgr.php');
     include($_SERVER['DOCUMENT_ROOT'].'/classes/ReturnShortcuts.php');
 
-
     //$uid = $_GLOBAL['User_Id'];
+    $uid = 1;
+    $dbvalue =  ReturnShortcuts::returnRegDetails($uid);
 
-
-    if(!empty($_GET)){
-        // Can not send sensitive info via GET  - TO BE FIXED!!!!!!
-
-        if($_GET['Send']== 'Apply Changes'){
-            unset($_GET['Send']);
-        }
-
-        $keys = array("Username","First_Name", "Last_Name", "Password" , "Email");
-
-        for($i=0; $i<count($keys); $i++){
-            if($_GET[$keys[$i]]== ''){
-                unset($_GET[$keys[$i]]);
-            }
-
-        }
-
-        //to be deleted when database working
-        $success = UserServiceMgr::testFunction($_GET);
-
-        //this wont work until database is sorted and working
-        //$success = UserServiceMgr::updateBasicUserDetails($userid, $changes);
+    if(!empty($_POST)){
+        $success = UserServiceMgr::updateBasicUserDetails($uid, $_POST);
     }
-
-
-    // All to be uncommented and used when database is working/populated
-    //    $dbvalue ReturnShortcuts::returnDetails($uid);
-
-    //hardcoded array to be replaced with code above when database working
-    $dbvalue = array("Username"=>"javanator89", "First_Name"=>"Louise", "Last_Name"=>"Allen","Password"=>"1x6f72", "Email"=>"louise.allen192@gmail.com");
     ?>
 
 </head>
@@ -76,7 +50,7 @@
                 <br><br>
 
                     <?php
-                    if(!empty($_GET)) {
+                    if(!empty($_POST)) {
                         if ($success) {
                             echo '<' . 'div class= "alert alert-success" role="alert">
                                     <a href="settingsPage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -91,7 +65,7 @@
                     }
                     ?>
 
-                <form id="userRegDetails" action="updateRegDetailsPage.php" id="updateRD" method="get">
+                <form id="userRegDetails" action="updateRegDetailsPage.php" id="updateRD" method="POST">
                     <fieldset class="form-group">
                         <label for="Username">Username</label>
                         <input type="text"  class="form-control" maxlength="32" name="Username" placeholder= "<?php echo ($dbvalue['Username']);?>" ><br /><br>
@@ -106,7 +80,7 @@
                     </fieldset>
                     <fieldset class="form-group">
                         <label for="Password">Password</label>
-                        <input type="text"  class="form-control" maxlength="32" name="Password" placeholder="<?php echo ($dbvalue['Password']);?>"><br /><br>
+                        <input type="password"  class="form-control" maxlength="32" name="Password" placeholder="Enter new password"><br /><br>
                     </fieldset>
                     <fieldset class="form-group">
                         <label for="Email">Email</label>

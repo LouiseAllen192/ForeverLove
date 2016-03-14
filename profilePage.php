@@ -3,10 +3,6 @@
 
 <head>
 
-<!--    TOTALLY FUCKING BROKE THIS PAGE - SOZ-->
-<!--    I'LL FIX IT LATER-->
-<!--    -LOUISE-->
-
     <?php
     require_once 'core/init.php';
     include("includes/metatags.html");
@@ -18,13 +14,15 @@
     <?php include("includes/fonts.html"); ?>
 
     <?php
-//    include($_SERVER['DOCUMENT_ROOT'].'/classes/User.php');
+        include($_SERVER['DOCUMENT_ROOT'].'/classes/User.php');
 
 //    $uid = $GLOBALS['User_Id'];
-//    $user = new User($uid);
-//
+        $uid = 1;
+        $user = new User($uid);
+        $dbhob = $user->getHobbies();
+        $dbprf = $user->getUserPrefrences();
 
-     function calculateAge($dob){
+        function calculateAge($dob){
         //date in mm/dd/yyyy format; or it can be in other formats as well
         $birthDate = "02/19/1991";
         //explode the date to get month, day and year
@@ -57,23 +55,6 @@
 
     }
 
-    //all hardcoded arrays to be replaced when database populated
-    $dbhob = array("Reading"=>"0", "Cinema"=>"0", "Shopping"=>"0", "Socializing"=>"1", "Travelling"=>"0", "Walking"=>"1",
-        "Exercise"=>"1", "Soccer"=>"0", "Dance"=>"1", "Horses"=>"1", "Painting"=>"0", "Running"=>"0",
-        "Eat_Out"=>"0", "Cooking"=>"0", "Computers"=>"0", "Bowling"=>"1", "Writing"=>"0", "Skiing"=>"1",
-        "Crafts"=>"1", "Golf"=>"1", "Chess"=>"1", "Gymnastics"=>"1", "Cycle"=>"1", "Swimming"=>"1",
-        "Surfing"=>"1", "Hiking"=>"0", "Video_Games"=>"1", "Volly_Ball"=>"1", "Badminton"=>"1", "Gym"=>"1",
-        "Parkour"=>"0", "Fashion"=>"1", "Yoga"=>"1", "Basketball"=>"0", "Boxing"=>"0", "Unique_Hobbie"=>"Cutting Turf");
-
-    $dbprf = array("Tag_Line"=>"I'm a cool guy", "City"=>"Dublin", "Gender"=>"Male","Seeking"=>"Female", "Intent"=>"Relationship",
-        "Height"=>"140-150cm", "Ethnicity"=>"White Irish","Body_Type"=>"Slim", "Date_Of_Birth"=>"02/19/1991",
-        "Religion"=>"Athiest", "Marital_Status"=>"Single","Income"=>"40k to 60k per year",
-        "Has_Children"=>"0", "Wants_Children"=>"1", "Smoker"=>"0", "Drinker"=>"Social Drinker",
-        "About_Me"=>"Dublin guy looking for a relationship. Love long walks on the beach.");
-
-    $dbreg = array("Username"=>"javanator89", "First_Name"=>"Louise", "Last_Name"=>"Allen","Password"=>"1x6f72",
-                        "Email"=>"louise.allen192@gmail.com");
-
     ?>
 
 
@@ -93,11 +74,11 @@
                     <!--image source to be got from database-->
                     <div class="profile-pic"><img src="includes/pics/ProfilePic.jpg" class="img-responsive" alt="Profile Picture"></div>
                     <br><br>
-                    <h1 class="user-name"><?php echo ($dbreg['Username'])// echo ($user->getUsername());?></h1>
+                    <h1 class="user-name"><?php echo ($user->getUsername());?></h1>
                     <hr class="tagline-divider">
                     <h2>
                         <small>
-                            <strong><?php echo ($dbprf['Tag_Line'])// echo ($user->getUserPrefrences()->getTagLine());?></strong>
+                            <strong><?php echo ($dbprf['Tag_Line'])?></strong>
                         </small>
                     </h2>
                 </div>
@@ -204,7 +185,7 @@
                                     <?php
                                     createDisplay("Exercise", $dbhob);
                                     createDisplay("Soccer", $dbhob);
-                                    createDisplay("Dance", $dbhob);
+                                    createDisplay("Dancing", $dbhob);
                                     ?>
                                     <div style="clear:both;"><div></div></div>
                                     <?php
@@ -214,7 +195,7 @@
                                     ?>
                                     <div style="clear:both;"><div></div></div>
                                     <?php
-                                    createDisplay("Eat_Out", $dbhob);
+                                    createDisplay("Eating_Out", $dbhob);
                                     createDisplay("Cooking", $dbhob);
                                     createDisplay("Computers", $dbhob);
                                     ?>
@@ -233,7 +214,7 @@
                                     <div style="clear:both;"><div></div></div>
                                     <?php
                                     createDisplay("Gymnastics", $dbhob);
-                                    createDisplay("Cycle", $dbhob);
+                                    createDisplay("Cycling", $dbhob);
                                     createDisplay("Swimming", $dbhob);
                                     ?>
                                     <div style="clear:both;"><div></div></div>
@@ -244,7 +225,7 @@
                                     ?>
                                     <div style="clear:both;"><div></div></div>
                                     <?php
-                                    createDisplay("Volly_Ball", $dbhob);
+                                    createDisplay("Volleyball", $dbhob);
                                     createDisplay("Badminton", $dbhob);
                                     createDisplay("Gym", $dbhob);
                                     ?>

@@ -7,7 +7,7 @@
     include("includes/metatags.html");
     ?>
 
-    <title>Update Prefrences</title>
+    <title>Update Preferences</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/custom-base-page.css" rel="stylesheet">
     <link href="css/custom-form-page.css" rel="stylesheet">
@@ -19,41 +19,12 @@
         include($_SERVER['DOCUMENT_ROOT'].'/classes/ReturnShortcuts.php');
 
         //$uid = $_GLOBAL['User_Id'];
+        $uid =1;
+        $dbvalue = ReturnShortcuts::returnPreferences($uid);
 
-    if(!empty($_GET)){
-
-        // About me not sending - TO BE FIXED!!!!!!
-        if (isset($_GET['About_Me'])) {
-            echo "is set!!!!";
+        if(!empty($_POST)){
+            $success = UserServiceMgr::updateUserPreferences($uid, $_POST);
         }
-        if ($_GET['Tag_Line'] == '') {
-            unset($_GET['Tag_Line']);
-        }
-        if ($_GET['City'] == '') {
-            unset($_GET['City']);
-        }
-        if ($_GET['Send'] == 'Apply Changes') {
-            unset($_GET['Send']);
-        }
-        //to be deleted when database working
-        $success = UserServiceMgr::testFunction($_GET);
-
-        //this wont work until database is sorted and working
-        //UserServiceMgr::updateUserHobbies($_GLOBAL['User_Id], $changes);
-    }
-
-
-    // All to be uncommented and used when database is working/populated
-    //    $uid = 001; //needs to be got properly
-    //    $dbvalue ReturnShortcuts::returnPreferences($uid);
-
-    //hardcoded array to be replaced with code above when database working
-    $dbvalue = array("Tag_Line"=>"I'm a cool guy", "City"=>"Dublin", "Gender"=>"Male","Seeking"=>"Female", "Intent"=>"Relationship",
-        "Height"=>"140-150cm", "Ethnicity"=>"White Irish","Body_Type"=>"Slim",
-        "Religion"=>"Athiest", "Marital_Status"=>"Single","Income"=>"40k to 60k per year",
-        "Has_Children"=>"0", "Wants_Children"=>"Yes", "Smoker"=>"0", "Drinker"=>"Social Drinker",
-        "About_Me"=>"Dublin guy looking for a relationship. Love long walks on the beach.");
-
 
     function generateSelect($name = '', $options = array(), $default = '') {
         $html = '<select name="'.$name.'" class="form-control">';
@@ -67,7 +38,6 @@
         $html .= '</select><br><br>';
         echo $html;
     }
-
 
     function generateSelectBoolean($name = '', $default = '') {
         $options = array("Yes"=>"1", "No"=>"0");
@@ -106,7 +76,7 @@
                 <p>
                     <br>
                     <?php
-                    if(!empty($_GET)) {
+                    if(!empty($_POST)) {
                         if ($success) {
                             echo '<' . 'div class= "alert alert-success" role="alert">
                                     <a href="settingsPage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -120,7 +90,7 @@
                         }
                     }
                     ?>
-                <form id="prefrences" action="updatePrefrencesPage.php" id="updateP" method="get">
+                <form id="prefrences" action="updatePreferencesPage.php" id="updateP" method="POST">
                     <fieldset class="form-group">
                         <label for="Tag_Line">Tag Line</label>
                         <input type="text"  class="form-control" maxlength="256" name="Tag_Line" placeholder= "<?php echo ($dbvalue['Tag_Line']);?>" ><br /><br>

@@ -25,56 +25,58 @@ class UserServiceMgr
     }
 
     public static function updateBasicUserDetails($userid, $changes){
-        // $changes - should be in format ['username' => 'Kevin', 'name' => 'Kevin O\'Brien']
+
+        $keys = array("Username","First_Name", "Last_Name", "Password" , "Email");
+
+        for($i=0; $i<count($keys); $i++){
+            if($changes[$keys[$i]]== '' || $changes[$keys[$i]]== 'Apply Changes'){
+                unset($changes[$keys[$i]]);
+            }
+
+        }
         $success = DB::getInstance()->update('registration_details', $userid, $changes);
-        if($success){
-            echo "<div class=\"alert alert-success\">
-                        <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
-                        User Details updated successfully
-                  </div>";
-        }
-        else{
-            echo "<div class=\"alert alert-danger\">
-                       <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
-                        <strong>Error</strong> - User Details update was unsuccessful
-                   </div>";
-        }
+        return $success;
+
     }
 
     public static function updateUserHobbies($userid, $changes){
-        // $changes - should be in format ['username' => 'Kevin', 'name' => 'Kevin O\'Brien']
-        $success = DB::getInstance()->update('hobbies', $userid, $changes);
-        if($success){
+        $changes = array();
 
-            echo "<div class=\"alert alert-success\">
-                        <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
-                        User Hobbies updated successfully
-                  </div>";
+        $keys = array('Reading','Cinema','Shopping','Socializing','Travelling',
+            'Walking','Exercise','Soccer','Dancing', 'Horses','Running','Eating_Out',
+            'Painting', 'Cooking', 'Computers', 'Bowling', 'Writing', 'Skiing', 'Crafts',
+            'Golf', 'Chess', 'Gymnastics','Cycling','Swimming','Surfing','Hiking','Video_Games',
+            'Volleyball','Badminton','Gym','Parkour','Fashion','Yoga','Basketball','Boxing', 'Unique_Hobbie');
+
+        for($i=0; $i<count($keys) ; $i++){
+            if(!isset ($_GET[$keys[$i]])) {
+                $changes[$keys[$i]] = "0";
+            } else {
+                $changes[$keys[$i]] = "1";
+            }
         }
-        else{
-            echo "<div class=\"alert alert-danger\">
-                       <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
-                        <strong>Error</strong> - User Hobbies update was unsuccessful
-                   </div>";
-        }
+
+        if(isset ($_GET['Unique_Hobbie'])){ $changes['Unique_Hobbie'] = $_GET['Unique_Hobbie'];}
+        if($changes['Unique_Hobbie']== ''){ unset($changes['Unique_Hobbie']);}
+
+        $success = DB::getInstance()->update('hobbies', $userid, $changes);
+        return $success;
+
     }
 
-    public static function updatePrefrences($userid, $changes){
-        // $changes - should be in format ['username' => 'Kevin', 'name' => 'Kevin O\'Brien']
-        $success = DB::getInstance()->update('preference_details', $userid, $changes);
-        if($success){
+    public static function updateUserPreferences($userid, $changes){
 
-            echo "<div class=\"alert alert-success\">
-                        <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
-                        User Prefrences Details updated successfully
-                  </div>";
+        $keys = array("Tag_Line", "City", "Gender", "Seeking", "Intent",
+            "Height", "Ethnicity","Body_Type","Religion", "Marital_Status","Income",
+            "Has_Children", "Wants_Children","Smoker", "Drinker", "About__Me");
+        foreach($keys as $key => $value){
+            if ($changes[$key] == '' || $changes[$key] == 'Apply Changes') {
+                unset($changes[$key]);
+            }
         }
-        else{
-            echo "<div class=\"alert alert-danger\">
-                       <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
-                        <strong>Error</strong> - User Prefrences Details update was unsuccessful
-                   </div>";
-        }
+        $success = DB::getInstance()->update('preference_details', $userid, $changes);
+        if($success) return true;
+        else return false;
     }
 
     public static function updateImageGallery($userid){
