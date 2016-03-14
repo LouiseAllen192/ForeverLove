@@ -14,7 +14,8 @@ $GLOBALS['config'] = [
         'cookie_expiry' => 604800
     ],
     'session' => [
-        'session_name' => 'user'
+        'session_name' => 'user',
+        'user_id' => ''
     ]
 ];
 
