@@ -45,7 +45,7 @@
         if($validate->passed()){
             $db = DB::getInstance();
             $db->registerUser('registration_details', ['Username' => $_POST['Username'], 'Password' => $_POST['Password'], 'First_Name' => $_POST['First_Name'], 'Last_Name' => $_POST['Last_Name'], 'Email' => $_POST['Email']]);
-            $GLOBALS['config']['session']['user_id'] = $db->get('registration_details', ['Username' , '=', $_POST['Username']])->results()[0]->User_id;
+            $GLOBALS['config']['session']['user_id'] = $db->get('registration_details', ['Username' , '=', $_POST['Username']])->results()[0]->user_id;
             header('Location: '.'registerPreferencesPage.php');
             die();
         }
