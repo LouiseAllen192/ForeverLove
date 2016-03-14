@@ -19,7 +19,7 @@
         include($_SERVER['DOCUMENT_ROOT'].'/classes/ReturnShortcuts.php');
 
         //$uid = $_GLOBAL['User_Id'];
-        $uid =1;
+        $uid =2;
         $dbvalue = ReturnShortcuts::returnPreferences($uid);
 
         if(!empty($_POST)){

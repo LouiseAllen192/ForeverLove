@@ -39,7 +39,7 @@ class UserServiceMgr
 
     }
 
-    public static function updateUserHobbies($userid, $changes){
+    public static function updateUserHobbies($userid, $postArray){
         $changes = array();
 
         $keys = array('Reading','Cinema','Shopping','Socializing','Travelling',
@@ -49,14 +49,14 @@ class UserServiceMgr
             'Volleyball','Badminton','Gym','Parkour','Fashion','Yoga','Basketball','Boxing', 'Unique_Hobbie');
 
         for($i=0; $i<count($keys) ; $i++){
-            if(!isset ($_GET[$keys[$i]])) {
+            if(!isset ($postArray[$keys[$i]])) {
                 $changes[$keys[$i]] = "0";
             } else {
                 $changes[$keys[$i]] = "1";
             }
         }
 
-        if(isset ($_GET['Unique_Hobbie'])){ $changes['Unique_Hobbie'] = $_GET['Unique_Hobbie'];}
+        if(isset ($postArray['Unique_Hobbie'])){ $changes['Unique_Hobbie'] = $postArray['Unique_Hobbie'];}
         if($changes['Unique_Hobbie']== ''){ unset($changes['Unique_Hobbie']);}
 
         $success = DB::getInstance()->update('hobbies', $userid, $changes);
@@ -69,9 +69,9 @@ class UserServiceMgr
         $keys = array("Tag_Line", "City", "Gender", "Seeking", "Intent",
             "Height", "Ethnicity","Body_Type","Religion", "Marital_Status","Income",
             "Has_Children", "Wants_Children","Smoker", "Drinker", "About__Me");
-        foreach($keys as $key => $value){
-            if ($changes[$key] == '' || $changes[$key] == 'Apply Changes') {
-                unset($changes[$key]);
+        for($i=0; $i<count($keys); $i++){
+            if ($changes[$keys[$i]] == '' || $changes[$keys[$i]] == 'Apply Changes') {
+                unset($changes[$keys[$i]]);
             }
         }
         $success = DB::getInstance()->update('preference_details', $userid, $changes);
@@ -99,12 +99,46 @@ class UserServiceMgr
         //todo
     }
 
-    //to be removed later
-    public static function testFunction($changes){
-        return true;
+    public static function registerPreferences($userid, $changes){
+        if($changes['Tag_Line']== ''){
+            $changes['Tag_Line'] = 'Unselected';
+        }
+        if($changes['City']== ''){
+            $changes['City'] = 'Unselected';
+        }
 
+        if($changes['Send']== 'Apply Changes'){
+            unset($changes['Send']);
+        }
+        $success = DB::getInstance()->update('preference_details', $userid, $changes);
+        if($success) return true;
+        else return false;
     }
 
+    public static function registerHobbies($postArray, $userid){
+        $changes = array();
+        $keys = array('Reading','Cinema','Shopping','Socializing','Travelling',
+            'Walking','Exercise','Soccer','Dancing', 'Horses','Running','Eating_Out',
+            'Painting', 'Cooking', 'Computers', 'Bowling', 'Writing', 'Skiing', 'Crafts',
+            'Golf', 'Chess', 'Gymnastics','Cycling','Swimming','Surfing','Hiking','Video_Games',
+            'Volleyball','Badminton','Gym','Parkour','Fashion','Yoga','Basketball','Boxing', 'Unique_Hobbie');
 
+        for($i=0; $i<count($keys) ; $i++){
+            if(!isset ($postArray[$keys[$i]])) {
+                $changes[$keys[$i]] = "0";
+            } else {
+                $changes[$keys[$i]] = "1";
+            }
+        }
 
+        if(isset ($postArray['Unique_Hobbie'])){ $changes['Unique_Hobbie'] = $postArray['Unique_Hobbie'];}
+        if($changes['Unique_Hobbie']== ''){ unset($changes['Unique_Hobbie']);}
+
+        if($_GET['Send']== 'Apply Changes'){
+            unset($postArray['Send']);
+        }
+        $success = DB::getInstance()->update('hobbies', $userid, $changes);
+        if($success) return true;
+        else return false;
+    }
 }

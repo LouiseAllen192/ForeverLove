@@ -19,37 +19,10 @@
     include($_SERVER['DOCUMENT_ROOT'].'/classes/ReturnShortcuts.php');
 
     //$uid = $_GLOBAL['User_Id'];
+    $uid=3;
 
-    if(!empty($_GET)) {
-        $changes = array();
-        $keys = array('Reading','Cinema','Shopping','Socializing','Travelling',
-            'Walking','Exercise','Soccer','Dancing', 'Horses','Running','Eating_Out',
-            'Painting', 'Cooking', 'Computers', 'Bowling', 'Writing', 'Skiing', 'Crafts',
-            'Golf', 'Chess', 'Gymnastics','Cycling','Swimming','Surfing','Hiking','Video_Games',
-            'Volleyball','Badminton','Gym','Parkour','Fashion','Yoga','Basketball','Boxing', 'Unique_Hobbie');
-
-        for($i=0; $i<count($keys) ; $i++){
-            if(!isset ($_GET[$keys[$i]])) {
-                $changes[$keys[$i]] = "0";
-            } else {
-                $changes[$keys[$i]] = "1";
-            }
-        }
-
-        if(isset ($_GET['Unique_Hobbie'])){ $changes['Unique_Hobbie'] = $_GET['Unique_Hobbie'];}
-        if($changes['Unique_Hobbie']== ''){ unset($changes['Unique_Hobbie']);}
-
-        if($_GET['Send']== 'Apply Changes'){
-            unset($_GET['Send']);
-        }
-
-
-
-        $success = UserServiceMgr::testFunction($changes);
-
-
-        //this wont work until database is sorted and working
-        //$success = UserServiceMgr::updateUserHobbies($userid, $changes);
+    if(!empty($_POST)) {
+        $success = UserServiceMgr::registerHobbies($uid, $_POST);
     }
 
     function createOption($name){
@@ -82,12 +55,10 @@
                 <br>
 
                 <?php
-                if(!empty($_GET)) {
+                if(!empty($_POST)) {
                     if ($success) {
-                        echo '<' . 'div class= "alert alert-success" role="alert">
-                                    <a href="homePage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                        Account Details updated successfully
-                                    </div>';
+                        header('Location: '.'homePage.php');
+                        die();
                     } else {
                         echo '<' . 'div class="alert alert-danger">
                                     <a href="registerHobbiesPage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -98,7 +69,7 @@
                 ?>
 
 
-                <form role ="form" class="form-inline" action="registerHobbiesPage.php" method="get">
+                <form role ="form" class="form-inline" action="registerHobbiesPage.php" method="POST">
                     <div class="row">
                         <div class="col-md-12">
                             <fieldset>

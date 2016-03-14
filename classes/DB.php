@@ -153,12 +153,15 @@ class DB{
             $x = 1;
 
             foreach ($fields as $name => $field) {
-                $set .= "{$name} = ?";
+               // $set .= "{$name} = ?";
+                $set .= $name.' = '."'".$field."'";
                 if ($x++ < $n)
                     $set .= ', ';
             }
 
-            $sql = "UPDATE {$table} SET {$set} WHERE id = {$id}";
+            //$sql = "UPDATE {$table} SET {$set} WHERE id = {$id}";
+            $sql = 'UPDATE '.$table.' SET '.$set.' WHERE Userid = '."'".$id."'";
+
             if (!$this->query($sql, $fields)->error()) return true;
         }
         return false;
