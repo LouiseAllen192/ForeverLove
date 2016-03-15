@@ -109,10 +109,9 @@ class DB{
             $sql = "INSERT INTO {$table} (`".implode('`, `', $keys)."`) VALUES ({$values})";
             if($this->query($sql, $fields)->error()) return false;
             else if($table === 'registration_details'){
-                $user_id = $this->get('registration_details', ['Username', '=', $fields['Username']])->results()[0]->User_id;
+                $user_id = $this->get('registration_details', ['Username', '=', $fields['Username']])->results()[0]->user_id;
                 $this->registerUser('account_details', ['User_id' => $user_id]);
                 $this->registerUser('preference_details', ['User_id' => $user_id]);
-                $this->registerUser('hobbies', ['User_id' => $user_id]);
             }
             else return true;
         }
