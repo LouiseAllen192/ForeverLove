@@ -6,6 +6,7 @@ $(document).ready(function(){
 
     if(page == 'registrationPage.php'){
         $('#Email_Group').find('#Email').keyup(function(){
+            $('#Email_Group > #Error_Required').removeClass('error').addClass('hide');
             var input = $(this).val();
             var pattern = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/;
             var valid = pattern.test(input);
@@ -43,6 +44,7 @@ $(document).ready(function(){
         });
 
         $('#Confirm_Email_Group').find('#Confirm_Email').keyup(function(){
+            $('#Confirm_Email_Group > #Error_Required').removeClass('error').addClass('hide');
             var input = $(this).val();
             if (input != $('#Email').val()) {
                 $('#Confirm_Email_Group > #Error_Regex').removeClass('hide').addClass('error');
@@ -55,6 +57,7 @@ $(document).ready(function(){
 
     if(page == 'registrationPage.php'){
         $('#Username_Group').find('#Username').keyup(function(){
+            $('#Username_Group > #Error_Required').removeClass('error').addClass('hide');
             var input = $(this).val();
             var pattern = /^[a-zA-Z0-9_-]{3,32}$/;
             var valid = pattern.test(input);
@@ -87,6 +90,7 @@ $(document).ready(function(){
 
     if(page == 'registrationPage.php') {
         $('#First_Name_Group').find('#First_Name').keyup(function () {
+            $('#First_Name_Group > #Error_Required').removeClass('error').addClass('hide');
             var input = $(this).val();
             var pattern = /^[a-zA-Z]{2,32}$/;
             var valid = pattern.test(input);
@@ -99,6 +103,7 @@ $(document).ready(function(){
         });
 
         $('#Last_Name_Group').find('#Last_Name').keyup(function(){
+            $('#Last_Name_Group > #Error_Required').removeClass('error').addClass('hide');
             var input = $(this).val();
             var pattern = /^[a-zA-Z'-]{2,32}$/;
             var valid = pattern.test(input);
@@ -113,6 +118,7 @@ $(document).ready(function(){
 
     if(page == 'registrationPage.php') {
         $('#Password_Group').find('#Password').keyup(function(){
+            $('#Password_Group > #Error_Required').removeClass('error').addClass('hide');
             var input = $(this).val();
             var pattern = /^[a-zA-Z0-9_-]{6,32}$/;
             var valid = pattern.test(input);
@@ -134,6 +140,7 @@ $(document).ready(function(){
         });
 
         $('#Confirm_Password_Group').find('#Confirm_Password').keyup(function(){
+            $('#Confirm_Password_Group > #Error_Required').removeClass('error').addClass('hide');
             var input = $(this).val();
             if (input != $('#Password').val()) {
                 $('#Confirm_Password_Group > #Error_Regex').removeClass('hide').addClass('error');

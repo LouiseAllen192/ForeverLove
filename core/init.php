@@ -8,14 +8,6 @@ $GLOBALS['config'] = [
         'username' => 'root',
         'password' => '',
         'db' => 'group13db'
-    ],
-    'remember' => [
-        'cookie_name' => 'hash',
-        'cookie_expiry' => 604800
-    ],
-    'session' => [
-        'session_name' => 'user',
-        'user_id' => ''
     ]
 ];
 
