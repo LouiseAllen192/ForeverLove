@@ -19,6 +19,8 @@
     include($_SERVER['DOCUMENT_ROOT'].'/classes/ReturnShortcuts.php');
 
 
+    /**********user_id is stored in $_SESSION['user_id']**********/
+
     //$uid = $_GLOBAL['User_Id'];
     $uid = 3;
 
