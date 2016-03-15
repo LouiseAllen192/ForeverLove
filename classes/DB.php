@@ -144,25 +144,24 @@ class DB{
 
     /*
      * Update tuple in table
-     * e.g. update('registration_details', 1, ['Username' => 'Kevin', 'First_Name' => 'Kevin']);
+     * e.g. update('user_hobbies', 'hobby_id = 1', ['hobby_name' => 'reading']);
      */
-    public function update($table, $id, $fields = []){
+    public function update($table, $where, $fields = []){
         $n = count($fields);
         if($n){
             $set = '';
             $x = 1;
 
-            foreach ($fields as $name => $field) {
-                $set .= "{$name} = ?";
+            foreach($fields as $fieldName => $fieldValue) {
+                $set .= "{$fieldName} = ?";
                 if ($x++ < $n)
                     $set .= ', ';
             }
 
-            $sql = "UPDATE {$table} SET {$set} WHERE id = {$id}";
+            $sql = "UPDATE {$table} SET {$set} WHERE {$where}";
             if (!$this->query($sql, $fields)->error()) return true;
         }
         return false;
-
     }
 
     public function count(){
