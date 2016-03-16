@@ -5,32 +5,32 @@ var page = path.substring(path.lastIndexOf('/') + 1);
 $(document).ready(function(){
 
     if(page == 'registrationPage.php'){
-        $('#Email_Group').find('#Email').keyup(function(){
-            $('#Email_Group > #Error_Required').removeClass('error').addClass('hide');
+        $('#email_group').find('#email').keyup(function(){
+            $('#email_group > #error_required').removeClass('error').addClass('hide');
             var input = $(this).val();
             var pattern = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/;
             var valid = pattern.test(input);
             if (valid) {
-                $('#Email_Group > #Error_Regex').removeClass('error').addClass('hide');
+                $('#email_group > #error_regex').removeClass('error').addClass('hide');
                 $.ajax({
                     type: "post",
                     url: "scripts/checkIfEmailIsRegistered.php",
-                    data: {Email: input},
+                    data: {email: input},
                     dataType: "text",
                     success: function (response) {
                         var result = parseInt(response);
                         if (result) {
-                            $('#Email_Group > #Error_Unique').removeClass('hide').addClass('error');
+                            $('#email_group > #error_unique').removeClass('hide').addClass('error');
                         }
                         else {
-                            $('#Email_Group > #Error_Unique').removeClass('error').addClass('hide');
-                            var confirmEmail = $('#Confirm_Email').val();
+                            $('#email_group > #error_unique').removeClass('error').addClass('hide');
+                            var confirmEmail = $('#confirm_email').val();
                             if (confirmEmail.length > 0) {
                                 if (input != confirmEmail) {
-                                    $('#Confirm_Email_Group > #Error_Regex').removeClass('hide').addClass('error');
+                                    $('#confirm_email_group > #error_regex').removeClass('hide').addClass('error');
                                 }
                                 else {
-                                    $('#Confirm_Email_Group > #Error_Regex').removeClass('error').addClass('hide');
+                                    $('#confirm_email_group > #error_regex').removeClass('error').addClass('hide');
                                 }
                             }
                         }
@@ -38,115 +38,115 @@ $(document).ready(function(){
                 });
             }
             else {
-                $('#Email_Group > #Error_Unique').removeClass('error').addClass('hide');
-                $('#Email_Group > #Error_Regex').removeClass('hide').addClass('error');
+                $('#email_group > #error_unique').removeClass('error').addClass('hide');
+                $('#email_group > #error_regex').removeClass('hide').addClass('error');
             }
         });
 
-        $('#Confirm_Email_Group').find('#Confirm_Email').keyup(function(){
-            $('#Confirm_Email_Group > #Error_Required').removeClass('error').addClass('hide');
+        $('#confirm_email_group').find('#confirm_email').keyup(function(){
+            $('#confirm_email_group > #error_required').removeClass('error').addClass('hide');
             var input = $(this).val();
-            if (input != $('#Email').val()) {
-                $('#Confirm_Email_Group > #Error_Regex').removeClass('hide').addClass('error');
+            if (input != $('#email').val()) {
+                $('#confirm_email_group > #error_regex').removeClass('hide').addClass('error');
             }
             else {
-                $('#Confirm_Email_Group > #Error_Regex').removeClass('error').addClass('hide');
+                $('#confirm_email_group > #error_regex').removeClass('error').addClass('hide');
             }
         });
     }
 
     if(page == 'registrationPage.php'){
-        $('#Username_Group').find('#Username').keyup(function(){
-            $('#Username_Group > #Error_Required').removeClass('error').addClass('hide');
+        $('#username_group').find('#username').keyup(function(){
+            $('#username_group > #error_required').removeClass('error').addClass('hide');
             var input = $(this).val();
             var pattern = /^[a-zA-Z0-9_-]{3,32}$/;
             var valid = pattern.test(input);
             if (valid) {
-                $('#Username_Group > #Error_Regex').removeClass('error').addClass('hide');
+                $('#username_group > #error_regex').removeClass('error').addClass('hide');
                 $.ajax({
                     type: "post",
                     url: "scripts/checkUsernameAvailability.php",
-                    data: {Username: input},
+                    data: {username: input},
                     dataType: "text",
                     success: function (response) {
                         var result = parseInt(response);
                         if (result) {
-                            $('#Username_Group > #Error_Regex').removeClass('error').addClass('hide');
-                            $('#Username_Group > #Error_Unique').removeClass('hide').addClass('error');
+                            $('#username_group > #error_regex').removeClass('error').addClass('hide');
+                            $('#username_group > #error_unique').removeClass('hide').addClass('error');
                         }
                         else {
-                            $('#Username_Group > #Error_Unique').removeClass('error').addClass('hide');
+                            $('#username_group > #error_unique').removeClass('error').addClass('hide');
                         }
                     }
                 });
             }
             else {
-                $('#Username_Group > #Error_Unique').removeClass('error').addClass('hide');
-                $('#Username_Group > #Error_Regex').removeClass('hide').addClass('error');
+                $('#username_group > #error_unique').removeClass('error').addClass('hide');
+                $('#username_group > #error_regex').removeClass('hide').addClass('error');
             }
 
         });
     }
 
     if(page == 'registrationPage.php') {
-        $('#First_Name_Group').find('#First_Name').keyup(function () {
-            $('#First_Name_Group > #Error_Required').removeClass('error').addClass('hide');
+        $('#first_name_group').find('#first_name').keyup(function () {
+            $('#first_name_group > #error_required').removeClass('error').addClass('hide');
             var input = $(this).val();
             var pattern = /^[a-zA-Z]{2,32}$/;
             var valid = pattern.test(input);
             if (valid) {
-                $('#First_Name_Group > #Error_Regex').removeClass('error').addClass('hide');
+                $('#first_name_group > #error_regex').removeClass('error').addClass('hide');
             }
             else {
-                $('#First_Name_Group > #Error_Regex').removeClass('hide').addClass('error');
+                $('#first_name_group > #error_regex').removeClass('hide').addClass('error');
             }
         });
 
-        $('#Last_Name_Group').find('#Last_Name').keyup(function(){
-            $('#Last_Name_Group > #Error_Required').removeClass('error').addClass('hide');
+        $('#last_name_group').find('#last_name').keyup(function(){
+            $('#last_name_group > #error_required').removeClass('error').addClass('hide');
             var input = $(this).val();
             var pattern = /^[a-zA-Z'-]{2,32}$/;
             var valid = pattern.test(input);
             if (valid) {
-                $('#Last_Name_Group > #Error_Regex').removeClass('error').addClass('hide');
+                $('#last_name_group > #error_regex').removeClass('error').addClass('hide');
             }
             else {
-                $('#Last_Name_Group > #Error_Regex').removeClass('hide').addClass('error');
+                $('#last_name_group > #error_regex').removeClass('hide').addClass('error');
             }
         });
     }
 
     if(page == 'registrationPage.php') {
-        $('#Password_Group').find('#Password').keyup(function(){
-            $('#Password_Group > #Error_Required').removeClass('error').addClass('hide');
+        $('#password_group').find('#password').keyup(function(){
+            $('#password_group > #error_required').removeClass('error').addClass('hide');
             var input = $(this).val();
             var pattern = /^[a-zA-Z0-9_-]{6,32}$/;
             var valid = pattern.test(input);
             if (valid) {
-                $('#Password_Group > #Error_Regex').removeClass('error').addClass('hide');
-                var confirmPassword = $('#Confirm_Password').val();
+                $('#password_group > #error_regex').removeClass('error').addClass('hide');
+                var confirmPassword = $('#confirm_password').val();
                 if (confirmPassword.length > 0) {
                     if (input != confirmPassword) {
-                        $('#Confirm_Password_Group > #Error_Regex').removeClass('hide').addClass('error');
+                        $('#confirm_password_group > #error_regex').removeClass('hide').addClass('error');
                     }
                     else {
-                        $('#Confirm_Password_Group > #Error_Regex').removeClass('error').addClass('hide');
+                        $('#confirm_password_group > #error_regex').removeClass('error').addClass('hide');
                     }
                 }
             }
             else {
-                $('#Password_Group > #Error_Regex').removeClass('hide').addClass('error');
+                $('#password_group > #error_regex').removeClass('hide').addClass('error');
             }
         });
 
-        $('#Confirm_Password_Group').find('#Confirm_Password').keyup(function(){
-            $('#Confirm_Password_Group > #Error_Required').removeClass('error').addClass('hide');
+        $('#confirm_password_group').find('#confirm_password').keyup(function(){
+            $('#confirm_password_group > #error_required').removeClass('error').addClass('hide');
             var input = $(this).val();
-            if (input != $('#Password').val()) {
-                $('#Confirm_Password_Group > #Error_Regex').removeClass('hide').addClass('error');
+            if (input != $('#password').val()) {
+                $('#confirm_password_group > #error_regex').removeClass('hide').addClass('error');
             }
             else {
-                $('#Confirm_Password_Group > #Error_Regex').removeClass('error').addClass('hide');
+                $('#confirm_password_group > #error_regex').removeClass('error').addClass('hide');
             }
         });
     }

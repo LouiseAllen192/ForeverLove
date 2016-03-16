@@ -98,41 +98,41 @@ class UserServiceMgr
     public static function register(){
         $validate = new Validate();
         $validate->check($_POST, [
-            'Email' => [
+            'email' => [
                 'required' => true,
                 'matches' => '/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/',
                 'unique' => 'registration_details'
             ],
-            'Confirm_Email' => [
+            'confirm_email' => [
                 'required' => true,
                 'matches' => '/\b('.$_POST['Email'].')\b/'
             ],
-            'Username' => [
+            'username' => [
                 'required' => true,
                 'matches' => '/^[a-zA-Z0-9_-]{3,32}$/',
                 'unique' => 'registration_details'
             ],
-            'First_Name' => [
+            'first_name' => [
                 'required' => true,
                 'matches' => '/^[a-zA-Z]{2,32}$/'
             ],
-            'Last_Name' => [
+            'last_name' => [
                 'required' => true,
                 'matches' => '/^[a-zA-Z\'-]{2,32}$/'
             ],
-            'Password' => [
+            'password' => [
                 'required' => true,
                 'matches' => '/^[a-zA-Z0-9_-]{6,32}$/',
             ],
-            'Confirm_Password' => [
+            'confirm_password' => [
                 'required' => true,
                 'matches' => '/\b('.$_POST['Password'].')\b/'
             ]
         ]);
 
         if($validate->passed()){
-            DB::getInstance()->registerUser('registration_details', ['username' => $_POST['Username'], 'Password' => $_POST['Password'], 'First_Name' => $_POST['First_Name'], 'Last_Name' => $_POST['Last_Name'], 'Email' => $_POST['Email']]);
-            $_SESSION['user_id'] = DB::getInstance()->get('registration_details', ['username', '=', $_POST['Username']])->results()[0]->user_id;
+            DB::getInstance()->registerUser('registration_details', ['username' => $_POST['username'], 'password' => password_hash($_POST['password'], PASSWORD_DEFAULT), 'first_name' => $_POST['first_name'], 'last_name' => $_POST['last_name'], 'email' => $_POST['email']]);
+            $_SESSION['user_id'] = DB::getInstance()->get('registration_details', ['username', '=', $_POST['username']])->results()[0]->user_id;
             return false;
         }
         else{

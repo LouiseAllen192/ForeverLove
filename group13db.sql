@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 14, 2016 at 09:16 PM
+-- Generation Time: Mar 16, 2016 at 10:53 AM
 -- Server version: 5.7.9
 -- PHP Version: 5.6.16
 
@@ -309,7 +309,7 @@ CREATE TABLE IF NOT EXISTS `registration_details` (
   `username` varchar(32) NOT NULL,
   `first_name` varchar(32) NOT NULL,
   `last_name` varchar(32) NOT NULL,
-  `password` varchar(32) NOT NULL,
+  `password` varchar(256) NOT NULL,
   `email` varchar(128) NOT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `Username` (`username`,`email`)
@@ -379,47 +379,6 @@ CREATE TABLE IF NOT EXISTS `user_hobbies` (
   `hobby_name` varchar(64) NOT NULL,
   PRIMARY KEY (`hobby_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `user_hobbies`
---
-
-INSERT INTO `user_hobbies` (`hobby_id`, `hobby_name`) VALUES
-(1, 'reading'),
-(2, 'cinema'),
-(3, 'shopping'),
-(4, 'socializing'),
-(5, 'travelling'),
-(6, 'walking'),
-(7, 'exercise'),
-(8, 'soccer'),
-(9, 'dancing'),
-(10, 'horses'),
-(11, 'running'),
-(12, 'eating_out'),
-(13, 'painting'),
-(14, 'cooking'),
-(15, 'computers'),
-(16, 'bowling'),
-(17, 'writing'),
-(18, 'skiing'),
-(19, 'crafts'),
-(20, 'golf'),
-(21, 'chess'),
-(22, 'gymnastics'),
-(23, 'cycling'),
-(24, 'swimming'),
-(25, 'surfing'),
-(26, 'hiking'),
-(27, 'video_games'),
-(28, 'volleyball'),
-(29, 'badminton'),
-(30, 'gym'),
-(31, 'parkour'),
-(32, 'fashion'),
-(33, 'yoga'),
-(34, 'basketball'),
-(35, 'boxing');
 
 -- --------------------------------------------------------
 
@@ -529,4 +488,3 @@ ALTER TABLE `user_hobby_preferences`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-

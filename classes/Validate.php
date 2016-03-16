@@ -11,18 +11,18 @@ class Validate{
             foreach($rules as $rule => $ruleValue){
                 $value = $source[$item];
                 if($rule == 'required' && empty($value)){
-                    $this->addError($item, 'Error_Required');
+                    $this->addError($item, 'error_required');
                 }
                 else if(!empty($value)){
                     if($rule == 'matches'){
                         if(!preg_match($ruleValue, $value)){
-                            $this->addError($item, 'Error_Regex');
+                            $this->addError($item, 'error_regex');
                         }
                     }
                     else if($rule == 'unique'){
                         $unavailable = $this->db->get($ruleValue, [$item, '=', $value])->count();
                         if($unavailable){
-                            $this->addError($item, 'Error_Unique');
+                            $this->addError($item, 'error_unique');
                         }
                     }
                 }
