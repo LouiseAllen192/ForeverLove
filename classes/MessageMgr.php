@@ -12,19 +12,11 @@ class MessageMgr
 
     public function doesConversationExist($user2ID)
     {
-        //$ans = DB::getInstance()->get("converstaions", "['User1_id', '=', '$this->userID', 'OR', '$user2ID', 'AND', 'User2_id', '=', '$this->userID', 'OR' '$user2ID'') //("SELECT * FROM converstaions WHERE User1_id = $this->userID || $user2ID AND User2_id = $this->userID || $user2ID AND User1_id <> User2_id");
-        //echo $ans;
-        $ans = DB::getInstance()->query("SELECT * FROM converstaions WHERE (User1_id = $this->userID OR User1_id = $user2ID) AND (User2_id = $this->userID OR User2_id = $user2ID) AND User1_id <> User2_id ", [])->results();//SELECT * FROM converstaion WHERE User1_id = $this->userID || $user2ID AND User2_id = $this->userID || $user2ID AND User1_id <> User2_id ", [])->results();
+        $ans = DB::getInstance()->query("SELECT * FROM converstaions WHERE (User1_id = $this->userID OR User1_id = $user2ID) AND (User2_id = $this->userID OR User2_id = $user2ID) AND User1_id <> User2_id ", [])->results();
         if(empty($ans))
-        {
-            echo "no hits";
             return false;
-        }
         else
-        {
-            print_r($ans[0]);
             return true;
-        }
     }
 
     public function sendMessage($message, $user2ID)
@@ -48,6 +40,15 @@ class MessageMgr
         {
             echo $key . ' ---------   ' . $value . '<br>';
         }
+    }
+
+    public function doesRecipientExist($recipientName)
+    {
+        $ans = DB::getInstance()->query("SELECT * FROM registration_details WHERE Username = '$recipientName'", [])->results();
+        if(empty($ans))
+            return false;
+        else
+            return true;
     }
 
 }

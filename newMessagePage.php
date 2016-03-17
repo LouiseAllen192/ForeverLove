@@ -40,22 +40,22 @@
 
                     if(!empty($_GET))
                     {
-                        //skipping checking if user/convo exists for now
-                        echo $_GET["recipient"];
-                        echo $_GET["message"];
+                        $rec = ($_GET["recipient"]);
+                        //echo $_GET["message"];
                         $convoid = 1; //temp
-                        $recieverid = 3; //temp
+                        $recieverid = 2; //temp
                         $uid = 1; //temp
                         $date = date('Y-m-d H:i:s');
                         $msgMgr = new MessageMgr($uid);
                         //need to check here if recipient is an existing user, if not return error message
-                        $existingConvo = $msgMgr->doesConversationExist($recieverid);
+                        $recExists = $msgMgr->doesRecipientExist($rec);
+                        if($recExists)
+                            $existingConvo = $msgMgr->doesConversationExist($recieverid);
                         //if conversation doesn't exist, need to create it
-                        if($existingConvo)
-                            DB::getInstance()->insert('converstaions', ['User1_id' => $recieverid, 'User2_id'  => $uid]);
+                        // if($existingConvo)
+                           // DB::getInstance()->insert('converstaions', ['User1_id' => $recieverid, 'User2_id'  => $uid]);
                         //need to get conversation ID here
                         //DB::getInstance()->insert('messages', ['Conversation_id' => 1, 'Sender_id' => $uid, 'Recipient_id'  => $recieverid, 'Date_Received' => $date, 'Message_Text' => $_GET["message"], 'Profile_Visable' => 1]);
-
                     }
 
                     ?>
