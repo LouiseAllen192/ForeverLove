@@ -74,8 +74,7 @@ hr {
     letter-spacing: 1px;
 }
 
-
-footer p {
+footer p{
     margin: 0;
     padding: 10px 0;
     text-align: left;
@@ -83,8 +82,9 @@ footer p {
     color: white;
     font-size: x-small;
 }
+/*SEARCH BAR START*/
 
-
+/*SEARCH BAR END*/
 
 @media screen and (min-width:1200px) {
     .box:after {

@@ -105,7 +105,7 @@ class UserServiceMgr
             ],
             'confirm_email' => [
                 'required' => true,
-                'matches' => '/\b('.$_POST['Email'].')\b/'
+                'matches' => '/\b('.$_POST['email'].')\b/'
             ],
             'username' => [
                 'required' => true,
@@ -126,7 +126,7 @@ class UserServiceMgr
             ],
             'confirm_password' => [
                 'required' => true,
-                'matches' => '/\b('.$_POST['Password'].')\b/'
+                'matches' => '/\b('.$_POST['password'].')\b/'
             ]
         ]);
 
