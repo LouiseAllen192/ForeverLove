@@ -15,9 +15,6 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/custom-base-page.css" rel="stylesheet">
     <link href="css/custom-form-page.css" rel="stylesheet">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <script src="scripts/registrationValidation.js"></script>
 </head>
 
 <body class="full">
@@ -39,7 +36,7 @@
                 <p>
                     <br>
 
-                <form id="RegForm" class="form-horizontal" role="form" method="post">
+                <form id="reg_form" class="form-horizontal" role="form" method="post">
                     <fieldset>
                         <div class="form-group" id="email_group">
                             <label for="email" class="col-lg-4 col-md-4 col-sm-5 control-label"><b>Email</b></label>
@@ -108,7 +105,7 @@
                             <div class="col-lg-8 col-md-8 col-sm-7">
                                 <input type="password" class="form-control" maxlength="32" id="confirm_password" name="confirm_password" value="">
                             </div>
-                            <p class="col-lg-4 col-md-4 col-sm-5"></p>
+                            <p class="col-lg-4 col-md-4"></p>
                             <span class="<?php if($errors['confirm_password'] == 'error_required') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_required">Required...</span>
                             <span class="<?php if($errors['confirm_password'] == 'error_regex') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_regex">Passwords do not match...</span>
                         </div>

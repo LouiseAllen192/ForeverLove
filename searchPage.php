@@ -2,7 +2,6 @@
 <html>
 
 <head>
-
     <?php
     require_once 'core/init.php';
     include("includes/metatags.html");
@@ -11,7 +10,6 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/custom-base-page.css" rel="stylesheet">
     <?php include("includes/fonts.html"); ?>
-
 </head>
 
 <body class="full">

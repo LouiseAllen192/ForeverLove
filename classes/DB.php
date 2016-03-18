@@ -6,7 +6,11 @@ class DB{
     //Connect to database
     private function __construct(){
         try{
-            $this->pdo = new PDO('mysql:host='.Config::get('mysql/host').';dbname='.Config::get('mysql/db'), Config::get('mysql/username'), Config::get('mysql/password'));
+            $this->pdo = new PDO(
+                'mysql:host='.Config::get('mysql/host').';dbname='.Config::get('mysql/db'),
+                Config::get('mysql/username'),
+                Config::get('mysql/password')
+            );
         }catch (PDOException $e){
             die($e->getMessage());
         }
@@ -36,6 +40,7 @@ class DB{
                     $x++;
                 }
             }
+
             //echo $this->query->queryString;
 
             //Returns the result as an object
@@ -109,9 +114,9 @@ class DB{
             $sql = "INSERT INTO {$table} (`".implode('`, `', $keys)."`) VALUES ({$values})";
             if($this->query($sql, $fields)->error()) return false;
             else if($table === 'registration_details'){
-                $user_id = $this->get('registration_details', ['Username', '=', $fields['Username']])->results()[0]->user_id;
-                $this->registerUser('account_details', ['User_id' => $user_id]);
-                $this->registerUser('preference_details', ['User_id' => $user_id]);
+                $user_id = $this->get('registration_details', ['username', '=', $fields['username']])->results()[0]->user_id;
+                $this->registerUser('account_details', ['user_id' => $user_id]);
+                $this->registerUser('preference_details', ['user_id' => $user_id]);
             }
             else return true;
         }
