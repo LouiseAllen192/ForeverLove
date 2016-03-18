@@ -52,7 +52,6 @@
         else{
             return ($array[$name]);
         }
-
     }
 
     ?>
