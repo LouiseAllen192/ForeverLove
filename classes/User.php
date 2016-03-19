@@ -19,93 +19,64 @@ class User{
         $details = DB::getInstance()->get('registration_details', ['User_id', '=', $uid])->results()[0];
         $accdet = DB::getInstance()->get('account_details', ['User_id', '=', $uid])->results()[0];
         $pref = DB::getInstance()->get('preference_details', ['User_id', '=', $uid])->results()[0];
-        $hob = DB::getInstance()->get('hobbies', ['User_id', '=', $uid])->results()[0];
 
         $this->setDet($details);
         $this->setPref($pref, $uid);
-        $this->setHob($hob, $uid);
+        $this->setHob($uid);
         $this->setAcc($accdet, $uid);
 
     }
 
     public function setDet($details){
-        $this->userName = $details->Username;
-        $this->firstName = $details->First_Name;
-        $this->lastName = $details->Last_Name;
-        $this->password = $details->Password;
-        $this->email = $details->Email;
+        $this->userName = $details->username;
+        $this->firstName = $details->first_name;
+        $this->lastName = $details->last_name;
+        $this->password = $details->password;
+        $this->email = $details->email;
         $this->accDetails = array();
         $this->preferences = array();
         $this->userHobbies = array();
     }
 
     public function setPref($preferences, $uid){
-        $this->preferences['Userid'] = $uid;
-        $this->preferences['Tag_Line'] = $preferences->Tag_Line;
-        $this->preferences['City'] = $preferences->City;
-        $this->preferences['Gender'] = $preferences->Gender;
-        $this->preferences['Seeking'] = $preferences->Seeking;
-        $this->preferences['Intent'] = $preferences->Intent;
-        $this->preferences['Date_Of_Birth'] = $preferences->Date_Of_Birth;
-        $this->preferences['Height'] = $preferences->Height;
-        $this->preferences['Ethnicity'] = $preferences->Ethnicity;
-        $this->preferences['Body_Type'] = $preferences->Body_Type;
-        $this->preferences['Religion'] = $preferences->Religion;
-        $this->preferences['Marital_Status'] = $preferences->Marital_Status;
-        $this->preferences['Income'] = $preferences->Income;
-        $this->preferences['Has_Children'] = $preferences->Has_Children;
-        $this->preferences['Wants_Children'] = $preferences->Wants_Children;
-        $this->preferences['Smoker'] = $preferences->Smoker;
-        $this->preferences['Drinker'] = $preferences->Drinker;
-        $this->preferences['AboutMe'] = $preferences->About_Me;
+        $this->preferences['userid'] = $uid;
+        $this->preferences['tag_line'] = $preferences->tag_line;
+        $this->preferences['city'] = $preferences->city;
+        $this->preferences['about_me'] = $preferences->about_me;
+        $this->preferences['date_of_birth'] = $preferences->date_of_birth;
+
+        $dbvalue = array("gender"=>$preferences->gender,"seeking"=>$preferences->seeking, "intent"=>$preferences->intent,
+            "height"=>$preferences->height, "ethnicity"=>$preferences->ethnicity,"body_type"=>$preferences->body_type,
+             "religion"=>$preferences->religion, "marital_status"=>$preferences->marital_status,"income"=>$preferences->income,
+            "has_children"=>$preferences->has_children, "wants_children"=>$preferences->wants_children,
+            "smoker"=>$preferences->smoker, "drinker"=>$preferences->drinker);
+
+        foreach($dbvalue as $key=>$value){
+            $pref = DB::getInstance()->get($key, ['id', '=', $value])->results()[0];
+            $this->preferences[$key] = $pref->option;
+        }
     }
 
-    public function setHob($hobbies, $uid){
-        $this->userHobbies['Userid'] = $uid;
-        $this->userHobbies['Reading'] = $hobbies->Reading;
-        $this->userHobbies['Cinema'] = $hobbies->Cinema;
-        $this->userHobbies['Shopping'] = $hobbies->Shopping;
-        $this->userHobbies['Socializing'] = $hobbies->Socializing;
-        $this->userHobbies['Travelling'] = $hobbies->Travelling;
-        $this->userHobbies['Walking'] = $hobbies->Walking;
-        $this->userHobbies['Exercise'] = $hobbies->Exercise;
-        $this->userHobbies['Soccer'] = $hobbies->Soccer;
-        $this->userHobbies['Dancing'] = $hobbies->Dancing;
-        $this->userHobbies['Horses'] = $hobbies->Horses;
-        $this->userHobbies['Running'] = $hobbies->Running;
-        $this->userHobbies['Eating_Out'] = $hobbies->Eating_Out;
-        $this->userHobbies['Painting'] = $hobbies->Painting;
-        $this->userHobbies['Cooking'] = $hobbies->Cooking;
-        $this->userHobbies['Computers'] = $hobbies->Computers;
-        $this->userHobbies['Bowling'] = $hobbies->Bowling;
-        $this->userHobbies['Writing'] = $hobbies->Writing;
-        $this->userHobbies['Skiing'] = $hobbies->Skiing;
-        $this->userHobbies['Crafts'] = $hobbies->Crafts;
-        $this->userHobbies['Golf'] = $hobbies->Golf;
-        $this->userHobbies['Chess'] = $hobbies->Chess;
-        $this->userHobbies['Gymnastics'] = $hobbies->Gymnastics;
-        $this->userHobbies['Cycling'] = $hobbies->Cycling;
-        $this->userHobbies['Swimming'] = $hobbies->Swimming;
-        $this->userHobbies['Surfing'] = $hobbies->Surfing;
-        $this->userHobbies['Hiking'] = $hobbies->Hiking;
-        $this->userHobbies['Video_Games'] = $hobbies->Video_Games;
-        $this->userHobbies['Volleyball'] = $hobbies->Volleyball;
-        $this->userHobbies['Badminton'] = $hobbies->Badminton;
-        $this->userHobbies['Gym'] = $hobbies->Gym;
-        $this->userHobbies['Parkour'] = $hobbies->Parkour;
-        $this->userHobbies['Fashion'] = $hobbies->Fashion;
-        $this->userHobbies['Yoga'] = $hobbies->Yoga;
-        $this->userHobbies['Basketball'] = $hobbies->Basketball;
-        $this->userHobbies['Boxing'] = $hobbies->Boxing;
-        $this->userHobbies['Unique_Hobbie'] = $hobbies->Unique_Hobbie;
+    public function setHob($uid){
+        $this->userHobbies['userid'] = $uid;
+
+        for($i=1; $i < 36; $i++) {
+            $sql = "SELECT hobby_name, hobby_preference " .
+                "FROM user_hobbies JOIN user_hobby_preferences USING(hobby_id) " .
+                "WHERE user_id = '".$uid."' && hobby_id = '".$i."'";
+
+            $results = DB::getInstance()->query($sql)->results();
+            foreach ($results as $result) {
+                $this->userHobbies[$result->hobby_name] = $result->hobby_preference;
+            }
+        }
     }
 
     public function setAcc($accDet, $uid){
-        $this->accDetails['Userid'] = $uid;
-        $this->accDetails['Account_Type'] = $accDet->Account_Type;
-        $this->accDetails['Free_Trail_Used'] = $accDet->Free_Trail_Used;
-        $this->accDetails['Account_Expiry'] = $accDet->Account_Expiry;
-        $this->accDetails['P_Code'] = $accDet->P_Code;
+        $this->accDetails['userid'] = $uid;
+        $this->accDetails['account_type'] = $accDet->account_type;
+        $this->accDetails['free_trail_used'] = $accDet->free_trail_used;
+        $this->accDetails['account_expired'] = $accDet->account_expired;
     }
 
 

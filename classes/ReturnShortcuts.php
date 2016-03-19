@@ -5,41 +5,75 @@ class ReturnShortcuts
 {
 
     public static function returnPreferences($uid){
-        $preferences = DB::getInstance()->get('preference_details', ['User_id', '=', $uid])->results()[0];
-            $dbvalue = array("Tag_Line"=>$preferences->Tag_Line, "City"=>$preferences->City, "Gender"=>$preferences->Gender,
-                              "Seeking"=>$preferences->Seeking, "Intent"=>$preferences->Intent, "Date_Of_Birth"=>$preferences->Date_Of_Birth,
-                              "Height"=>$preferences->Height, "Ethnicity"=>$preferences->Ethnicity,"Body_Type"=>$preferences->Body_Type,
-                              "Religion"=>$preferences->Religion, "Marital_Status"=>$preferences->Marital_Status,"Income"=>$preferences->Income,
-                              "Has_Children"=>$preferences->Has_Children, "Wants_Children"=>$preferences->Wants_Children,
-                              "Smoker"=>$preferences->Smoker, "Drinker"=>$preferences->Drinker, "About__Me"=>$preferences->About__Me);
-        return $dbvalue;
+        $preferences =  DB::getInstance()->get('preference_details', ['User_id', '=', $uid])->results()[0];
+            $dbvalue = array("tag_line"=>$preferences->tag_line, "city"=>$preferences->city, "gender"=>$preferences->gender,
+                              "seeking"=>$preferences->seeking, "intent"=>$preferences->intent, "date_of_birth"=>$preferences->date_of_birth,
+                              "height"=>$preferences->height, "ethnicity"=>$preferences->ethnicity,"body_type"=>$preferences->body_type,
+                              "religion"=>$preferences->religion, "marital_status"=>$preferences->marital_status,"income"=>$preferences->income,
+                              "has_children"=>$preferences->has_children, "wants_children"=>$preferences->wants_children,
+                              "smoker"=>$preferences->smoker, "drinker"=>$preferences->drinker, "about_me"=>$preferences->about_me);
+            $finalResults =array();
+        foreach($dbvalue as $key=>$value){
+
+            if(strcmp($key ,"tag_line") != 0 && strcmp($key ,"city") != 0 && strcmp($key ,"date_of_birth") != 0 && strcmp($key ,"about_me") != 0 ){
+                $pref = DB::getInstance()->get($key, ['id', '=', $value])->results()[0];
+                $finalResults[$key]= $pref->option;
+            }
+            else{
+                $finalResults[$key]= $value;
+            }
+        }
+        return $finalResults;
     }
 
     public static function returnHobbies($uid){
-        $hobbies = DB::getInstance()->get('hobbies', ['User_id', '=', $uid])->results()[0];
-        $dbvalue = array("Reading"=>$hobbies->Reading, "Cinema"=>$hobbies->Cinema, "Shopping"=>$hobbies->Shopping,
-            "Socializing"=>$hobbies->Socializing, "Travelling"=>$hobbies->Travelling, "Walking"=>$hobbies->Walking,
-            "Exercise"=>$hobbies->Exercise, "Soccer"=>$hobbies->Soccer, "Dancing"=>$hobbies->Dancing,
-            "Horses"=>$hobbies->Horses, "Painting"=>$hobbies->Painting, "Running"=>$hobbies->Running,
-            "Eating_Out"=>$hobbies->Eating_Out, "Cooking"=>$hobbies->Cooking, "Computers"=>$hobbies->Computers,
-            "Bowling"=>$hobbies->Bowling, "Writing"=>$hobbies->Writing, "Skiing"=>$hobbies->Skiing,
-            "Crafts"=>$hobbies->Crafts, "Golf"=>$hobbies->Golf, "Chess"=>$hobbies->Chess,
-            "Gymnastics"=>$hobbies->Gymnastics, "Cycling"=>$hobbies->Cycling, "Swimming"=>$hobbies->Swimming,
-            "Surfing"=>$hobbies->Surfing, "Hiking"=>$hobbies->Hiking, "Video_Games"=>$hobbies->Video_Games,
-            "Volleyball"=>$hobbies->Volleyball, "Badminton"=>$hobbies->Badminton, "Gym"=>$hobbies->Gym,
-            "Parkour"=>$hobbies->Parkour, "Fashion"=>$hobbies->Fashion, "Yoga"=>$hobbies->Yoga,
-            "Basketball"=>$hobbies->Basketball, "Boxing"=>$hobbies->Boxing, "Unique_Hobbie"=>$hobbies->Unique_Hobbie);
-        return $dbvalue;
+      $resultFinal = array();
+        for($i=1; $i < 36; $i++) {
+            $sql = "SELECT hobby_name, hobby_preference " .
+                "FROM user_hobbies JOIN user_hobby_preferences USING(hobby_id) " .
+                "WHERE user_id = '".$uid."' && hobby_id = '".$i."'";
 
+            $results = DB::getInstance()->query($sql)->results();
+            foreach ($results as $result) {
+                $resultFinal[$result->hobby_name] = $result->hobby_preference;
+            }
+        }
+        return $resultFinal;
 
     }
 
     public static function returnRegDetails($uid){
-        $registrationDetails = DB::getInstance()->get('registration_details', ['User_id', '=', $uid])->results()[0];
-            $dbvalue = array("Username"=>$registrationDetails->Username, "First_Name"=>$registrationDetails->First_Name,
-                              "Last_Name"=>$registrationDetails->Last_Name, "Password"=>$registrationDetails->Password,
-                              "Email"=>$registrationDetails->Email);
+        $registrationDetails = DB::getInstance()->get('registration_details', ['user_id', '=', $uid])->results()[0];
+            $dbvalue = array("username"=>$registrationDetails->username, "first_name"=>$registrationDetails->first_name,
+                              "last_name"=>$registrationDetails->last_name, "password"=>$registrationDetails->password,
+                              "email"=>$registrationDetails->email);
         return $dbvalue;
 
     }
+
+    public static function returnHobbyNames(){
+        $resultFinal = array();
+        $sql = "SELECT hobby_name, hobby_id " .
+            "FROM user_hobbies  ";
+
+        $results = DB::getInstance()->query($sql)->results();
+        foreach ($results as $result) {
+            $resultFinal[$result->hobby_id] = $result->hobby_name;
+        }
+        return $resultFinal;
+    }
+
+    public static function returnOptionNames($tableName){
+        $resultFinal = array();
+        $sql = "SELECT * " .
+            "FROM ".$tableName." ";
+
+        $results = DB::getInstance()->query($sql)->results();
+        foreach ($results as $result) {
+            $resultFinal[$result->id] = $result->option;
+        }
+        return $resultFinal;
+    }
+
+
 }

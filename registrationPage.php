@@ -6,7 +6,7 @@
     include("includes/fonts.html");
 
     if(Input::exists() && !($errors = UserServiceMgr::register())){
-        header('Location: '.'registerPreferencesPage.php');
+        header('Location: '.'updatePreferencesPage.php');
         die();
     }
     ?>

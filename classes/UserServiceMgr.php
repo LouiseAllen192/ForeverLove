@@ -19,7 +19,6 @@ class UserServiceMgr
     }
 
     public static function updateAccountDetails($changes, $userID){
-        // $changes - should be in format ['username' => 'Kevin', 'name' => 'Kevin O\'Brien']
         $success = DB::getInstance()->update('account_details', $userID, $changes);
         return $success;
     }
@@ -39,14 +38,15 @@ class UserServiceMgr
 
     }
 
-    public static function updateUserHobbies($userid, $postArray){
+    //TODO - not working/finished. Need to FIX!!!!!!!!!!!!!!!
+    public static function updateUserHobbies($userid, $postArray, $regOrUpdate){
         $changes = array();
 
         $keys = array('Reading','Cinema','Shopping','Socializing','Travelling',
             'Walking','Exercise','Soccer','Dancing', 'Horses','Running','Eating_Out',
             'Painting', 'Cooking', 'Computers', 'Bowling', 'Writing', 'Skiing', 'Crafts',
             'Golf', 'Chess', 'Gymnastics','Cycling','Swimming','Surfing','Hiking','Video_Games',
-            'Volleyball','Badminton','Gym','Parkour','Fashion','Yoga','Basketball','Boxing', 'Unique_Hobbie');
+            'Volleyball','Badminton','Gym','Parkour','Fashion','Yoga','Basketball','Boxing');
 
         for($i=0; $i<count($keys) ; $i++){
             if(!isset ($postArray[$keys[$i]])) {
@@ -56,24 +56,50 @@ class UserServiceMgr
             }
         }
 
-        if(isset ($postArray['Unique_Hobbie'])){ $changes['Unique_Hobbie'] = $postArray['Unique_Hobbie'];}
-        if($changes['Unique_Hobbie']== ''){ unset($changes['Unique_Hobbie']);}
+        $unique = array();
+        if(isset ($postArray['unique_hobbie'])){
+            $unique['unique_hobbie'] = $postArray['unique_hobbie'];
+        }
+        if($unique['unique_hobbie']== ''){
+            unset($unique['unique_hobbie']);
+        }
 
-        $success = DB::getInstance()->update('hobbies', $userid, $changes);
+        $prefSuccess = DB::getInstance()->update('hobbies', $userid, $changes);
+        $uniqueSuccess = DB::getInstance()->update('hobbies', $userid, $changes);
+        if($prefSuccess && $uniqueSuccess){
+            $success=true;
+        }
+        else{
+            $success=false;
+        }
         return $success;
 
     }
 
-    public static function updateUserPreferences($userid, $changes){
+    public static function updateUserPreferences($userid, $changes, $regOrUpdate){
+        $keys = array("tag_line", "city", "gender", "seeking", "intent",
+            "height", "ethnicity","body_type","religion", "marital_status","income",
+            "has_children", "wants_children","smoker", "drinker", "about_me");
 
-        $keys = array("Tag_Line", "City", "Gender", "Seeking", "Intent",
-            "Height", "Ethnicity","Body_Type","Religion", "Marital_Status","Income",
-            "Has_Children", "Wants_Children","Smoker", "Drinker", "About__Me");
+
         for($i=0; $i<count($keys); $i++){
-            if ($changes[$keys[$i]] == '' || $changes[$keys[$i]] == 'Apply Changes') {
-                unset($changes[$keys[$i]]);
+            if($regOrUpdate == "registration"){
+                if(!isset($changes[$keys[$i]])){
+                    return false;
+                }
+                if ($changes[$keys[$i]] == 'Register Changes') {
+                    unset($changes[$keys[$i]]);
+                }
+            }
+            else{
+                if(!isset($changes[$keys[$i]]) || $changes[$keys[$i]] == 'Update Changes'){
+                    unset($changes[$keys[$i]]);
+                }
             }
         }
+
+
+
         $success = DB::getInstance()->update('preference_details', $userid, $changes);
         if($success) return true;
         else return false;
@@ -140,46 +166,4 @@ class UserServiceMgr
         }
     }
 
-    public static function registerPreferences($userid, $changes){
-        if($changes['Tag_Line']== ''){
-            $changes['Tag_Line'] = 'Unselected';
-        }
-        if($changes['City']== ''){
-            $changes['City'] = 'Unselected';
-        }
-
-        if($changes['Send']== 'Apply Changes'){
-            unset($changes['Send']);
-        }
-        $success = DB::getInstance()->update('preference_details', $userid, $changes);
-        if($success) return true;
-        else return false;
-    }
-
-    public static function registerHobbies($postArray, $userid){
-        $changes = array();
-        $keys = array('Reading','Cinema','Shopping','Socializing','Travelling',
-            'Walking','Exercise','Soccer','Dancing', 'Horses','Running','Eating_Out',
-            'Painting', 'Cooking', 'Computers', 'Bowling', 'Writing', 'Skiing', 'Crafts',
-            'Golf', 'Chess', 'Gymnastics','Cycling','Swimming','Surfing','Hiking','Video_Games',
-            'Volleyball','Badminton','Gym','Parkour','Fashion','Yoga','Basketball','Boxing', 'Unique_Hobbie');
-
-        for($i=0; $i<count($keys) ; $i++){
-            if(!isset ($postArray[$keys[$i]])) {
-                $changes[$keys[$i]] = "0";
-            } else {
-                $changes[$keys[$i]] = "1";
-            }
-        }
-
-        if(isset ($postArray['Unique_Hobbie'])){ $changes['Unique_Hobbie'] = $postArray['Unique_Hobbie'];}
-        if($changes['Unique_Hobbie']== ''){ unset($changes['Unique_Hobbie']);}
-
-        if($_GET['Send']== 'Apply Changes'){
-            unset($postArray['Send']);
-        }
-        $success = DB::getInstance()->update('hobbies', $userid, $changes);
-        if($success) return true;
-        else return false;
-    }
 }
