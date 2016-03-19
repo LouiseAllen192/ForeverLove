@@ -1,4 +1,6 @@
 <?php
+
+
 class DB{
     private static $instance = null;
     private $pdo, $query, $error = false, $results, $count = 0;
