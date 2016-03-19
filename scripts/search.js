@@ -1,5 +1,6 @@
 $(document).ready(function() {
     $('#input_search').keyup(function () {
+        $('#search_result').removeClass('hide');
         var input = $(this).val();
         input = $.trim(input);
         if (input != '') {
@@ -8,27 +9,14 @@ $(document).ready(function() {
                 url: "scripts/search.php",
                 data: {searchTerm: input},
                 cache: false,
-                success: function (html) {
-                    $('#search_result').html(html).show();
+                success: function(response){
+                    $('#search_result').html(response).show();
                 }
             });
         }
     });
 
-    $('#search_result').live("click", function (event) {
-        var clicked = $(event.target);
-        var name = clicked.find('.name').html();
-        $('#input_search').val($("<div/>").html(name).text());
-    });
-
-    $(document).live("click", function (event) {
-        var clicked = $(event.target);
-        if (!clicked.hasClass('search')) {
-            $('#search_result').fadeOut();
-        }
-    });
-
-    $('#input_search').click(function () {
-        $('#search_result').fadeIn();
+    $('#input_search').blur(function(){
+        $('#search_result').addClass('hide');
     });
 });

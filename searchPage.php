@@ -24,12 +24,11 @@
                 <br><br>
                 <h2>
                     <small>
-                        <strong>Search</strong>
+                        <strong>Search By Criteria</strong>
                     </small>
                 </h2>
                 <hr class="tagline-divider">
                 <p>
-
                     <br><br>
                     Insert search page contents here
 

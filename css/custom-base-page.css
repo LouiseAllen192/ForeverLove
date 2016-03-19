@@ -83,11 +83,6 @@ footer p {
     font-size: x-small;
 }
 /*SEARCH BAR START*/
-.content_area{
-    width:600px;
-    margin:0 auto;
-}
-
 #input_search{
     border: solid 1px #000;
     padding: 3px;
@@ -114,8 +109,6 @@ footer p {
 
 .display_box{
     border-top: solid 1px #dedede;
-    font-size: 12px;
-    height: 50px;
 }
 
 .display_box:hover{
