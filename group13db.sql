@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 18, 2016 at 10:25 PM
+-- Generation Time: Mar 19, 2016 at 05:34 PM
 -- Server version: 5.7.9
 -- PHP Version: 5.6.16
 
@@ -618,7 +618,7 @@ DROP TABLE IF EXISTS `user_hobby_preferences`;
 CREATE TABLE IF NOT EXISTS `user_hobby_preferences` (
   `user_id` int(11) NOT NULL,
   `hobby_id` int(11) NOT NULL,
-  `hobby_preference` tinyint(1) NOT NULL,
+  `hobby_preference` tinyint(1) DEFAULT NULL,
   KEY `user_hobby_preferences_ibfk_1` (`user_id`),
   KEY `hobby_id` (`hobby_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

@@ -121,7 +121,7 @@ class DB{
                 $this->registerUser('preference_details', ['user_id' => $user_id]);
                 $hobbies = $this->get('user_hobbies', ['hobby_id', '>' , 0])->results();
                 foreach($hobbies as $hobby){
-                    $this->insert('user_hobby_preferences', ['user_id' => $user_id, 'hobby_id' => $hobby->hobby_id, 'hobby_preference' => 0]);
+                    $this->insert('user_hobby_preferences', ['user_id' => $user_id, 'hobby_id' => $hobby->hobby_id, 'hobby_preference' => null]);
                 }
             }
             else return true;
