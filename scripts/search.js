@@ -8,8 +8,8 @@ $(document).ready(function() {
                 url: "scripts/search.php",
                 data: {searchTerm: input},
                 cache: false,
-                success: function (html) {
-                    $('#search_result').html(html).show();
+                success: function(response){
+                    $('#search_result').html(response).show();
                 }
             });
         }
