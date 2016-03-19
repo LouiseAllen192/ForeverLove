@@ -28,13 +28,23 @@
                     </small>
                 </h2>
                 <hr class="tagline-divider">
-                <p>
-                    <br><br>
-                    Insert search page contents here
+                    <div class="container col-lg-12 col-md-12 col-sm-12">
+                        <br><p>Preferences</p>
+                        <div class="btn-group" data-toggle="buttons">
+                            <label class="btn btn-default">
+                                <input type="checkbox" name="" id="" value="">test
+                            </label>
+                            <label class="btn btn-default">
+                                <input type="checkbox" name="" id="" value="">test
+                            </label>
+                            <label class="btn btn-default">
+                                <input type="checkbox" name="" id="" value="">test
+                            </label>
+                        </div>
+                    </div>
 
                     <br><br>
                     <br><br>
-                </p>
             </div>
         </div>
     </div>
