@@ -5,11 +5,13 @@
     <?php
     require_once 'core/init.php';
     include("includes/metatags.html");
+    include("includes/fonts.html");
+
+    $hobbies = DB::getInstance()->query('SELECT * FROM user_hobbies ORDER BY hobby_name')->results();
     ?>
     <title>Search Page</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/custom-base-page.css" rel="stylesheet">
-    <?php include("includes/fonts.html"); ?>
 </head>
 
 <body class="full">
@@ -28,23 +30,33 @@
                     </small>
                 </h2>
                 <hr class="tagline-divider">
-                    <div class="container col-lg-12 col-md-12 col-sm-12">
-                        <br><p>Preferences</p>
-                        <div class="btn-group" data-toggle="buttons">
+
+                <?php
+                $n = 0;
+                foreach($hobbies as $hobby){
+                    if($n++ % 12 == 0){?>
+                    <div class="col-lg-12">
+                        <br>
+                        <div class="btn-group" id="12" data-toggle="toggle">
+                        <?php
+                    }?>
                             <label class="btn btn-default">
-                                <input type="checkbox" name="" id="" value="">test
+                                <input type="checkbox" name="<?php echo $hobby->hobby_name;?>" id="<?php echo $hobby->hobby_name;?>"><?php echo $hobby->hobby_name;?>
                             </label>
-                            <label class="btn btn-default">
-                                <input type="checkbox" name="" id="" value="">test
-                            </label>
-                            <label class="btn btn-default">
-                                <input type="checkbox" name="" id="" value="">test
-                            </label>
+                    <?php
+                    if($n % 12 == 0){?>
                         </div>
                     </div>
+                        <?php
+                    }
+                }?>
+
 
                     <br><br>
                     <br><br>
+                <div class="col-lg-12">
+                    <input class="btn btn-info" id="search_button" type="submit" value="Search">
+                </div>
             </div>
         </div>
     </div>

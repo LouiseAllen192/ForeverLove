@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function(){
     $('#input_search').keyup(function () {
         $('#search_result').removeClass('hide');
         var input = $(this).val();
