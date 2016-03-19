@@ -27,8 +27,8 @@ class DB{
     /*
      * Query database with either a single sql query or combined with an array
      * in which each element of the array is binded to a "?"
-     * e.g. query("SELECT username FROM users WHERE username = alex || joe", [])
-     * e.g. query("SELECT username FROM users WHERE username = ? || ?", ['alex', 'joe'])
+     * e.g. query("SELECT username FROM users WHERE username='alex' || username='joe'", [])
+     * e.g. query("SELECT username FROM users WHERE username=? || username=?", ['alex', 'joe'])
      */
     public function query($sql, $params = []){
         $this->error = false;

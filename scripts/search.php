@@ -14,12 +14,23 @@ if(isset($_POST['searchTerm'])){
     $results = DB::getInstance()->query($sql)->results();
     foreach($results as $result){
         ?>
-        <div class="display_box" align="left">
-            <img src="https://s3.amazonaws.com/uifaces/faces/twitter/calebogden/48.jpg" style="width: 48px; height: 48px; float: left; margin-right: 6px;"/>
-            <span class="name"><?php echo $result->username ?></span>
-            &nbsp;<br>
-            <?php echo $result->tag_line; ?><br>
-            <span style="font-size: 9px; color: #999999"><?php echo $result->city; ?></span>
+        <div class="display_box">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="media">
+                        <div class="media-left">
+                            <img class="media-object" src="https://s3.amazonaws.com/uifaces/faces/twitter/calebogden/48.jpg"/>
+                        </div>
+                        <div class="media-body" style="padding-top: 3px;">
+                            <h4 class="media-heading"><?php echo $result->username; ?></h4>
+                            <small><?php echo $result->tag_line; ?></small>
+                        </div>
+                        <div class="media-right media-middle">
+                            <h5 class="media-heading"><?php echo $result->city; ?></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <?php
     }
