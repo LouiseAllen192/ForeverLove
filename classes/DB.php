@@ -119,6 +119,7 @@ class DB{
                 $user_id = $this->get('registration_details', ['username', '=', $fields['username']])->results()[0]->user_id;
                 $this->registerUser('account_details', ['user_id' => $user_id]);
                 $this->registerUser('preference_details', ['user_id' => $user_id]);
+                $this->registerUser('unique_hobby', ['user_id' => $user_id]);
                 $hobbies = $this->get('user_hobbies', ['hobby_id', '>' , 0])->results();
                 foreach($hobbies as $hobby){
                     $this->insert('user_hobby_preferences', ['user_id' => $user_id, 'hobby_id' => $hobby->hobby_id, 'hobby_preference' => null]);

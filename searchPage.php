@@ -34,7 +34,7 @@
                 <?php
                 $n = 0;
                 foreach($hobbies as $hobby){
-                    if($n++ % 12 == 0){?>
+                    if($n++ % 9 == 0){?>
                     <div class="col-lg-12">
                         <br>
                         <div class="btn-group" id="12" data-toggle="toggle">
@@ -44,7 +44,7 @@
                                 <input type="checkbox" name="<?php echo $hobby->hobby_name;?>" id="<?php echo $hobby->hobby_name;?>"><?php echo $hobby->hobby_name;?>
                             </label>
                     <?php
-                    if($n % 12 == 0){?>
+                    if($n % 9 == 0){?>
                         </div>
                     </div>
                         <?php

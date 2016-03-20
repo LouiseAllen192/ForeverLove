@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 19, 2016 at 05:34 PM
+-- Generation Time: Mar 20, 2016 at 05:47 PM
 -- Server version: 5.7.9
 -- PHP Version: 5.6.16
 
@@ -541,7 +541,7 @@ INSERT INTO `smoker` (`id`, `choice`) VALUES
 DROP TABLE IF EXISTS `unique_hobby`;
 CREATE TABLE IF NOT EXISTS `unique_hobby` (
   `user_id` int(11) NOT NULL,
-  `unique_hobby` varchar(256) NOT NULL,
+  `unique_hobby` varchar(256) DEFAULT NULL,
   KEY `unique_hobby_ibfk_1` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
