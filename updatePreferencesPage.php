@@ -10,10 +10,14 @@
 
     //$uid = $_SESSION['user_id'];
     $uid = 1;
+    echo '<'.'br><br><br><br><br>';
 
     $regOrUpdate;
-    if(isset(ReturnShortcuts::returnPreferences($uid)['gender']))   $regOrUpdate = "Register";
-    else                                                            $regOrUpdate = "Update";
+//    if(isset(ReturnShortcuts::returnPreferences($uid)['gender']))   $regOrUpdate = "Register";
+//    else                                                            $regOrUpdate = "Update";
+    $regOrUpdate= "Update";
+
+    echo 'regorupdate is:'.$regOrUpdate.'<br>';
 
     if($regOrUpdate == "Update"){
         $dbvalue = ReturnShortcuts::returnPreferences($uid);

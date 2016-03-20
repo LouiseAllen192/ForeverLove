@@ -11,14 +11,17 @@
 
     //$uid = $_GLOBAL['User_Id'];
     $uid = 1;
-
-    $regOrUpdate;
-    if(isset(ReturnShortcuts::returnHobbies($uid)['reading']))      $regOrUpdate = "Register";
-    else                                                            $regOrUpdate = "Update";
-
     echo '<'.'br><br><br><br><br><br><br><br><br>';
 
-    $dbvalue = array();
+    $regOrUpdate;
+//    if(isset(ReturnShortcuts::returnHobbies($uid)['reading']))      $regOrUpdate = "Register";
+//    else                                                            $regOrUpdate = "Update";
+    $regOrUpdate= "Update";
+
+    echo 'regorupdate is:'.$regOrUpdate.'<br>';
+
+
+
     if($regOrUpdate == "Update"){
         $dbvalue = ReturnShortcuts::returnHobbies($uid);
     }

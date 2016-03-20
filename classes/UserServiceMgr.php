@@ -113,7 +113,7 @@ class UserServiceMgr
         else return false;
     }
 
-    public static function returChoiceNumber($name, $choiceSelected){
+    public static function returnChoiceNumber($name, $choiceSelected){
         $sql = "SELECT * " .
             "FROM ".$name." ";
 

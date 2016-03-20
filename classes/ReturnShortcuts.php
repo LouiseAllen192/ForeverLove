@@ -17,7 +17,7 @@ class ReturnShortcuts
 
             if(strcmp($key ,"tag_line") != 0 && strcmp($key ,"city") != 0 && strcmp($key ,"date_of_birth") != 0 && strcmp($key ,"about_me") != 0 ){
                 $pref = DB::getInstance()->get($key, ['id', '=', $value])->results()[0];
-                $finalResults[$key]= $pref->option;
+                $finalResults[$key]= $pref->choice;
             }
             else{
                 $finalResults[$key]= $value;
@@ -37,18 +37,6 @@ class ReturnShortcuts
             foreach ($results as $result) {
                 $resultFinal[$result->hobby_name] = $result->hobby_preference;
             }
-        }
-
-        $unique = DB::getInstance()->get('unique_hobby', ['user_id', '=', "'".$uid."'"])->results()[0];
-
-        $sql2 = "SELECT * " .
-            "FROM unique_hobby ".
-            "WHERE user_id = '".$uid."'";
-
-        $unique = DB::getInstance()->query($sql2)->results();
-        for ($i=0; $i<1;) {
-            $resultFinal['unique_hobby'] = $unique[$i]->unique_hobby;
-            $resultFinal[$result->hobby_id] = $unique[$i]->hobby_name;
         }
         return $resultFinal;
 
@@ -82,7 +70,7 @@ class ReturnShortcuts
 
         $results = DB::getInstance()->query($sql)->results();
         foreach ($results as $result) {
-            $resultFinal[$result->id] = $result->option;
+            $resultFinal[$result->id] = $result->choice;
         }
         return $resultFinal;
     }
