@@ -8,6 +8,26 @@
     include("includes/fonts.html");
 
     $hobbies = DB::getInstance()->query('SELECT * FROM user_hobbies ORDER BY hobby_name')->results();
+
+    if(Input::exists()){
+        $sql = "SELECT user_id,";
+        $last = count($_POST['list']);
+        $n = 1;
+        foreach($_POST['list'] as $item){
+            $sql .= "MAX(CASE WHEN hobby_id = '".$item."' THEN hobby_preference END)AS '".$item."'";
+            if($n++ < $last){
+                $sql .= ",";
+            }
+        }
+        $sql .= " FROM (SELECT user_id,hobby_id,hobby_preference FROM registration_details JOIN";
+        $sql .= " user_hobby_preferences USING(user_id) ORDER BY user_id)x GROUP BY user_id";
+        $results = DB::getInstance()->query($sql)->results();
+        foreach($results as $result){
+            foreach($result as $value){
+                echo '<br>'.$value;
+            }
+        }
+    }
     ?>
     <title>Search Page</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -30,33 +50,30 @@
                     </small>
                 </h2>
                 <hr class="tagline-divider">
-
-                <?php
-                $n = 0;
-                foreach($hobbies as $hobby){
-                    if($n++ % 9 == 0){?>
-                    <div class="col-lg-12">
-                        <br>
-                        <div class="btn-group" id="12" data-toggle="toggle">
-                        <?php
-                    }?>
-                            <label class="btn btn-default">
-                                <input type="checkbox" name="<?php echo $hobby->hobby_name;?>" id="<?php echo $hobby->hobby_name;?>"><?php echo $hobby->hobby_name;?>
-                            </label>
+                <form id="reg_form" class="form-horizontal" role="form" method="post">
                     <?php
-                    if($n % 9 == 0){?>
-                        </div>
-                    </div>
-                        <?php
+                    $n = 0;
+                    $last = count($hobbies);
+                    foreach($hobbies as $hobby){
+                        if($n++ % 7 == 0){
+                            echo '<div class="row"><br>';
+                            echo '<div class="col-xs-12"><br>';
+                        }
+                        echo '<label class="btn btn-default">';
+                        echo '<input type="checkbox" name="list[]" value="'.$hobby->hobby_id.'">'.$hobby->hobby_name;
+                        echo '</label>';
+                        if($n % 7 == 0 || $n == $last){
+                            echo '</div>';
+                            echo '</div>';
+                        }
                     }
-                }?>
-
-
-                    <br><br>
-                    <br><br>
-                <div class="col-lg-12">
-                    <input class="btn btn-info" id="search_button" type="submit" value="Search">
-                </div>
+                    ?>
+                        <br><br>
+                    <div class="col-xs-12">
+                        <input class="btn btn-info" id="search_button" type="submit" value="Search">
+                    </div>
+                </form>
+                <br><br><br><br><br>
             </div>
         </div>
     </div>
