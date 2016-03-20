@@ -19,7 +19,7 @@
     include($_SERVER['DOCUMENT_ROOT'].'/classes/UserServiceMgr.php');
     include($_SERVER['DOCUMENT_ROOT'].'/classes/ReturnShortcuts.php');
 
-    //$uid = $_GLOBAL['User_Id'];
+    //$uid = $_SESSION['user_id']
     $uid = 1;
     $dbvalue =  ReturnShortcuts::returnRegDetails($uid);
 
@@ -51,9 +51,10 @@
 
                     <?php
                     if(!empty($_POST)) {
+                        $dbvalue =  ReturnShortcuts::returnRegDetails($uid);
                         if ($success) {
                             echo '<' . 'div class= "alert alert-success" role="alert">
-                                    <a href="settingsPage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    <a href="homePage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                         Account Details updated successfully
                                     </div>';
                         } else {
@@ -68,23 +69,23 @@
                 <form id="userRegDetails" action="updateRegDetailsPage.php" id="updateRD" method="POST">
                     <fieldset class="form-group">
                         <label for="Username">Username</label>
-                        <input type="text"  class="form-control" maxlength="32" name="Username" placeholder= "<?php echo ($dbvalue['Username']);?>" ><br /><br>
+                        <input type="text"  class="form-control" maxlength="32" name="username" placeholder= "<?php echo ($dbvalue['username']);?>" ><br /><br>
                     </fieldset>
                     <fieldset class="form-group">
                         <label for="First_Name">First Name</label>
-                        <input type="text"  class="form-control" maxlength="32" name="First_Name" placeholder="<?php echo ($dbvalue['First_Name']);?>"><br /><br>
+                        <input type="text"  class="form-control" maxlength="32" name="first_name" placeholder="<?php echo ($dbvalue['first_name']);?>"><br /><br>
                     </fieldset>
                     <fieldset class="form-group">
                         <label for="Last_Name">Last Name</label>
-                        <input type="text"  class="form-control" maxlength="32" name="Last_Name" placeholder="<?php echo ($dbvalue['Last_Name']);?>"><br /><br>
+                        <input type="text"  class="form-control" maxlength="32" name="last_name" placeholder="<?php echo ($dbvalue['last_name']);?>"><br /><br>
                     </fieldset>
                     <fieldset class="form-group">
                         <label for="Password">Password</label>
-                        <input type="password"  class="form-control" maxlength="32" name="Password" placeholder="Enter new password"><br /><br>
+                        <input type="password"  class="form-control" maxlength="32" name="password" placeholder="Enter new password"><br /><br>
                     </fieldset>
                     <fieldset class="form-group">
                         <label for="Email">Email</label>
-                        <input type="text"  class="form-control" maxlength="128" name="Email" placeholder="<?php echo ($dbvalue['Email']);?>"><br /><br>
+                        <input type="text"  class="form-control" maxlength="128" name="email" placeholder="<?php echo ($dbvalue['email']);?>"><br /><br>
                     </fieldset>
                     <br><br>
                     <input type="submit" name="Send" class="btn btn-primary" Value="Apply Changes">

@@ -8,9 +8,9 @@
     include($_SERVER['DOCUMENT_ROOT'].'/classes/UserServiceMgr.php');
     include($_SERVER['DOCUMENT_ROOT'].'/classes/ReturnShortcuts.php');
 
-    /**********user_id is stored in $_SESSION['user_id']**********/
-    //$uid = $_GLOBAL['User_Id'];
-    $uid = 4;
+
+    //$uid = $_SESSION['user_id'];
+    $uid = 1;
     $user = new User($uid);
     $dbvalue = ReturnShortcuts::returnPreferences($uid);
 
@@ -80,7 +80,7 @@
                     </fieldset>
                     <fieldset class="form-group">
                         <label for="city">City</label>
-                        <input type="text"  class="form-control" maxlength="64" name="City" placeholder="<?php echo isset($dbvalue['city']) ? $dbvalue['city'] : "Enter city here"?>"><br /><br>
+                        <input type="text"  class="form-control" maxlength="64" name="city" placeholder="<?php echo isset($dbvalue['city']) ? $dbvalue['city'] : "Enter city here"?>"><br /><br>
                     </fieldset>
                     <fieldset class="form-group">
                         <?php

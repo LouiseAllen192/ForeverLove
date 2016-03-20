@@ -18,68 +18,66 @@ class UserServiceMgr
         //todo
     }
 
-    public static function updateAccountDetails($changes, $userID){
-        $success = DB::getInstance()->update('account_details', $userID, $changes);
-        return $success;
+    public static function updateAccountDetails($changes, $uid){
+      //todo
     }
 
-    public static function updateBasicUserDetails($userid, $changes){
-
-        $keys = array("Username","First_Name", "Last_Name", "Password" , "Email");
-
+    public static function updateBasicUserDetails($uid, $changes){
+        $keys = array("username","first_name", "last_name", "password" , "email", "Send");
         for($i=0; $i<count($keys); $i++){
             if($changes[$keys[$i]]== '' || $changes[$keys[$i]]== 'Apply Changes'){
                 unset($changes[$keys[$i]]);
             }
 
         }
-        $success = DB::getInstance()->update('registration_details', $userid, $changes);
+        $where = "user_id = '".$uid."'";
+        $success = DB::getInstance()->update('registration_details', $where, $changes);
         return $success;
 
     }
 
-    //TODO - not working/finished. Need to FIX!!!!!!!!!!!!!!!
-    public static function updateUserHobbies($userid, $postArray, $regOrUpdate){
-        $changes = array();
 
-        $keys = array('Reading','Cinema','Shopping','Socializing','Travelling',
-            'Walking','Exercise','Soccer','Dancing', 'Horses','Running','Eating_Out',
-            'Painting', 'Cooking', 'Computers', 'Bowling', 'Writing', 'Skiing', 'Crafts',
-            'Golf', 'Chess', 'Gymnastics','Cycling','Swimming','Surfing','Hiking','Video_Games',
-            'Volleyball','Badminton','Gym','Parkour','Fashion','Yoga','Basketball','Boxing');
-
-        for($i=0; $i<count($keys) ; $i++){
-            if(!isset ($postArray[$keys[$i]])) {
-                $changes[$keys[$i]] = "0";
-            } else {
-                $changes[$keys[$i]] = "1";
-            }
-        }
-
+    public static function updateUserHobbies($uid, $postArray){
+        $update = array();
+        $prefSuccess = true;
+        $uniqueSuccess = false;
+        $whereUnique = "user_id = '".$uid."'";
         $unique = array();
-        if(isset ($postArray['unique_hobbie'])){
-            $unique['unique_hobbie'] = $postArray['unique_hobbie'];
-        }
-        if($unique['unique_hobbie']== ''){
-            unset($unique['unique_hobbie']);
+        if(isset ($postArray['unique'])){
+            $unique['unique'] = $postArray['unique'];
+            if($unique['unique_hobbie'] != ''){
+                $uniqueSuccess = DB::getInstance()->update('unique_hobby', $whereUnique,  $unique);
+            }
+
         }
 
-        $prefSuccess = DB::getInstance()->update('hobbies', $userid, $changes);
-        $uniqueSuccess = DB::getInstance()->update('hobbies', $userid, $changes);
+        $where = "user_id = '".$uid."' && hobby_id = '";
+        $keys = ReturnShortcuts::returnHobbyNames();
+        for($i=1; $i<=count($keys) && $prefSuccess; $i++){
+            $where .= $i."'";
+            if(!isset ($postArray[$keys[$i]])) {
+                $update['hobby_preference'] = "0";
+            } else {
+                $update['hobby_preference'] = "1";
+            }
+            $prefSuccess = DB::getInstance()->update('user_hobby_preferences', $where , $update);
+        }
+
         if($prefSuccess && $uniqueSuccess){
-            $success=true;
+            return true;
         }
         else{
-            $success=false;
+            return false;
         }
-        return $success;
 
     }
 
     public static function updateUserPreferences($userid, $changes, $regOrUpdate){
         $keys = array("tag_line", "city", "gender", "seeking", "intent",
             "height", "ethnicity","body_type","religion", "marital_status","income",
-            "has_children", "wants_children","smoker", "drinker", "about_me");
+            "has_children", "wants_children","smoker", "drinker", "about_me", "Send");
+        
+        echo '<'.'br><br><br><br><br>';
 
 
         for($i=0; $i<count($keys); $i++){
@@ -92,17 +90,39 @@ class UserServiceMgr
                 }
             }
             else{
-                if(!isset($changes[$keys[$i]]) || $changes[$keys[$i]] == 'Update Changes'){
+                if(!isset($changes[$keys[$i]])){
                     unset($changes[$keys[$i]]);
                 }
+                //|| $changes[$keys[$i]] == 'Update Changes' || $changes[$keys[$i]] == ''
             }
+//            if($keys[$i] != 'tag_line' || $keys[$i] != 'city' || $keys[$i] != 'about_me'){
+//                $changes[$keys[$i]] = UserServiceMgr::returnOptionNumber($keys[$i], $keys[$i]);
+//            }
+        }
+
+        foreach($changes as $key=>$value){
+            echo $key.'----'.$value.'<br>';
         }
 
 
-
-        $success = DB::getInstance()->update('preference_details', $userid, $changes);
+        $where = "user_id = '".$userid."'";
+        $success = DB::getInstance()->update('preference_details', $where, $changes);
         if($success) return true;
         else return false;
+    }
+
+    public static function returnOptionNumber($name){
+        echo 'name:'.$name.'<br>';
+        $sql = "SELECT * " .
+            "FROM ".$name." ";
+
+        $results = DB::getInstance()->query($sql)->results();
+        foreach ($results as $result) {
+            if($name == $result->option){
+                echo $result->id;
+                return $result->id;
+            }
+        }
     }
 
     public static function updateImageGallery($userid){

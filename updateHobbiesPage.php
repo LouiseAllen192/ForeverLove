@@ -10,6 +10,7 @@
     include($_SERVER['DOCUMENT_ROOT'].'/classes/ReturnShortcuts.php');
 
     echo '<'.'br><br><br><br><br><br>';
+
     //$uid = $_GLOBAL['User_Id'];
     $uid = 2;
     $user = new User($uid);
@@ -28,10 +29,9 @@
     <link href="css/custom-form-page.css" rel="stylesheet">
     <?php include("includes/fonts.html"); ?>
 
-
     <?php
     if(!empty($_POST)){
-        $success = UserServiceMgr::updateUserHobbies($uid, $_POST, $regOrUpdate);
+        $success = UserServiceMgr::updateUserHobbies($uid, $_POST);
     }
     ?>
 
@@ -107,7 +107,7 @@
                             <br>
                             <fieldset class="form-group">
                                 <label for="uniqueHobbyLabel">Unique Hobby</label>
-                                <input type="text"  name="unique_hobbie" class="form-control" maxlength="256"  placeholder="Enter new unique hobby"><br /><br>
+                                <input type="text"  name="unique" class="form-control" maxlength="256"  placeholder="Enter new unique hobby"><br /><br>
                             </fieldset>
                         </div>
                         <div style="clear:both;"><div></div></div>
