@@ -18,9 +18,6 @@ class UserServiceMgr
         //todo
     }
 
-    public static function updateAccountDetails($changes, $uid){
-      //todo
-    }
 
     public static function updateBasicUserDetails($uid, $changes){
         $keys = array("username","first_name", "last_name", "password" , "email", "Send");
@@ -28,12 +25,10 @@ class UserServiceMgr
             if($changes[$keys[$i]]== '' || $changes[$keys[$i]]== 'Apply Changes'){
                 unset($changes[$keys[$i]]);
             }
-
         }
         $where = "user_id = '".$uid."'";
         $success = DB::getInstance()->update('registration_details', $where, $changes);
         return $success;
-
     }
 
 
@@ -42,7 +37,7 @@ class UserServiceMgr
         $prefSuccess = true;
         $uniqueSuccess = true;
 
-
+//   commented out for now as unique_bobby table does not put a NULL value in automatically when registering
 //        $unique = array();
 //        if(isset($postArray['unique_hobby'])){
 //            $unique['unique_hobby'] = $postArray['unique_hobby'];
@@ -75,19 +70,17 @@ class UserServiceMgr
 
     }
 
-    //TODO: about_me still not sending
+
     public static function updateUserPreferences($userid, $changes, $regOrUpdate){
         $keys = array("tag_line", "city", "gender", "seeking", "intent",
             "height", "ethnicity","body_type","religion", "marital_status","income",
             "has_children", "wants_children","smoker", "drinker", "about_me", "Send");
 
-
-
         for($i=0; $i<count($keys); $i++){
             if($regOrUpdate == "Register"){
-//                if(!isset($changes[$keys[$i]])){
-//                    return false;
-//                }
+                if(!isset($changes[$keys[$i]])){
+                    return false;
+                }
                 if ($changes[$keys[$i]] == 'Register Changes') {
                     unset($changes[$keys[$i]]);
                 }
@@ -110,10 +103,11 @@ class UserServiceMgr
         else return false;
     }
 
+    //takes in name of a preference table and the choice as a string
+    //returns the choice_id that goes with the choice selected
     public static function returnChoiceNumber($name, $choiceSelected){
         $sql = "SELECT * " .
             "FROM ".$name." ";
-
         $results = DB::getInstance()->query($sql)->results();
         foreach ($results as $result) {
             if($choiceSelected == $result->choice){

@@ -116,7 +116,7 @@
                         ?>
                     <fieldset class="form-group">
                         <label for="about_me">About Me</label>
-                        <textarea class="form-control" name="about_me" id= "about_me" rows="3" form="updateP"><?php echo isset($dbvalue['about_me']) ? $dbvalue['about_me'] : "Tell us about yourself..."?></textarea><br />
+                        <textarea class="form-control" name="about_me" id= "about_me" rows="3"><?php ?><?php echo isset($dbvalue['about_me']) ? $dbvalue['about_me'] : "Enter tagline here"?></textarea><br />
                     </fieldset>
                     <br><br>
                     <input type="submit" name="Send" class="btn btn-primary" Value="<?php echo $regOrUpdate?> Changes">
