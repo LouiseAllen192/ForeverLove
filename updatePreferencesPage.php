@@ -8,15 +8,16 @@
     include($_SERVER['DOCUMENT_ROOT'].'/classes/UserServiceMgr.php');
     include($_SERVER['DOCUMENT_ROOT'].'/classes/ReturnShortcuts.php');
 
-
     //$uid = $_SESSION['user_id'];
     $uid = 1;
-    $user = new User($uid);
-    $dbvalue = ReturnShortcuts::returnPreferences($uid);
 
     $regOrUpdate;
-    if($user->getUserPrefrences()["gender"] == null) $regOrUpdate = "Register";
-    else $regOrUpdate = "Update";
+        if(isset(ReturnShortcuts::returnPreferences($uid)['gender']))   $regOrUpdate = "Register";
+        else                                                            $regOrUpdate = "Update";
+
+    if($regOrUpdate == "Update"){
+        $dbvalue = ReturnShortcuts::returnPreferences($uid);
+    }
 
     ?>
 
@@ -55,6 +56,7 @@
                     <br>
                     <?php
                     if(!empty($_POST)) {
+                        $dbvalue = ReturnShortcuts::returnPreferences($uid);
                         if ($regOrUpdate == "Register" && $success) {
                             header('Location: ' . 'updateHobbiesPage.php');
                             die();

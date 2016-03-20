@@ -72,13 +72,13 @@ class UserServiceMgr
 
     }
 
+    //TODO: about_me still not sending
     public static function updateUserPreferences($userid, $changes, $regOrUpdate){
         $keys = array("tag_line", "city", "gender", "seeking", "intent",
             "height", "ethnicity","body_type","religion", "marital_status","income",
             "has_children", "wants_children","smoker", "drinker", "about_me", "Send");
-        
-        echo '<'.'br><br><br><br><br>';
 
+        echo '<'.'br><br><br><br><br><br>';
 
         for($i=0; $i<count($keys); $i++){
             if($regOrUpdate == "registration"){
@@ -90,20 +90,17 @@ class UserServiceMgr
                 }
             }
             else{
-                if(!isset($changes[$keys[$i]])){
+                if(!isset($changes[$keys[$i]]) || $changes[$keys[$i]] == '' || $changes[$keys[$i]] == 'Update Changes'){
                     unset($changes[$keys[$i]]);
                 }
-                //|| $changes[$keys[$i]] == 'Update Changes' || $changes[$keys[$i]] == ''
             }
-//            if($keys[$i] != 'tag_line' || $keys[$i] != 'city' || $keys[$i] != 'about_me'){
-//                $changes[$keys[$i]] = UserServiceMgr::returnOptionNumber($keys[$i], $keys[$i]);
-//            }
         }
 
         foreach($changes as $key=>$value){
-            echo $key.'----'.$value.'<br>';
+            if($key != 'tag_line' && $key != 'city' && $key != 'about_me'){
+                $changes[$key] = UserServiceMgr::returnOptionNumber($key, $value);
+            }
         }
-
 
         $where = "user_id = '".$userid."'";
         $success = DB::getInstance()->update('preference_details', $where, $changes);
@@ -111,15 +108,13 @@ class UserServiceMgr
         else return false;
     }
 
-    public static function returnOptionNumber($name){
-        echo 'name:'.$name.'<br>';
+    public static function returnOptionNumber($name, $choiceSelected){
         $sql = "SELECT * " .
             "FROM ".$name." ";
 
         $results = DB::getInstance()->query($sql)->results();
         foreach ($results as $result) {
-            if($name == $result->option){
-                echo $result->id;
+            if($choiceSelected == $result->option){
                 return $result->id;
             }
         }
