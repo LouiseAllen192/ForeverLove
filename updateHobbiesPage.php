@@ -12,15 +12,18 @@
     echo '<'.'br><br><br><br><br><br>';
 
     //$uid = $_GLOBAL['User_Id'];
-    $uid = 2;
-    $user = new User($uid);
-    $dbvalue = ReturnShortcuts::returnHobbies($uid);
-    $hobbyNames = ReturnShortcuts::returnHobbyNames();
+    $uid = 1;
 
     $regOrUpdate;
-    if($user->getHobbies()["Reading"] == null) $regOrUpdate = "Register";
-    else $regOrUpdate = "Update";
+    if(isset(ReturnShortcuts::returnHobbies($uid)['reading']))      $regOrUpdate = "Register";
+    else                                                            $regOrUpdate = "Update";
 
+
+    if($regOrUpdate == "Update"){
+        $dbvalue = ReturnShortcuts::returnHobbies($uid);
+    }
+
+    $hobbyNames = ReturnShortcuts::returnHobbyNames();
     ?>
 
     <title><?php echo $regOrUpdate?> Hobbies</title>
@@ -57,6 +60,7 @@
 
                 <?php
                 if(!empty($_POST)) {
+                    $dbvalue = ReturnShortcuts::returnHobbies($uid);
                     if ($regOrUpdate == "Register" && $success) {
                         header('Location: ' . 'homePage.php');
                         die();
@@ -107,7 +111,7 @@
                             <br>
                             <fieldset class="form-group">
                                 <label for="uniqueHobbyLabel">Unique Hobby</label>
-                                <input type="text"  name="unique" class="form-control" maxlength="256"  placeholder="Enter new unique hobby"><br /><br>
+                                <input type="text"  name="unique_hobby" class="form-control" maxlength="256"  placeholder="Enter new unique hobby"><br /><br>
                             </fieldset>
                         </div>
                         <div style="clear:both;"><div></div></div>

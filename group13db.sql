@@ -104,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `banned_users` (
 DROP TABLE IF EXISTS `body_type`;
 CREATE TABLE IF NOT EXISTS `body_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `option` varchar(64) NOT NULL,
+  `choice` varchar(64) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
@@ -112,7 +112,7 @@ CREATE TABLE IF NOT EXISTS `body_type` (
 -- Dumping data for table `body_type`
 --
 
-INSERT INTO `body_type` (`id`, `option`) VALUES
+INSERT INTO `body_type` (`id`, `choice`) VALUES
 (1, 'Unselected'),
 (2, 'I''d rather not say'),
 (3, 'Thin'),
@@ -152,7 +152,7 @@ CREATE TABLE IF NOT EXISTS `conversations` (
 DROP TABLE IF EXISTS `drinker`;
 CREATE TABLE IF NOT EXISTS `drinker` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `option` varchar(64) NOT NULL,
+  `choice` varchar(64) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
@@ -160,7 +160,7 @@ CREATE TABLE IF NOT EXISTS `drinker` (
 -- Dumping data for table `drinker`
 --
 
-INSERT INTO `drinker` (`id`, `option`) VALUES
+INSERT INTO `drinker` (`id`, `choice`) VALUES
 (1, 'Unselected'),
 (2, 'Social Drinker'),
 (3, 'Occasional Drinker'),
@@ -176,7 +176,7 @@ INSERT INTO `drinker` (`id`, `option`) VALUES
 DROP TABLE IF EXISTS `ethnicity`;
 CREATE TABLE IF NOT EXISTS `ethnicity` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `option` varchar(64) NOT NULL,
+  `choice` varchar(64) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
@@ -184,7 +184,7 @@ CREATE TABLE IF NOT EXISTS `ethnicity` (
 -- Dumping data for table `ethnicity`
 --
 
-INSERT INTO `ethnicity` (`id`, `option`) VALUES
+INSERT INTO `ethnicity` (`id`, `choice`) VALUES
 (1, 'Unselected'),
 (2, 'White Irish'),
 (3, 'White Traveller Irish'),
@@ -202,7 +202,7 @@ INSERT INTO `ethnicity` (`id`, `option`) VALUES
 DROP TABLE IF EXISTS `gender`;
 CREATE TABLE IF NOT EXISTS `gender` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `option` varchar(64) NOT NULL,
+  `choice` varchar(64) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
@@ -210,7 +210,7 @@ CREATE TABLE IF NOT EXISTS `gender` (
 -- Dumping data for table `gender`
 --
 
-INSERT INTO `gender` (`id`, `option`) VALUES
+INSERT INTO `gender` (`id`, `choice`) VALUES
 (1, 'Unselected'),
 (2, 'Male'),
 (3, 'Female');
@@ -224,7 +224,7 @@ INSERT INTO `gender` (`id`, `option`) VALUES
 DROP TABLE IF EXISTS `has_children`;
 CREATE TABLE IF NOT EXISTS `has_children` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `option` varchar(64) NOT NULL,
+  `choice` varchar(64) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
@@ -232,7 +232,7 @@ CREATE TABLE IF NOT EXISTS `has_children` (
 -- Dumping data for table `has_children`
 --
 
-INSERT INTO `has_children` (`id`, `option`) VALUES
+INSERT INTO `has_children` (`id`, `choice`) VALUES
 (1, 'Unselected'),
 (2, 'Yes'),
 (3, 'No');
@@ -246,7 +246,7 @@ INSERT INTO `has_children` (`id`, `option`) VALUES
 DROP TABLE IF EXISTS `height`;
 CREATE TABLE IF NOT EXISTS `height` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `option` varchar(64) NOT NULL,
+  `choice` varchar(64) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
@@ -254,7 +254,7 @@ CREATE TABLE IF NOT EXISTS `height` (
 -- Dumping data for table `height`
 --
 
-INSERT INTO `height` (`id`, `option`) VALUES
+INSERT INTO `height` (`id`, `choice`) VALUES
 (1, 'Unselected'),
 (2, 'Less than 130cm'),
 (3, '130-140cm'),
@@ -287,7 +287,7 @@ CREATE TABLE IF NOT EXISTS `images` (
 DROP TABLE IF EXISTS `income`;
 CREATE TABLE IF NOT EXISTS `income` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `option` varchar(64) NOT NULL,
+  `choice` varchar(64) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
@@ -295,7 +295,7 @@ CREATE TABLE IF NOT EXISTS `income` (
 -- Dumping data for table `income`
 --
 
-INSERT INTO `income` (`id`, `option`) VALUES
+INSERT INTO `income` (`id`, `choice`) VALUES
 (1, 'Unselected'),
 (2, 'I''d rather not say'),
 (3, 'Unemployed'),
@@ -317,7 +317,7 @@ INSERT INTO `income` (`id`, `option`) VALUES
 DROP TABLE IF EXISTS `intent`;
 CREATE TABLE IF NOT EXISTS `intent` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `option` varchar(64) NOT NULL,
+  `choice` varchar(64) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
@@ -325,7 +325,7 @@ CREATE TABLE IF NOT EXISTS `intent` (
 -- Dumping data for table `intent`
 --
 
-INSERT INTO `intent` (`id`, `option`) VALUES
+INSERT INTO `intent` (`id`, `choice`) VALUES
 (1, 'Unselected'),
 (2, 'Friendship'),
 (3, 'Hook Up'),
@@ -342,7 +342,7 @@ INSERT INTO `intent` (`id`, `option`) VALUES
 DROP TABLE IF EXISTS `marital_status`;
 CREATE TABLE IF NOT EXISTS `marital_status` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `option` varchar(64) NOT NULL,
+  `choice` varchar(64) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
@@ -350,7 +350,7 @@ CREATE TABLE IF NOT EXISTS `marital_status` (
 -- Dumping data for table `marital_status`
 --
 
-INSERT INTO `marital_status` (`id`, `option`) VALUES
+INSERT INTO `marital_status` (`id`, `choice`) VALUES
 (1, 'Unselected'),
 (2, 'Single'),
 (3, 'Married'),
@@ -468,7 +468,7 @@ INSERT INTO `registration_details` (`user_id`, `username`, `first_name`, `last_n
 DROP TABLE IF EXISTS `religion`;
 CREATE TABLE IF NOT EXISTS `religion` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `option` varchar(64) NOT NULL,
+  `choice` varchar(64) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
@@ -476,7 +476,7 @@ CREATE TABLE IF NOT EXISTS `religion` (
 -- Dumping data for table `religion`
 --
 
-INSERT INTO `religion` (`id`, `option`) VALUES
+INSERT INTO `religion` (`id`, `choice`) VALUES
 (1, 'Unselected'),
 (2, 'I''d rather not say'),
 (3, 'Athiest'),
@@ -496,7 +496,7 @@ INSERT INTO `religion` (`id`, `option`) VALUES
 DROP TABLE IF EXISTS `seeking`;
 CREATE TABLE IF NOT EXISTS `seeking` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `option` varchar(64) NOT NULL,
+  `choice` varchar(64) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
@@ -504,7 +504,7 @@ CREATE TABLE IF NOT EXISTS `seeking` (
 -- Dumping data for table `seeking`
 --
 
-INSERT INTO `seeking` (`id`, `option`) VALUES
+INSERT INTO `seeking` (`id`, `choice`) VALUES
 (1, 'Unselected'),
 (2, 'Male'),
 (3, 'Female'),
@@ -519,7 +519,7 @@ INSERT INTO `seeking` (`id`, `option`) VALUES
 DROP TABLE IF EXISTS `smoker`;
 CREATE TABLE IF NOT EXISTS `smoker` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `option` varchar(64) NOT NULL,
+  `choice` varchar(64) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
@@ -527,7 +527,7 @@ CREATE TABLE IF NOT EXISTS `smoker` (
 -- Dumping data for table `smoker`
 --
 
-INSERT INTO `smoker` (`id`, `option`) VALUES
+INSERT INTO `smoker` (`id`, `choice`) VALUES
 (1, 'Unselected'),
 (2, 'Yes'),
 (3, 'No');
@@ -541,7 +541,7 @@ INSERT INTO `smoker` (`id`, `option`) VALUES
 DROP TABLE IF EXISTS `unique_hobby`;
 CREATE TABLE IF NOT EXISTS `unique_hobby` (
   `user_id` int(11) NOT NULL,
-  `unique` varchar(256) NOT NULL,
+  `unique_hobby` varchar(256) NOT NULL,
   KEY `unique_hobby_ibfk_1` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -549,7 +549,7 @@ CREATE TABLE IF NOT EXISTS `unique_hobby` (
 -- Dumping data for table `unique_hobby`
 --
 
-INSERT INTO `unique_hobby` (`user_id`, `unique`) VALUES
+INSERT INTO `unique_hobby` (`user_id`, `unique_hobby`) VALUES
 (1, 'Sewing'),
 (2, 'Sheering sheep'),
 (3, 'Sunbathing');
@@ -743,7 +743,7 @@ INSERT INTO `user_hobby_preferences` (`user_id`, `hobby_id`, `hobby_preference`)
 DROP TABLE IF EXISTS `wants_children`;
 CREATE TABLE IF NOT EXISTS `wants_children` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `option` varchar(64) NOT NULL,
+  `choice` varchar(64) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
@@ -751,7 +751,7 @@ CREATE TABLE IF NOT EXISTS `wants_children` (
 -- Dumping data for table `wants_children`
 --
 
-INSERT INTO `wants_children` (`id`, `option`) VALUES
+INSERT INTO `wants_children` (`id`, `choice`) VALUES
 (1, 'Unselected'),
 (2, 'Yes'),
 (3, 'No'),

@@ -12,8 +12,8 @@
     $uid = 1;
 
     $regOrUpdate;
-        if(isset(ReturnShortcuts::returnPreferences($uid)['gender']))   $regOrUpdate = "Register";
-        else                                                            $regOrUpdate = "Update";
+    if(isset(ReturnShortcuts::returnPreferences($uid)['gender']))   $regOrUpdate = "Register";
+    else                                                            $regOrUpdate = "Update";
 
     if($regOrUpdate == "Update"){
         $dbvalue = ReturnShortcuts::returnPreferences($uid);

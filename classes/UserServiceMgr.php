@@ -40,21 +40,29 @@ class UserServiceMgr
     public static function updateUserHobbies($uid, $postArray){
         $update = array();
         $prefSuccess = true;
-        $uniqueSuccess = false;
-        $whereUnique = "user_id = '".$uid."'";
-        $unique = array();
-        if(isset ($postArray['unique'])){
-            $unique['unique'] = $postArray['unique'];
-            if($unique['unique_hobbie'] != ''){
-                $uniqueSuccess = DB::getInstance()->update('unique_hobby', $whereUnique,  $unique);
-            }
+        $uniqueSuccess = true;
 
+        $unique = array();
+        if(isset($postArray['unique_hobby'])){
+            $unique['unique_hobby'] = $postArray['unique_hobby'];
+            if($unique['unique_hobby'] == ''){
+                $uniqueSuccess = true;
+            }
+            else{
+                foreach($unique as $key=>$value){
+                    echo $key.'----'.$value.'<br>';
+                }
+                $uniqueWhere = "user_id = '".$uid."'";
+                echo 'unique where:'.$uniqueWhere.'<br>';;
+                $uniqueSuccess = DB::getInstance()->update('unique_hobby', $uniqueWhere ,  $unique);
+                echo 'unique success:'.$uniqueSuccess.'<br>';
+            }
         }
 
-        $where = "user_id = '".$uid."' && hobby_id = '";
+
         $keys = ReturnShortcuts::returnHobbyNames();
         for($i=1; $i<=count($keys) && $prefSuccess; $i++){
-            $where .= $i."'";
+            $where = "user_id = '".$uid."' AND hobby_id = '".$i."'";
             if(!isset ($postArray[$keys[$i]])) {
                 $update['hobby_preference'] = "0";
             } else {
@@ -63,7 +71,9 @@ class UserServiceMgr
             $prefSuccess = DB::getInstance()->update('user_hobby_preferences', $where , $update);
         }
 
-        if($prefSuccess && $uniqueSuccess){
+        //$prefSuccess &&
+
+        if($uniqueSuccess){
             return true;
         }
         else{
@@ -98,7 +108,7 @@ class UserServiceMgr
 
         foreach($changes as $key=>$value){
             if($key != 'tag_line' && $key != 'city' && $key != 'about_me'){
-                $changes[$key] = UserServiceMgr::returnOptionNumber($key, $value);
+                $changes[$key] = UserServiceMgr::returnChoiceNumber($key, $value);
             }
         }
 
@@ -108,13 +118,13 @@ class UserServiceMgr
         else return false;
     }
 
-    public static function returnOptionNumber($name, $choiceSelected){
+    public static function returChoiceNumber($name, $choiceSelected){
         $sql = "SELECT * " .
             "FROM ".$name." ";
 
         $results = DB::getInstance()->query($sql)->results();
         foreach ($results as $result) {
-            if($choiceSelected == $result->option){
+            if($choiceSelected == $result->choice){
                 return $result->id;
             }
         }
