@@ -9,15 +9,11 @@
     include($_SERVER['DOCUMENT_ROOT'].'/classes/ReturnShortcuts.php');
 
     //$uid = $_SESSION['user_id'];
-    $uid = 1;
-    echo '<'.'br><br><br><br><br>';
+    $uid = 4;
 
-    $regOrUpdate;
-//    if(isset(ReturnShortcuts::returnPreferences($uid)['gender']))   $regOrUpdate = "Register";
-//    else                                                            $regOrUpdate = "Update";
-    $regOrUpdate= "Update";
+    $regOrUpdate = UserServiceMgr::determineUpdateOrReg($uid);
 
-    echo 'regorupdate is:'.$regOrUpdate.'<br>';
+    $dbvalue=array();
 
     if($regOrUpdate == "Update"){
         $dbvalue = ReturnShortcuts::returnPreferences($uid);
@@ -60,12 +56,13 @@
                     <br>
                     <?php
                     if(!empty($_POST)) {
-                        $dbvalue = ReturnShortcuts::returnPreferences($uid);
                         if ($regOrUpdate == "Register" && $success) {
+                            $dbvalue = ReturnShortcuts::returnPreferences($uid);
                             header('Location: ' . 'updateHobbiesPage.php');
                             die();
                         }
                         if ($regOrUpdate == "Update" && $success) {
+                            $dbvalue = ReturnShortcuts::returnPreferences($uid);
                             echo '<' . 'div class= "alert alert-success" role="alert">
                                     <a href="homePage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                     Preference Details updated successfully

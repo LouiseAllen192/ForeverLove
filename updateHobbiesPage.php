@@ -10,17 +10,11 @@
     include($_SERVER['DOCUMENT_ROOT'].'/classes/ReturnShortcuts.php');
 
     //$uid = $_GLOBAL['User_Id'];
-    $uid = 1;
+    $uid = 4;
     echo '<'.'br><br><br><br><br><br><br><br><br>';
 
-    $regOrUpdate;
-//    if(isset(ReturnShortcuts::returnHobbies($uid)['reading']))      $regOrUpdate = "Register";
-//    else                                                            $regOrUpdate = "Update";
-    $regOrUpdate= "Update";
-
-    echo 'regorupdate is:'.$regOrUpdate.'<br>';
-
-
+    $regOrUpdate = UserServiceMgr::determineUpdateOrReg($uid);
+    $dbvalue=array();
 
     if($regOrUpdate == "Update"){
         $dbvalue = ReturnShortcuts::returnHobbies($uid);
@@ -87,15 +81,18 @@
                     <div class="row">
                         <div class="col-md-12">
                             <?php
-                            function createOption($name, $dbvalue){
+                            function createOption($name, $dbvalue, $regOrUpdate){
                                 $html = '<div class="col-md-4"'.'>'.'<div class="form-group">'. '<label class="checkbox-inline">';
-                                $html .= '<input type="checkbox" name="'.$name.'" id="'.$name.'"'.checked($name, $dbvalue).'>';
+                                $html .= '<input type="checkbox" name="'.$name.'" id="'.$name.'"'.checked($name, $dbvalue,  $regOrUpdate).'>';
                                 $html .= str_replace('_', ' ', $name);
                                 $html .= '</label></div></div>';
                                 echo $html;
                             }
 
-                            function checked($name, $dbvalue){
+                            function checked($name, $dbvalue, $regOrUpdate){
+                                if($regOrUpdate == "Register"){
+                                    return '';
+                                }
                                 return ($dbvalue[$name] == 1 ? 'checked' : '');
                             }
                             ?>
@@ -103,7 +100,7 @@
                             <fieldset>
                                 <?php
                                 for($i=1; $i<count($hobbyNames)-1; $i++){
-                                    createOption($hobbyNames[$i], $dbvalue);
+                                    createOption($hobbyNames[$i], $dbvalue, $regOrUpdate);
                                     if($i % 3 ==0){
                                         echo '<'.'div style="clear:both;"><div></div></div>';
                                     }
