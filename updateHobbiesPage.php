@@ -9,8 +9,6 @@
     include($_SERVER['DOCUMENT_ROOT'].'/classes/UserServiceMgr.php');
     include($_SERVER['DOCUMENT_ROOT'].'/classes/ReturnShortcuts.php');
 
-    echo '<'.'br><br><br><br><br><br>';
-
     //$uid = $_GLOBAL['User_Id'];
     $uid = 1;
 
@@ -18,7 +16,9 @@
     if(isset(ReturnShortcuts::returnHobbies($uid)['reading']))      $regOrUpdate = "Register";
     else                                                            $regOrUpdate = "Update";
 
+    echo '<'.'br><br><br><br><br><br><br><br><br>';
 
+    $dbvalue = array();
     if($regOrUpdate == "Update"){
         $dbvalue = ReturnShortcuts::returnHobbies($uid);
     }
@@ -111,7 +111,7 @@
                             <br>
                             <fieldset class="form-group">
                                 <label for="uniqueHobbyLabel">Unique Hobby</label>
-                                <input type="text"  name="unique_hobby" class="form-control" maxlength="256"  placeholder="Enter new unique hobby"><br /><br>
+                                <input type="text"  name="unique_hobby" class="form-control" maxlength="256"  placeholder="<?php echo isset($dbvalue['unique_hobby']) ? $dbvalue['unique_hobby'] : "Enter new unique hobby"?>"><br /><br>
                             </fieldset>
                         </div>
                         <div style="clear:both;"><div></div></div>

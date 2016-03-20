@@ -49,13 +49,8 @@ class UserServiceMgr
                 $uniqueSuccess = true;
             }
             else{
-                foreach($unique as $key=>$value){
-                    echo $key.'----'.$value.'<br>';
-                }
                 $uniqueWhere = "user_id = '".$uid."'";
-                echo 'unique where:'.$uniqueWhere.'<br>';;
                 $uniqueSuccess = DB::getInstance()->update('unique_hobby', $uniqueWhere ,  $unique);
-                echo 'unique success:'.$uniqueSuccess.'<br>';
             }
         }
 

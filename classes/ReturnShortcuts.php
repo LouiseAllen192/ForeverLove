@@ -38,6 +38,18 @@ class ReturnShortcuts
                 $resultFinal[$result->hobby_name] = $result->hobby_preference;
             }
         }
+
+        $unique = DB::getInstance()->get('unique_hobby', ['user_id', '=', "'".$uid."'"])->results()[0];
+
+        $sql2 = "SELECT * " .
+            "FROM unique_hobby ".
+            "WHERE user_id = '".$uid."'";
+
+        $unique = DB::getInstance()->query($sql2)->results();
+        for ($i=0; $i<1;) {
+            $resultFinal['unique_hobby'] = $unique[$i]->unique_hobby;
+            $resultFinal[$result->hobby_id] = $unique[$i]->hobby_name;
+        }
         return $resultFinal;
 
     }
