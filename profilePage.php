@@ -77,7 +77,7 @@
                     <hr class="tagline-divider">
                     <h2>
                         <small>
-                            <strong><?php echo ($dbprf['Tag_Line'])?></strong>
+                            <strong><?php echo ($dbprf['tag_line'])?></strong>
                         </small>
                     </h2>
                 </div>
@@ -99,54 +99,47 @@
                                 <div class = "panel-body">
 
                                     <div class="col-md-4">
-                                        <small class="text-muted">Age&emsp;</small><?php echo (calculateAge($dbprf['Date_Of_Birth'])) // echo (calculateAge($user->getUserPreferences()->getDateob()));?>
+                                        <small class="text-muted">Age&emsp;</small><?php echo (calculateAge($dbprf['date_of_birth'])) // echo (calculateAge($user->getUserPreferences()->getDateob()));?>
                                     </div>
                                     <?php
-                                    createDisplay("City", $dbprf);
-                                    createDisplay("Height", $dbprf);
+                                    createDisplay("city", $dbprf);
+                                    createDisplay("height", $dbprf);
                                     ?>
                                     <div style="clear:both;"><div></div></div>
                                     <?php
-                                    createDisplay("Gender", $dbprf);
-                                    createDisplay("Ethnicity", $dbprf);
-                                    createDisplay("Body_Type", $dbprf);
+                                    createDisplay("gender", $dbprf);
+                                    createDisplay("ethnicity", $dbprf);
+                                    createDisplay("body_type", $dbprf);
                                     ?>
                                     <div style="clear:both;"><div></div></div>
                                     <?php
-                                    createDisplay("Seeking", $dbprf);
-                                    createDisplay("Religion", $dbprf);
+                                    createDisplay("seeking", $dbprf);
+                                    createDisplay("religion", $dbprf);
                                     ?>
                                     <div class="col-md-4">
-                                        <small class="text-muted">Smoker:&emsp;</small><?php echo ($dbprf['Smoker'])==1 ? 'Yes' : 'No'
+                                        <small class="text-muted">Smoker:&emsp;</small><?php echo ($dbprf['smoker'])==1 ? 'Yes' : 'No'
                                             // echo ($user->getUserPreferences()->getSmoker())==1 ? 'Yes' : 'No';?>
                                     </div>
                                     <div style="clear:both;"><div></div></div>
                                     <?php
-                                    createDisplay("Intent", $dbprf);
-                                    ?>
-                                    <div class="col-md-4">
-                                        <small class="text-muted">Has Children:&emsp;</small><?php echo ($dbprf['Has_Children'])// echo ($user->getUserPreferences()->getHasChildren());?>
-                                    </div>
-                                    <?php
-                                    createDisplay("Drinker", $dbprf);
+                                    createDisplay("intent", $dbprf);
+                                    createDisplay("has_children", $dbprf);
+                                    createDisplay("drinker", $dbprf);
                                     ?>
                                     <div style="clear:both;"><div></div></div>
                                     <?php
-                                    createDisplay("Marital_Status", $dbprf);
+                                    createDisplay("marital_status", $dbprf);
+                                    createDisplay("wants_children", $dbprf);
                                     ?>
                                     <div class="col-md-4">
-                                        <small class="text-muted">Wants Children:&emsp;</small><?php echo ($dbprf['Wants_Children'])==1 ? 'Yes' : 'No'
-                                            // echo ($user->getUserPreferences()->getWantsChildren())==1 ? 'Yes' : 'No' ;?>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <small class="text-muted">Income:&emsp;</small><?php echo ($dbprf['Income'])// echo ($user->getUserPreferences()->getIncome());?>
+                                        <small class="text-muted">Income:&emsp;</small><?php echo ($dbprf['income'])// echo ($user->getUserPreferences()->getIncome());?>
                                     </div>
                                 </div>
                             </div>
                             <br>
                             <div class = "panel panel-default">
                                 <div class = "panel-body">
-                                    <small class="text-muted">About me:&emsp;</small><?php echo ($dbprf['About_Me']) // echo ($user->getUserPreferences()->getAboutMe()); ?>
+                                    <small class="text-muted">About me:&emsp;</small><?php echo ($dbprf['about_me']) // echo ($user->getUserPreferences()->getAboutMe()); ?>
                                 </div>
                             </div>
 
@@ -194,7 +187,7 @@
                                     ?>
                                     <div style="clear:both;"><div></div></div>
                                     <?php
-                                    createDisplay("Eating_Out", $dbhob);
+                                    createDisplay("Eating Out", $dbhob);
                                     createDisplay("Cooking", $dbhob);
                                     createDisplay("Computers", $dbhob);
                                     ?>
@@ -220,7 +213,7 @@
                                     <?php
                                     createDisplay("Surfing", $dbhob);
                                     createDisplay("Hiking", $dbhob);
-                                    createDisplay("Video_Games", $dbhob);
+                                    createDisplay("Video Games", $dbhob);
                                     ?>
                                     <div style="clear:both;"><div></div></div>
                                     <?php

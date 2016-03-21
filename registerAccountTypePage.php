@@ -23,7 +23,7 @@
     <link href="css/custom-base-page.css" rel="stylesheet">
     <link href="css/custom-form-page.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <script src="scripts/accountType.js"></script>
+    <script src="scripts/registrationValidation.js"></script>
     <?php include("includes/fonts.html"); ?>
 
 </head>

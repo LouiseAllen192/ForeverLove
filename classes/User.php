@@ -53,7 +53,7 @@ class User{
 
         foreach($dbvalue as $key=>$value){
             $pref = DB::getInstance()->get($key, ['id', '=', $value])->results()[0];
-            $this->preferences[$key] = $pref->option;
+            $this->preferences[$key] = $pref->choice;
         }
     }
 

@@ -12,9 +12,11 @@ User Services:
     - create image gallery on profile
     - create functionality for uploading and changing images
     - create report user functionality if viewing another users page
+    - change profile page to work with ne hobby databases
     - create view Account details page - give option to upgrade
     - create update/upgrade account details functionality
     - change prepopulated profiles passwords to proper passwords
+
 
 Message Services:
     -
