@@ -9,8 +9,8 @@
     include($_SERVER['DOCUMENT_ROOT'].'/classes/UserServiceMgr.php');
     include($_SERVER['DOCUMENT_ROOT'].'/classes/ReturnShortcuts.php');
 
-    //$uid = $_GLOBAL['User_Id'];
-    $uid = 6;
+
+    $uid = $_SESSION['user_id'];
 
     $regOrUpdate = UserServiceMgr::determineUpdateOrReg($uid);
     $dbvalue=array();
@@ -58,6 +58,11 @@
                 if(!empty($_POST)) {
                     $dbvalue = ReturnShortcuts::returnHobbies($uid);
                     if ($regOrUpdate == "Register" && $success) {
+                        echo '<' . 'div class= "alert alert-success" role="alert">
+                                    <a href="homePage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    Registration completed successfully
+                                    </div>';
+                        sleep(5);
                         header('Location: ' . 'homePage.php');
                         die();
                     }

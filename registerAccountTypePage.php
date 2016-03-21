@@ -8,13 +8,14 @@
     include("includes/metatags.html");
     include($_SERVER['DOCUMENT_ROOT'].'/classes/UserServiceMgr.php');
     include($_SERVER['DOCUMENT_ROOT'].'/classes/ReturnShortcuts.php');
-    include($_SERVER['DOCUMENT_ROOT'].'/classes/Input.php');
-    include($_SERVER['DOCUMENT_ROOT'].'/classes/Validate.php');
 
-    //$uid = $_GLOBAL['User_Id'];
-    $uid = 6;
+
+    $uid = $_SESSION['user_id'];
     $acc = "";
     $length;
+    if(!empty($_POST) && !isset($_POST['accType'])) {
+        $errors = UserServiceMgr::errorsExistInCardDetails();
+    }
 
     ?>
 

@@ -1,21 +1,41 @@
 
 User Services:
+
+    databases:
     - move date_of_birth to registration page
+    - change prepopulated profiles passwords to proper passwords
+
+    registration page:
     - validate date_of_birth js and php on registration page
+
+    regAccTypePage:
     - implement functionality to check credit card info against server
     - if signing up for free trial - check if free trial already used for that email address
-    - apply registrationValidation.js to updateRegistration details
-    - create and apply js and php validation for update hobbies and update preferences pages
+     - fix js validation on registerAccountTypePage
+
+    updateRegDetailsPage:
+    - apply registrationValidation.js to updateRegistration details - FIX (half working)
+
+    updateHobbysPage:
+    - create and apply js and php validation
+
+     updatePrefPage:
+     - create and apply js and php validation
+
+   welcomePage:
     - create login and log out functionality
     - check if users account is not expired on login
     - create forgotten password functionality
+
+    ProfilePage:
     - create image gallery on profile
     - create functionality for uploading and changing images
     - create report user functionality if viewing another users page
-    - change profile page to work with ne hobby databases
+
+    Settings:
     - create view Account details page - give option to upgrade
     - create update/upgrade account details functionality
-    - change prepopulated profiles passwords to proper passwords
+
 
 
 Message Services:

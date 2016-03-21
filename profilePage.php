@@ -16,32 +16,31 @@
     <?php
         include($_SERVER['DOCUMENT_ROOT'].'/classes/User.php');
 
-//    $uid = $GLOBALS['User_Id'];
+//    user id will come either from $_SESSION['user_id'] (if viewing your own profile)
+//    or $_POST[] if viewing someone elses page
+
         $uid = 1;
+
         $user = new User($uid);
-        $dbhob = $user->getHobbies();
         $dbprf = $user->getUserPrefrences();
+        $hobNames = ReturnShortcuts::returnHobbyNames();
+        $dbhob = $user->getHobbies();
 
         function calculateAge($dob){
-        //date in mm/dd/yyyy format; or it can be in other formats as well
         $birthDate = "02/19/1991";
-        //explode the date to get month, day and year
         $birthDate = explode("/", $birthDate);
-        //get age from date or birthdate
         $age = (date("md", date("U", mktime(0, 0, 0, $birthDate[0], $birthDate[1], $birthDate[2]))) > date("md")
             ? ((date("Y") - $birthDate[2]) - 1)
             : (date("Y") - $birthDate[2]));
         echo $age;
     }
 
-    function createDisplay($name, $array){
+    function createDisplay($name, $dbhob){
         $html = '<'.'div class="col-md-4">'.'<'.'small class="text-muted">';
-        $html.= str_replace('_', ' ', $name).'&emsp;</small>'.getFieldData($name, $array).'</div>';
+        $html.= str_replace('_', ' ', $name).'&emsp;</small>'.getFieldData($name, $dbhob).'</div>';
         echo $html;
-        // To be changed to:  echo ($user->getUserPreferences()->getX());
     }
 
-    //to be changed to access values through getters
     function getFieldData($name, $array){
         if($array[$name] == '1'){
             return '<'.'div class="col-md-2">'.'<img src="includes/pics/tick.png" class="img-rounded" alt="tick" width="20" height="20">'.'</div>';
@@ -161,84 +160,21 @@
 
                             <div class = "panel panel-default">
                                 <div class = "panel-body">
-
                                     <?php
-                                    createDisplay("Reading", $dbhob);
-                                    createDisplay("Cinema", $dbhob);
-                                    createDisplay("Shopping", $dbhob);
+                                    for($i=1; $i<count($hobNames); $i++){
+                                        $name= $hobNames[$i];
+                                        createDisplay($name, $dbhob);
+                                            if($i % 3 ==0){
+                                            echo '<'.'div style="clear:both;"><div></div></div>';
+                                            }
+                                    }
                                     ?>
-                                    <div style="clear:both;"><div></div></div>
-                                    <?php
-                                    createDisplay("Socializing", $dbhob);
-                                    createDisplay("Travelling", $dbhob);
-                                    createDisplay("Walking", $dbhob);
-                                    ?>
-                                    <div style="clear:both;"><div></div></div>
-                                    <?php
-                                    createDisplay("Exercise", $dbhob);
-                                    createDisplay("Soccer", $dbhob);
-                                    createDisplay("Dancing", $dbhob);
-                                    ?>
-                                    <div style="clear:both;"><div></div></div>
-                                    <?php
-                                    createDisplay("Horses", $dbhob);
-                                    createDisplay("Painting", $dbhob);
-                                    createDisplay("Running", $dbhob);
-                                    ?>
-                                    <div style="clear:both;"><div></div></div>
-                                    <?php
-                                    createDisplay("Eating Out", $dbhob);
-                                    createDisplay("Cooking", $dbhob);
-                                    createDisplay("Computers", $dbhob);
-                                    ?>
-                                    <div style="clear:both;"><div></div></div>
-                                    <?php
-                                    createDisplay("Bowling", $dbhob);
-                                    createDisplay("Writing", $dbhob);
-                                    createDisplay("Skiing", $dbhob);
-                                    ?>
-                                    <div style="clear:both;"><div></div></div>
-                                    <?php
-                                    createDisplay("Crafts", $dbhob);
-                                    createDisplay("Golf", $dbhob);
-                                    createDisplay("Chess", $dbhob);
-                                    ?>
-                                    <div style="clear:both;"><div></div></div>
-                                    <?php
-                                    createDisplay("Gymnastics", $dbhob);
-                                    createDisplay("Cycling", $dbhob);
-                                    createDisplay("Swimming", $dbhob);
-                                    ?>
-                                    <div style="clear:both;"><div></div></div>
-                                    <?php
-                                    createDisplay("Surfing", $dbhob);
-                                    createDisplay("Hiking", $dbhob);
-                                    createDisplay("Video Games", $dbhob);
-                                    ?>
-                                    <div style="clear:both;"><div></div></div>
-                                    <?php
-                                    createDisplay("Volleyball", $dbhob);
-                                    createDisplay("Badminton", $dbhob);
-                                    createDisplay("Gym", $dbhob);
-                                    ?>
-                                    <div style="clear:both;"><div></div></div>
-                                    <?php
-                                    createDisplay("Parkour", $dbhob);
-                                    createDisplay("Fashion", $dbhob);
-                                    createDisplay("Yoga", $dbhob);
-                                    ?>
-                                    <div style="clear:both;"><div></div></div>
-                                    <?php
-                                    createDisplay("Basketball", $dbhob);
-                                    createDisplay("Boxing", $dbhob);
-                                    ?>
-
                                 </div>
                             </div>
 
                             <div class = "panel panel-default">
                                 <div class = "panel-body">
-                                    <small class="text-muted">Unique Hobby&emsp;</small><?php echo ($dbhob['Unique_Hobbie']) // echo ($user->getUserPreferences()->getAboutMe()); ?>
+                                    <small class="text-muted">Unique Hobby&emsp;</small><?php echo $user->getUniqueHobby() // echo ($user->getUserPreferences()->getAboutMe()); ?>
                                 </div>
                             </div>
 

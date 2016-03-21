@@ -140,8 +140,8 @@ class UserServiceMgr
             $changes['account_expired']= $date->format('Y-m-d');
         }
         $where = "user_id = '".$uid."'";
-        $success = DB::getInstance()->update('account_details', $where, $changes);
 
+        $success = DB::getInstance()->update('account_details', $where, $changes);
         return $success;
     }
 
@@ -216,6 +216,39 @@ class UserServiceMgr
             $updOrReg = "Update";
         }
        return $updOrReg;
+    }
+
+    public static function errorsExistInCardDetails(){
+        $validate = new Validate();
+        $validate->check($_POST, [
+            'name_on_card' => [
+                'required' => true,
+                'matches' => '/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/',
+            ],
+            'cardnum' => [
+                'required' => true,
+                'matches' => '/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/',
+            ],
+            'expiry' => [
+                'required' => true,
+                'matches' => '/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/',
+            ],
+            'cvv' => [
+                'required' => true,
+                'matches' => '/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/',
+            ],
+            'address' => [
+                'required' => true,
+                'matches' => '/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/',
+            ]
+        ]);
+
+        if($validate->passed()){
+            return false;
+        }
+        else{
+            return $validate->getErrors();
+        }
     }
 
 }
