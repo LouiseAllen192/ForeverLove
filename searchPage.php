@@ -9,24 +9,8 @@
 
     $hobbies = DB::getInstance()->query('SELECT * FROM user_hobbies ORDER BY hobby_name')->results();
 
-    if(Input::exists()){
-        $sql = "SELECT user_id,";
-        $last = count($_POST['list']);
-        $n = 1;
-        foreach($_POST['list'] as $item){
-            $sql .= "MAX(CASE WHEN hobby_id = '".$item."' THEN hobby_preference END)AS '".$item."'";
-            if($n++ < $last){
-                $sql .= ",";
-            }
-        }
-        $sql .= " FROM (SELECT user_id,hobby_id,hobby_preference FROM registration_details JOIN";
-        $sql .= " user_hobby_preferences USING(user_id) ORDER BY user_id)x GROUP BY user_id";
-        $results = DB::getInstance()->query($sql)->results();
-        foreach($results as $result){
-            foreach($result as $value){
-                echo '<br>'.$value;
-            }
-        }
+    if(isset($_POST['list'])){
+        $results = SearchServiceMgr::byCriteria($_POST['list']);
     }
     ?>
     <title>Search Page</title>
@@ -73,7 +57,34 @@
                         <input class="btn btn-info" id="search_button" type="submit" value="Search">
                     </div>
                 </form>
-                <br><br><br><br><br>
+                <br><br><br>
+                <?php
+                if(isset($results)) {
+                    foreach ($results as $result){
+                        ?>
+                        <div class="display_box">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="media">
+                                        <div class="media-left">
+                                            <img class="media-object"
+                                                 src="https://s3.amazonaws.com/uifaces/faces/twitter/calebogden/73.jpg"/>
+                                        </div>
+                                        <div class="media-body" style="padding-top: 3px;">
+                                            <h4 class="media-heading"><?php echo $result->username; ?></h4>
+                                            <small style="white-space: nowrap;"><?php echo $result->tag_line; ?></small>
+                                        </div>
+                                        <div class="media-right media-middle">
+                                            <h5 class="media-heading"><?php echo $result->city; ?></h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                }?>
+                <br><br>
             </div>
         </div>
     </div>

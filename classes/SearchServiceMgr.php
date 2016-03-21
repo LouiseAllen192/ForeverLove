@@ -6,40 +6,26 @@ class SearchServiceMgr{
         else return new User($userReg->results()[0]->user_id);
     }
 
-    /*
-     * I haven't tested this....
-     */
-    public function byCriteria($prefernces = [], $hobbies = []){
-        $n = 0;
-        $params = [];
-        foreach($prefernces as $prefernce){
-            if($prefernce === true){
-                $params[] = 'a'.$prefernce;
-                $n++;
+    public static function byCriteria($list){
+        $last = count($list);
+        $n = 1;
+        $sql = "SELECT z.* FROM (SELECT y.*,";
+        foreach($list as $item){
+            $sql .= "COALESCE(y.$item, 0)";
+            if($n++ < $last){
+                $sql .= "+";
             }
         }
-        foreach($hobbies as $hobby){
-            if($hobby === true){
-                $params[] = 'b'.$hobby;
-                $n++;
+        $sql .= " AS Total FROM (SELECT x.user_id,x.username,x.tag_line,x.city,";
+        $n = 1;
+        foreach($list as $item){
+            $sql .= "MAX(CASE WHEN x.hobby_id = '$item' THEN x.hobby_preference END)AS '$item'";
+            if($n++ < $last){
+                $sql .= ",";
             }
         }
-        $sql = "SELECT a.user_id FROM preference_details a JOIN hobbies b ON a.user_id = b.user_id where";
-        while($n-- > 1){
-            $sql .= " ? &&";
-        }
-        $sql .= " ?";
-
-        /*
-         * ********************
-         * ********************
-         * ********************
-         */
-        $results = DB::getInstance()->query($sql, $params)->results();
-        $viewableProfiles = [];
-        foreach($results as $result){
-            $viewableProfiles[] = new User($result->User_id);
-        }
-        return $viewableProfiles;
+        $sql .= " FROM (SELECT user_id,username,tag_line,city,hobby_id,hobby_preference FROM registration_details JOIN preference_details USING(user_id)";
+        $sql .= " JOIN user_hobby_preferences USING(user_id))x GROUP BY user_id)y ORDER BY Total DESC)z WHERE Total > 0";
+        return DB::getInstance()->query($sql)->results();
     }
 }
