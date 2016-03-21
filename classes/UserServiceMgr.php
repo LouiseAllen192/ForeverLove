@@ -154,9 +154,9 @@ class UserServiceMgr
         //todo
     }
 
-    public static function register(){
+    public static function register($source){
         $validate = new Validate();
-        $validate->check($_POST, [
+        $validate->check($source, [
             'email' => [
                 'required' => true,
                 'matches' => '/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/',
@@ -186,11 +186,23 @@ class UserServiceMgr
             'confirm_password' => [
                 'required' => true,
                 'matches' => '/\b('.$_POST['password'].')\b/'
+            ],
+            'dob' => [
+                'required' => true,
+                'over_18' => true
             ]
         ]);
 
         if($validate->passed()){
-            DB::getInstance()->registerUser('registration_details', ['username' => $_POST['username'], 'password' => password_hash($_POST['password'], PASSWORD_DEFAULT), 'first_name' => $_POST['first_name'], 'last_name' => $_POST['last_name'], 'email' => $_POST['email']]);
+            DB::getInstance()->registerUser(
+                'registration_details',[
+                    'username' => $_POST['username'],
+                    'password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
+                    'first_name' => $_POST['first_name'], 'last_name' => $_POST['last_name'],
+                    'email' => $_POST['email']
+                ],
+                $_POST['dob']
+            );
             $_SESSION['user_id'] = DB::getInstance()->get('registration_details', ['username', '=', $_POST['username']])->results()[0]->user_id;
             return false;
         }

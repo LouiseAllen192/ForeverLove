@@ -5,7 +5,7 @@
     include("includes/metatags.html");
     include("includes/fonts.html");
 
-    if(Input::exists() && !($errors = UserServiceMgr::register())){
+    if(Input::exists() && !($errors = UserServiceMgr::register($_POST))){
         header('Location: '.'registerAccountTypePage.php');
         die();
     }
@@ -108,6 +108,16 @@
                             <p class="col-md-4"></p>
                             <span class="<?php if($errors['confirm_password'] == 'error_required') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_required">Required...</span>
                             <span class="<?php if($errors['confirm_password'] == 'error_regex') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_regex">Passwords do not match...</span>
+                        </div>
+
+                        <div class="form-group" id="dob_group">
+                            <label for="dob" class="col-md-4 col-sm-5 control-label"><b>Date Of Birth</b></label>
+                            <div class="col-md-8 col-sm-7">
+                                <input type="date" class="form-control" id="dob" name="dob" value="<?php echo Input::get('dob');?>">
+                            </div>
+                            <p class="col-md-4 col-sm-5"></p>
+                            <span class="<?php if($errors['dob'] == 'error_required') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_required">Required...</span>
+                            <span class="<?php if($errors['dob'] == 'error_regex') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_regex">Over 18's Only...</span>
                         </div>
                     </fieldset>
                     <br>

@@ -20,9 +20,13 @@ class Validate{
                         }
                     }
                     else if($rule == 'unique'){
-                        $unavailable = $this->db->get($ruleValue, [$item, '=', $value])->count();
-                        if($unavailable){
+                        if($this->db->get($ruleValue, [$item, '=', $value])->count()){
                             $this->addError($item, 'error_unique');
+                        }
+                    }
+                    else if($rule == 'over_18'){
+                        if(!((new DateTime($value))->diff(new DateTime(date('Y-m-d')))->y >= 18)){
+                            $this->addError($item, 'error_regex');
                         }
                     }
                 }

@@ -150,4 +150,24 @@ $(document).ready(function(){
             }
         });
     }
+
+    if(page == 'registrationPage.php'  || page == 'updateRegDetailsPage.php') {
+        $('#dob_group').find('#dob').change(function () {
+            $('#dob_group > #error_required').removeClass('error').addClass('hide');
+            var input = $(this).val();
+            var today = new Date();
+            var dob = new Date(input);
+            var age = today.getFullYear() - dob.getFullYear();
+            var m = today.getMonth() - dob.getMonth();
+            if (m < 0 || (m == 0 && today.getDate() < dob.getDate())) {
+                age--;
+            }
+            if (age < 18) {
+                $('#dob_group > #error_regex').removeClass('hide').addClass('error');
+            }
+            else {
+                $('#dob_group > #error_regex').removeClass('error').addClass('hide');
+            }
+        });
+    }
 });

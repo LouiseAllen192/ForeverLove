@@ -101,7 +101,7 @@ class DB{
      * Insert new tuple into tables
      * e.g. insert('registration_details', ['Username' => 'Kevin', 'Password' => 'password']);
      */
-    public function registerUser($table, $fields = []){
+    public function registerUser($table, $fields = [], $dob = null){
         $n = count($fields);
         if($n){
             $keys = array_keys($fields);
@@ -118,7 +118,7 @@ class DB{
             else if($table === 'registration_details'){
                 $user_id = $this->get('registration_details', ['username', '=', $fields['username']])->results()[0]->user_id;
                 $this->registerUser('account_details', ['user_id' => $user_id]);
-                $this->registerUser('preference_details', ['user_id' => $user_id]);
+                $this->registerUser('preference_details', ['user_id' => $user_id, 'date_of_birth' => $dob]);
                 $this->registerUser('unique_hobby', ['user_id' => $user_id]);
                 $hobbies = $this->get('user_hobbies', ['hobby_id', '>' , 0])->results();
                 foreach($hobbies as $hobby){
