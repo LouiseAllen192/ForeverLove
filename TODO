@@ -2,11 +2,7 @@
 User Services:
 
     databases:
-    - move date_of_birth to registration page
-    - change prepopulated profiles passwords to proper passwords
-
-    registration page:
-    - validate date_of_birth js and php on registration page
+    - change prepopulated profiles passwords to proper passwords-----(can be done when we add change password functionality)
 
     regAccTypePage:
     - implement functionality to check credit card info against server
