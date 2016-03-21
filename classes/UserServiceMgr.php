@@ -37,18 +37,17 @@ class UserServiceMgr
         $prefSuccess = true;
         $uniqueSuccess = true;
 
-//   commented out for now as unique_bobby table does not put a NULL value in automatically when registering
-//        $unique = array();
-//        if(isset($postArray['unique_hobby'])){
-//            $unique['unique_hobby'] = $postArray['unique_hobby'];
-//            if($unique['unique_hobby'] == ''){
-//                $uniqueSuccess = true;
-//            }
-//            else{
-//                $uniqueWhere = "user_id = '".$uid."'";
-//                $uniqueSuccess = DB::getInstance()->update('unique_hobby', $uniqueWhere ,  $unique);
-//            }
-//        }
+        $unique = array();
+        if(isset($postArray['unique_hobby'])){
+            $unique['unique_hobby'] = $postArray['unique_hobby'];
+            if($unique['unique_hobby'] == ''){
+                $uniqueSuccess = true;
+            }
+            else{
+                $uniqueWhere = "user_id = '".$uid."'";
+                $uniqueSuccess = DB::getInstance()->update('unique_hobby', $uniqueWhere ,  $unique);
+            }
+        }
 
         $keys = ReturnShortcuts::returnHobbyNames();
         for($i=1; $i<=count($keys) && $prefSuccess; $i++){
@@ -124,8 +123,31 @@ class UserServiceMgr
         //todo
     }
 
-    public static function upgradeAccountType($userid){
+    public static function registerAccountType($uid, $accLength){
+
+        $date = new DateTime();
+        $changes = array();
+        if($accLength == 30) {
+            $changes['account_type']= "Free";
+            $changes['free_trail_used']= 1;
+            $date->add(new DateInterval('P'.$accLength.'D'));
+            $changes['account_expired']= $date->format('Y-m-d');
+        }
+        else                {
+            $changes['account_type']= "Premium";
+            $changes['free_trail_used']= 0;
+            $date->add(new DateInterval('P'.$accLength.'M'));
+            $changes['account_expired']= $date->format('Y-m-d');
+        }
+        $where = "user_id = '".$uid."'";
+        $success = DB::getInstance()->update('account_details', $where, $changes);
+
+        return $success;
+    }
+
+    public static function validateCreditCard($userid){
         //todo
+        return true;
     }
 
     public static function upgradeMembership($userid){
@@ -177,16 +199,23 @@ class UserServiceMgr
         }
     }
 
+
     public static function determineUpdateOrReg($uid){
-        $updOrReg="";
-        $preferences =  DB::getInstance()->get('preference_details', ['User_id', '=', $uid])->results()[0];
-        if($preferences->seeking == null){
+
+        echo '<'.'br><br><br><br><br><br>';
+
+        $sql = "SELECT unique_hobby ".
+            "FROM unique_hobby  ".
+            "WHERE user_id = '".$uid."'";
+        $results = DB::getInstance()->query($sql)->results();
+        foreach($results as $result)
+        if($result->unique_hobby == null){
             $updOrReg = "Register";
         }
         else{
             $updOrReg = "Update";
         }
-        return $updOrReg;
+       return $updOrReg;
     }
 
 }

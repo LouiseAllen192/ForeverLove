@@ -10,8 +10,7 @@
     include($_SERVER['DOCUMENT_ROOT'].'/classes/ReturnShortcuts.php');
 
     //$uid = $_GLOBAL['User_Id'];
-    $uid = 4;
-    echo '<'.'br><br><br><br><br><br><br><br><br>';
+    $uid = 6;
 
     $regOrUpdate = UserServiceMgr::determineUpdateOrReg($uid);
     $dbvalue=array();

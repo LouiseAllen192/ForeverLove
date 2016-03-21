@@ -20,7 +20,7 @@
     include($_SERVER['DOCUMENT_ROOT'].'/classes/ReturnShortcuts.php');
 
     //$uid = $_SESSION['user_id']
-    $uid = 1;
+    $uid = 4;
     $dbvalue =  ReturnShortcuts::returnRegDetails($uid);
 
     if(!empty($_POST)){

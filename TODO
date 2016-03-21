@@ -1,7 +1,6 @@
 
 User Services:
     - move date_of_birth to registration page
-    - allow . in emails
     - validate date_of_birth js and php on registration page
     - create selectAccountType page after (or before?) registration page??
     - implement functionality to check credit card info against server
