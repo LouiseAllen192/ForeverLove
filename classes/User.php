@@ -70,6 +70,17 @@ class User{
                 $this->userHobbies[$result->hobby_name] = $result->hobby_preference;
             }
         }
+
+        $sql2 = "SELECT unique_hobby " .
+            "FROM unique_hobby  " .
+            "WHERE user_id = '".$uid."'";
+
+        $results = DB::getInstance()->query($sql2)->results();
+        foreach ($results as $result) {
+            $this->userHobbies['unique_hobby'] = $result->unique_hobby;
+        }
+
+
     }
 
     public function setAcc($accDet, $uid){
@@ -116,6 +127,11 @@ class User{
     public function getHobbies(){
         return $this->userHobbies;
     }
+
+    public function getUniqueHobby(){
+        return (string)$this->userHobbies['unique_hobby'];
+    }
+
 
 }
 
