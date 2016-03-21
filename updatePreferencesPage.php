@@ -94,7 +94,7 @@
                                 $options = ReturnShortcuts::returnOptionNames($name);
 
                                 $html = '<'.'fieldset class="form-group">';
-                                $html .= '<'.'label for="'.$name.'Label">'.str_replace('_', ' ', $name).'</label>';
+                                $html .= '<'.'label for="'.$name.'Label">'.ucwords(str_replace('_', ' ', $name)).'</label>';
                                 $html .= '<select name="'.$name.'" class="form-control">';
                                 foreach ($options as $option) {
                                     if ($option == $default) {

@@ -8,6 +8,8 @@
     include("includes/metatags.html");
     include($_SERVER['DOCUMENT_ROOT'].'/classes/UserServiceMgr.php');
     include($_SERVER['DOCUMENT_ROOT'].'/classes/ReturnShortcuts.php');
+    include($_SERVER['DOCUMENT_ROOT'].'/classes/Input.php');
+    include($_SERVER['DOCUMENT_ROOT'].'/classes/Validate.php');
 
     //$uid = $_GLOBAL['User_Id'];
     $uid = 6;
@@ -20,6 +22,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/custom-base-page.css" rel="stylesheet">
     <link href="css/custom-form-page.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="scripts/accountType.js"></script>
     <?php include("includes/fonts.html"); ?>
 
@@ -73,6 +76,7 @@
 
                 <?php
                     if(!empty($_POST) && isset($_POST['accType']) ) {
+
                         if ($_POST['accType'] == "free") {
                             $acc = "Free 30 day trial";
                             $length = 30;
@@ -113,7 +117,7 @@
                                 '</div>' . '<br><br><p>You are on your way to having unlimited access to all of our features.<br></p><br>' .
                                 '<'.'div class = "panel panel-default">'.
                                     '<div class = "panel-body">'.
-                                        ' <form id="reg_form" class="form-horizontal" role="form" method="post">
+                                        ' <form id="regDetails_form" class="form-horizontal" role="form" method="post">
                                         <fieldset>
                                             <label>Please enter your payment information here:<br><br></label>
                                         </fieldset>
@@ -121,17 +125,30 @@
                                                 <div class="form-group" id="name_on_card_group">
                                                     <label for="name_on_card" class="col-md-4 col-sm-5 control-label"><b>Name on Card</b></label>
                                                     <div class="col-md-8 col-sm-7">
-                                                        <input type="text" class="form-control" id="name_on_card" name="name_on_card" maxlength="128" value="<?php echo Input::get(\'name_on_card\');?>">
+                                                        <input type="text" class="form-control" id="name_on_card" name="name_on_card" maxlength="128" value="'.Input::get('name_on_card').'">
                                                     </div>
                                                     <p class="col-md-4 col-sm-5"></p>
                                                     <span class="<?php if($errors[\'name_on_card\'] == \'error_required\') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_required">Required...</span>
                                                     <span class="<?php if($errors[\'name_on_card\'] == \'error_regex\') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_regex">Invalid format, e.g. John Doe</span>
                                                 </div>
 
+                                                <div class="form-group" id="type_group">
+                                                    <label for="type" class="col-md-4 col-sm-5 control-label"><b>Card type</b></label>
+                                                    <div class="col-md-8 col-sm-7">
+                                                        <select name="cardType" id="cardType" class="form-control">'.
+                                                               '<option value="Visa"> Visa</option>
+                                                               <option value="Mastercard"> Mastercard</option>
+                                                               <option value="Laser"> Laser</option>
+                                                               <option value="Maestro"> Maestro</option>
+                                                        </select>
+                                                    </div>
+                                                    <p class="col-md-4 col-sm-5"></p>
+                                                </div>
+
                                                 <div class="form-group" id="cardnum_group">
                                                     <label for="cardnum" class="col-md-4 col-sm-5 control-label"><b>Card number</b></label>
                                                     <div class="col-md-8 col-sm-7">
-                                                        <input type="text" class="form-control" id="cardnum" name="cardnum" maxlength="128" value="<?php echo Input::get(\'cardnum\');?>">
+                                                        <input type="text" class="form-control" id="cardnum" name="cardnum" maxlength="128" value="'.Input::get('cardnum').'">
                                                     </div>
                                                     <p class="col-md-4 col-sm-5"></p>
                                                     <span class="<?php if($errors[\'cardnum\'] == \'error_required\') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_required">Required...</span>
@@ -141,7 +158,7 @@
                                                 <div class="form-group" id="expiry_group">
                                                     <label for="expiry" class="col-md-4 col-sm-5 control-label"><b>Expiry Date</b></label>
                                                     <div class="col-md-8 col-sm-7">
-                                                        <input type="text" class="form-control" id="expiry" name="expiry" maxlength="128" value="<?php echo Input::get(\'expiry\');?>">
+                                                        <input type="text" class="form-control" id="expiry" name="expiry" maxlength="128" value="'.Input::get('expiry').'">
                                                     </div>
                                                     <p class="col-md-4 col-sm-5"></p>
                                                     <span class="<?php if($errors[\'expiry\'] == \'error_required\') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_required">Required...</span>
@@ -151,7 +168,7 @@
                                                 <div class="form-group" id="cvv_group">
                                                     <label for="cvv" class="col-md-4 col-sm-5 control-label"><b>Security code</b></label>
                                                     <div class="col-md-8 col-sm-7">
-                                                        <input type="text" class="form-control" id="cvv" name="cvv" maxlength="128" value="<?php echo Input::get(\'cvv\');?>">
+                                                        <input type="text" class="form-control" id="cvv" name="cvv" maxlength="128" value="'.Input::get('cvv').'">
                                                     </div>
                                                     <p class="col-md-4 col-sm-5"></p>
                                                     <span class="<?php if($errors[\'cvv\'] == \'error_required\') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_required">Required...</span>
@@ -161,7 +178,7 @@
                                                 <div class="form-group" id="address_group">
                                                     <label for="address" class="col-md-4 col-sm-5 control-label"><b>Billing address</b></label>
                                                     <div class="col-md-8 col-sm-7">
-                                                        <textarea type="text" class="form-control" name="address" id= "address" rows="3" maxlength="128" value="<?php echo Input::get(\'address\');?>"></textarea>
+                                                        <textarea type="text" class="form-control" name="address" id= "address" rows="3" maxlength="128" value="'.Input::get('address').'"></textarea>
                                                     </div>
                                                     <p class="col-md-4 col-sm-5"></p>
                                                     <span class="<?php if($errors[\'address\'] == \'error_required\') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_required">Required...</span>

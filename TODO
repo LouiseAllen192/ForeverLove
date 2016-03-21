@@ -2,9 +2,7 @@
 User Services:
     - move date_of_birth to registration page
     - validate date_of_birth js and php on registration page
-    - create selectAccountType page after (or before?) registration page??
     - implement functionality to check credit card info against server
-    - Set up accountDetails table info from credit card info page
     - if signing up for free trial - check if free trial already used for that email address
     - apply registrationValidation.js to updateRegistration details
     - create and apply js and php validation for update hobbies and update preferences pages

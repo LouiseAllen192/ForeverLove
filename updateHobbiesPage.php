@@ -83,7 +83,7 @@
                             function createOption($name, $dbvalue, $regOrUpdate){
                                 $html = '<div class="col-md-4"'.'>'.'<div class="form-group">'. '<label class="checkbox-inline">';
                                 $html .= '<input type="checkbox" name="'.$name.'" id="'.$name.'"'.checked($name, $dbvalue,  $regOrUpdate).'>';
-                                $html .= str_replace('_', ' ', $name);
+                                $html .= ucwords(str_replace('_', ' ', $name));
                                 $html .= '</label></div></div>';
                                 echo $html;
                             }
