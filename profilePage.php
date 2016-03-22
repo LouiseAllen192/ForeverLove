@@ -83,7 +83,7 @@
                     <div class = "row">
 
                         <div class="col-md-5 col-sm-6 text-center">
-                            <div class="profile-pic"><img src="includes/pics/ProfilePic.jpg" class="img-responsive" alt="Profile Picture"></div>
+                            <div class="profile-pic"><img src="includes/pics/default-profile.png" class="img-responsive" alt="Profile Picture"></div>
                             <br><br>
 
                         </div>
