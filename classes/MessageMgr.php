@@ -53,6 +53,24 @@ class MessageMgr
         //todo
     }
 
+    public function findConversations()
+    {
+        //find conversations that involve the user
+        $convos = DB::getInstance()->query("SELECT * FROM conversations WHERE (User1_id = $this->userID OR User2_id = $this->userID", [])->results();
+        $messagedUsers = array();
+        for($i = 0; $i < count($convos); $i++)
+        {
+            if($messagedUsers[$i]->user1_id == $this->userID)
+                $temp = $messagedUsers[$i]->user2_id;
+            else
+                $temp = $messagedUsers[$i]->user1_id;
+            $messagedUsers[$i]=$temp;
+            echo $temp;
+            //get usernames and display those
+            //once that's done get messages
+        }
+    }
+
     public static function testFunction($changes)
     {
         foreach ($changes as $key => $value)
