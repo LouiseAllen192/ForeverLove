@@ -40,22 +40,23 @@
 
                     if(!empty($_GET))
                     {
-                        $rec = ($_GET["recipient"]);
-                        //echo $_GET["message"];
-                        $convoid = 1; //temp
-                        $recieverid = 2; //temp
-                        $uid = 1; //temp
-                        $date = date('Y-m-d H:i:s');
+                        $uid = 3; //temp - need to get from global array
                         $msgMgr = new MessageMgr($uid);
-                        //need to check here if recipient is an existing user, if not return error message
-                        $recExists = $msgMgr->doesRecipientExist($rec);
-                        if($recExists)
-                            $existingConvo = $msgMgr->doesConversationExist($recieverid);
-                        //if conversation doesn't exist, need to create it
-                        // if($existingConvo)
-                           // DB::getInstance()->insert('converstaions', ['User1_id' => $recieverid, 'User2_id'  => $uid]);
-                        //need to get conversation ID here
-                        //DB::getInstance()->insert('messages', ['Conversation_id' => 1, 'Sender_id' => $uid, 'Recipient_id'  => $recieverid, 'Date_Received' => $date, 'Message_Text' => $_GET["message"], 'Profile_Visable' => 1]);
+                        $msgMgr->sendNewMessage($_GET);
+                        /*$rec = ($_GET["recipient"]);
+                        $date = date('Y-m-d H:i:s');
+                        $reciever_id = $msgMgr->doesRecipientExist($rec);
+                        if(!($reciever_id))
+                            echo "user does not exist";
+                        else
+                        {
+                            $convo_id = $msgMgr->doesConversationExist($reciever_id);
+                            if(!($convo_id))
+                            {
+                                $convo_id = $msgMgr->createConversation($reciever_id);
+                            }
+                            DB::getInstance()->insert('messages', ['Conversation_id' => $convo_id, 'Sender_id' => $uid, 'Recipient_id'  => $reciever_id, 'Date_Received' => $date, 'Message_Text' => $_GET["message"], 'Profile_Visable' => 1]);
+                        }*/
                     }
 
                     ?>
