@@ -16,9 +16,20 @@
     <?php
         include($_SERVER['DOCUMENT_ROOT'].'/classes/User.php');
 
+    $me;
+    $uid;
 //    user id will come either from $_SESSION['user_id'] (if viewing your own profile)
 //    or $_POST[] if viewing someone elses page
+//    if(!empty($_POST)){
+//        $uid = $_POST['uid'];
+//        $me=false;
+//    }
+//    else{
+//        $uid = $_SESSION['user_id'];
+//        $me=true;
+//    }
 
+        $me=true;
         $uid = 1;
 
         $user = new User($uid);
@@ -37,7 +48,7 @@
 
     function createDisplay($name, $dbhob){
         $html = '<'.'div class="col-md-4">'.'<'.'small class="text-muted">';
-        $html.= str_replace('_', ' ', $name).'&emsp;</small>'.getFieldData($name, $dbhob).'</div>';
+        $html.= ucwords(str_replace('_', ' ', $name)).'&emsp;</small>'.getFieldData($name, $dbhob).'</div>';
         echo $html;
     }
 
@@ -68,20 +79,82 @@
         <div class="row">
             <div class="box">
                 <div class="col-lg-12 text-center">
+                <br><br><br>
+                    <div class = "row">
+
+                        <div class="col-md-5 col-sm-6 text-center">
+                            <div class="profile-pic"><img src="includes/pics/ProfilePic.jpg" class="img-responsive" alt="Profile Picture"></div>
+                            <br><br>
+
+                        </div>
+
+                        <div class="col-md-5 col-sm-6 text-center">
+                            <div class = "panel panel-default">
+                                <div class = "panel-body">
+                                    <h1 class="user-name"><?php echo ($user->getUsername());?></h1>
+                                    <hr class="tagline-divider">
+                                    <h2>
+                                        <small>
+                                            <strong><?php echo ($dbprf['tag_line'])?></strong>
+                                        </small>
+                                    </h2>
+                                    <br><br>
+                                    <div class="col-md-4">
+                                        <small class="text-muted">Age&emsp;</small><?php echo calculateAge($dbprf['date_of_birth']); ?>
+                                    </div>
+                                    <br><br>
+                                    <div class="col-md-4">
+                                        <small class="text-muted">City&emsp;</small><?php echo $dbprf['city'];?>
+                                    </div>
+                                    <br><br>
+                                    <div class="col-md-4">
+                                        <small class="text-muted">Gender&emsp;</small><?php echo $dbprf['gender'];?>
+                                    </div>
+                                    <div style="clear:both;"><div></div></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2 col-sm-6 text-center">
+                            <div class = buttons_right>
+                                <?php
+                                if($me){
+                                    echo '<'.'br><a href="updatePreferencesPage.php" class="btn btn-info center-inline" role="button">Edit Preferences</a>';
+                                    echo '<'.'br><br><a href="updateHobbiesPage.php" class="btn btn-info center-inline" role="button">Edit Hobbies</a>';
+                                }
+                                else{
+                                    echo '<a href="reportUserPage.php" class="btn btn-info center-inline" role="button">Report this user</a>';
+                                }
+                                ?>
+                            </div>
+                        </div>
+
+                    </div>
+
                     <br><br>
-                    <!--image source to be got from database-->
-                    <div class="profile-pic"><img src="includes/pics/ProfilePic.jpg" class="img-responsive" alt="Profile Picture"></div>
-                    <br><br>
-                    <h1 class="user-name"><?php echo ($user->getUsername());?></h1>
-                    <hr class="tagline-divider">
-                    <h2>
-                        <small>
-                            <strong><?php echo ($dbprf['tag_line'])?></strong>
-                        </small>
-                    </h2>
+
                 </div>
             </div>
         </div>
+
+        <div class="row">
+            <div class="box">
+                <div class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center">Image Gallery</h2>
+                    <hr>
+                    <hr class="visible-xs">
+                    <br>
+                    <div class = "panel panel-default">
+                        <div class = "panel-body">
+                            <a href="imageGalleryPage.php" class="btn btn-info center-inline" role="button">Image Gallery</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
 
         <div class="row">
             <div class="box">
@@ -97,20 +170,12 @@
                             <div class = "panel panel-default">
                                 <div class = "panel-body">
 
-                                    <div class="col-md-4">
-                                        <small class="text-muted">Age&emsp;</small><?php echo (calculateAge($dbprf['date_of_birth'])) // echo (calculateAge($user->getUserPreferences()->getDateob()));?>
-                                    </div>
                                     <?php
-                                    createDisplay("city", $dbprf);
                                     createDisplay("height", $dbprf);
-                                    ?>
-                                    <div style="clear:both;"><div></div></div>
-                                    <?php
-                                    createDisplay("gender", $dbprf);
                                     createDisplay("ethnicity", $dbprf);
                                     createDisplay("body_type", $dbprf);
                                     ?>
-                                    <div style="clear:both;"><div></div></div>
+                                    <div style="clear:both;"><div></div></div><br>
                                     <?php
                                     createDisplay("seeking", $dbprf);
                                     createDisplay("religion", $dbprf);
@@ -119,13 +184,13 @@
                                         <small class="text-muted">Smoker:&emsp;</small><?php echo ($dbprf['smoker'])==1 ? 'Yes' : 'No'
                                             // echo ($user->getUserPreferences()->getSmoker())==1 ? 'Yes' : 'No';?>
                                     </div>
-                                    <div style="clear:both;"><div></div></div>
+                                    <div style="clear:both;"><div></div></div><br>
                                     <?php
                                     createDisplay("intent", $dbprf);
                                     createDisplay("has_children", $dbprf);
                                     createDisplay("drinker", $dbprf);
                                     ?>
-                                    <div style="clear:both;"><div></div></div>
+                                    <div style="clear:both;"><div></div></div><br>
                                     <?php
                                     createDisplay("marital_status", $dbprf);
                                     createDisplay("wants_children", $dbprf);

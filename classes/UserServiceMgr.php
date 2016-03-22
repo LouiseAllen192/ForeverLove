@@ -19,16 +19,51 @@ class UserServiceMgr
     }
 
 
-    public static function updateBasicUserDetails($uid, $changes){
-        $keys = array("username","first_name", "last_name", "password" , "email", "Send");
-        for($i=0; $i<count($keys); $i++){
-            if($changes[$keys[$i]]== '' || $changes[$keys[$i]]== 'Apply Changes'){
-                unset($changes[$keys[$i]]);
-            }
+    public static function updateBasicUserDetails($uid, $source){
+
+        if(isset($source['Send'])) unset($source['Send']);
+
+        $requiredConfEmail = false;
+        if(isset($source['email'])) $requiredConfEmail = true;
+        $requiredConfPass = false;
+        if(isset($source['password'])) $requiredConfPass= true;
+
+        $validate = new Validate();
+        $validate->check($source, [
+            'email' => [
+                'matches' => '/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/',
+                'unique' => 'registration_details'
+            ],
+            'confirm_email' => [
+                'required' => $requiredConfEmail,
+                'matches' => '/\b('.$_POST['email'].')\b/'
+            ],
+            'username' => [
+                'matches' => '/^[a-zA-Z0-9_-]{3,32}$/',
+                'unique' => 'registration_details'
+            ],
+            'first_name' => [
+                'matches' => '/^[a-zA-Z]{2,32}$/'
+            ],
+            'last_name' => [
+                'matches' => '/^[a-zA-Z\'-]{2,32}$/'
+            ],
+            'password' => [
+                'matches' => '/^[a-zA-Z0-9_-]{6,32}$/',
+            ],
+            'confirm_password' => [
+                'required' => $requiredConfPass,
+                'matches' => '/\b('.$_POST['password'].')\b/'
+            ]
+        ]);
+
+        if($validate->passed()){
+            DB::getInstance()->update('registration_details', "user_id = '".$uid."'", $source);
+            return false;
         }
-        $where = "user_id = '".$uid."'";
-        $success = DB::getInstance()->update('registration_details', $where, $changes);
-        return $success;
+        else{
+            return $validate->getErrors();
+        }
     }
 
 
@@ -124,7 +159,6 @@ class UserServiceMgr
     }
 
     public static function registerAccountType($uid, $accLength){
-
         $date = new DateTime();
         $changes = array();
         if($accLength == 30) {
@@ -144,6 +178,9 @@ class UserServiceMgr
         $success = DB::getInstance()->update('account_details', $where, $changes);
         return $success;
     }
+
+
+
 
     public static function validateCreditCard($userid){
         //todo

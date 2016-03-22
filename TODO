@@ -6,11 +6,11 @@ User Services:
 
     regAccTypePage:
     - implement functionality to check credit card info against server
-    - if signing up for free trial - check if free trial already used for that email address
      - fix js validation on registerAccountTypePage
 
     updateRegDetailsPage:
     - apply registrationValidation.js to updateRegistration details - FIX (half working)
+    - get passwords to update encrypted
 
     updateHobbysPage:
     - create and apply js and php validation
@@ -31,6 +31,7 @@ User Services:
     Settings:
     - create view Account details page - give option to upgrade
     - create update/upgrade account details functionality
+    - if signing up for free trial - check if free trial already used for that email address
 
 
 

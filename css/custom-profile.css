@@ -93,3 +93,7 @@ footer p {
         clear: both;
     }
 }
+
+.buttons_right{
+    float: right;
+}
