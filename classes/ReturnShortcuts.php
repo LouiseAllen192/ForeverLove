@@ -1,6 +1,4 @@
 <?php
-
-
 class ReturnShortcuts
 {
 
@@ -26,7 +24,7 @@ class ReturnShortcuts
         return $finalResults;
     }
 
-    public static function returnHobbies($uid){
+    /*public static function returnHobbies($uid){
       $resultFinal = array();
         for($i=1; $i < 36; $i++) {
             $sql = "SELECT hobby_name, hobby_preference " .
@@ -40,6 +38,18 @@ class ReturnShortcuts
         }
         return $resultFinal;
 
+    }*/
+
+    /*
+     * This returns hobby preferences in one query instead of making 35 queries as above (faster)
+     */
+    public static function returnHobbies($uid){
+        $results = DB::getInstance()->query("SELECT hobby_name,hobby_preference FROM user_hobby_preferences JOIN user_hobbies USING(hobby_id) WHERE user_id = $uid")->results();
+        $array = [];
+        foreach($results as $result){
+            $array [$result->hobby_name] =  $result->hobby_preference;
+        }
+        return $array;
     }
 
     public static function returnRegDetails($uid){
