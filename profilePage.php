@@ -91,6 +91,7 @@
                         <div class="col-md-5 col-sm-6 text-center">
                             <div class = "panel panel-default">
                                 <div class = "panel-body">
+                                    <br><br>
                                     <h1 class="user-name"><?php echo ($user->getUsername());?></h1>
                                     <hr class="tagline-divider">
                                     <h2>
@@ -99,18 +100,25 @@
                                         </small>
                                     </h2>
                                     <br><br>
-                                    <div class="col-md-4">
-                                        <small class="text-muted">Age&emsp;</small><?php echo calculateAge($dbprf['date_of_birth']); ?>
+                                    <div class = "row">
+                                        <div class="col-md-4"></div>
+                                        <div class="col-md-4">
+                                            <div class="col-md-4">
+                                                <small class="text-muted">Age&emsp;</small><?php echo calculateAge($dbprf['date_of_birth']); ?>
+                                            </div>
+                                            <br><br>
+                                            <div class="col-md-4">
+                                                <small class="text-muted">City&emsp;</small><?php echo $dbprf['city'];?>
+                                            </div>
+                                            <br><br>
+                                            <div class="col-md-4">
+                                                <small class="text-muted">Gender&emsp;</small><?php echo $dbprf['gender'];?>
+                                            </div>
+                                            <div style="clear:both;"><div></div></div>
+                                            <br><br>
+                                        </div>
+                                        <div class="col-md-4"></div>
                                     </div>
-                                    <br><br>
-                                    <div class="col-md-4">
-                                        <small class="text-muted">City&emsp;</small><?php echo $dbprf['city'];?>
-                                    </div>
-                                    <br><br>
-                                    <div class="col-md-4">
-                                        <small class="text-muted">Gender&emsp;</small><?php echo $dbprf['gender'];?>
-                                    </div>
-                                    <div style="clear:both;"><div></div></div>
                                 </div>
                             </div>
                         </div>

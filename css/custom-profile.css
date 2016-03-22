@@ -15,7 +15,7 @@ body {
 
 .profile-pic img{
     margin: 0 auto;
-    width: 200px;
+    width: 250px;
     height: auto;
 }
 
@@ -51,13 +51,17 @@ hr {
 .user-name {
     text-transform: capitalize;
     margin: 0;
-    font-size: 4em;
+    font-size: 3em;
 }
 
 .tagline-divider {
     margin: 15px auto 3px;
     max-width: 250px;
     border-color: #999999;
+}
+
+.info_box{
+    align-content: center;
 }
 
 .box {
@@ -97,3 +101,4 @@ footer p {
 .buttons_right{
     float: right;
 }
+
