@@ -102,3 +102,29 @@ footer p {
     float: right;
 }
 
+.button_center{
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.carousel{
+    align-content: center;
+    width: 50%;
+    padding-left: 40px;
+    padding-right: 40px;
+
+}
+
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+    line-height: 1;
+    width: 100%;
+}
+
+.carouselBox{
+    align-content: center;
+    width: 600px;
+    padding-left: 50px;
+    float: inherit;
+}
+

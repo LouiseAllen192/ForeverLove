@@ -24,8 +24,8 @@
         "4"=> "http://placehold.it/150x150&text=4", "5"=> "http://placehold.it/150x150&text=5", "6"=> "http://placehold.it/150x150&text=6",
         "7"=> "http://placehold.it/150x150&text=7", "8"=> "http://placehold.it/150x150&text=8", "9"=> "http://placehold.it/150x150&text=9",
         "10"=> "http://placehold.it/150x150&text=10", "11"=> "http://placehold.it/150x150&text=11", "12"=> "http://placehold.it/150x150&text=12",
-        "13"=> "http://placehold.it/150x150&text=13", "14"=> "http://placehold.it/150x150&text=14", "15"=> "http://placehold.it/150x150&text=15");
-
+        "13"=> "http://placehold.it/150x150&text=13", "14"=> "http://placehold.it/150x150&text=14", "15"=> "http://placehold.it/150x150&text=15",
+        "16"=> "http://all4desktop.com/data_images/original/4240423-people.jpg");
 
     function createThumbnail($img_num, $img_url){
         echo '<'.'li class="col-sm-3">

@@ -39,7 +39,7 @@
                             <img src="includes/pics/telephone.jpg" class="img-circle" alt="telephone" height="250" width="250">
                         </div>
                         <div class="col-md-4 text-center">
-                            <p><br>Phone:</p>
+                            <p><br><span class="glyphicon glyphicon-phone-alt"></span>  Phone:</p>
                             <hr class="tagline-divider"><br>
                             <p>+00-12345678</p><br><br><br>
                         </div>
@@ -50,7 +50,7 @@
                             <img src="includes/pics/email.jpg" class="img-circle" alt="email" height="250" width="250">
                         </div>
                         <div class="col-md-4 text-center">
-                            <p>Email:</p>
+                            <p><span class="glyphicon glyphicon-envelope"></span>  Email:</p>
                             <hr class="tagline-divider"><br>
                             <p>info@foreverlove.ie</p><br><br><br>
                         </div>
@@ -61,7 +61,7 @@
                             <img src="includes/pics/address.jpg" class="img-circle" alt="address" height="250" width="250">
                         </div>
                         <div class="col-md-4 text-center">
-                            <p>Address</p>
+                            <p><span class="glyphicon glyphicon-globe"></span>  Address</p>
                             <hr class="tagline-divider"><br>
                             <p>72 Pearse Street<br>Sallynogin<br>Dublin 1<br>Co.Dublin</p><br><br><br><br>
                         </div>

@@ -16,6 +16,15 @@
     <?php
         include($_SERVER['DOCUMENT_ROOT'].'/classes/User.php');
 
+    //hardcoded array of image urls - to be changed to urls from database
+    $images = array("0"=>"http://placehold.it/150x150&text=zero", "1"=> "http://placehold.it/150x150&text=1", "2"=> "http://placehold.it/150x150&text=2", "3"=> "http://placehold.it/150x150&text=3",
+        "4"=> "http://placehold.it/150x150&text=4", "5"=> "http://placehold.it/150x150&text=5", "6"=> "http://placehold.it/150x150&text=6",
+        "7"=> "http://placehold.it/150x150&text=7", "8"=> "http://placehold.it/150x150&text=8", "9"=> "http://placehold.it/150x150&text=9",
+        "10"=> "http://placehold.it/150x150&text=10", "11"=> "http://placehold.it/150x150&text=11", "12"=> "http://placehold.it/150x150&text=12",
+        "13"=> "http://placehold.it/150x150&text=13", "14"=> "http://placehold.it/150x150&text=14", "15"=> "http://placehold.it/150x150&text=15",
+        "16"=> "http://all4desktop.com/data_images/original/4240423-people.jpg");
+
+
     $me;
     $uid;
 //    user id will come either from $_SESSION['user_id'] (if viewing your own profile)
@@ -54,17 +63,34 @@
 
     function getFieldData($name, $array){
         if($array[$name] == '1'){
-            return '<'.'div class="col-md-2">'.'<img src="includes/pics/tick.png" class="img-rounded" alt="tick" width="20" height="20">'.'</div>';
+            return '<'.'div class="col-md-2">'.'<span class="glyphicon glyphicon-ok"></span>'.'</div>';
         }
         if($array[$name] == '0'){
-            return '<'.'div class="col-md-2">'.'<img src="includes/pics/cross.png" class=img-rounded" alt="cross" width="20" height="20">'.'</div>';
+            return '<'.'div class="col-md-2">'.'<span class="glyphicon glyphicon-remove"></span>'.'</div>';
         }
         else{
             return ($array[$name]);
         }
     }
 
+
+    function createSlides($images){
+        foreach($images as $key=>$image) {
+            if ($key == "zero") {
+                echo '<'.'div class="item active">
+                         <img src="'.$image.'" alt="image zero">
+                        </div>';
+            } else {
+                echo '<'.'div class="item ">
+                         <img src="'.$image.'" alt="image '.$key.'">
+                        </div>';
+            }
+        }
+    }
+
     ?>
+
+
 
 
 
@@ -153,11 +179,36 @@
                     <hr>
                     <hr class="visible-xs">
                     <br>
-                    <div class = "panel panel-default">
-                        <div class = "panel-body">
-                            <a href="imageGalleryPage.php" class="btn btn-info center-inline" role="button">Image Gallery</a>
-                        </div>
-                    </div>
+
+                            <div class = "row">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4">
+                                    <div class="carouselBox">
+                                        <div class = "button_center">
+                                        <a href="galleryPage.php" class="btn btn-info center-inline" role="button">Go to Image Gallery  <span class="glyphicon glyphicon-picture"></span></a>
+                                        </div>
+                                            <br><br>
+                                        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                                            <div class="carousel-inner" role="listbox">
+                                                <?php
+                                                createSlides($images);
+                                                ?>
+                                            </div>
+                                            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                                                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                                <span class="sr-only">Previous</span>
+                                            </a>
+                                            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                                                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                                <span class="sr-only">Next</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4"></div>
+
+                            </div>
+
                 </div>
             </div>
         </div>
