@@ -105,7 +105,7 @@
         <div class="row">
             <div class="box">
                 <div class="col-lg-12 text-center">
-                <br><br><br>
+                    <br><br><br>
                     <div class = "row">
 
                         <div class="col-md-5 col-sm-6 text-center">
@@ -171,23 +171,25 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="box">
-                <div class="col-lg-12">
-                    <hr>
-                    <h2 class="intro-text text-center">Image Gallery</h2>
-                    <hr>
-                    <hr class="visible-xs">
-                    <br>
+        <div class = "row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="boxLeft box">
+                        <div class="col-lg-12">
+                            <hr>
+                            <h2 class="intro-text text-center">Image Gallery</h2>
+                            <hr>
+                            <hr class="visible-xs">
+                            <br>
 
                             <div class = "row">
-                                <div class="col-md-4"></div>
-                                <div class="col-md-4">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-8">
                                     <div class="carouselBox">
                                         <div class = "button_center">
-                                        <a href="galleryPage.php" class="btn btn-info center-inline" role="button">Go to Image Gallery  <span class="glyphicon glyphicon-picture"></span></a>
+                                            <a href="galleryPage.php" class="btn btn-info center-inline" role="button">Go to Image Gallery  <span class="glyphicon glyphicon-picture"></span></a>
                                         </div>
-                                            <br><br>
+                                        <br><br>
 
 
                                         <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -209,13 +211,38 @@
 
                                     </div>
                                 </div>
-                                <div class="col-md-4"></div>
-
+                                <div class="col-md-2"></div>
                             </div>
 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="boxRight box">
+                        <div class="col-lg-12">
+                            <hr>
+                            <h2 class="intro-text text-center">About Me:</h2>
+                            <hr>
+                            <hr class="visible-xs">
+                            <br>
+                            <div class = "panel panel-default panel-stretch">
+                                <div class = "panel-body">
+                                    <small class="text-muted"><?php echo ($dbprf['about_me']) // echo ($user->getUserPreferences()->getAboutMe()); ?>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+
+
+
+
+
 
 
 
@@ -223,7 +250,7 @@
             <div class="box">
                 <div class="col-lg-12">
                     <hr>
-                    <h2 class="intro-text text-center">All about me</h2>
+                    <h2 class="intro-text text-center">My Details</h2>
                     <hr>
                     <hr class="visible-xs">
                     <br>
@@ -272,9 +299,12 @@
 
                         </div>
                     </div>
+
+
+                </div>
             </div>
         </div>
-            <?php // echo ($dbvalue['Shopping']==1 ? 'checked' : '');?>
+
 
         <div class="row">
             <div class="box">
