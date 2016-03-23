@@ -109,7 +109,7 @@ footer p {
 }
 
 .display_box{
-    border-top: solid 1px #dedede;
+    border: solid 1px #dedede;
 }
 
 .display_box:hover{

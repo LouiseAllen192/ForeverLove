@@ -52,6 +52,29 @@ class ReturnShortcuts
         return $array;
     }
 
+    public static function searchablePreferences(){
+        return [
+            'Body Type' => self::getRowsAsArray('body_type', 'choice'),
+            'Ethnicity' => self::getRowsAsArray('ethnicity', 'choice'),
+            'Has Children' => self::getRowsAsArray('has_children', 'choice'),
+            'Height' => self::getRowsAsArray('height', 'choice'),
+            'Income' => self::getRowsAsArray('income', 'choice'),
+            'Intent' => self::getRowsAsArray('intent', 'choice'),
+            'Marital Status' => self::getRowsAsArray('marital_status', 'choice'),
+            'Religion' => self::getRowsAsArray('religion', 'choice'),
+            'Smoker' => self::getRowsAsArray('smoker', 'choice'),
+            'Wants Children' => self::getRowsAsArray('wants_children', 'choice')
+        ];
+    }
+    private static function getRowsAsArray($table, $column){
+        $results = DB::getInstance()->query("SELECT $column FROM $table")->results();
+        $array = [];
+        foreach($results as $result){
+            $array[] = $result->$column;
+        }
+        return $array;
+    }
+
     public static function returnRegDetails($uid){
         $registrationDetails = DB::getInstance()->get('registration_details', ['user_id', '=', $uid])->results()[0];
             $dbvalue = array("username"=>$registrationDetails->username, "first_name"=>$registrationDetails->first_name,
