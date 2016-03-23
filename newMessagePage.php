@@ -33,33 +33,15 @@
 
                     <br><br>
                     <?php
-
-                    //include($_SERVER['DOCUMENT_ROOT'].'/classes/MessageMgr.php');
-
-                    //$uid = $_GLOBAL['User_Id'];
-
                     if(!empty($_GET))
                     {
                         $uid = 3; //temp - need to get from global array
+                        //$uid = $_SESSION['user_id'];
                         $msgMgr = new MessageMgr($uid);
                         $msgMgr->sendNewMessage($_GET);
-                        /*$rec = ($_GET["recipient"]);
-                        $date = date('Y-m-d H:i:s');
-                        $reciever_id = $msgMgr->doesRecipientExist($rec);
-                        if(!($reciever_id))
-                            echo "user does not exist";
-                        else
-                        {
-                            $convo_id = $msgMgr->doesConversationExist($reciever_id);
-                            if(!($convo_id))
-                            {
-                                $convo_id = $msgMgr->createConversation($reciever_id);
-                            }
-                            DB::getInstance()->insert('messages', ['Conversation_id' => $convo_id, 'Sender_id' => $uid, 'Recipient_id'  => $reciever_id, 'Date_Received' => $date, 'Message_Text' => $_GET["message"], 'Profile_Visable' => 1]);
-                        }*/
                     }
-
                     ?>
+
                     <form role ="form" class="form-inline" action="newMessagePage.php" method="get">
                         To:<br>
                         <input type="text" name="recipient""><br>
