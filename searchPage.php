@@ -10,6 +10,7 @@
     $hobbies = DB::getInstance()->query('SELECT * FROM user_hobbies ORDER BY hobby_name')->results();
     $preferences = ReturnShortcuts::searchablePreferences();
 
+
     if(isset($_POST['list'])){
         $results = SearchServiceMgr::byCriteria($_POST['list']);
     }
