@@ -11,18 +11,19 @@
     <title>Profile Page</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/custom-profile.css" rel="stylesheet">
+    <script src="scripts/profileCarousel.js"></script>
     <?php include("includes/fonts.html"); ?>
 
     <?php
         include($_SERVER['DOCUMENT_ROOT'].'/classes/User.php');
 
     //hardcoded array of image urls - to be changed to urls from database
-    $images = array("0"=>"http://placehold.it/150x150&text=zero", "1"=> "http://placehold.it/150x150&text=1", "2"=> "http://placehold.it/150x150&text=2", "3"=> "http://placehold.it/150x150&text=3",
-        "4"=> "http://placehold.it/150x150&text=4", "5"=> "http://placehold.it/150x150&text=5", "6"=> "http://placehold.it/150x150&text=6",
-        "7"=> "http://placehold.it/150x150&text=7", "8"=> "http://placehold.it/150x150&text=8", "9"=> "http://placehold.it/150x150&text=9",
-        "10"=> "http://placehold.it/150x150&text=10", "11"=> "http://placehold.it/150x150&text=11", "12"=> "http://placehold.it/150x150&text=12",
-        "13"=> "http://placehold.it/150x150&text=13", "14"=> "http://placehold.it/150x150&text=14", "15"=> "http://placehold.it/150x150&text=15",
-        "16"=> "http://all4desktop.com/data_images/original/4240423-people.jpg");
+    $images = array("0"=>"http://www.dogoilpress.com/data/wallpapers/6/FDS_377793.jpg", "1"=> "http://www.jeffbullas.com/wp-content/uploads/2013/10/the-10-most-annoying-types-of-people-on-facebook.jpg", "2"=> "http://templates.elearningbrothers.com/files/2011/01/athletic_people_images.png", "3"=> "http://blogs-images.forbes.com/travisbradberry/files/2014/10/Toxic_people1.jpg",
+        "4"=> "http://all4desktop.com/data_images/original/4240423-people.jpg", "5"=> "https://c1.staticflickr.com/3/2823/9501964248_a388be25a8.jpg", "6"=> "http://img2.timeinc.net/people/i/2012/news/120806/emily-maynard-2-320.jpg",
+        "7"=> "http://img2-2.timeinc.net/people/i/2015/red-carpet/grammys/backstage-lessons/taylor-swift-2-320.jpg", "8"=> "https://c2.staticflickr.com/8/7151/6424464061_de9d36f647_b.jpg", "9"=> "http://img2-2.timeinc.net/people/i/2015/red-carpet/grammys/backstage-lessons/taylor-swift-2-320.jpg",
+        "10"=> "http://templates.elearningbrothers.com/files/2011/01/athletic_people_images.png", "11"=> "http://www.dogoilpress.com/data/wallpapers/6/FDS_377793.jpg", "12"=> "http://all4desktop.com/data_images/original/4240423-people.jpg",
+        "13"=> "http://www.parapolitika.gr/sites/default/files/parapolitikaold/mediadefaultimagespareja.jpg", "14"=> "http://templates.elearningbrothers.com/files/2011/01/athletic_people_images.png", "15"=> "http://www.dogoilpress.com/data/wallpapers/6/FDS_377793.jpg",
+    );
 
 
     $me;
@@ -46,13 +47,12 @@
         $hobNames = ReturnShortcuts::returnHobbyNames();
         $dbhob = $user->getHobbies();
 
-        function calculateAge($dob){
-        $birthDate = "02/19/1991";
-        $birthDate = explode("/", $birthDate);
-        $age = (date("md", date("U", mktime(0, 0, 0, $birthDate[0], $birthDate[1], $birthDate[2]))) > date("md")
-            ? ((date("Y") - $birthDate[2]) - 1)
-            : (date("Y") - $birthDate[2]));
-        echo $age;
+    function calculateAge($dob){
+    $birthDate = explode("-", $dob);
+    $age = (date("md", date("U", mktime(0, 0, 0, $birthDate[2], $birthDate[1], $birthDate[0]))) > date("md")
+        ? ((date("Y") - $birthDate[0]) - 1)
+        : (date("Y") - $birthDate[0]));
+    echo $age;
     }
 
     function createDisplay($name, $dbhob){
@@ -76,7 +76,7 @@
 
     function createSlides($images){
         foreach($images as $key=>$image) {
-            if ($key == "zero") {
+            if ($key == "0") {
                 echo '<'.'div class="item active">
                          <img src="'.$image.'" alt="image zero">
                         </div>';
@@ -105,7 +105,7 @@
         <div class="row">
             <div class="box">
                 <div class="col-lg-12 text-center">
-                <br><br><br>
+                    <br><br><br>
                     <div class = "row">
 
                         <div class="col-md-5 col-sm-6 text-center">
@@ -171,23 +171,27 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="box">
-                <div class="col-lg-12">
-                    <hr>
-                    <h2 class="intro-text text-center">Image Gallery</h2>
-                    <hr>
-                    <hr class="visible-xs">
-                    <br>
+        <div class = "row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="boxLeft box">
+                        <div class="col-lg-12">
+                            <hr>
+                            <h2 class="intro-text text-center">Image Gallery</h2>
+                            <hr>
+                            <hr class="visible-xs">
+                            <br>
 
                             <div class = "row">
-                                <div class="col-md-4"></div>
-                                <div class="col-md-4">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-8">
                                     <div class="carouselBox">
                                         <div class = "button_center">
-                                        <a href="galleryPage.php" class="btn btn-info center-inline" role="button">Go to Image Gallery  <span class="glyphicon glyphicon-picture"></span></a>
+                                            <a href="galleryPage.php" class="btn btn-info center-inline" role="button">Go to Image Gallery  <span class="glyphicon glyphicon-picture"></span></a>
                                         </div>
-                                            <br><br>
+                                        <br><br>
+
+
                                         <div id="myCarousel" class="carousel slide" data-ride="carousel">
                                             <div class="carousel-inner" role="listbox">
                                                 <?php
@@ -203,15 +207,42 @@
                                                 <span class="sr-only">Next</span>
                                             </a>
                                         </div>
+
+
                                     </div>
                                 </div>
-                                <div class="col-md-4"></div>
-
+                                <div class="col-md-2"></div>
                             </div>
 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="boxRight box">
+                        <div class="col-lg-12">
+                            <hr>
+                            <h2 class="intro-text text-center">About Me:</h2>
+                            <hr>
+                            <hr class="visible-xs">
+                            <br>
+                            <div class = "panel panel-default panel-stretch">
+                                <div class = "panel-body">
+                                    <small class="text-muted"><?php echo ($dbprf['about_me']) // echo ($user->getUserPreferences()->getAboutMe()); ?>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+
+
+
+
+
 
 
 
@@ -219,7 +250,7 @@
             <div class="box">
                 <div class="col-lg-12">
                     <hr>
-                    <h2 class="intro-text text-center">All about me</h2>
+                    <h2 class="intro-text text-center">My Details</h2>
                     <hr>
                     <hr class="visible-xs">
                     <br>
@@ -268,9 +299,12 @@
 
                         </div>
                     </div>
+
+
+                </div>
             </div>
         </div>
-            <?php // echo ($dbvalue['Shopping']==1 ? 'checked' : '');?>
+
 
         <div class="row">
             <div class="box">

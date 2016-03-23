@@ -99,3 +99,17 @@ footer p {
 .carousel-inner>.item>img, .carousel-inner>.item>a>img {
     width: 100%;
 }
+
+.thumb{
+    height: 100px;
+    width: 100px;
+}
+
+
+.thumbnail > img,
+.thumbnail a > img{
+
+    display: block;
+    max-width: 100%;
+    height: 80px;
+}

@@ -36,7 +36,15 @@ User Services:
 
 
 Message Services:
-    -
+    - Make message sending success/failure feedback look prettier (atm it's just a simple echo)
+	- Figure out how to refresh messages/trigger when a message comes in for the user
+	- Figure out how to load and display messages in a conversation
+	
+	Blind date
+	- Figure out like...all of this
+	
+	User Page
+	-Figure out what to do when a user clicks "send message" button on another user's page
 
 Search Services:
     - Make search bar look prettier (CSS)
