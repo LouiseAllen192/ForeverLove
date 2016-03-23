@@ -105,5 +105,4 @@ class ReturnShortcuts
         }
         return $resultFinal;
     }
-
 }
