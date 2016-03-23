@@ -40,14 +40,35 @@ class ReturnShortcuts
 
     }*/
 
-    /*
-     * This returns hobby preferences in one query instead of making 35 queries as above (faster)
-     */
     public static function returnHobbies($uid){
         $results = DB::getInstance()->query("SELECT hobby_name,hobby_preference FROM user_hobby_preferences JOIN user_hobbies USING(hobby_id) WHERE user_id = $uid")->results();
         $array = [];
         foreach($results as $result){
             $array [$result->hobby_name] =  $result->hobby_preference;
+        }
+        return $array;
+    }
+
+    public static function searchablePreferences(){
+        return [
+            'Body Type' => self::getRowsAsArray('body_type', 'choice'),
+            'Ethnicity' => self::getRowsAsArray('ethnicity', 'choice'),
+            'Has Children' => self::getRowsAsArray('has_children', 'choice'),
+            'Height' => self::getRowsAsArray('height', 'choice'),
+            'Income' => self::getRowsAsArray('income', 'choice'),
+            'Intent' => self::getRowsAsArray('intent', 'choice'),
+            'Marital Status' => self::getRowsAsArray('marital_status', 'choice'),
+            'Religion' => self::getRowsAsArray('religion', 'choice'),
+            'Smoker' => self::getRowsAsArray('smoker', 'choice'),
+            'Wants Children' => self::getRowsAsArray('wants_children', 'choice')
+        ];
+    }
+
+    private static function getRowsAsArray($table, $column){
+        $results = DB::getInstance()->query("SELECT $column FROM $table")->results();
+        $array = [];
+        foreach($results as $result){
+            $array[] = $result->$column;
         }
         return $array;
     }
@@ -84,6 +105,4 @@ class ReturnShortcuts
         }
         return $resultFinal;
     }
-
-
 }
