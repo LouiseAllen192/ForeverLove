@@ -2,9 +2,5 @@
 <project version="4">
   <component name="JavaScriptLibraryMappings">
     <includedPredefinedLibrary name="ECMAScript 6" />
-<<<<<<< HEAD
-=======
-    <includedPredefinedLibrary name="WebGL" />
->>>>>>> origin/master
   </component>
 </project>
