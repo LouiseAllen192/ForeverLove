@@ -251,18 +251,18 @@ class UserServiceMgr
 
     public static function determineUpdateOrReg($uid){
 
-        echo '<'.'br><br><br><br><br><br>';
+        echo '<br><br><br><br><br><br>';
 
         $sql = "SELECT unique_hobby ".
             "FROM unique_hobby  ".
             "WHERE user_id = '".$uid."'";
         $results = DB::getInstance()->query($sql)->results();
-        foreach($results as $result)
-        if($result->unique_hobby == null){
-            $updOrReg = "Register";
-        }
-        else{
-            $updOrReg = "Update";
+        foreach($results as $result) {
+            if ($result->unique_hobby == null) {
+                $updOrReg = "Register";
+            } else {
+                $updOrReg = "Update";
+            }
         }
        return $updOrReg;
     }

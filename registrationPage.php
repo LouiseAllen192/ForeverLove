@@ -6,7 +6,7 @@
     include("includes/fonts.html");
 
     if(Input::exists() && !($errors = UserServiceMgr::register($_POST))){
-        header('Location: '.'registerAccountTypePage.php');
+        header('Location: registerAccountTypePage.php');
         die();
     }
     ?>
