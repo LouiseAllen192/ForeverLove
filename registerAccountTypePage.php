@@ -6,11 +6,9 @@
     <?php
     require_once 'core/init.php';
     include("includes/metatags.html");
-    include($_SERVER['DOCUMENT_ROOT'].'/classes/UserServiceMgr.php');
-    include($_SERVER['DOCUMENT_ROOT'].'/classes/ReturnShortcuts.php');
 
-
-    $uid = 1;//$_SESSION['user_id'];
+    $_SESSION['user_id'] = 1;
+    $uid = $_SESSION['user_id'];
     $acc = "";
     $length;
     if(!empty($_POST) && !isset($_POST['accType'])) {
@@ -49,7 +47,7 @@
                 <br>
 
                 <p>Here at ForeverLove we want to give everyone the best possible chance at happiness. <br>
-                    That's why we give all our members a 30day trial for FREE. <br><br>Find a love that will last a lifetime.<br>Continue your sign up here...</p>
+                    That's why we give all our members a 30 day trial for FREE. <br><br>Find a love that will last a lifetime.<br>Continue your sign up here...</p>
                 <br>
 
                 <?php
@@ -119,6 +117,7 @@
                             <p>You have chosen a <?php echo $acc;?> account.</p>
                         </div><br><br><p>You are on your way to having unlimited access to all of our features.<br></p><br>
                             <div class = "panel panel-default">
+                                <!---------------------------------------------------------------------------------------------------------------------------------------->
                                 <div class = "panel-body">
                                     <form id="regDetails_form" class="form-horizontal" role="form" method="post">
                                         <fieldset>
@@ -189,13 +188,14 @@
 
                                                 <div class="form-group" id="address_group">
                                                     <div class="col-md-8 col-sm-7">
-                                                        <input class="btn btn-info center-inline" id=payment_submit_button" name= "'.$length.'" type="submit" value="Submit">
+                                                        <input class="btn btn-info center-inline" id=payment_submit_button" name= "<?php echo $length;?>" type="submit" value="Submit">
                                                     </div>
                                                     <p class="col-md-4 col-sm-5"></p>
                                                     </div>
                                         </fieldset>
                                      </form>
                                 </div>
+                                <!------------------------------------------------------------------------------------------------------------------------------------------>
                             </div>
                         <?php
                     }
@@ -236,7 +236,6 @@
                         <?php
                         }
                     }
-
                 }?>
 
                 <br><br>

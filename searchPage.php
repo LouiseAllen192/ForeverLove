@@ -67,8 +67,7 @@
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="media">
                                         <div class="media-left">
-                                            <img class="media-object"
-                                                 src="https://s3.amazonaws.com/uifaces/faces/twitter/calebogden/73.jpg"/>
+                                            <img class="media-object" src="https://s3.amazonaws.com/uifaces/faces/twitter/calebogden/73.jpg"/>
                                         </div>
                                         <div class="media-body" style="padding-top: 3px;">
                                             <h4 class="media-heading"><?php echo $result->username; ?></h4>

@@ -40,6 +40,9 @@ Message Services:
 
 Search Services:
     - Make search bar look prettier (CSS)
+    - Return search based on intent and gender
+    - Add search icon to search bar
+    - Redirect with results upon enter or click search icon
 
 Admin Services:
     -

@@ -8,6 +8,7 @@
     include($_SERVER['DOCUMENT_ROOT'].'/classes/UserServiceMgr.php');
     include($_SERVER['DOCUMENT_ROOT'].'/classes/ReturnShortcuts.php');
 
+    $_SESSION['user_id'] = 1;
     $uid = $_SESSION['user_id'];
 
     $regOrUpdate = UserServiceMgr::determineUpdateOrReg($uid);
