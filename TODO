@@ -6,7 +6,7 @@ User Services:
 
     regAccTypePage:
     - implement functionality to check credit card info against server
-     - fix js validation on registerAccountTypePage
+    - fix js validation on registerAccountTypePage
 
     updateRegDetailsPage:
     - apply registrationValidation.js to updateRegistration details - FIX (half working)
