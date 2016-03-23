@@ -66,6 +66,7 @@ class ReturnShortcuts
             'Wants Children' => self::getRowsAsArray('wants_children', 'choice')
         ];
     }
+
     private static function getRowsAsArray($table, $column){
         $results = DB::getInstance()->query("SELECT $column FROM $table")->results();
         $array = [];
