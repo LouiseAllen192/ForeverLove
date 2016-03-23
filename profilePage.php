@@ -11,6 +11,7 @@
     <title>Profile Page</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/custom-profile.css" rel="stylesheet">
+    <script src="scripts/profileCarousel.js"></script>
     <?php include("includes/fonts.html"); ?>
 
     <?php
@@ -46,13 +47,12 @@
         $hobNames = ReturnShortcuts::returnHobbyNames();
         $dbhob = $user->getHobbies();
 
-        function calculateAge($dob){
-        $birthDate = "02/19/1991";
-        $birthDate = explode("/", $birthDate);
-        $age = (date("md", date("U", mktime(0, 0, 0, $birthDate[0], $birthDate[1], $birthDate[2]))) > date("md")
-            ? ((date("Y") - $birthDate[2]) - 1)
-            : (date("Y") - $birthDate[2]));
-        echo $age;
+    function calculateAge($dob){
+    $birthDate = explode("-", $dob);
+    $age = (date("md", date("U", mktime(0, 0, 0, $birthDate[2], $birthDate[1], $birthDate[0]))) > date("md")
+        ? ((date("Y") - $birthDate[0]) - 1)
+        : (date("Y") - $birthDate[0]));
+    echo $age;
     }
 
     function createDisplay($name, $dbhob){
@@ -76,7 +76,7 @@
 
     function createSlides($images){
         foreach($images as $key=>$image) {
-            if ($key == "zero") {
+            if ($key == "0") {
                 echo '<'.'div class="item active">
                          <img src="'.$image.'" alt="image zero">
                         </div>';
@@ -188,6 +188,8 @@
                                         <a href="galleryPage.php" class="btn btn-info center-inline" role="button">Go to Image Gallery  <span class="glyphicon glyphicon-picture"></span></a>
                                         </div>
                                             <br><br>
+
+
                                         <div id="myCarousel" class="carousel slide" data-ride="carousel">
                                             <div class="carousel-inner" role="listbox">
                                                 <?php
@@ -203,6 +205,8 @@
                                                 <span class="sr-only">Next</span>
                                             </a>
                                         </div>
+
+
                                     </div>
                                 </div>
                                 <div class="col-md-4"></div>

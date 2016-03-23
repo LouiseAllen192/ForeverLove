@@ -11,7 +11,6 @@
     <title>Gallery Page</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/custom_gallery.css" rel="stylesheet">
-
     <script src="scripts/gallery.js"></script>
 
     <?php include("includes/fonts.html"); ?>
@@ -79,7 +78,7 @@
                                 <!-- Top part of the slider -->
                                 <div class="row">
                                     <div class="col-sm-12" id="carousel-bounding-box">
-                                        <div class="carousel slide" id="myCarousel">
+                                        <div class="carousel slide" id="myGalleryCarousel">
                                             <!-- Carousel items -->
                                             <div class="carousel-inner">
 
