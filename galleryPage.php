@@ -19,22 +19,32 @@
     include($_SERVER['DOCUMENT_ROOT'] . '/classes/User.php');
 
     //hardcoded array of image urls - to be changed to urls from database
-    $images = array("0"=>"http://placehold.it/150x150&text=zero", "1"=> "http://placehold.it/150x150&text=1", "2"=> "http://placehold.it/150x150&text=2", "3"=> "http://placehold.it/150x150&text=3",
-        "4"=> "http://placehold.it/150x150&text=4", "5"=> "http://placehold.it/150x150&text=5", "6"=> "http://placehold.it/150x150&text=6",
-        "7"=> "http://placehold.it/150x150&text=7", "8"=> "http://placehold.it/150x150&text=8", "9"=> "http://placehold.it/150x150&text=9",
-        "10"=> "http://placehold.it/150x150&text=10", "11"=> "http://placehold.it/150x150&text=11", "12"=> "http://placehold.it/150x150&text=12",
-        "13"=> "http://placehold.it/150x150&text=13", "14"=> "http://placehold.it/150x150&text=14", "15"=> "http://placehold.it/150x150&text=15",
-        "16"=> "http://all4desktop.com/data_images/original/4240423-people.jpg");
+    $images = array("0"=>"http://www.dogoilpress.com/data/wallpapers/6/FDS_377793.jpg", "1"=> "http://www.jeffbullas.com/wp-content/uploads/2013/10/the-10-most-annoying-types-of-people-on-facebook.jpg", "2"=> "http://templates.elearningbrothers.com/files/2011/01/athletic_people_images.png", "3"=> "http://blogs-images.forbes.com/travisbradberry/files/2014/10/Toxic_people1.jpg",
+        "4"=> "http://all4desktop.com/data_images/original/4240423-people.jpg", "5"=> "https://c1.staticflickr.com/3/2823/9501964248_a388be25a8.jpg", "6"=> "http://img2.timeinc.net/people/i/2012/news/120806/emily-maynard-2-320.jpg",
+        "7"=> "http://img2-2.timeinc.net/people/i/2015/red-carpet/grammys/backstage-lessons/taylor-swift-2-320.jpg", "8"=> "https://c2.staticflickr.com/8/7151/6424464061_de9d36f647_b.jpg", "9"=> "http://img2-2.timeinc.net/people/i/2015/red-carpet/grammys/backstage-lessons/taylor-swift-2-320.jpg",
+        "10"=> "http://templates.elearningbrothers.com/files/2011/01/athletic_people_images.png", "11"=> "http://www.dogoilpress.com/data/wallpapers/6/FDS_377793.jpg", "12"=> "http://all4desktop.com/data_images/original/4240423-people.jpg",
+        "13"=> "http://www.parapolitika.gr/sites/default/files/parapolitikaold/mediadefaultimagespareja.jpg", "14"=> "http://templates.elearningbrothers.com/files/2011/01/athletic_people_images.png", "15"=> "http://www.dogoilpress.com/data/wallpapers/6/FDS_377793.jpg",
+    );
 
     function createThumbnail($img_num, $img_url){
         echo '<'.'li class="col-sm-3">
-                <a class="thumbnail" id="carousel-selector-'.$img_num.'"><img src="'.$img_url.'"></a>
-               </li>';
+                <a class="thumbnail" id="carousel-selector-'.$img_num.'"><img src="'.$img_url.'" class = "imgBorder"></a>
+              </li>';
     }
 
-    function createSlider($img_num, $img_url){
-        echo '<div class="item" data-slide-number="'.$img_num.'">
+    function createSlider($images){
+        foreach($images as $img_num=>$img_url){
+            if($img_num == "0"){
+                echo '<div class="item active" data-slide-number="'.$img_num.'">
         <img src="'.$img_url.'"></div>';
+            }
+            else{
+                echo '<div class="item" data-slide-number="'.$img_num.'">
+        <img src="'.$img_url.'"></div>';
+            }
+        }
+
+
     }
 
     ?>
@@ -78,17 +88,12 @@
                                 <!-- Top part of the slider -->
                                 <div class="row">
                                     <div class="col-sm-12" id="carousel-bounding-box">
-                                        <div class="carousel slide" id="myGalleryCarousel">
+                                        <div class="carousel slide" id="myCarousel">
                                             <!-- Carousel items -->
                                             <div class="carousel-inner">
 
-                                                <div class="active item" data-slide-number="0">
-                                                    <img src="http://placehold.it/470x480&text=zero"></div>
-
                                                 <?php
-                                                for($i=1; $i<count($images); $i++){
-                                                    createSlider($i, $images[$i]);
-                                                }
+                                                    createSlider($images);
                                                 ?>
                                             </div>
                                             <!-- Carousel nav -->

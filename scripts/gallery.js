@@ -1,6 +1,6 @@
 jQuery(document).ready(function($) {
 
-    $('#myGalleryCarousel').carousel({
+    $('#myCarousel').carousel({
         interval: 5000
     });
 
@@ -10,13 +10,13 @@ jQuery(document).ready(function($) {
         try {
             var id = /-(\d+)$/.exec(id_selector)[1];
             console.log(id_selector, id);
-            jQuery('#myGalleryCarousel').carousel(parseInt(id));
+            jQuery('#myCarousel').carousel(parseInt(id));
         } catch (e) {
             console.log('Regex failed!', e);
         }
     });
     // When the carousel slides, auto update the text
-    $('#myGalleryCarousel').on('slid.bs.carousel', function (e) {
+    $('#myCarousel').on('slid.bs.carousel', function (e) {
         var id = $('.item.active').data('slide-number');
         $('#carousel-text').html($('#slide-content-'+id).html());
     });
