@@ -55,19 +55,20 @@ class MessageMgr
 
     public function findConversations()
     {
-        //find conversations that involve the user
-        $convos = DB::getInstance()->query("SELECT * FROM conversations WHERE (User1_id = $this->userID OR User2_id = $this->userID", [])->results();
+        $convos = DB::getInstance()->query("SELECT * FROM conversations WHERE (User1_id = $this->userID) OR (User2_id = $this->userID)", [])->results();
         $messagedUsers = array();
         for($i = 0; $i < count($convos); $i++)
         {
-            if($messagedUsers[$i]->user1_id == $this->userID)
-                $temp = $messagedUsers[$i]->user2_id;
+            if($convos[$i]->user1_id == $this->userID)
+                $temp = $convos[$i]->user2_id;
             else
-                $temp = $messagedUsers[$i]->user1_id;
-            $messagedUsers[$i]=$temp;
-            echo $temp;
-            //get usernames and display those
-            //once that's done get messages
+                $temp = $convos[$i]->user1_id;
+            $temp2 = DB::getInstance()->query("SELECT username FROM registration_details WHERE user_id = '$temp'")->results();
+            $messagedUsers[$i]=$temp2[0]->username;
+            $tempConvoID = $convos[$i]->conversation_id;
+            $linkString = "Conversation.php?".$tempConvoID;
+           // echo $messagedUsers[$i];
+            echo "<a href= '".$linkString."''>$messagedUsers[$i]</a>";
         }
     }
 
