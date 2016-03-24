@@ -18,11 +18,17 @@
                 $selectedPreferences[$setPreference] = $_POST[$setPreference];
             }
         }
-        if(isset($_POST['list'])) {
+        if(isset($_POST['list'])){
             $results = SearchServiceMgr::byCriteria($_POST['list'], $selectedPreferences);
         }
-        else{
+        else if(count($selectedPreferences)){
             $results = SearchServiceMgr::byCriteria([], $selectedPreferences);
+        }
+        else{
+            $results = DB::getInstance()->query("SELECT user_id,username,tag_line,city,TIMESTAMPDIFF(YEAR, date_of_birth, CURDATE()) AS age FROM registration_details JOIN preference_details USING(user_id)")->results();
+        }
+        if(isset($_POST['age'])){
+            $results = SearchServiceMgr::matchAge($_POST['age'], $results);
         }
     }
     ?>
@@ -113,6 +119,14 @@
                                     </div>
                                     <div class="panel-body">
                                         <div style="height: 350px;overflow: auto;">
+                                            <select class="form-control" name="age">
+                                                <option disabled selected>Age Range</option>
+                                                <option value="18">18 - 24</option>
+                                                <option value="25">25 - 34</option>
+                                                <option value="35">35 - 44</option>
+                                                <option value="45">45 - 54</option>
+                                                <option value="55">55 or Older</option>
+                                            </select>
                                             <?php
                                             foreach($preferences as $preference => $options){?>
                                                 <select class="form-control" name="<?php echo strtolower(str_replace(' ', '_',$preference));?>">

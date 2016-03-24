@@ -73,6 +73,10 @@ class ReturnShortcuts
         return $array;
     }
 
+    public static function ageCategorys(){
+
+    }
+
     public static function returnRegDetails($uid){
         $registrationDetails = DB::getInstance()->get('registration_details', ['user_id', '=', $uid])->results()[0];
             $dbvalue = array("username"=>$registrationDetails->username, "first_name"=>$registrationDetails->first_name,
