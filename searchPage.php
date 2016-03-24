@@ -7,8 +7,11 @@
     include("includes/metatags.html");
     include("includes/fonts.html");
 
+    $_SESSION['user_id'] = 1;//DELETE
+
+    $uid = $_SESSION['user_id'];
     $hobbies = DB::getInstance()->query('SELECT * FROM user_hobbies ORDER BY hobby_name')->results();
-    $preferences = ReturnShortcuts::searchablePreferences();
+    $preferences = SearchServiceMgr::searchablePreferences();
 
     if(isset($_POST['submit'])){
         $selectedPreferences = [];
@@ -19,16 +22,18 @@
             }
         }
         if(isset($_POST['list'])){
-            $results = SearchServiceMgr::byCriteria($_POST['list'], $selectedPreferences);
+            $results = SearchServiceMgr::byCriteria($uid, $_POST['list'], $selectedPreferences);
         }
         else if(count($selectedPreferences)){
-            $results = SearchServiceMgr::byCriteria([], $selectedPreferences);
+            $results = SearchServiceMgr::byCriteria($uid, [], $selectedPreferences);
         }
         else{
-            $results = DB::getInstance()->query("SELECT user_id,username,tag_line,city,TIMESTAMPDIFF(YEAR, date_of_birth, CURDATE()) AS age FROM registration_details JOIN preference_details USING(user_id)")->results();
+            $sql = "SELECT user_id,username,tag_line,city,TIMESTAMPDIFF(YEAR, date_of_birth, CURDATE()) AS age";
+            $sql .= " FROM registration_details JOIN preference_details USING(user_id) WHERE user_id != $uid";
+            $results = DB::getInstance()->query($sql)->results();
         }
         if(isset($_POST['age'])){
-            $results = SearchServiceMgr::matchAge($_POST['age'], $results);
+            $results = SearchServiceMgr::filterAge($_POST['age'], $results);
         }
     }
     ?>
@@ -133,7 +138,7 @@
                                                     <option disabled selected><?php echo $preference;?></option>
                                                     <?php
                                                     foreach($options as $option => $value){?>
-                                                        <option value="<?php echo $option;?>"><?php echo $value;?></option>';
+                                                        <option value="<?php echo $option;?>"><?php echo $value;?></option>;
                                                         <?php
                                                     }?>
                                                 </select>

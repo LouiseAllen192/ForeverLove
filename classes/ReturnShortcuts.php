@@ -49,34 +49,6 @@ class ReturnShortcuts
         return $array;
     }
 
-    public static function searchablePreferences(){
-        return [
-            'Body Type' => self::structureResult('body_type', 'id', 'choice'),
-            'Ethnicity' => self::structureResult('ethnicity', 'id', 'choice'),
-            'Has Children' => self::structureResult('has_children', 'id', 'choice'),
-            'Height' => self::structureResult('height', 'id', 'choice'),
-            'Income' => self::structureResult('income', 'id', 'choice'),
-            'Intent' => self::structureResult('intent', 'id', 'choice'),
-            'Marital Status' => self::structureResult('marital_status', 'id', 'choice'),
-            'Religion' => self::structureResult('religion', 'id', 'choice'),
-            'Smoker' => self::structureResult('smoker', 'id', 'choice'),
-            'Wants Children' => self::structureResult('wants_children', 'id', 'choice')
-        ];
-    }
-
-    private static function structureResult($table, $id, $choice){
-        $results = DB::getInstance()->query("SELECT $id, $choice FROM $table")->results();
-        $array = [];
-        foreach($results as $result){
-            $array[$result->$id] = $result->$choice;
-        }
-        return $array;
-    }
-
-    public static function ageCategorys(){
-
-    }
-
     public static function returnRegDetails($uid){
         $registrationDetails = DB::getInstance()->get('registration_details', ['user_id', '=', $uid])->results()[0];
             $dbvalue = array("username"=>$registrationDetails->username, "first_name"=>$registrationDetails->first_name,

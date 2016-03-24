@@ -131,8 +131,5 @@ class User{
     public function getUniqueHobby(){
         return (string)$this->userHobbies['unique_hobby'];
     }
-
-
 }
-
 ?>
