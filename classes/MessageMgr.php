@@ -19,9 +19,11 @@ class MessageMgr
             return ($ans[0]->conversation_id);
     }
 
-    public function sendMessage($message, $user2ID)
+    public function sendMessage($message, $convoID)
     {
-        //todo
+        $reciever_id = $this->getConversationPartner($convoID);
+        $date = date('Y-m-d H:i:s');
+        DB::getInstance()->insert('messages', ['Conversation_id' => $convoID, 'Sender_id' => $this->userID, 'Recipient_id'  => $reciever_id, 'Date_Received' => $date, 'Message_Text' => $message, 'Profile_Visable' => 1]);
     }
 
     public function sendNewMessage($GET)
@@ -43,16 +45,6 @@ class MessageMgr
         }
     }
 
-    public function retriveConversations()
-    {
-        //todo
-    }
-
-    public function retriveMessages($ConversationID)
-    {
-        //todo
-    }
-
     public function findConversations()
     {
         $convos = DB::getInstance()->query("SELECT * FROM conversations WHERE (User1_id = $this->userID) OR (User2_id = $this->userID)", [])->results();
@@ -60,16 +52,17 @@ class MessageMgr
         for($i = 0; $i < count($convos); $i++)
         {
             if($convos[$i]->user1_id == $this->userID)
-                $temp = $convos[$i]->user2_id;
+                $tempUID = $convos[$i]->user2_id;
             else
-                $temp = $convos[$i]->user1_id;
-            $temp2 = DB::getInstance()->query("SELECT username FROM registration_details WHERE user_id = '$temp'")->results();
-            $messagedUsers[$i]=$temp2[0]->username;
+                $tempUID = $convos[$i]->user1_id;
+            $convoPartner = DB::getInstance()->query("SELECT username FROM registration_details WHERE user_id = '$tempUID'")->results();
+            $messagedUsers[$i]=$convoPartner[0]->username;
             $tempConvoID = $convos[$i]->conversation_id;
-            $linkString = "Conversation.php?".$tempConvoID;
-           // echo $messagedUsers[$i];
+            $linkString = "Conversation.php?".$tempConvoID."#bottom";
             echo "<a href= '".$linkString."''>$messagedUsers[$i]</a>";
         }
+        if($i == 0)
+            echo "No existing converations found.";
     }
 
     public static function testFunction($changes)
@@ -94,6 +87,35 @@ class MessageMgr
         DB::getInstance()->insert('Conversations', ['User1_id' => $this->userID, 'User2_id' => $recieverid]);
         $ans = DB::getInstance()->query("SELECT conversation_id FROM conversations WHERE User1_id = '$this->userID' AND User2_id = '$recieverid'")->results();
         return ($ans[0]->conversation_id);
+    }
+
+    public function loadConversation($convoID)
+    {
+        if(!empty($convoID))
+        {
+            $messages = DB::getInstance()->query("SELECT * FROM messages WHERE conversation_id = '$convoID' ORDER BY date_received")->results();
+            for($i = 0; $i < count($messages); $i++)
+            {
+                if ($messages[$i]->sender_id == $this->userID)
+                    $sender = "To:    ";
+                else
+                    $sender = "From:  ";
+                echo ($sender . $messages[$i]->message_text) . "<br>";
+            }
+        }
+        else //if user just types in URL without following appropriate link
+            echo "Nothing to see here.";
+    }
+
+    public function getConversationPartner($convoID)
+    {
+        $convo = DB::getInstance()->query("SELECT * FROM conversations WHERE conversation_id = '$convoID'")->results();
+        $user1 = $convo[0]->user1_id;
+        $user2 = $convo[0]->user2_id;
+        if($user1 == $this->userID)
+            return $user2;
+        else
+            return $user1;
     }
 }
 ?>
