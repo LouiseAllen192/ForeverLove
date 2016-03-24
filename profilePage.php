@@ -18,11 +18,12 @@
         include($_SERVER['DOCUMENT_ROOT'].'/classes/User.php');
 
     //hardcoded array of image urls - to be changed to urls from database
-    $images = array("0"=>"http://www.dogoilpress.com/data/wallpapers/6/FDS_377793.jpg", "1"=> "http://www.jeffbullas.com/wp-content/uploads/2013/10/the-10-most-annoying-types-of-people-on-facebook.jpg", "2"=> "http://templates.elearningbrothers.com/files/2011/01/athletic_people_images.png", "3"=> "http://blogs-images.forbes.com/travisbradberry/files/2014/10/Toxic_people1.jpg",
+    $images = array("0"=>"http://zblogged.com/wp-content/uploads/2015/11/17.jpg", "1"=> "http://www.jeffbullas.com/wp-content/uploads/2013/10/the-10-most-annoying-types-of-people-on-facebook.jpg", "2"=> "http://templates.elearningbrothers.com/files/2011/01/athletic_people_images.png", "3"=> "http://blogs-images.forbes.com/travisbradberry/files/2014/10/Toxic_people1.jpg",
         "4"=> "http://all4desktop.com/data_images/original/4240423-people.jpg", "5"=> "https://c1.staticflickr.com/3/2823/9501964248_a388be25a8.jpg", "6"=> "http://img2.timeinc.net/people/i/2012/news/120806/emily-maynard-2-320.jpg",
         "7"=> "http://img2-2.timeinc.net/people/i/2015/red-carpet/grammys/backstage-lessons/taylor-swift-2-320.jpg", "8"=> "https://c2.staticflickr.com/8/7151/6424464061_de9d36f647_b.jpg", "9"=> "http://img2-2.timeinc.net/people/i/2015/red-carpet/grammys/backstage-lessons/taylor-swift-2-320.jpg",
         "10"=> "http://templates.elearningbrothers.com/files/2011/01/athletic_people_images.png", "11"=> "http://www.dogoilpress.com/data/wallpapers/6/FDS_377793.jpg", "12"=> "http://all4desktop.com/data_images/original/4240423-people.jpg",
-        "13"=> "http://www.parapolitika.gr/sites/default/files/parapolitikaold/mediadefaultimagespareja.jpg", "14"=> "http://templates.elearningbrothers.com/files/2011/01/athletic_people_images.png", "15"=> "http://www.dogoilpress.com/data/wallpapers/6/FDS_377793.jpg",
+        "13"=> "", "14"=> "http://templates.elearningbrothers.com/files/2011/01/athletic_people_images.png",
+        "15"=> "http://cdn.playbuzz.com/cdn/2c9b6d1a-61df-4c7a-8d46-6824b5603684/f31e88ef-97df-419d-9414-b1a662266c8e.jpg",
     );
 
 
@@ -39,7 +40,7 @@
 //        $me=true;
 //    }
 
-        $me=true;
+        $me=false;
         $uid = 1;
 
         $user = new User($uid);
@@ -56,17 +57,16 @@
     }
 
     function createDisplay($name, $dbhob){
-        $html = '<'.'div class="col-md-4">'.'<'.'small class="text-muted">';
-        $html.= ucwords(str_replace('_', ' ', $name)).'&emsp;</small>'.getFieldData($name, $dbhob).'</div>';
-        echo $html;
+        echo '<div class="col-md-4">'.'<'.'small class="text-muted">'.
+        ucwords(str_replace('_', ' ', $name)).'&emsp;</small>'.getFieldData($name, $dbhob).'</div>';
     }
 
     function getFieldData($name, $array){
         if($array[$name] == '1'){
-            return '<'.'div class="col-md-2">'.'<span class="glyphicon glyphicon-ok"></span>'.'</div>';
+            return '<div class="col-md-2">'.'<span class="glyphicon glyphicon-ok"></span>'.'</div>';
         }
         if($array[$name] == '0'){
-            return '<'.'div class="col-md-2">'.'<span class="glyphicon glyphicon-remove"></span>'.'</div>';
+            return '<div class="col-md-2">'.'<span class="glyphicon glyphicon-remove"></span>'.'</div>';
         }
         else{
             return ($array[$name]);
@@ -77,11 +77,11 @@
     function createSlides($images){
         foreach($images as $key=>$image) {
             if ($key == "0") {
-                echo '<'.'div class="item active">
+                echo '<div class="item active">
                          <img src="'.$image.'" alt="image zero">
                         </div>';
             } else {
-                echo '<'.'div class="item ">
+                echo '<div class="item ">
                          <img src="'.$image.'" alt="image '.$key.'">
                         </div>';
             }
@@ -109,7 +109,8 @@
                     <div class = "row">
 
                         <div class="col-md-5 col-sm-6 text-center">
-                            <div class="profile-pic"><img src="includes/pics/default-profile.png" class="img-responsive" alt="Profile Picture"></div>
+                            <br><br>
+                            <div class="profile-pic"><img src="<?php echo $images['0']?>" class="img-responsive" alt="Profile Picture"></div>
                             <br><br>
 
                         </div>
@@ -153,11 +154,14 @@
                             <div class = buttons_right>
                                 <?php
                                 if($me){
-                                    echo '<'.'br><a href="updatePreferencesPage.php" class="btn btn-info center-inline" role="button">Edit Preferences</a>';
-                                    echo '<'.'br><br><a href="updateHobbiesPage.php" class="btn btn-info center-inline" role="button">Edit Hobbies</a>';
+                                    echo '<br><a href="updatePreferencesPage.php" class="btn btn-info center-inline" role="button"><span class="glyphicon glyphicon-heart-empty"></span> Edit Preferences</a>'.
+                                        '<br><br><a href="updateHobbiesPage.php" class="btn btn-info center-inline" role="button"><span class="glyphicon glyphicon-knight"></span> Edit Hobbies</a>';
                                 }
                                 else{
-                                    echo '<a href="reportUserPage.php" class="btn btn-info center-inline" role="button">Report this user</a>';
+                                    echo '<form action ="#", method="post">'.
+                                        '<a href="reportUserPage.php" class="btn btn-info center-inline" role="button"><span class="glyphicon glyphicon-remove-circle"></span> Report this user</a>'.
+                                        '<br><br><a href="#" class="btn btn-info center-inline" role="button"><span class="glyphicon glyphicon-envelope"></span> Send message</a>'.
+                                        '</form>';
                                 }
                                 ?>
                             </div>
@@ -291,11 +295,6 @@
                                 </div>
                             </div>
                             <br>
-                            <div class = "panel panel-default">
-                                <div class = "panel-body">
-                                    <small class="text-muted">About me:&emsp;</small><?php echo ($dbprf['about_me']) // echo ($user->getUserPreferences()->getAboutMe()); ?>
-                                </div>
-                            </div>
 
                         </div>
                     </div>

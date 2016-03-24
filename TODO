@@ -6,9 +6,11 @@ User Services:
 
     regAccTypePage:
     - implement functionality to check credit card info against server
+    - change input of credit card details to match server details
     - fix js validation on registerAccountTypePage
 
     updateRegDetailsPage:
+    - fix this page
     - apply registrationValidation.js to updateRegistration details - FIX (half working)
     - get passwords to update encrypted
 
@@ -24,9 +26,9 @@ User Services:
     - create forgotten password functionality
 
     ProfilePage:
-    - create image gallery on profile
     - create functionality for uploading and changing images
     - create report user functionality if viewing another users page
+    - fix profile image size
 
     Settings:
     - create view Account details page - give option to upgrade
@@ -52,7 +54,7 @@ Message Services:
 
 Search Services:
     - Make search bar look prettier (CSS)
-    - Return search based on intent and gender
+    - Return search based on intent and gender (and age?? :) )
     - Add search icon to search bar
     - Redirect with results upon enter or click search icon
 

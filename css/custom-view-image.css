@@ -85,50 +85,22 @@ footer p {
     }
 }
 
-
-.hide-bullets {
-    list-style:none;
-    margin-left: -40px;
-    margin-top:20px;
-}
-
-.thumbnail {
-    padding: 0;
-}
-
-.carousel-inner>.item>img, .carousel-inner>.item>a>img {
-    width: 100%;
-}
-
-.thumb{
-    height: 100px;
-    width: 100px;
-}
-
-
-.thumbnail > input,
-.thumbnail a > button{
-
+img{
     display: block;
     max-width: 100%;
     height: 80px;
+    margin: 0 auto;
 }
 
-.imgButton{
-    display: block;
-    max-width: 100%;
-    height: 80px;
-}
-
-
-.galleryButtons{
+.myButtonsRight{
     float: right;
 }
 
-.galleryButtons a{
-    color: white;
+.myButtonsLeft{
+    float: left;
 }
 
-.popover-content{
-    color: black;
+.alert{
+    width: 500px;
+    align: center;
 }
