@@ -51,24 +51,24 @@ class ReturnShortcuts
 
     public static function searchablePreferences(){
         return [
-            'Body Type' => self::getRowsAsArray('body_type', 'choice'),
-            'Ethnicity' => self::getRowsAsArray('ethnicity', 'choice'),
-            'Has Children' => self::getRowsAsArray('has_children', 'choice'),
-            'Height' => self::getRowsAsArray('height', 'choice'),
-            'Income' => self::getRowsAsArray('income', 'choice'),
-            'Intent' => self::getRowsAsArray('intent', 'choice'),
-            'Marital Status' => self::getRowsAsArray('marital_status', 'choice'),
-            'Religion' => self::getRowsAsArray('religion', 'choice'),
-            'Smoker' => self::getRowsAsArray('smoker', 'choice'),
-            'Wants Children' => self::getRowsAsArray('wants_children', 'choice')
+            'Body Type' => self::structureResult('body_type', 'id', 'choice'),
+            'Ethnicity' => self::structureResult('ethnicity', 'id', 'choice'),
+            'Has Children' => self::structureResult('has_children', 'id', 'choice'),
+            'Height' => self::structureResult('height', 'id', 'choice'),
+            'Income' => self::structureResult('income', 'id', 'choice'),
+            'Intent' => self::structureResult('intent', 'id', 'choice'),
+            'Marital Status' => self::structureResult('marital_status', 'id', 'choice'),
+            'Religion' => self::structureResult('religion', 'id', 'choice'),
+            'Smoker' => self::structureResult('smoker', 'id', 'choice'),
+            'Wants Children' => self::structureResult('wants_children', 'id', 'choice')
         ];
     }
 
-    private static function getRowsAsArray($table, $column){
-        $results = DB::getInstance()->query("SELECT $column FROM $table")->results();
+    private static function structureResult($table, $id, $choice){
+        $results = DB::getInstance()->query("SELECT $id, $choice FROM $table")->results();
         $array = [];
         foreach($results as $result){
-            $array[] = $result->$column;
+            $array[$result->$id] = $result->$choice;
         }
         return $array;
     }

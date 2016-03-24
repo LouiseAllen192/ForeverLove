@@ -10,8 +10,20 @@
     $hobbies = DB::getInstance()->query('SELECT * FROM user_hobbies ORDER BY hobby_name')->results();
     $preferences = ReturnShortcuts::searchablePreferences();
 
-    if(isset($_POST['list'])){
-        $results = SearchServiceMgr::byCriteria($_POST['list']);
+    if(isset($_POST['submit'])){
+        $selectedPreferences = [];
+        foreach($preferences as $preference => $options){
+            $setPreference = strtolower(str_replace(' ', '_',$preference));
+            if(isset($_POST[$setPreference]) && $_POST[$setPreference] != 1){
+                $selectedPreferences[$setPreference] = $_POST[$setPreference];
+            }
+        }
+        if(isset($_POST['list'])) {
+            $results = SearchServiceMgr::byCriteria($_POST['list'], $selectedPreferences);
+        }
+        else{
+            $results = SearchServiceMgr::byCriteria([], $selectedPreferences);
+        }
     }
     ?>
     <title>Search Page</title>
@@ -103,11 +115,11 @@
                                         <div style="height: 350px;overflow: auto;">
                                             <?php
                                             foreach($preferences as $preference => $options){?>
-                                                <select class="form-control">
-                                                    <option value="" disabled selected><?php echo $preference;?></option>
+                                                <select class="form-control" name="<?php echo strtolower(str_replace(' ', '_',$preference));?>">
+                                                    <option disabled selected><?php echo $preference;?></option>
                                                     <?php
-                                                    foreach($options as $option){?>
-                                                        <option><?php echo $option;?></option>';
+                                                    foreach($options as $option => $value){?>
+                                                        <option value="<?php echo $option;?>"><?php echo $value;?></option>';
                                                         <?php
                                                     }?>
                                                 </select>
@@ -122,7 +134,7 @@
 
                         <br>
                     <div class="col-xs-12">
-                        <input class="btn btn-info" id="search_button" type="submit" value="Search">
+                        <input class="btn btn-info" id="search_button" name="submit" type="submit" value="Search">
                     </div>
                 </form>
                 <br><br><br>
