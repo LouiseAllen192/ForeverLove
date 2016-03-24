@@ -43,6 +43,9 @@
                 </p>
 
             </div>
+            <div style = "text-align: left">
+                <a href="messagesPage.php"><h3>Back</h3></a>
+            </div>
         </div>
     </div>
 </div>

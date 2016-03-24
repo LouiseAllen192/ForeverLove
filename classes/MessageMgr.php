@@ -32,7 +32,9 @@ class MessageMgr
         $date = date('Y-m-d H:i:s');
         $reciever_id = $this->doesRecipientExist($rec);
         if(!($reciever_id))
-            echo "user does not exist"; //must be updated to look better
+            echo "<div class=\"alert alert-danger\">
+                      Message Not Sent - User Does Not Exist.
+                  </div>";
         else
         {
             $convo_id = $this->doesConversationExist($reciever_id);
@@ -41,7 +43,9 @@ class MessageMgr
                 $convo_id = $this->createConversation($reciever_id);
             }
             DB::getInstance()->insert('messages', ['Conversation_id' => $convo_id, 'Sender_id' => $this->userID, 'Recipient_id'  => $reciever_id, 'Date_Received' => $date, 'Message_Text' => $GET["message"], 'Profile_Visable' => 1]);
-            echo "message sent"; //must be updated to look better
+            echo "<div class=\"alert alert-success\">
+                      Message Sent Succesfully.
+                  </div>";
         }
     }
 
@@ -58,7 +62,7 @@ class MessageMgr
             $convoPartner = DB::getInstance()->query("SELECT username FROM registration_details WHERE user_id = '$tempUID'")->results();
             $messagedUsers[$i]=$convoPartner[0]->username;
             $tempConvoID = $convos[$i]->conversation_id;
-            $linkString = "Conversation.php?".$tempConvoID."#bottom";
+            $linkString = "conversationPage.php?".$tempConvoID."#bottom";
             echo "<a href= '".$linkString."''>$messagedUsers[$i]</a>";
         }
         if($i == 0)
@@ -94,14 +98,41 @@ class MessageMgr
         if(!empty($convoID))
         {
             $messages = DB::getInstance()->query("SELECT * FROM messages WHERE conversation_id = '$convoID' ORDER BY date_received")->results();
+            $convoPartner = $this->getConversationPartner($convoID);
+            $partnerName = $this->getUsername($convoPartner);
+            echo"<div class = panel-group>";
             for($i = 0; $i < count($messages); $i++)
             {
+                $dateAndTime = explode(" ", ($messages[$i]->date_received));
+                $date = explode("-", $dateAndTime[0]);
+                $tidyDate = $date[2]."/".$date[1]."/".$date[0]; //displays date forwards instead of backwards as it is stored
+                $time = explode(":", $dateAndTime[1]);
+                $tidyTime = $time[0].":".$time[1]; //removes seconds from time, so it's displayed in hours and mins
+                $headerString = $partnerName." at ".$tidyTime." on ".$tidyDate;
+                $messageText = $messages[$i]->message_text;
                 if ($messages[$i]->sender_id == $this->userID)
-                    $sender = "To:    ";
+                {
+                    $sender = "To ";
+                    echo "<div class=\"panel panel-success\" style = \"text-align: right\">
+                      <div class=\"panel-heading\">$sender$headerString</div>
+                      <div class=\"panel-body\">$messageText</div>
+                    </div>";
+                }
                 else
-                    $sender = "From:  ";
-                echo ($sender . $messages[$i]->message_text) . "<br>";
+                {
+                    $sender = "From ";
+                    echo "<div class=\"panel panel-info\" style = \"text-align: left\">
+                      <div class=\"panel-heading\">$sender$headerString</div>
+                      <div class=\"panel-body\">$messageText</div>
+                    </div>";
+                }
             }
+            echo "</div><br>
+                <form role =\"form\" class=\"form-inline\" action=\"conversationPage.php?.$convoID.#bottom\" method=\"post\">
+                    <textarea rows=\"6\" cols=\"50\" name=\"message\"></textarea><br><br>
+                    <input type=\"hidden\" name=\"convoID\" value=$convoID />
+                    <input type=\"submit\" value=\"Submit\">
+                </form>";
         }
         else //if user just types in URL without following appropriate link
             echo "Nothing to see here.";
@@ -116,6 +147,12 @@ class MessageMgr
             return $user2;
         else
             return $user1;
+    }
+
+    public function getUsername($uid)
+    {
+        $user = DB::getInstance()->query("SELECT username FROM registration_details WHERE user_id = '$uid'")->results();
+        return ($user[0]->username);
     }
 }
 ?>
