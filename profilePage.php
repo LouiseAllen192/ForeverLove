@@ -158,10 +158,10 @@
                                         '<br><br><a href="updateHobbiesPage.php" class="btn btn-info center-inline" role="button"><span class="glyphicon glyphicon-knight"></span> Edit Hobbies</a>';
                                 }
                                 else{
-                                    echo '<form action ="#", method="post">'.
-                                        '<a href="reportUserPage.php" class="btn btn-info center-inline" role="button"><span class="glyphicon glyphicon-remove-circle"></span> Report this user</a>'.
-                                        '<br><br><a href="#" class="btn btn-info center-inline" role="button"><span class="glyphicon glyphicon-envelope"></span> Send message</a>'.
-                                        '</form>';
+                                    echo "<form action =\"#\", method=\"post\">
+                                          <a href=\"reportUserPage.php\" class=\"btn btn-info center-inline\" role=\"button\"><span class=\"glyphicon glyphicon-remove-circle\"></span> Report this user</a>
+                                        <br><br><a href=\"newMessagePage.php?$uid\" class=\"btn btn-info center-inline\" role=\"button\"><span class=\"glyphicon glyphicon-envelope\"></span> Send message</a>
+                                        </form>"; //uid here should be the ID of the user who owns the page, NOT the current logged in user
                                 }
                                 ?>
                             </div>

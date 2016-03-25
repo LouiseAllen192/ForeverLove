@@ -27,8 +27,8 @@
                     <small>
                         <strong>
                             <?php
-                                $uid = 1; //need to change to global
-                                //$uid = $_SESSION['user_id'];
+                                //$uid = 1; //need to change to global
+                                $uid = $_SESSION['user_id'];
                                 $MsgMgr = new MessageMgr($uid);
                                 if(!isset($_POST['convoID']))
                                     $convoID = $_SERVER['QUERY_STRING'];
@@ -36,13 +36,18 @@
                                     $convoID = ($_POST["convoID"]);
                                 if(!empty($convoID))
                                 {
-                                    $user2_id = $MsgMgr->getConversationPartner($convoID);
-                                    $nameArray = DB::getInstance()->query("SELECT username FROM registration_details WHERE user_id = '$user2_id'")->results();
-                                    $name = $nameArray[0]->username;
-                                    echo $name;
+                                    if($MsgMgr->isUserInConversation($convoID)== true)
+                                    {
+                                        $user2_id = $MsgMgr->getConversationPartner($convoID);
+                                        $nameArray = DB::getInstance()->query("SELECT username FROM registration_details WHERE user_id = '$user2_id'")->results();
+                                        $name = $nameArray[0]->username;
+                                        echo $name;
+                                    }
+                                    else
+                                        echo "Nobody.";
                                 }
                                 else
-                                    echo "Invalid Conversation";
+                                    echo "Invalid Conversation.";
                             ?>
                         </strong>
                     </small>
@@ -51,8 +56,8 @@
                 <p>
                     <br><br>
                     <?php
-                        $uid = 1; //need to change to global
-                        //$uid = $_SESSION['user_id'];
+                        //$uid = 1; //need to change to global
+                        $uid = $_SESSION['user_id'];
                         $MsgMgr = new MessageMgr($uid);
                         if(!isset($_POST['convoID']))
                             $convoID = $_SERVER['QUERY_STRING'];
@@ -61,11 +66,16 @@
                             $convoID = ($_POST["convoID"]);
                             $MsgMgr->sendMessage($_POST["message"], $convoID);
                         }
-                        $MsgMgr->loadConversation($convoID);
+                        if($MsgMgr->isUserInConversation($convoID) == TRUE)
+                            $MsgMgr->loadConversation($convoID);
+                        else
+                            echo "<div class=\"alert alert-danger\">
+                                      Error - You are not invloved in this conversation!
+                                  </div>";
                     ?>
                 </p>
                 <div style = "text-align: left">
-                    <a href="existingConversationPage.php"><h3>Back</h3></a>
+                    <a href="existingConversationPage.php"><h3>Back To Conversation List</h3></a>
                 </div>
             </div>
         </div>
