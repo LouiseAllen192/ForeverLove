@@ -4,7 +4,7 @@ var page = path.substring(path.lastIndexOf('/') + 1);
 
 $(document).ready(function(){
 
-    if(page == 'registrationPage.php' || page == 'updateRegDetailsPage.php'){
+    if(page == 'registrationPage.php' || page == 'updateRegDetailsPage.php' || page == 'updateRegDetailsPage.php'){
         $('#email_group').find('#email').keyup(function(){
             $('#email_group > #error_required').removeClass('error').addClass('hide');
             var input = $(this).val();
@@ -55,7 +55,7 @@ $(document).ready(function(){
         });
     }
 
-    if(page == 'registrationPage.php'  || page == 'updateRegDetailsPage.php'){
+    if(page == 'registrationPage.php' || page == 'updateRegDetailsPage.php' || page == 'updateRegDetailsPage.php'){
         $('#username_group').find('#username').keyup(function(){
             $('#username_group > #error_required').removeClass('error').addClass('hide');
             var input = $(this).val();
@@ -88,7 +88,7 @@ $(document).ready(function(){
         });
     }
 
-    if(page == 'registrationPage.php'  || page == 'updateRegDetailsPage.php') {
+    if(page == 'registrationPage.php' || page == 'updateRegDetailsPage.php' || page == 'updateRegDetailsPage.php') {
         $('#first_name_group').find('#first_name').keyup(function () {
             $('#first_name_group > #error_required').removeClass('error').addClass('hide');
             var input = $(this).val();
@@ -116,7 +116,7 @@ $(document).ready(function(){
         });
     }
 
-    if(page == 'registrationPage.php'  || page == 'updateRegDetailsPage.php') {
+    if(page == 'registrationPage.php' || page == 'updateRegDetailsPage.php') {
         $('#password_group').find('#password').keyup(function(){
             $('#password_group > #error_required').removeClass('error').addClass('hide');
             var input = $(this).val();
@@ -151,7 +151,7 @@ $(document).ready(function(){
         });
     }
 
-    if(page == 'registrationPage.php'  || page == 'updateRegDetailsPage.php') {
+    if(page == 'registrationPage.php' || page == 'updateRegDetailsPage.php' || page == 'updateRegDetailsPage.php') {
         $('#dob_group').find('#dob').change(function () {
             $('#dob_group > #error_required').removeClass('error').addClass('hide');
             var input = $(this).val();

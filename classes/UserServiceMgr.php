@@ -191,7 +191,7 @@ class UserServiceMgr
         //todo
     }
 
-    public static function register($source){
+    public static function registerUpdateAccount($source, $update = false){
         $validate = new Validate();
         $validate->check($source, [
             'email' => [
@@ -231,16 +231,23 @@ class UserServiceMgr
         ]);
 
         if($validate->passed()){
-            DB::getInstance()->registerUser(
-                'registration_details',[
-                    'username' => $_POST['username'],
-                    'password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
-                    'first_name' => $_POST['first_name'], 'last_name' => $_POST['last_name'],
-                    'email' => $_POST['email']
-                ],
-                $_POST['dob']
-            );
-            $_SESSION['user_id'] = DB::getInstance()->get('registration_details', ['username', '=', $_POST['username']])->results()[0]->user_id;
+            $fields = [
+                'username' => $_POST['username'],
+                'password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
+                'first_name' => $_POST['first_name'], 'last_name' => $_POST['last_name'],
+                'email' => $_POST['email']
+            ];
+
+            if($update){
+                DB::getInstance()->update('registration_details', 'user_id = '.$_SESSION['user_id'], $fields);
+                DB::getInstance()->update('preference_details', 'user_id = '.$_SESSION['user_id'], ['date_of_birth' => $_POST['dob']]);
+            }
+            else{
+                DB::getInstance()->registerUser('registration_details', $fields, $_POST['dob']);
+            }
+            if(!isset($_SESSION['user_id'])) {
+                $_SESSION['user_id'] = DB::getInstance()->get('registration_details', ['username', '=', $_POST['username']])->results()[0]->user_id;
+            }
             return false;
         }
         else{

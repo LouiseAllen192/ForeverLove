@@ -5,7 +5,7 @@
     include("includes/metatags.html");
     include("includes/fonts.html");
 
-    if(Input::exists() && !($errors = UserServiceMgr::register($_POST))){
+    if(Input::exists() && !($errors = UserServiceMgr::registerUpdateAccount($_POST))){
         header('Location: registerAccountTypePage.php');
         die();
     }
@@ -15,6 +15,8 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/custom-base-page.css" rel="stylesheet">
     <link href="css/custom-form-page.css" rel="stylesheet">
+    <script src="bootstrap_js/jquery.js"></script>
+    <script src="scripts/registrationValidation.js"></script>
 </head>
 
 <body class="full">

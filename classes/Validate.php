@@ -20,7 +20,8 @@ class Validate{
                         }
                     }
                     else if($rule == 'unique'){
-                        if($this->db->get($ruleValue, [$item, '=', $value])->count()){
+                        $uid = (isset($_SESSION['user_id'])) ? $_SESSION['user_id'] : 0;
+                        if($this->db->query("SELECT * FROM $ruleValue WHERE $item = '$value' && user_id != '$uid'")->count()){
                             $this->addError($item, 'error_unique');
                         }
                     }
