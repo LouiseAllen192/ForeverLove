@@ -5,20 +5,9 @@
     require_once 'core/init.php';
     include("includes/metatags.html");
     include("includes/fonts.html");
-    ?>
-
-    <title>Update Account Details</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/custom-base-page.css" rel="stylesheet">
-    <link href="css/custom-form-page.css" rel="stylesheet">
-    <script src="bootstrap_js/jquery.js"></script>
-    <script src="scripts/registrationValidation.js"></script>
-
-    <?php
-
-    $_SESSION['user_id'] = 1;//DELETE
 
     $uid = $_SESSION['user_id'];
+
     $db = DB::getInstance();
     $results = $db->get('registration_details', ['user_id', '=', $uid])->results()[0];
     $dob = $db->query("SELECT date_of_birth FROM preference_details WHERE user_id = $uid")->results()[0];
@@ -33,6 +22,13 @@
         }
     }
     ?>
+
+    <title>Update Account Details</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/custom-base-page.css" rel="stylesheet">
+    <link href="css/custom-form-page.css" rel="stylesheet">
+    <script src="bootstrap_js/jquery.js"></script>
+    <script src="scripts/registrationValidation.js"></script>
 
 </head>
 

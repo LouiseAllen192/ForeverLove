@@ -8,10 +8,9 @@
     include("includes/metatags.html");
     include("includes/fonts.html");
 
-    $_SESSION['user_id'] = 1;//DELETE
-
     $uid = $_SESSION['user_id'];
-    $sql = "SELECT user_id,username,tag_line,city,gender,seeking FROM registration_details JOIN preference_details USING(user_id) WHERE user_id != $uid";
+
+    $sql = "SELECT user_id,username,tag_line,city,gender,seeking FROM registration_details JOIN preference_details USING(user_id) WHERE user_id != '$uid'";
     $results = SearchServiceMgr::filterSeekingGender($uid, DB::getInstance()->query($sql)->results());
     ?>
     <title>View All Page</title>

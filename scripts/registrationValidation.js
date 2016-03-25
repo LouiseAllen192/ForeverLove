@@ -61,7 +61,7 @@ $(document).ready(function(){
             var input = $(this).val();
             var pattern = /^[a-zA-Z0-9_-]{3,32}$/;
             var valid = pattern.test(input);
-            if (valid) {
+            if(valid){
                 $('#username_group > #error_regex').removeClass('error').addClass('hide');
                 $.ajax({
                     type: "post",

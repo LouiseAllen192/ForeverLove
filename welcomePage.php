@@ -7,6 +7,11 @@
     require_once 'core/init.php';
     include("includes/metatags.html");
     include("includes/fonts.html");
+
+    $errors = [];
+    if(isset($_POST)){
+        $errors = UserServiceMgr::login($_POST);
+    }
     ?>
     <title>Welcome Page</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -42,17 +47,21 @@
                                 <a class="close"><img id="close_button" src="includes/pics/close_pop.png" class="btn_close" title="Close Window" alt="Close" /></a>
                                 <form method="post" class="signin">
                                     <fieldset class="textbox">
-                                        <label class="username">
+                                        <label class="username" id="username_group">
                                             <span>Username</span>
                                             <input id="username" name="username" value="<?php echo Input::get('username');?>" type="text" autocomplete="on" placeholder="Username">
+                                            <span class="<?php if($errors['username'] == 'error_required') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_required">Required...</span>
+                                            <span class="<?php if($errors['username'] == 'error_login') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_login">Username Not Recognised...</span>
                                         </label>
 
-                                        <label class="password">
+                                        <label class="password" id="password_group">
                                             <span>Password</span>
                                             <input id="password" name="password" value="" type="password" placeholder="Password">
+                                            <span class="<?php if($errors['password'] == 'error_required') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_required">Required...</span>
+                                            <span class="<?php if($errors['password'] == 'error_login') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_login">Password Incorrect...</span>
                                         </label>
 
-                                        <button class="submit button" type="button">Sign in</button>
+                                        <button class="submit button" type="submit">Sign in</button>
 
                                         <p>
                                             <a class="forgot" href="#">Forgot your password?</a>

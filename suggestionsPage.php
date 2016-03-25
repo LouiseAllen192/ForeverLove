@@ -7,10 +7,7 @@
     include("includes/metatags.html");
     include("includes/fonts.html");
 
-    $_SESSION['user_id'] = 1;//DELETE
-
-    $uid = $_SESSION['user_id'];
-    $results = SearchServiceMgr::suggestions($uid);
+    $results = SearchServiceMgr::suggestions($_SESSION['user_id']);
     ?>
     <title>Suggestions Page</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
