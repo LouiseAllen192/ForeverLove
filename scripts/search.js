@@ -3,7 +3,7 @@ $(document).ready(function(){
         $('#search_result').removeClass('hide');
         var input = $(this).val();
         input = $.trim(input);
-        if (input != '') {
+        if (input != ''){
             $.ajax({
                 type: "post",
                 url: "scripts/search.php",
@@ -16,7 +16,9 @@ $(document).ready(function(){
         }
     });
 
-    $('#input_search').blur(function(){
-        $('#search_result').addClass('hide');
-    });
+    $(this).click(function(event){
+        if(event.target.id != 'input_search' || event.target.id != 'search_result'){
+            $('#search_result').addClass('hide');
+        }
+    })
 });
