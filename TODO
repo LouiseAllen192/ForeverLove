@@ -39,14 +39,20 @@ User Services:
 
 Message Services:
 	- Figure out how to refresh messages/trigger when a message comes in for the user
+		- add attribute to database that is 0 or 1 - 0 = unread, 1 = read
+		- periodically check database for messages with a 0
+		- if there flash up on nav bar
+		- make offending conversation link a different colour
+		- if in conversation already, reload page?
 	- Maybe output user's profile pictures on existing conversations page
 	- Add a max length to message box?
+	- Find and eliminate bug that's occasionally creating duplicate conversations
 	
 	Blind date
 	- Figure out how to connect users
-	
-	User Page
-	-Figure out what to do when a user clicks "send message" button on another user's page
+		- when users click blind date they are added to database
+		- matches are made when suitible genders/seeking are found
+		- conversations take place in conversationsPage
 
 Search Services:
     - Make search bar look prettier (CSS)
