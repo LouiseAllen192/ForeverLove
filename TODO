@@ -51,8 +51,11 @@ Message Services:
 	Blind date
 	- Figure out how to connect users
 		- when users click blind date they are added to database
-		- matches are made when suitible genders/seeking are found
+			-check database and see if user is already there - if not add them
+			- match made immediately if possible
+		- matches are made when suitable genders/seeking are found
 		- conversations take place in conversationsPage
+	-Maybe add time to DB or is it unimportant
 
 Search Services:
     - Make search bar look prettier (CSS)

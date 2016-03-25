@@ -3,8 +3,10 @@
 
 <head>
 
-    <?php include("includes/metatags.html");
-    require_once 'core/init.php'; ?>
+    <?php
+        include("includes/metatags.html");
+        require_once 'core/init.php';
+    ?>
     <title>New Message</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/custom-base-page.css" rel="stylesheet">

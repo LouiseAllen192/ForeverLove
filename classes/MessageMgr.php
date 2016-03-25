@@ -23,7 +23,7 @@ class MessageMgr
     {
         $reciever_id = $this->getConversationPartner($convoID);
         $date = date('Y-m-d H:i:s');
-        DB::getInstance()->insert('messages', ['Conversation_id' => $convoID, 'Sender_id' => $this->userID, 'Recipient_id'  => $reciever_id, 'Date_Received' => $date, 'Message_Text' => $message, 'Profile_Visable' => 1]);
+        DB::getInstance()->insert('messages', ['Conversation_id' => $convoID, 'Sender_id' => $this->userID, 'Recipient_id'  => $reciever_id, 'Date_Received' => $date, 'Message_Text' => $message]);
     }
 
     public function sendNewMessage($GET)
@@ -42,7 +42,7 @@ class MessageMgr
             {
                 $convo_id = $this->createConversation($reciever_id);
             }
-            DB::getInstance()->insert('messages', ['Conversation_id' => $convo_id, 'Sender_id' => $this->userID, 'Recipient_id'  => $reciever_id, 'Date_Received' => $date, 'Message_Text' => $GET["message"], 'Profile_Visable' => 1]);
+            DB::getInstance()->insert('messages', ['Conversation_id' => $convo_id, 'Sender_id' => $this->userID, 'Recipient_id'  => $reciever_id, 'Date_Received' => $date, 'Message_Text' => $GET["message"]]);
             echo "<div class=\"alert alert-success\">
                       Message Sent Succesfully.
                   </div>";
@@ -88,7 +88,7 @@ class MessageMgr
 
     public function createConversation($recieverid)
     {
-        DB::getInstance()->insert('Conversations', ['User1_id' => $this->userID, 'User2_id' => $recieverid]);
+        DB::getInstance()->insert('Conversations', ['User1_id' => $this->userID, 'User2_id' => $recieverid, 'profile_visible' => 1]);
         $ans = DB::getInstance()->query("SELECT conversation_id FROM conversations WHERE User1_id = '$this->userID' AND User2_id = '$recieverid'")->results();
         return ($ans[0]->conversation_id);
     }
