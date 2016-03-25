@@ -62,16 +62,11 @@
                             $MsgMgr->sendMessage($_POST["message"], $convoID);
                         }
                         $MsgMgr->loadConversation($convoID);
-
-                        /*echo "<br>
-                        <form role =\"form\" class=\"form-inline\" action=\"Conversation.php?.$convoID.#bottom\" method=\"post\">
-                            <textarea rows=\"6\" cols=\"50\" name=\"message\"></textarea><br><br>
-                            <input type=\"hidden\" name=\"convoID\" value=$convoID />
-                            <input type=\"submit\" value=\"Submit\">
-                        </form>";*/
                     ?>
                 </p>
-
+                <div style = "text-align: left">
+                    <a href="existingConversationPage.php"><h3>Back</h3></a>
+                </div>
             </div>
         </div>
     </div>
@@ -79,5 +74,4 @@
 </div>
 <?php include("includes/footer.html"); ?>
 </body>
-
 </html>

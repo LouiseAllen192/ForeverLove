@@ -44,13 +44,12 @@
 
                 <div class="row">
                     <div class="col-lg-6 col-sm-6 text-center">
-                        <a href="newMessagePage.php"><h3>New Message</h3></a>                    </div>
+                        <a href="newMessagePage.php"><h3>New Message</h3></a>
+                    </div>
                     <div class="col-lg-6 col-sm-6 text-center">
                         <a href="existingConversationPage.php"><h3>Existing Conversation</h3></a>
                     </div>
                 </div>
-
-
             </div>
         </div>
     </div>

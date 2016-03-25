@@ -38,12 +38,9 @@ User Services:
 
 
 Message Services:
-    - Make message sending success/failure feedback look prettier (atm it's just a simple echo)
 	- Figure out how to refresh messages/trigger when a message comes in for the user
-	- Make messages in a conversation prettier
 	- Maybe output user's profile pictures on existing conversations page
-	- Change all instances of GET to POST
-	- Add a max length to message box
+	- Add a max length to message box?
 	- Figure out how to stop users from seeing a conversation they're not involved in
 	
 	Blind date
