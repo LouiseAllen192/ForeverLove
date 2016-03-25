@@ -63,7 +63,7 @@ class MessageMgr
             $messagedUsers[$i]=$convoPartner[0]->username;
             $tempConvoID = $convos[$i]->conversation_id;
             $linkString = "conversationPage.php?".$tempConvoID."#bottom";
-            echo "<a href= '".$linkString."''>$messagedUsers[$i]</a>";
+            echo "<a href= '".$linkString."''>$messagedUsers[$i]</a><br><br>";
         }
         if($i == 0)
             echo "No existing converations found.";
@@ -149,10 +149,31 @@ class MessageMgr
             return $user1;
     }
 
-    public function getUsername($uid)
+    public function getUsername()
     {
+        if(func_num_args() > 0)
+            $uid = func_get_arg(0);
+        else
+            $uid = $this->userID;
         $user = DB::getInstance()->query("SELECT username FROM registration_details WHERE user_id = '$uid'")->results();
-        return ($user[0]->username);
+        if(!empty($user))
+            return ($user[0]->username);
+        else
+            return "";
+    }
+
+    public function isUserInConversation($convoID)
+    {
+        $usersInConversation = DB::getInstance()->query("SELECT user1_id, user2_id FROM conversations WHERE conversation_id = '$convoID'")->results();
+        if(!empty($usersInConversation))
+        {
+            if($this->userID == $usersInConversation[0]->user1_id || $this->userID == $usersInConversation[0]->user2_id)
+                return true;
+            else
+                return false;
+        }
+        else
+            return false;
     }
 }
 ?>
