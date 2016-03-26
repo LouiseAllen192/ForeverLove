@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 26, 2016 at 04:24 PM
+-- Generation Time: Mar 26, 2016 at 09:58 PM
 -- Server version: 5.7.9
 -- PHP Version: 5.6.16
 
@@ -155,6 +155,7 @@ CREATE TABLE IF NOT EXISTS `conversations` (
   `user1_id` int(11) NOT NULL,
   `user2_id` int(11) NOT NULL,
   `profile_visible` tinyint(4) DEFAULT NULL,
+  `reveal` int(11) DEFAULT NULL,
   PRIMARY KEY (`conversation_id`),
   KEY `User1_id` (`user1_id`),
   KEY `User2_id` (`user2_id`)
@@ -164,11 +165,11 @@ CREATE TABLE IF NOT EXISTS `conversations` (
 -- Dumping data for table `conversations`
 --
 
-INSERT INTO `conversations` (`conversation_id`, `user1_id`, `user2_id`, `profile_visible`) VALUES
-(11, 1, 3, 1),
-(12, 3, 3, 1),
-(16, 1, 1, 1),
-(17, 1, 4, 1);
+INSERT INTO `conversations` (`conversation_id`, `user1_id`, `user2_id`, `profile_visible`, `reveal`) VALUES
+(11, 1, 3, 1, NULL),
+(12, 3, 3, 1, NULL),
+(16, 1, 1, 1, NULL),
+(17, 1, 4, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -302,7 +303,7 @@ CREATE TABLE IF NOT EXISTS `images` (
   `image_id` int(11) NOT NULL,
   `image_path` varchar(256) DEFAULT NULL,
   `image_name` varchar(256) DEFAULT NULL,
-  PRIMARY KEY (`user_id`, `image_id`),
+  PRIMARY KEY (`user_id`,`image_id`),
   KEY `User_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
