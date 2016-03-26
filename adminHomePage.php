@@ -21,27 +21,31 @@
 
 <div class="container">
     <div class="row">
-
+        <div class="box">
             <div class="col-lg-12 text-center">
                 <br><br>
                 <h2>
                     <small>
-                        <strong>Admin</strong>
+                        <strong>Please Choose From The Following</strong>
                     </small>
                 </h2>
                 <hr class="tagline-divider">
-                <p>
+                <form method="get" action="viewBannedUsersPage.php"><br>
+                <input type="submit" value="View Banned Users" name="bannedUsers"/>
+                </form>
+                <form method="get" action="ChooseReportPage.php">
+                <br>
+                <input type="submit" value="View Unresolved" name="unres"/>
+                <br><br>
+                <input type="submit" value="View Resolved" name="res"/>
+                </form>
+                    <br><br>
 
-                    <br><br>
-                    <a href="viewReportedCasesPage.php">View Reported Cases</a><br><br>
-                    <a href="adminLoginPage.php">Logout</a><br><br>
-                    <br><br>
-                    <br><br>
-                </p>
+<!--                Log out user and return to home page - TODO-->
+<!--                <a href="adminLoginPage.php">Logout</a><br><br>-->
             </div>
+        </div>
     </div>
-
-</div>
 <?php include("includes/footer.html"); ?>
 </body>
 

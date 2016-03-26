@@ -1,11 +1,5 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: Garret
- * Date: 03-Mar-16
- * Time: 12:04 PM
- */
 class Admin
 {
     private $adminId ;
@@ -22,13 +16,13 @@ class Admin
      * @param null $password
      * @param null $emailAddress
      */
-    public function __Administrator($adminId, $firstName, $lastName, $password, $emailAddress)
+    public function __construct($admin)
     {
-        $this->adminId = $adminId;
-        $this->firstName = $firstName;
-        $this->lastName = $lastName;
-        $this->password = $password;
-        $this->emailAddress = $emailAddress;
+        $this->adminId = $admin->Admin_id;
+        $this->firstName = $admin ->firstName;
+        $this->lastName = $admin ->lastName;
+        $this->password = $admin -> password;
+        $this->emailAddress =$admin -> Email;
     }
 
     /**

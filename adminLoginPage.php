@@ -11,6 +11,7 @@
     <link href="css/custom-admin.css" rel="stylesheet">
     <?php include("includes/fonts.html"); ?>
     <?php include("includes/navbarAdmin.html"); ?>
+
 </head>
 
 <body class="full">
@@ -28,18 +29,13 @@
                 </h2>
                 <hr class="tagline-divider">
                 <p>
+                <form onsubmit=""(); return false; id="form" action="adminLoginPage.php" method="post" enctype="multipart/form-data">
+                    Username: <input type="text" name="username" />
+                    <br>
+                    Password:<input type="password" name="password" />
                     <br><br>
-                    <form id='login' action='login.php' method='post' accept-charset='UTF-8'>
-                            <input type='hidden' name='submitted' id='submitted' value='1'/>
-
-                            <label for='username' >Username</label>
-                            <input type='text' name='username' id='username'  maxlength="50" />
-                            <br><br>
-                            <label for='password' >Password</label>
-                            <input type='password' name='password' id='password' maxlength="50" />
-                            <br><br>
-                            <input type='submit' name='Submit' value='Submit' />
-                    </form>
+                    <input type="submit" value="Login" name="Submit" />
+                </form>
                     <br><br>
                     <br><br>
                 </p>
@@ -50,3 +46,4 @@
 </body>
 
 </html>
+

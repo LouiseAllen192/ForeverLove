@@ -9,6 +9,12 @@ body {
     -o-background-size: cover;
 }
 
+form{
+    width: 50%;
+    display: inline-block;
+    text-align: center;
+}
+
 .navbar-nav{
     margin-top: 30px;
 }
@@ -84,6 +90,20 @@ footer p {
     font-size: x-small;
 }
 
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px ;
+    text-align: left;
+}
+
+#form {
+    margin: auto;
+    width: 200px;
+    height: 100px;
+}
 
 
 @media screen and (min-width:1200px) {
