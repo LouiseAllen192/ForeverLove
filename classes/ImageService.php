@@ -20,17 +20,19 @@ class ImageService
         //todo
     }
 
-    public static function changeImage(){
-        //todo
-    }
 
     public static function deleteImage($imgNum){
         return true;
         //todo
     }
 
-    public static function uploadImage(){
-        //todo
+    public static function uploadImage($uid, $imgNum, $path, $name){
+        $update = array("image_path" => "$path", "image_name" => "$name");
+        $where = "user_id = '".$uid."' AND image_id = '".$imgNum."'";
+        if(DB::getInstance()->update('images', $where , $update)){
+            return true;
+        }
+        return false;
     }
 
     public static function checkIfImageGalleryFull($images){

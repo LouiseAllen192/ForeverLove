@@ -17,6 +17,7 @@
 
     <?php
     include($_SERVER['DOCUMENT_ROOT'] . '/classes/User.php');
+    include($_SERVER['DOCUMENT_ROOT'] . '/classes/ImageService.php');
 
 
     //$uid = $_SESSION['user_id'];
