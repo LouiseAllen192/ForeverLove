@@ -53,19 +53,14 @@ Message Services:
 		- if there flash up on nav bar
 		- make offending conversation link a different colour
 		- if in conversation already, reload page?
+	- Figure out how to notify user of new messages
 	- Maybe output user's profile pictures on existing conversations page
-	- Add a max length to message box?
 	- Find and eliminate bug that's occasionally creating duplicate conversations
 	
 	Blind date
-	- Figure out how to connect users
-		- when users click blind date they are added to database
-			-check database and see if user is already there - if not add them
-			- match made immediately if possible
-		- matches are made when suitable genders/seeking are found
-		- conversations take place in conversationsPage
-	-Maybe add time to DB or is it unimportant
-
+	- Add reveal column to Conversations - NULL for regular conversations. For BDs, starts at 0, 1 person clicking changes to 1, if it's 2 then reveal
+	
+	
 Search Services:
     - Make search bar look prettier (CSS)
     - Return search based on intent and gender (and age?? :) )

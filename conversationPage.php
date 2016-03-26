@@ -39,8 +39,11 @@
                                     if($MsgMgr->isUserInConversation($convoID)== true)
                                     {
                                         $user2_id = $MsgMgr->getConversationPartner($convoID);
-                                        $nameArray = DB::getInstance()->query("SELECT username FROM registration_details WHERE user_id = '$user2_id'")->results();
-                                        $name = $nameArray[0]->username;
+                                        $vis = $MsgMgr->isProfileVisible($convoID);
+                                        if(!$vis)
+                                            $name = "Blind Date";
+                                        else
+                                            $name = $MsgMgr->getUsername($user2_id);
                                         echo $name;
                                     }
                                     else
@@ -66,11 +69,33 @@
                             $convoID = ($_POST["convoID"]);
                             $MsgMgr->sendMessage($_POST["message"], $convoID);
                         }
-                        if($MsgMgr->isUserInConversation($convoID) == TRUE)
-                            $MsgMgr->loadConversation($convoID);
+                        //if(isset($_POST[]))
+                        if($MsgMgr->conversationExists($convoID))
+                        {
+                            if ($MsgMgr->isUserInConversation($convoID) == TRUE)
+                                $MsgMgr->loadConversation($convoID);
+                            else
+                                echo "<div class=\"alert alert-danger\">
+                                          Error - You are not invloved in this conversation!
+                                      </div>";
+                            $visible = $MsgMgr->isProfileVisible($convoID);
+                            if (!$visible) {
+                                $msgCount = $MsgMgr->messageCount($convoID);
+                                echo "Message Count: " . $msgCount;
+                                /*if($msgCount <= 25)
+                                    echo "<form action=\"conversationPage.php?\".$convoID  method=\"post\">
+                                            <button name=\"end\" value=\"end\" class=\"btn btn-warning\">Reveal User</button>
+                                            <input type=\"hidden\" name=\"convo_id\" value=$convoID>
+                                           </form>";*/
+                                echo "<form action=\"blindDateEndPage.php\" method=\"post\">
+                                        <button name=\"end\" value=\"end\" class=\"btn btn-warning\">End Conversation</button>
+                                        <input type=\"hidden\" name=\"convo_id\" value=$convoID>
+                                       </form>";
+                            }
+                        }
                         else
                             echo "<div class=\"alert alert-danger\">
-                                      Error - You are not invloved in this conversation!
+                                   This Conversation Does Not Exist.
                                   </div>";
                     ?>
                 </p>

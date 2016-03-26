@@ -9,10 +9,17 @@ class MessageMgr
     {
         $this->userID = $uid;
     }
-
+    public function conversationExists($convoID)
+    {
+        $ans = DB::getInstance()->query("SELECT * FROM conversations WHERE conversation_id = '$convoID'")->results();
+        if(empty($ans))
+            return false;
+        else
+            return true;
+    }
     public function doesConversationExist($user2ID)
     {
-        $ans = DB::getInstance()->query("SELECT * FROM conversations WHERE (User1_id = $this->userID OR User1_id = $user2ID) AND (User2_id = $this->userID OR User2_id = $user2ID) AND User1_id <> User2_id ", [])->results();
+        $ans = DB::getInstance()->query("SELECT * FROM conversations WHERE (User1_id = $this->userID OR User1_id = $user2ID) AND (User2_id = $this->userID OR User2_id = $user2ID) AND (User1_id <> User2_id) AND profile_visible = '1' ", [])->results();
         if(empty($ans))
             return false;
         else
@@ -23,7 +30,7 @@ class MessageMgr
     {
         $reciever_id = $this->getConversationPartner($convoID);
         $date = date('Y-m-d H:i:s');
-        DB::getInstance()->insert('messages', ['Conversation_id' => $convoID, 'Sender_id' => $this->userID, 'Recipient_id'  => $reciever_id, 'Date_Received' => $date, 'Message_Text' => $message]);
+        DB::getInstance()->insert('messages', ['Conversation_id' => $convoID, 'Sender_id' => $this->userID, 'Recipient_id'  => $reciever_id, 'Date_Received' => $date, 'Message_Text' => $message, 'seen' => 0]);
     }
 
     public function sendNewMessage($GET)
@@ -40,9 +47,9 @@ class MessageMgr
             $convo_id = $this->doesConversationExist($reciever_id);
             if(!($convo_id))
             {
-                $convo_id = $this->createConversation($reciever_id);
+                $convo_id = $this->createConversation($reciever_id, 1);
             }
-            DB::getInstance()->insert('messages', ['Conversation_id' => $convo_id, 'Sender_id' => $this->userID, 'Recipient_id'  => $reciever_id, 'Date_Received' => $date, 'Message_Text' => $GET["message"]]);
+            DB::getInstance()->insert('messages', ['Conversation_id' => $convo_id, 'Sender_id' => $this->userID, 'Recipient_id'  => $reciever_id, 'Date_Received' => $date, 'Message_Text' => $GET["message"], 'seen' => 0]);
             echo "<div class=\"alert alert-success\">
                       Message Sent Succesfully.
                   </div>";
@@ -63,7 +70,11 @@ class MessageMgr
             $messagedUsers[$i]=$convoPartner[0]->username;
             $tempConvoID = $convos[$i]->conversation_id;
             $linkString = "conversationPage.php?".$tempConvoID."#bottom";
-            echo "<a href= '".$linkString."''>$messagedUsers[$i]</a><br><br>";
+            $vis = $this->isProfileVisible($tempConvoID);
+            if($vis)
+                echo "<a href= '".$linkString."''>$messagedUsers[$i]</a><br><br>";
+            else
+                echo "<a href= '".$linkString."''>Blind Date</a><br><br>";
         }
         if($i == 0)
             echo "No existing converations found.";
@@ -86,9 +97,9 @@ class MessageMgr
             return ($ans[0]->user_id);
     }
 
-    public function createConversation($recieverid)
+    public function createConversation($recieverid, $visible)
     {
-        DB::getInstance()->insert('Conversations', ['User1_id' => $this->userID, 'User2_id' => $recieverid, 'profile_visible' => 1]);
+        DB::getInstance()->insert('Conversations', ['User1_id' => $this->userID, 'User2_id' => $recieverid, 'profile_visible' => $visible]);
         $ans = DB::getInstance()->query("SELECT conversation_id FROM conversations WHERE User1_id = '$this->userID' AND User2_id = '$recieverid'")->results();
         return ($ans[0]->conversation_id);
     }
@@ -98,8 +109,14 @@ class MessageMgr
         if(!empty($convoID))
         {
             $messages = DB::getInstance()->query("SELECT * FROM messages WHERE conversation_id = '$convoID' ORDER BY date_received")->results();
-            $convoPartner = $this->getConversationPartner($convoID);
-            $partnerName = $this->getUsername($convoPartner);
+            $vis = $this->isProfileVisible($convoID);
+            if($vis)
+            {
+                $convoPartner = $this->getConversationPartner($convoID);
+                $partnerName = $this->getUsername($convoPartner);
+            }
+            else
+                $partnerName = "Blind Date";
             echo"<div class = panel-group>";
             for($i = 0; $i < count($messages); $i++)
             {
@@ -174,6 +191,73 @@ class MessageMgr
         }
         else
             return false;
+    }
+
+    public function blindDateMatch()
+    {
+        $alreadyIn = DB::getInstance()->query("SELECT * FROM blind_date WHERE user_id = $this->userID")->results();
+        if(empty($alreadyIn))//THIS IS NOT FINISHED
+        {
+            $user = DB::getInstance()->query("SELECT * FROM preference_details WHERE user_id = $this->userID")->results();
+            $seeking = $user[0]->seeking;
+            $gender = $user[0]->gender;
+            if(($seeking == 2 || $seeking == 3 || $seeking == 4) && ($gender == 2 || $gender == 3))
+            {
+                //get all people from Blind Date table here and try to find an eligible match
+                $allUsers = DB::getInstance()->query("SELECT * FROM blind_date")->results();
+                $matchFound = false;
+                $i = 0;
+                while (!$matchFound && $i < count($allUsers))
+                {
+                    $otherUserSeeking = $allUsers[$i]->seeking;
+                    $otherUserGender = $allUsers[$i]->gender;
+                    if (($seeking == 4 || $seeking == $otherUserGender) && ($otherUserSeeking == 4 || $otherUserSeeking == $gender))
+                    {
+                        $matchFound = true;
+                        $this->createConversation($allUsers[$i]->user_id, 0);
+                        $id = $allUsers[$i]->user_id;
+                        DB::getInstance()->query("DELETE FROM blind_date WHERE user_id = $id")->results();
+                        //DB::getInstance()->delete('blind_date', "user_id = $allUsers[$i]->user_id");
+                        echo "<div class=\"alert alert-success\">
+                               Blind Date Match Made! Go To Your Existing Conversations To Begin Chatting!
+                                <a href=\"existingConversationPage.php\"><h3>Take Me There!</h3></a></div>";
+                    }
+                    $i++;
+                }
+                if(!$matchFound)
+                {
+                    DB::getInstance()->insert('blind_date', ['user_id' => $this->userID, 'seeking' => $seeking, 'gender' => $gender]);
+                    echo "<div class=\"alert alert-success\">
+                       No suitible match availible at the moment, but you will be matched shortly. Keep checking you existing conversations page!
+                      </div>";
+                }
+            }
+            else
+                echo "<div class=\"alert alert-danger\">
+                       Gender And/Or Seeking Details Not Specified For Your Profile. You Must Update Them Before You Can Participate In Blind Date.
+                      </div>
+                      <a href =\"updatePreferencesPage\"><h3>Take Me To Update Preferences Page</h3></a></div>";
+
+        }
+        else
+            echo "<div class=\"alert alert-danger\">
+                   You are already signed up to find a blind date. You will be matched with someone shortly!
+                  </div>";
+    }
+    public function isProfileVisible($convo_id)
+    {
+        $vis = DB::getInstance()->query("SELECT profile_visible FROM conversations WHERE conversation_id = '$convo_id'")->results();
+        if($vis[0]->profile_visible == 1)
+            return true;
+        else
+            return false;
+    }
+
+    public function messageCount($convoID)
+    {
+        $array = DB::getInstance()->query("SELECT COUNT(*) AS 'count' FROM messages where conversation_id = '$convoID'")->results();
+        $count = $array[0]->count;
+        return $count;
     }
 }
 ?>
