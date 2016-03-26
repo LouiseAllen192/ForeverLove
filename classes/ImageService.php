@@ -4,7 +4,16 @@ class ImageService
 {
 
     public static function getImages($uid){
-        //todo
+        $resultFinal = array();
+        $sql = "SELECT * " .
+            "FROM images  ".
+            "WHERE user_id = '".$uid."'";
+
+        $results = DB::getInstance()->query($sql)->results();
+        foreach ($results as $result) {
+            $resultFinal[$result->image_id] = $result->image_path;
+        }
+        return $resultFinal;
     }
 
     public static function updateProfileImage(){
