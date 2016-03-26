@@ -3,6 +3,10 @@
 class ImageService
 {
 
+    public static function getImages($uid){
+        //todo
+    }
+
     public static function updateProfileImage(){
         //todo
     }

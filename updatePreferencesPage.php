@@ -7,9 +7,7 @@
     include("includes/metatags.html");
     include("includes/fonts.html");
 
-    $_SESSION['user_id'] = 1;
-    $uid = $_SESSION['user_id'];
-
+   $uid = $_SESSION['user_id'];
     $regOrUpdate = UserServiceMgr::determineUpdateOrReg($uid);
 
     $dbvalue=array();

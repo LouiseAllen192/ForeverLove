@@ -3,12 +3,13 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 26, 2016 at 02:35 PM
+-- Generation Time: Mar 26, 2016 at 04:24 PM
 -- Server version: 5.7.9
 -- PHP Version: 5.6.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -18,7 +19,9 @@ SET time_zone = "+00:00";
 --
 -- Database: `group13db`
 --
+
 -- --------------------------------------------------------
+
 --
 -- Table structure for table `account_details`
 --
@@ -37,10 +40,11 @@ CREATE TABLE IF NOT EXISTS `account_details` (
 --
 
 INSERT INTO `account_details` (`user_id`, `account_type`, `free_trail_used`, `account_expired`) VALUES
-(1, 'Free', 1, '2016-04-24'),
+(1, 'Premium', 0, '2016-09-26'),
 (2, 'Premium', 1, '2017-03-04'),
 (3, 'Premium', 0, '2017-01-06'),
-(4, NULL, NULL, NULL);
+(4, 'Premium', 0, '2016-06-26'),
+(5, 'Premium', 0, '2016-06-26');
 
 -- --------------------------------------------------------
 
@@ -296,10 +300,97 @@ DROP TABLE IF EXISTS `images`;
 CREATE TABLE IF NOT EXISTS `images` (
   `user_id` int(11) NOT NULL,
   `image_id` int(11) NOT NULL,
-  `url` varchar(256) NOT NULL,
+  `image_path` varchar(256) DEFAULT NULL,
+  `image_name` varchar(256) DEFAULT NULL,
   PRIMARY KEY (`image_id`,`user_id`),
   KEY `User_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `images`
+--
+
+INSERT INTO `images` (`user_id`, `image_id`, `image_path`, `image_name`) VALUES
+(1, 1, '/userImageUploads/user1/athletic_people.png', 'athletic_people.png'),
+(1, 2, '/userImageUploads/user1/couple.jpg', 'couple.jpg'),
+(1, 3, '', ''),
+(1, 4, '/userImageUploads/user1/emotions.jpg', 'emotions.jpg'),
+(1, 5, '/userImageUploads/user1/office-people.jpg', 'office-people.jpg'),
+(1, 6, '', ''),
+(1, 7, '', ''),
+(1, 8, '', ''),
+(1, 9, '/userImageUploads/user1/people-thinking.jpg', 'people-thinking.jpg'),
+(1, 10, '/userImageUploads/user1/show.jpg', 'show.jpg'),
+(1, 11, '/userImageUploads/user1/people.jpg', 'people.jpg'),
+(1, 12, '/userImageUploads/user1/Toxic-people.jpg', 'Toxic-people.jpg'),
+(1, 13, '', ''),
+(1, 14, '/userImageUploads/user1/undecided.jpg', 'undecided.jpg'),
+(1, 15, '', ''),
+(1, 16, '', ''),
+(2, 1, '/userImageUploads/user2/office-people.jpg', 'office-people.jpg'),
+(2, 2, '', ''),
+(2, 3, '', ''),
+(2, 4, '/userImageUploads/user1/Toxic-people.jpg', 'Toxic-people.jpg'),
+(2, 5, '', ''),
+(2, 6, '', ''),
+(2, 7, '', ''),
+(2, 8, '', ''),
+(2, 9, '', ''),
+(2, 10, '', ''),
+(2, 11, '', ''),
+(2, 12, '', ''),
+(2, 13, '', ''),
+(2, 14, '', ''),
+(2, 15, '', ''),
+(2, 16, '', ''),
+(3, 1, '/userImageUploads/user3/emotions.jpg', 'emotions.jpg'),
+(3, 2, '/userImageUploads/user3/people-thinking.jpg', 'people-thinking.jpg'),
+(3, 3, '/userImageUploads/user3/show.jpg', 'show.jpg'),
+(3, 4, '', ''),
+(3, 5, '', ''),
+(3, 6, '', ''),
+(3, 7, '', ''),
+(3, 8, '', ''),
+(3, 9, '', ''),
+(3, 10, '', ''),
+(3, 11, '', ''),
+(3, 12, '', ''),
+(3, 13, '', ''),
+(3, 14, '', ''),
+(3, 15, '', ''),
+(3, 16, '', ''),
+(4, 1, '', ''),
+(4, 2, '', ''),
+(4, 3, '', ''),
+(4, 4, '', ''),
+(4, 5, '', ''),
+(4, 6, '', ''),
+(4, 7, '', ''),
+(4, 8, '', ''),
+(4, 9, '', ''),
+(4, 10, '', ''),
+(4, 11, '', ''),
+(4, 12, '', ''),
+(4, 13, '', ''),
+(4, 14, '', ''),
+(4, 15, '', ''),
+(4, 16, '', ''),
+(5, 1, '', ''),
+(5, 2, '', ''),
+(5, 3, '', ''),
+(5, 4, '', ''),
+(5, 5, '', ''),
+(5, 6, '', ''),
+(5, 7, '', ''),
+(5, 8, '', ''),
+(5, 9, '', ''),
+(5, 10, '', ''),
+(5, 11, '', ''),
+(5, 12, '', ''),
+(5, 13, '', ''),
+(5, 14, '', ''),
+(5, 15, '', ''),
+(5, 16, '', '');
 
 -- --------------------------------------------------------
 
@@ -501,7 +592,8 @@ INSERT INTO `preference_details` (`user_id`, `tag_line`, `city`, `gender`, `seek
 (1, 'Hup Kerry', 'Tipp', 2, 3, 3, '1991-03-03', 2, 6, 9, 6, 6, 11, 2, 2, 2, 4, 'I''m just a love machine.'),
 (2, 'Hashtag farmer life', 'Sligo', 2, 3, 3, '1980-12-22', 7, 2, 11, 5, 6, 7, 2, 4, 2, 4, 'I''m really only interested in the farming life. Anything to do with farming gets my blood flowing. I love the smell of silage in the morning and grass all day.'),
 (3, 'See you in Ibiza', 'Dublin', 2, 3, 3, '1996-05-19', 4, 2, 9, 2, 2, 3, 3, 3, 2, 4, 'Living for the weekend. Into fast cars and fast women. Hit me up if you like boy race cars, repetitive music and mind numbingly boring conversations'),
-(4, NULL, NULL, NULL, NULL, NULL, '1996-10-21', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(4, 'I''m Rob, i''m cool', 'Limerick', 2, 2, 3, '1996-10-21', 2, 6, 1, 5, 3, 10, 2, 2, 3, 4, 'Rob Rob ... Robbedy Rob'),
+(5, 'Living that life', 'Kerry', 3, 2, 2, '1991-02-19', 4, 4, 6, 3, 2, 2, 3, 2, 3, 2, 'MAking my way down town, walking fast, faces past and i''m homebound.... du du du du du du dun');
 
 -- --------------------------------------------------------
 
@@ -519,7 +611,7 @@ CREATE TABLE IF NOT EXISTS `registration_details` (
   `email` varchar(128) NOT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `Username` (`username`,`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `registration_details`
@@ -529,7 +621,8 @@ INSERT INTO `registration_details` (`user_id`, `username`, `first_name`, `last_n
 (1, 'lollypop23', 'Lily', 'Lovejoy', 'LilyLovejoy1', 'lily@gmail.com'),
 (2, 'FarmerFred', 'Fred', 'Connors', 'FredConnors1', 'Freddy@yahoo.ie'),
 (3, 'PartyBoy56', 'Jared', 'Armstein', 'JaredArmstein1', 'Jarjar@gmail.com'),
-(4, 'Rob', 'Rob', 'King', '$2y$10$jB8QeMTgCo.ZHotyBWpfeeSdCp6MTYI3E6hAlaW3P.3c9OVNiLbDK', 'robert.king.1996@gmail.com');
+(4, 'Rob', 'Rob', 'King', '$2y$10$jB8QeMTgCo.ZHotyBWpfeeSdCp6MTYI3E6hAlaW3P.3c9OVNiLbDK', 'robert.king.1996@gmail.com'),
+(5, 'LouiseA192', 'Louise', 'Allen', '$2y$10$VwuRBBW2rjHUgsRoG1VEo.T48VDcTHc11v3hTw2zUZIrTvp0OMzce', 'louise.allen192@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -625,7 +718,8 @@ INSERT INTO `unique_hobby` (`user_id`, `unique_hobby`) VALUES
 (1, 'Sewing'),
 (2, 'Sheering sheep'),
 (3, 'Sunbathing'),
-(4, NULL);
+(4, 'CSS'),
+(5, 'Jumping');
 
 -- --------------------------------------------------------
 
@@ -806,41 +900,76 @@ INSERT INTO `user_hobby_preferences` (`user_id`, `hobby_id`, `hobby_preference`)
 (3, 33, 1),
 (3, 34, 0),
 (3, 35, 0),
-(4, 1, NULL),
-(4, 2, NULL),
-(4, 3, NULL),
-(4, 4, NULL),
-(4, 5, NULL),
-(4, 6, NULL),
-(4, 7, NULL),
-(4, 8, NULL),
-(4, 9, NULL),
-(4, 10, NULL),
-(4, 11, NULL),
-(4, 12, NULL),
-(4, 13, NULL),
-(4, 14, NULL),
-(4, 15, NULL),
-(4, 16, NULL),
-(4, 17, NULL),
-(4, 18, NULL),
-(4, 19, NULL),
-(4, 20, NULL),
-(4, 21, NULL),
-(4, 22, NULL),
-(4, 23, NULL),
-(4, 24, NULL),
-(4, 25, NULL),
-(4, 26, NULL),
-(4, 27, NULL),
-(4, 28, NULL),
-(4, 29, NULL),
-(4, 30, NULL),
-(4, 31, NULL),
-(4, 32, NULL),
-(4, 33, NULL),
-(4, 34, NULL),
-(4, 35, NULL);
+(4, 1, 0),
+(4, 2, 0),
+(4, 3, 0),
+(4, 4, 1),
+(4, 5, 0),
+(4, 6, 1),
+(4, 7, 1),
+(4, 8, 0),
+(4, 9, 0),
+(4, 10, 0),
+(4, 11, 1),
+(4, 12, 0),
+(4, 13, 0),
+(4, 14, 0),
+(4, 15, 1),
+(4, 16, 0),
+(4, 17, 0),
+(4, 18, 1),
+(4, 19, 0),
+(4, 20, 0),
+(4, 21, 0),
+(4, 22, 0),
+(4, 23, 1),
+(4, 24, 0),
+(4, 25, 0),
+(4, 26, 0),
+(4, 27, 0),
+(4, 28, 0),
+(4, 29, 0),
+(4, 30, 1),
+(4, 31, 0),
+(4, 32, 0),
+(4, 33, 0),
+(4, 34, 0),
+(4, 35, 0),
+(5, 1, 0),
+(5, 2, 0),
+(5, 3, 0),
+(5, 4, 0),
+(5, 5, 1),
+(5, 6, 1),
+(5, 7, 0),
+(5, 8, 1),
+(5, 9, 0),
+(5, 10, 0),
+(5, 11, 0),
+(5, 12, 0),
+(5, 13, 0),
+(5, 14, 1),
+(5, 15, 1),
+(5, 16, 0),
+(5, 17, 1),
+(5, 18, 0),
+(5, 19, 1),
+(5, 20, 0),
+(5, 21, 1),
+(5, 22, 0),
+(5, 23, 0),
+(5, 24, 0),
+(5, 25, 1),
+(5, 26, 0),
+(5, 27, 0),
+(5, 28, 0),
+(5, 29, 0),
+(5, 30, 0),
+(5, 31, 1),
+(5, 32, 0),
+(5, 33, 0),
+(5, 34, 0),
+(5, 35, 0);
 
 -- --------------------------------------------------------
 

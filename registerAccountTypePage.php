@@ -7,8 +7,10 @@
     require_once 'core/init.php';
     include("includes/metatags.html");
 
-    $_SESSION['user_id'] = 1;
-    $uid = $_SESSION['user_id'];
+
+//    $uid = $_SESSION['user_id'];
+    $uid =5;
+
     $acc = "";
     $length;
     if(!empty($_POST) && !isset($_POST['accType'])) {

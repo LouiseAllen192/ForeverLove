@@ -11,6 +11,7 @@
 
 
     $uid = $_SESSION['user_id'];
+    $uid = 5;
 
     $regOrUpdate = UserServiceMgr::determineUpdateOrReg($uid);
     $dbvalue=array();

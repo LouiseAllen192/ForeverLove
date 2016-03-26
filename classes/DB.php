@@ -123,7 +123,7 @@ class DB{
                     $this->insert('user_hobby_preferences', ['user_id' => $user_id, 'hobby_id' => $hobby->hobby_id, 'hobby_preference' => null]);
                 }
                 for($i = 1; $i <= 16; $i++){
-                    $this->insert('images', ['user_id' => $user_id, 'image_id' => $i, 'url' => '']);
+                    $this->insert('images', ['user_id' => $user_id, 'image_id' => $i, 'image_path' => '', 'image_name' => '',]);
                 }
             }
             else return true;

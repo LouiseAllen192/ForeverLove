@@ -21,6 +21,14 @@ Contact Options:
 - phone: https://s-media-cache-ak0.pinimg.com/736x/f9/fc/fd/f9fcfd54094ae3857415bdad365157fc.jpg
 - email: https://farm4.staticflickr.com/3079/3160636432_aac350cea8_o.jpg
 
+Sample images:
+    ("0"=>"https://pearlsofprofundity.files.wordpress.com/2014/01/people-thinking-1a.jpg", "1"=> "http://thirstyturtletimes.com/wp-content/uploads/2013/02/Ravens-undecided.jpg", "2"=> "http://templates.elearningbrothers.com/files/2011/01/athletic_people_images.png", "3"=> "http://blogs-images.forbes.com/travisbradberry/files/2014/10/Toxic_people1.jpg",
+        "4"=> "http://all4desktop.com/data_images/original/4240423-people.jpg", "5"=> "https://c1.staticflickr.com/3/2823/9501964248_a388be25a8.jpg", "6"=> "https://static.pexels.com/photos/1990/man-person-people-emotions.jpg",
+        "7"=> "https://pearlsofprofundity.files.wordpress.com/2014/01/people-thinking-1a.jpg", "8"=> "https://c2.staticflickr.com/8/7151/6424464061_de9d36f647_b.jpg", "9"=> "http://thirstyturtletimes.com/wp-content/uploads/2013/02/Ravens-undecided.jpg",
+        "10"=> "http://templates.elearningbrothers.com/files/2011/01/athletic_people_images.png", "11"=> "http://www.dogoilpress.com/data/wallpapers/6/FDS_377793.jpg", "12"=> "http://all4desktop.com/data_images/original/4240423-people.jpg",
+        "13"=> "", "14"=> "http://templates.elearningbrothers.com/files/2011/01/athletic_people_images.png",
+        "15"=> "http://cdn.playbuzz.com/cdn/2c9b6d1a-61df-4c7a-8d46-6824b5603684/f31e88ef-97df-419d-9414-b1a662266c8e.jpg",
+
 OTHER:
 bootstrap css, js & fonts: http://getbootstrap.com/getting-started/#template
 galleryPage : http://bootsnipp.com/snippets/featured/carousel-with-gallery-thumbs

@@ -8,6 +8,7 @@
 
     $uid = $_SESSION['user_id'];
 
+
     $db = DB::getInstance();
     $results = $db->get('registration_details', ['user_id', '=', $uid])->results()[0];
     $dob = $db->query("SELECT date_of_birth FROM preference_details WHERE user_id = $uid")->results()[0];
