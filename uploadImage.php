@@ -7,8 +7,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/classes/DB.php');
 include("includes/navbar.html");
 
 
-$uid = 1;
-$imgNum = 3;
+$imgNum = ImageService::returnFirstEmptySlotNumber($images);
 
 $file = $_FILES['myimage']['tmp_name'];
 $file_name = $_FILES['myimage']['name'];

@@ -18,7 +18,7 @@
         include($_SERVER['DOCUMENT_ROOT'].'/classes/User.php');
 
     $me;
-    $uid;//= $_GET['uid'];
+    $uid;
 //    user id will come either from $_SESSION['user_id'] (if viewing your own profile)
 //    or $_POST[] if viewing someone elses page
 //    if(!empty($_POST)){

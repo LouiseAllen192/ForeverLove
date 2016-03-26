@@ -19,8 +19,20 @@
     include($_SERVER['DOCUMENT_ROOT'] . '/classes/User.php');
     include($_SERVER['DOCUMENT_ROOT'] . '/classes/ImageService.php');
 
-
+    $me;
+    $uid;
+    //    user id will come either from $_SESSION['user_id'] (if viewing your own profile)
+    //    or $_POST[] if viewing someone elses page
+    //    if(!empty($_POST)){
+    //        $uid = $_POST['uid'];
+    //        $me=false;
+    //    }
+    //    else{
+    //        $uid = $_SESSION['user_id'];
+    //        $me=true;
+    //    }
     //$uid = $_SESSION['user_id'];
+
     $uid = 1;
     $images = ImageService::getImages($uid);
 
@@ -76,7 +88,6 @@
                 <br>
 
 
-
                 <div class="btn-group galleryButtons">
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Upload Image</button>
                     <button type="button" class="btn btn-primary" data-toggle="popover"  data-content="Select image from thumbnails below to delete.">Delete Image</button>
@@ -94,19 +105,69 @@
                             </div>
                             <div class="modal-body">
                                 <p>
-                                    <?php if(ImageService::checkIfImageGalleryFull($images)) { ?>
+                                    <?php
+                                    if(ImageService::checkIfImageGalleryFull($images)) { ?>
                                         <br> Unfortunately your image gallery is full.
                                         You can have a maximum of 16 images. Please delete an image to make room for new uploads.
-                                    <?php } else {?>
+                                    <?php
+                                    } else {
+                                    ?>
                                     Empty slot at: <?php echo ImageService::returnFirstEmptySlotNumber($images)?>
 
 
-                                <form method="POST" action="uploadImage.php" enctype="multipart/form-data">
-                                    <input type="file" name="myimage" id="myimage">
-                                    <input type="submit" name="submit_image" value="Upload Image">
+                                <form method="POST" action="galleryPage.php" enctype="multipart/form-data">
+                                    <input type="file" name="myimage" id="myimage" class="btn btn-primary" >
+                                    <input type="submit" name="submit_image" value="Upload Image" class="btn btn-primary" >
                                 </form>
 
-                                <?php }?>
+                                <?php if(isset($_POST['submit_image'])){
+
+                                    $imgNum = ImageService::returnFirstEmptySlotNumber($images);
+
+                                    $file = $_FILES['myimage']['tmp_name'];
+                                    $file_name = $_FILES['myimage']['name'];
+                                    $size = $_FILES["myimage"]["size"];
+                                    $target_dir = "userImageUploads/user".$uid."/";
+                                    $name = basename($file_name);
+                                    $target_file = $target_dir . basename($file_name);
+                                    $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+                                    $infoMsg ="UNSET";
+                                    $infoMsgType = "danger";
+
+                                        // Check if image file is an actual image or fake image
+                                        $check = getimagesize($file);
+                                        if($check !== false) {
+                                            if (file_exists($target_file)) {
+                                                $infoMsg = "Sorry, an image with that filename already exists for this user. Please upload an image with a unique filename";
+                                            }
+                                            else{
+                                                if ($size > 500000) {
+                                                    $infoMsg = "Sorry, your file is too large.";
+                                                }
+                                                else{
+                                                    if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) {
+                                                        $infoMsg ="Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+                                                    }
+                                                    else{
+                                                        if (move_uploaded_file($file, $target_file)) {
+                                                            if(ImageService::uploadImage($uid, $imgNum, $target_file, $name)){
+                                                                $infoMsg ="The file ".$name." has been uploaded.";
+                                                                $infoMsgType = "success";
+                                                            }
+                                                            else{
+                                                                $infoMsg ='Image not stored in db correctly';
+                                                            }
+                                                        } else {
+                                                            $infoMsg ="Sorry, there was an error uploading your file.";
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        else { $infoMsg ="Error - File is not an image."; }
+                                 ?>
+
+                                <?php }}?>
                                 </p>
                             </div>
                             <div class="modal-footer">
@@ -119,6 +180,14 @@
 
 
                 <br><br><br>
+
+                <?php if(isset($_POST['submit_image'])){ ?>
+                <div class= "alert alert-<?php echo $infoMsgType;?>" role="alert">
+                    <a href="galleryPage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <?php echo $infoMsg;?>
+                </div>
+                <?php } $images = ImageService::getImages($uid);?>
+
                 <div id="main_area">
                     <!-- Slider -->
                     <div class="row">

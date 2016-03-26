@@ -16,8 +16,9 @@ class ImageService
         return $resultFinal;
     }
 
-    public static function updateProfileImage(){
+    public static function updateProfileImage($imageNum, $uid){
         //todo
+        return true;
     }
 
 
