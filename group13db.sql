@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 25, 2016 at 08:27 PM
+-- Generation Time: Mar 26, 2016 at 02:35 PM
 -- Server version: 5.7.9
 -- PHP Version: 5.6.16
 
@@ -297,10 +297,10 @@ INSERT INTO `height` (`id`, `choice`) VALUES
 
 DROP TABLE IF EXISTS `images`;
 CREATE TABLE IF NOT EXISTS `images` (
-  `image_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
+  `image_id` int(11) NOT NULL,
   `url` varchar(256) NOT NULL,
-  PRIMARY KEY (`image_id`),
+  PRIMARY KEY (`image_id`,`user_id`),
   KEY `User_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
