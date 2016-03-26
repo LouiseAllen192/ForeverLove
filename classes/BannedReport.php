@@ -5,7 +5,7 @@ class BannedReport{
     public function __construct($report_id){
         $this->report_id = $report_id;
 
-
+        
        setParams(DB::getInstance()->get('banned_reports', ['report_id', '=', $report_id])->results()[0]);
     }
 

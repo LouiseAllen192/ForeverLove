@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 20, 2016 at 05:47 PM
+-- Generation Time: Mar 26, 2016 at 02:35 PM
 -- Server version: 5.7.9
 -- PHP Version: 5.6.16
 
@@ -37,9 +37,10 @@ CREATE TABLE IF NOT EXISTS `account_details` (
 --
 
 INSERT INTO `account_details` (`user_id`, `account_type`, `free_trail_used`, `account_expired`) VALUES
-(1, 'Free', 1, '2016-02-02'),
+(1, 'Free', 1, '2016-04-24'),
 (2, 'Premium', 1, '2017-03-04'),
-(3, 'Premium', 0, '2017-01-06');
+(3, 'Premium', 0, '2017-01-06'),
+(4, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -95,6 +96,20 @@ CREATE TABLE IF NOT EXISTS `banned_users` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `blind_date`
+--
+
+DROP TABLE IF EXISTS `blind_date`;
+CREATE TABLE IF NOT EXISTS `blind_date` (
+  `user_id` int(11) DEFAULT NULL,
+  `seeking` int(11) DEFAULT NULL,
+  `gender` int(11) DEFAULT NULL,
+  KEY `user_id` (`user_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `body_type`
 --
 
@@ -135,10 +150,21 @@ CREATE TABLE IF NOT EXISTS `conversations` (
   `conversation_id` int(11) NOT NULL AUTO_INCREMENT,
   `user1_id` int(11) NOT NULL,
   `user2_id` int(11) NOT NULL,
+  `profile_visible` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`conversation_id`),
   KEY `User1_id` (`user1_id`),
   KEY `User2_id` (`user2_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `conversations`
+--
+
+INSERT INTO `conversations` (`conversation_id`, `user1_id`, `user2_id`, `profile_visible`) VALUES
+(11, 1, 3, 1),
+(12, 3, 3, 1),
+(16, 1, 1, 1),
+(17, 1, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -268,10 +294,10 @@ INSERT INTO `height` (`id`, `choice`) VALUES
 
 DROP TABLE IF EXISTS `images`;
 CREATE TABLE IF NOT EXISTS `images` (
-  `image_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
+  `image_id` int(11) NOT NULL,
   `url` varchar(256) NOT NULL,
-  PRIMARY KEY (`image_id`),
+  PRIMARY KEY (`image_id`,`user_id`),
   KEY `User_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -371,12 +397,59 @@ CREATE TABLE IF NOT EXISTS `messages` (
   `recipient_id` int(11) NOT NULL,
   `date_received` datetime NOT NULL,
   `message_text` text NOT NULL,
-  `profile_visable` tinyint(1) NOT NULL,
+  `seen` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`message_id`),
   KEY `Sender_id` (`sender_id`),
   KEY `Recipient_id` (`recipient_id`),
   KEY `Conversation_id` (`conversation_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `messages`
+--
+
+INSERT INTO `messages` (`message_id`, `conversation_id`, `sender_id`, `recipient_id`, `date_received`, `message_text`, `seen`) VALUES
+(4, 11, 1, 3, '2016-03-22 19:28:48', 'ha', 1),
+(5, 11, 1, 3, '2016-03-22 19:32:05', 'Hey x', 1),
+(6, 11, 3, 1, '2016-03-22 19:37:16', 'pop', 1),
+(7, 11, 1, 3, '2016-03-23 21:30:18', 'Well Lad', 1),
+(8, 11, 1, 3, '2016-03-23 21:33:05', 'Why do they call you party boy?', 1),
+(9, 11, 1, 3, '2016-03-23 21:33:59', 'Once upon a time not so long ago\r\n\r\nTommy used to work on the docks\r\nUnion''s been on strike\r\nHe''s down on his luck...\r\nIt''s tough, so tough\r\n\r\nGina works the diner all day\r\nWorking for her man,\r\nShe brings home her pay\r\nFor love, for love\r\n\r\nShe says, "We''ve gotta hold on to what we''ve got.\r\nIt doesn''t make a difference if we make it or not.\r\nWe''ve got each other and that''s a lot.\r\nFor love we''ll give it a shot."\r\n\r\n[Chorus:]\r\nWhoa, we''re half way there\r\nWhoa, livin'' on a prayer\r\nTake my hand and we''ll make it - I swear\r\nWhoa, livin'' on a prayer\r\n\r\nTommy''s got his six string in hock\r\nNow he''s holding in\r\nWhat he used to make it talk\r\nSo tough, it''s tough\r\n\r\nGina dreams of running away\r\nWhen she cries in the night\r\nTommy whispers,\r\n"Baby, it''s okay, someday...\r\n\r\n...We''ve gotta hold on to what we''ve got.\r\nIt doesn''t make a difference if we make it or not.\r\nWe''ve got each other and that''s a lot.\r\nFor love we''ll give it a shot."\r\n\r\n[Chorus]\r\n\r\nLivin'' on a prayer\r\n\r\nWe''ve gotta hold on ready or not\r\nYou live for the fight when it''s all that you''ve got\r\n', 1),
+(10, 11, 1, 3, '2016-03-23 21:37:47', 'Once upon a time not so long ago\r\n\r\nTommy used to work on the docks\r\nUnion''s been on strike\r\nHe''s down on his luck...\r\nIt''s tough, so tough\r\n\r\nGina works the diner all day\r\nWorking for her man,\r\nShe brings home her pay\r\nFor love, for love\r\n\r\nShe says, "We''ve gotta hold on to what we''ve got.\r\nIt doesn''t make a difference if we make it or not.\r\nWe''ve got each other and that''s a lot.\r\nFor love we''ll give it a shot."\r\n\r\n[Chorus:]\r\nWhoa, we''re half way there\r\nWhoa, livin'' on a prayer\r\nTake my hand and we''ll make it - I swear\r\nWhoa, livin'' on a prayer\r\n\r\nTommy''s got his six string in hock\r\nNow he''s holding in\r\nWhat he used to make it talk\r\nSo tough, it''s tough\r\n\r\nGina dreams of running away\r\nWhen she cries in the night\r\nTommy whispers,\r\n"Baby, it''s okay, someday...\r\n\r\n...We''ve gotta hold on to what we''ve got.\r\nIt doesn''t make a difference if we make it or not.\r\nWe''ve got each other and that''s a lot.\r\nFor love we''ll give it a shot."\r\n\r\n[Chorus]\r\n\r\nLivin'' on a prayer\r\n\r\nWe''ve gotta hold on ready or not\r\nYou live for the fight when it''s all that you''ve got\r\n', 1),
+(11, 11, 1, 3, '2016-03-23 21:37:52', 'Once upon a time not so long ago\r\n\r\nTommy used to work on the docks\r\nUnion''s been on strike\r\nHe''s down on his luck...\r\nIt''s tough, so tough\r\n\r\nGina works the diner all day\r\nWorking for her man,\r\nShe brings home her pay\r\nFor love, for love\r\n\r\nShe says, "We''ve gotta hold on to what we''ve got.\r\nIt doesn''t make a difference if we make it or not.\r\nWe''ve got each other and that''s a lot.\r\nFor love we''ll give it a shot."\r\n\r\n[Chorus:]\r\nWhoa, we''re half way there\r\nWhoa, livin'' on a prayer\r\nTake my hand and we''ll make it - I swear\r\nWhoa, livin'' on a prayer\r\n\r\nTommy''s got his six string in hock\r\nNow he''s holding in\r\nWhat he used to make it talk\r\nSo tough, it''s tough\r\n\r\nGina dreams of running away\r\nWhen she cries in the night\r\nTommy whispers,\r\n"Baby, it''s okay, someday...\r\n\r\n...We''ve gotta hold on to what we''ve got.\r\nIt doesn''t make a difference if we make it or not.\r\nWe''ve got each other and that''s a lot.\r\nFor love we''ll give it a shot."\r\n\r\n[Chorus]\r\n\r\nLivin'' on a prayer\r\n\r\nWe''ve gotta hold on ready or not\r\nYou live for the fight when it''s all that you''ve got\r\n', 1),
+(13, 11, 1, 3, '2016-03-23 21:38:20', 'hwy', 1),
+(15, 11, 1, 3, '2016-03-23 21:40:39', 'hwy', 1),
+(16, 11, 1, 3, '2016-03-23 21:57:05', '', 1),
+(17, 11, 1, 3, '2016-03-24 13:38:22', 'This is cool', 1),
+(18, 11, 1, 3, '2016-03-24 13:38:34', 'hEY BBY', 1),
+(19, 11, 1, 3, '2016-03-24 13:46:09', 'hEY BBY', 1),
+(20, 11, 1, 3, '2016-03-24 13:55:22', '', 1),
+(21, 12, 3, 3, '2016-03-24 14:13:44', 'This is a party test', 1),
+(22, 11, 1, 3, '2016-03-24 14:14:12', 'lol', 1),
+(23, 12, 3, 3, '2016-03-24 14:21:27', 'This is not a drill.', 1),
+(24, 12, 3, 3, '2016-03-24 14:21:38', 'Halo', 1),
+(25, 12, 3, 3, '2016-03-24 14:31:41', 'Hey now', 1),
+(26, 11, 1, 3, '2016-03-24 14:32:10', 'Hey now', 1),
+(27, 11, 1, 3, '2016-03-24 15:50:20', 'Test test another test', 1),
+(28, 11, 1, 3, '2016-03-24 15:52:09', 'Test test another test', 1),
+(29, 11, 1, 3, '2016-03-24 16:07:47', 'Test test another test', 1),
+(30, 11, 1, 3, '2016-03-24 16:08:12', 'Test test another test', 1),
+(31, 11, 1, 3, '2016-03-24 19:04:20', 'Test test another test', 1),
+(32, 11, 1, 3, '2016-03-24 19:04:45', 'Test test another test', 1),
+(33, 11, 1, 3, '2016-03-24 19:26:11', 'hello partyhead', 1),
+(34, 11, 1, 3, '2016-03-24 19:26:53', 'party', 1),
+(35, 11, 1, 3, '2016-03-24 19:28:08', 'I like party boys', 1),
+(36, 11, 1, 3, '2016-03-24 19:43:46', 'well', 1),
+(37, 11, 1, 3, '2016-03-24 19:52:39', 'a', 1),
+(38, 11, 1, 3, '2016-03-24 19:58:50', 'a', 1),
+(39, 16, 1, 1, '2016-03-25 11:01:38', 'Well Girlo ;)', 1),
+(40, 17, 1, 4, '2016-03-25 12:30:00', 'Well Rob', 1),
+(41, 11, 1, 3, '2016-03-25 12:30:14', 'wuu2?', 1),
+(42, 16, 1, 1, '2016-03-25 17:19:36', 'Send msgs yo', 1),
+(43, 17, 1, 4, '2016-03-25 18:34:06', 'This conversation already exists.', 1),
+(44, 16, 1, 1, '2016-03-25 18:40:04', 'This convo exists', 1),
+(45, 17, 1, 4, '2016-03-25 18:40:15', 'This exists too', 1),
+(46, 17, 1, 4, '2016-03-25 18:40:30', 'Get this', 1);
 
 -- --------------------------------------------------------
 
@@ -425,9 +498,10 @@ CREATE TABLE IF NOT EXISTS `preference_details` (
 --
 
 INSERT INTO `preference_details` (`user_id`, `tag_line`, `city`, `gender`, `seeking`, `intent`, `date_of_birth`, `height`, `ethnicity`, `body_type`, `religion`, `marital_status`, `income`, `has_children`, `wants_children`, `smoker`, `drinker`, `about_me`) VALUES
-(1, 'I''m a fun loving girl', 'Kerry', 3, 2, 6, '1991-03-03', 3, 2, 3, 3, 5, 8, 3, 4, 3, 2, 'I''m a Grad Student living in Monaghan but originally from Kerry. I like long walks on the beach and ice-cream'),
+(1, 'Hup Kerry', 'Tipp', 2, 3, 3, '1991-03-03', 2, 6, 9, 6, 6, 11, 2, 2, 2, 4, 'I''m just a love machine.'),
 (2, 'Hashtag farmer life', 'Sligo', 2, 3, 3, '1980-12-22', 7, 2, 11, 5, 6, 7, 2, 4, 2, 4, 'I''m really only interested in the farming life. Anything to do with farming gets my blood flowing. I love the smell of silage in the morning and grass all day.'),
-(3, 'See you in Ibiza', 'Dublin', 2, 3, 3, '1996-05-19', 4, 2, 9, 2, 2, 3, 3, 3, 2, 4, 'Living for the weekend. Into fast cars and fast women. Hit me up if you like boy race cars, repetitive music and mind numbingly boring conversations');
+(3, 'See you in Ibiza', 'Dublin', 2, 3, 3, '1996-05-19', 4, 2, 9, 2, 2, 3, 3, 3, 2, 4, 'Living for the weekend. Into fast cars and fast women. Hit me up if you like boy race cars, repetitive music and mind numbingly boring conversations'),
+(4, NULL, NULL, NULL, NULL, NULL, '1996-10-21', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -445,7 +519,7 @@ CREATE TABLE IF NOT EXISTS `registration_details` (
   `email` varchar(128) NOT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `Username` (`username`,`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `registration_details`
@@ -454,7 +528,8 @@ CREATE TABLE IF NOT EXISTS `registration_details` (
 INSERT INTO `registration_details` (`user_id`, `username`, `first_name`, `last_name`, `password`, `email`) VALUES
 (1, 'lollypop23', 'Lily', 'Lovejoy', 'LilyLovejoy1', 'lily@gmail.com'),
 (2, 'FarmerFred', 'Fred', 'Connors', 'FredConnors1', 'Freddy@yahoo.ie'),
-(3, 'PartyBoy56', 'Jared', 'Armstein', 'JaredArmstein1', 'Jarjar@gmail.com');
+(3, 'PartyBoy56', 'Jared', 'Armstein', 'JaredArmstein1', 'Jarjar@gmail.com'),
+(4, 'Rob', 'Rob', 'King', '$2y$10$jB8QeMTgCo.ZHotyBWpfeeSdCp6MTYI3E6hAlaW3P.3c9OVNiLbDK', 'robert.king.1996@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -549,7 +624,8 @@ CREATE TABLE IF NOT EXISTS `unique_hobby` (
 INSERT INTO `unique_hobby` (`user_id`, `unique_hobby`) VALUES
 (1, 'Sewing'),
 (2, 'Sheering sheep'),
-(3, 'Sunbathing');
+(3, 'Sunbathing'),
+(4, NULL);
 
 -- --------------------------------------------------------
 
@@ -562,7 +638,7 @@ CREATE TABLE IF NOT EXISTS `user_hobbies` (
   `hobby_id` int(11) NOT NULL AUTO_INCREMENT,
   `hobby_name` varchar(64) NOT NULL,
   PRIMARY KEY (`hobby_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user_hobbies`
@@ -729,7 +805,42 @@ INSERT INTO `user_hobby_preferences` (`user_id`, `hobby_id`, `hobby_preference`)
 (3, 32, 1),
 (3, 33, 1),
 (3, 34, 0),
-(3, 35, 0);
+(3, 35, 0),
+(4, 1, NULL),
+(4, 2, NULL),
+(4, 3, NULL),
+(4, 4, NULL),
+(4, 5, NULL),
+(4, 6, NULL),
+(4, 7, NULL),
+(4, 8, NULL),
+(4, 9, NULL),
+(4, 10, NULL),
+(4, 11, NULL),
+(4, 12, NULL),
+(4, 13, NULL),
+(4, 14, NULL),
+(4, 15, NULL),
+(4, 16, NULL),
+(4, 17, NULL),
+(4, 18, NULL),
+(4, 19, NULL),
+(4, 20, NULL),
+(4, 21, NULL),
+(4, 22, NULL),
+(4, 23, NULL),
+(4, 24, NULL),
+(4, 25, NULL),
+(4, 26, NULL),
+(4, 27, NULL),
+(4, 28, NULL),
+(4, 29, NULL),
+(4, 30, NULL),
+(4, 31, NULL),
+(4, 32, NULL),
+(4, 33, NULL),
+(4, 34, NULL),
+(4, 35, NULL);
 
 -- --------------------------------------------------------
 

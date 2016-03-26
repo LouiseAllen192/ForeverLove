@@ -1,6 +1,4 @@
 <?php
-
-
 class DB{
     private static $instance = null;
     private $pdo, $query, $error = false, $results, $count = 0;
@@ -123,6 +121,9 @@ class DB{
                 $hobbies = $this->get('user_hobbies', ['hobby_id', '>' , 0])->results();
                 foreach($hobbies as $hobby){
                     $this->insert('user_hobby_preferences', ['user_id' => $user_id, 'hobby_id' => $hobby->hobby_id, 'hobby_preference' => null]);
+                }
+                for($i = 1; $i <= 16; $i++){
+                    $this->insert('images', ['user_id' => $user_id, 'image_id' => $i, 'url' => '']);
                 }
             }
             else return true;

@@ -2,14 +2,33 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aa9ae6b7-303e-437b-99d9-aebc819ae203" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/viewReportedCasesPage.php" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/adminHomePage.php" afterPath="$PROJECT_DIR$/adminHomePage.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/adminLoginPage.php" afterPath="$PROJECT_DIR$/adminLoginPage.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/Admin.php" afterPath="$PROJECT_DIR$/classes/Admin.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/AdminServiceMgr.php" afterPath="$PROJECT_DIR$/classes/AdminServiceMgr.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/scripts/login.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TODO" afterPath="$PROJECT_DIR$/TODO" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/blindDatePage.php" afterPath="$PROJECT_DIR$/blindDatePage.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/BannedReport.php" afterPath="$PROJECT_DIR$/classes/BannedReport.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/custom-admin.css" afterPath="$PROJECT_DIR$/css/custom-admin.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/DB.php" afterPath="$PROJECT_DIR$/classes/DB.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/MessageMgr.php" afterPath="$PROJECT_DIR$/classes/MessageMgr.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/User.php" afterPath="$PROJECT_DIR$/classes/User.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/UserServiceMgr.php" afterPath="$PROJECT_DIR$/classes/UserServiceMgr.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/classes/Validate.php" afterPath="$PROJECT_DIR$/classes/Validate.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/conversationPage.php" afterPath="$PROJECT_DIR$/conversationPage.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/custom-welcome.css" afterPath="$PROJECT_DIR$/css/custom-welcome.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/existingConversationPage.php" afterPath="$PROJECT_DIR$/existingConversationPage.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/group13db.sql" afterPath="$PROJECT_DIR$/group13db.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/homePage.php" afterPath="$PROJECT_DIR$/homePage.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/includes/navbarNotLoggedIn.html" afterPath="$PROJECT_DIR$/includes/navbarNotLoggedIn.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/newMessagePage.php" afterPath="$PROJECT_DIR$/newMessagePage.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/profilePage.php" afterPath="$PROJECT_DIR$/profilePage.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/registrationPage.php" afterPath="$PROJECT_DIR$/registrationPage.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/checkIfEmailIsRegistered.php" afterPath="$PROJECT_DIR$/scripts/checkIfEmailIsRegistered.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/checkUsernameAvailability.php" afterPath="$PROJECT_DIR$/scripts/checkUsernameAvailability.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/registrationValidation.js" afterPath="$PROJECT_DIR$/scripts/registrationValidation.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/searchPage.php" afterPath="$PROJECT_DIR$/searchPage.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/suggestionsPage.php" afterPath="$PROJECT_DIR$/suggestionsPage.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/updateRegDetailsPage.php" afterPath="$PROJECT_DIR$/updateRegDetailsPage.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/viewAllPage.php" afterPath="$PROJECT_DIR$/viewAllPage.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/welcomePage.php" afterPath="$PROJECT_DIR$/welcomePage.php" />
     </list>
     <ignored path="ForeverLove.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -45,70 +64,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="viewBannedUsersPage.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/viewBannedUsersPage.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.807693">
-              <caret line="15" column="44" selection-start-line="15" selection-start-column="44" selection-end-line="15" selection-end-column="44" />
-              <folding>
-                <marker date="1459003641013" expanded="true" signature="417:475" placeholder="SELECT user_... banned_reports" />
-                <marker date="1459003641013" expanded="true" signature="694:2262" placeholder="..." />
-                <marker date="1459003641013" expanded="true" signature="792:2212" placeholder="..." />
-                <marker date="1459003641013" expanded="true" signature="814:2205" placeholder="..." />
-                <marker date="1459003641013" expanded="true" signature="836:2194" placeholder="..." />
-                <marker date="1459003641013" expanded="true" signature="880:2183" placeholder="..." />
-                <marker date="1459003641013" expanded="true" signature="918:1035" placeholder="..." />
-                <marker date="1459003641013" expanded="true" signature="942:1017" placeholder="..." />
-                <marker date="1459003641013" expanded="true" signature="1227:1236" placeholder="..." />
-                <marker date="1459003641013" expanded="true" signature="1252:1988" placeholder="..." />
-                <marker date="1459003641013" expanded="true" signature="1273:1408" placeholder="..." />
-                <marker date="1459003641013" expanded="true" signature="1429:1573" placeholder="..." />
-                <marker date="1459003641013" expanded="true" signature="1594:1735" placeholder="..." />
-                <marker date="1459003641013" expanded="true" signature="1756:1893" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AdminServiceMgr.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/classes/AdminServiceMgr.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-18.307692">
-              <caret line="28" column="5" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DB.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/classes/DB.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.538462">
-              <caret line="62" column="51" selection-start-line="62" selection-start-column="51" selection-end-line="62" selection-end-column="51" />
-              <folding>
-                <marker date="1459004611253" expanded="true" signature="3406:3476" placeholder="INSERT INTO $... " />
-                <marker date="1459004611253" expanded="true" signature="4866:4936" placeholder="INSERT INTO $... " />
-                <marker date="1459004611253" expanded="true" signature="5551:5584" placeholder="UPDATE ${{$t... " />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="adminLoginPage.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/adminLoginPage.php">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-7.769231">
               <caret line="31" column="32" selection-start-line="31" selection-start-column="32" selection-end-line="31" selection-end-column="32" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="group13db.sql" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/group13db.sql">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -124,10 +84,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="adminHomePage.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="adminHomePage.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/adminHomePage.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.071301244">
+            <state vertical-scroll-proportion="-1.5384616">
               <caret line="25" column="20" selection-start-line="25" selection-start-column="20" selection-end-line="25" selection-end-column="20" />
               <folding />
             </state>
@@ -157,11 +117,56 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BannedReport.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="BannedReport.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/classes/BannedReport.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.576923">
-              <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.21212122">
+              <caret line="7" column="8" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MessageMgr.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/classes/MessageMgr.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-3.7692308">
+              <caret line="53" column="18" selection-start-line="53" selection-start-column="18" selection-end-line="53" selection-end-column="152" />
+              <folding>
+                <marker date="1459005072439" expanded="true" signature="229:391" placeholder="SELECT * FRO... conversations" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="blindDatePage.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/blindDatePage.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <marker date="1459005072436" expanded="true" signature="1077:1118" placeholder="SELECT * FRO... blind_date" />
+                <marker date="1459005072436" expanded="true" signature="1306:1355" placeholder="SELECT * FRO... preference_details" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="suggestionsPage.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/suggestionsPage.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="welcomePage.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/welcomePage.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -404,7 +409,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1458824730425" expanded="true" signature="8525:8534" placeholder="..." />
+            <marker date="1459005072443" expanded="true" signature="9765:9774" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -484,8 +489,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1458928002769" expanded="true" signature="192:238" placeholder="SELECT * FRO... user_hobbies" />
-            <marker date="1458928002769" expanded="true" signature="1032:1187" placeholder="SELECT user_... registration_details" />
+            <marker date="1459005072466" expanded="true" signature="192:238" placeholder="SELECT * FRO... user_hobbies" />
+            <marker date="1459005072466" expanded="true" signature="1032:1187" placeholder="SELECT user_... registration_details" />
           </folding>
         </state>
       </provider>
@@ -573,7 +578,7 @@
         <state vertical-scroll-proportion="-0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1458824730425" expanded="true" signature="8525:8534" placeholder="..." />
+            <marker date="1459005072443" expanded="true" signature="9765:9774" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -647,7 +652,7 @@
         <state vertical-scroll-proportion="25.23077">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1458928002749" expanded="true" signature="1358:1427" placeholder="SELECT usern... registration_details" />
+            <marker date="1459005072446" expanded="true" signature="1358:1427" placeholder="SELECT usern... registration_details" />
           </folding>
         </state>
       </provider>
@@ -665,7 +670,7 @@
         <state vertical-scroll-proportion="-1.0890411">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1458928002772" expanded="true" signature="236:371" placeholder="SELECT user_... registration_details" />
+            <marker date="1459005072471" expanded="true" signature="236:371" placeholder="SELECT user_... registration_details" />
           </folding>
         </state>
       </provider>
@@ -675,30 +680,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/classes/MessageMgr.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.1660959">
-          <caret line="53" column="18" selection-start-line="53" selection-start-column="18" selection-end-line="53" selection-end-column="152" />
-          <folding>
-            <marker date="1458928002748" expanded="true" signature="229:391" placeholder="SELECT * FRO... conversations" />
-            <marker date="1458928002748" expanded="true" signature="1170:1257" placeholder="..." />
-            <marker date="1458928002748" expanded="true" signature="1763:1836" placeholder="..." />
-            <marker date="1458928002748" expanded="true" signature="1947:2037" placeholder="SELECT * FRO... conversations" />
-            <marker date="1458928002748" expanded="true" signature="2373:2441" placeholder="SELECT usern... registration_details" />
-            <marker date="1458928002748" expanded="true" signature="3095:3163" placeholder="SELECT * FRO... registration_details" />
-            <marker date="1458928002748" expanded="true" signature="3521:3624" placeholder="SELECT conve... conversations" />
-            <marker date="1458928002748" expanded="true" signature="3831:3911" placeholder="SELECT * FRO... messages" />
-            <marker date="1458928002748" expanded="true" signature="4927:4944" placeholder="..." />
-            <marker date="1458928002748" expanded="true" signature="4946:5118" placeholder="..." />
-            <marker date="1458928002748" expanded="true" signature="5286:5302" placeholder="..." />
-            <marker date="1458928002748" expanded="true" signature="5304:5476" placeholder="..." />
-            <marker date="1458928002748" expanded="true" signature="5665:5918" placeholder="..." />
-            <marker date="1458928002748" expanded="true" signature="6158:6220" placeholder="SELECT * FRO... conversations" />
-            <marker date="1458928002748" expanded="true" signature="6507:6571" placeholder="SELECT usern... registration_details" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -713,8 +694,10 @@
     <entry file="file://$PROJECT_DIR$/group13db.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
-          <folding />
+          <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+          <folding>
+            <marker date="1459005072515" expanded="true" signature="24742:24743" placeholder="INSERT INTO `user_hobby_preferences`... " />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -751,21 +734,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/classes/DB.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.538462">
-          <caret line="62" column="51" selection-start-line="62" selection-start-column="51" selection-end-line="62" selection-end-column="51" />
+        <state vertical-scroll-proportion="-8.230769">
+          <caret line="60" column="51" selection-start-line="60" selection-start-column="51" selection-end-line="60" selection-end-column="51" />
           <folding>
-            <marker date="1459004611253" expanded="true" signature="3406:3476" placeholder="INSERT INTO $... " />
-            <marker date="1459004611253" expanded="true" signature="4866:4936" placeholder="INSERT INTO $... " />
-            <marker date="1459004611253" expanded="true" signature="5551:5584" placeholder="UPDATE ${{$t... " />
+            <marker date="1459005072438" expanded="true" signature="4434:4454" placeholder="..." />
+            <marker date="1459005072438" expanded="true" signature="5028:5098" placeholder="INSERT INTO $... " />
+            <marker date="1459005072438" expanded="true" signature="5713:5746" placeholder="UPDATE ${{$t... " />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/classes/BannedReport.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.576923">
-          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -806,8 +781,53 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/adminHomePage.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.071301244">
+        <state vertical-scroll-proportion="-1.5384616">
           <caret line="25" column="20" selection-start-line="25" selection-start-column="20" selection-end-line="25" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/classes/MessageMgr.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.7692308">
+          <caret line="53" column="18" selection-start-line="53" selection-start-column="18" selection-end-line="53" selection-end-column="152" />
+          <folding>
+            <marker date="1459005072439" expanded="true" signature="229:391" placeholder="SELECT * FRO... conversations" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blindDatePage.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1459005072436" expanded="true" signature="1077:1118" placeholder="SELECT * FRO... blind_date" />
+            <marker date="1459005072436" expanded="true" signature="1306:1355" placeholder="SELECT * FRO... preference_details" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/suggestionsPage.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/welcomePage.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/classes/BannedReport.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.21212122">
+          <caret line="7" column="8" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
           <folding />
         </state>
       </provider>

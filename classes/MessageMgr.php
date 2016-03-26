@@ -23,7 +23,7 @@ class MessageMgr
     {
         $reciever_id = $this->getConversationPartner($convoID);
         $date = date('Y-m-d H:i:s');
-        DB::getInstance()->insert('messages', ['Conversation_id' => $convoID, 'Sender_id' => $this->userID, 'Recipient_id'  => $reciever_id, 'Date_Received' => $date, 'Message_Text' => $message, 'Profile_Visable' => 1]);
+        DB::getInstance()->insert('messages', ['Conversation_id' => $convoID, 'Sender_id' => $this->userID, 'Recipient_id'  => $reciever_id, 'Date_Received' => $date, 'Message_Text' => $message]);
     }
 
     public function sendNewMessage($GET)
@@ -42,7 +42,7 @@ class MessageMgr
             {
                 $convo_id = $this->createConversation($reciever_id);
             }
-            DB::getInstance()->insert('messages', ['Conversation_id' => $convo_id, 'Sender_id' => $this->userID, 'Recipient_id'  => $reciever_id, 'Date_Received' => $date, 'Message_Text' => $GET["message"], 'Profile_Visable' => 1]);
+            DB::getInstance()->insert('messages', ['Conversation_id' => $convo_id, 'Sender_id' => $this->userID, 'Recipient_id'  => $reciever_id, 'Date_Received' => $date, 'Message_Text' => $GET["message"]]);
             echo "<div class=\"alert alert-success\">
                       Message Sent Succesfully.
                   </div>";
@@ -63,7 +63,7 @@ class MessageMgr
             $messagedUsers[$i]=$convoPartner[0]->username;
             $tempConvoID = $convos[$i]->conversation_id;
             $linkString = "conversationPage.php?".$tempConvoID."#bottom";
-            echo "<a href= '".$linkString."''>$messagedUsers[$i]</a>";
+            echo "<a href= '".$linkString."''>$messagedUsers[$i]</a><br><br>";
         }
         if($i == 0)
             echo "No existing converations found.";
@@ -88,7 +88,7 @@ class MessageMgr
 
     public function createConversation($recieverid)
     {
-        DB::getInstance()->insert('Conversations', ['User1_id' => $this->userID, 'User2_id' => $recieverid]);
+        DB::getInstance()->insert('Conversations', ['User1_id' => $this->userID, 'User2_id' => $recieverid, 'profile_visible' => 1]);
         $ans = DB::getInstance()->query("SELECT conversation_id FROM conversations WHERE User1_id = '$this->userID' AND User2_id = '$recieverid'")->results();
         return ($ans[0]->conversation_id);
     }
@@ -149,10 +149,31 @@ class MessageMgr
             return $user1;
     }
 
-    public function getUsername($uid)
+    public function getUsername()
     {
+        if(func_num_args() > 0)
+            $uid = func_get_arg(0);
+        else
+            $uid = $this->userID;
         $user = DB::getInstance()->query("SELECT username FROM registration_details WHERE user_id = '$uid'")->results();
-        return ($user[0]->username);
+        if(!empty($user))
+            return ($user[0]->username);
+        else
+            return "";
+    }
+
+    public function isUserInConversation($convoID)
+    {
+        $usersInConversation = DB::getInstance()->query("SELECT user1_id, user2_id FROM conversations WHERE conversation_id = '$convoID'")->results();
+        if(!empty($usersInConversation))
+        {
+            if($this->userID == $usersInConversation[0]->user1_id || $this->userID == $usersInConversation[0]->user2_id)
+                return true;
+            else
+                return false;
+        }
+        else
+            return false;
     }
 }
 ?>
