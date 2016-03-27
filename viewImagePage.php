@@ -12,44 +12,35 @@
     <link href="css/custom-view-image.css" rel="stylesheet">
     <script src="scripts/gallery.js"></script>
 
-    <?php include("includes/fonts.html"); ?>
-
-    <?php
+    <?php include("includes/fonts.html");
     include($_SERVER['DOCUMENT_ROOT'] . '/classes/User.php');
+
 
     $me;
     $uid;
-    //    user id will come either from $_SESSION['user_id'] (if viewing your own profile)
-    //    or $_POST[] if viewing someone elses page
-    //    if(!empty($_POST)){
-    //        $uid = $_POST['uid'];
-    //        $me=false;
-    //    }
-    //    else{
-    //        $uid = $_SESSION['user_id'];
-    //        $me=true;
-    //    }
+    $imageNum;
 
-    $me=false;
-    $uid = 1;
+    foreach($_POST as $key=>$value){
+        if(endsWith($key, '_x')){
+            $imageNum = (string)$key;
+            $imageNum = str_replace('_x', '', $imageNum);
+        }
+        if($key == "me"){
+            $me = $value;
+        }
+        if($key == 'uid'){
+            $uid = $value;
+        }
+        if($key == 'imgNum'){
+            $imageNum = $value;
+        }
+    }
+
     $images = ImageService::getImages($uid);
 
     function endsWith($word, $x) {
         return $x === "" || (($temp = strlen($word) - strlen($x)) >= 0 && strpos($word, $x, $temp) !== false);
     }
-
-
-
-    $imageNum;
-        foreach($_POST as $key=>$value){
-            if(endsWith($key, '_x')){
-                $imageNum = (string)$key;
-                $imageNum = str_replace('_x', '', $imageNum);
-            }
-            if($value == "Delete" || $value == "ProfilePic"){
-                $imageNum = $key;
-            }
-        }
 
 
     ?>
@@ -75,19 +66,25 @@
                 <hr class="visible-xs">
                 <br>
 
+                <?php if($me){ ?>
                 <form action="viewImagePage.php" method="post">
+                <input type="hidden" name="uid" value="<?php echo $uid?>">
+                <input type="hidden" name="me" value="<?php echo $me?>">
+                <input type="hidden" name="imgNum" value="<?php echo $imageNum?>">
+
                 <div class="btn-group myButtonsLeft">
-                    <button type="submit" name="<?php echo $imageNum?>" class="btn btn-primary" Value="Delete" >Delete Image</button>
+                    <button type="submit" name="submit" class="btn btn-primary" Value="Delete" >Delete Image</button>
                 </div>
                     <div class="btn-group myButtonsRight">
-                        <button type="submit" name="<?php echo $imageNum?>"  class="btn btn-primary" Value="ProfilePic" >Set as Profile Picture</button>
+                        <button type="submit" name="submit"  class="btn btn-primary" Value="ProfilePic" >Set as Profile Picture</button>
                     </div>
                 </form>
+                <?php } ?>
 
                 <?php
-                if(isset($_POST[$imageNum])) {
-                    if ($_POST[$imageNum] == "Delete") {
-                        $success = ImageService::deleteImage($imageNum);
+                if(isset($_POST['submit'])) {
+                    if ($_POST['submit'] == "Delete") {
+                        $success = ImageService::deleteImage($imageNum, $uid);
                         if($success){
                             $alertType = "success";
                             $alertMsg = "Image deleted successfully";
@@ -97,7 +94,7 @@
                             $alertMsg = "Image was not successfully deleted. Please try again";
                         }
                     }
-                    if ($_POST[$imageNum] == "ProfilePic") {
+                    if ($_POST['submit'] == "ProfilePic") {
                         $success = ImageService::updateProfileImage($imageNum, $uid);
                         if($success){
                             $alertType = "success";
@@ -112,7 +109,6 @@
                              <div class= "alert alert-<?php echo $alertType?>" role="alert">
                             <a href="galleryPage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                             <?php echo $alertMsg?>
-                                 <br><br><a href="galleryPage.php"><button type="button" name="Back to gallery" class="btn btn-primary" Value="Back to gallery">Back to gallery</button></a>
                             </div>
                 <?php }
                 ?>
@@ -120,15 +116,25 @@
 
                 <br><br><br><br>
                 <?php
-                if(isset($_POST[$imageNum])) {
-                    if ($_POST[$imageNum] != "Delete" && $_POST[$imageNum] != "ProfilePic") {
-                        echo '<img src="<?php echo $images[$imageNum]?>" class="img-responsive">';
+                if(isset($_POST['submit'])) {
+                    if ($_POST['submit'] != "Delete" && $_POST['submit'] != "ProfilePic") {
+                        echo '<img src="'.$images[$imageNum].'" class="img-responsive">';
                     }
                 }
                 else{ ?>
                     <img src="<?php echo $images[$imageNum]?>" class="img-responsive">
                 <?php }
                 ?>
+
+
+                <br><br><br><br>
+
+                <form action="galleryPage.php" method="post">
+                    <input type="hidden" name="uid" value="<?php echo $uid?>">
+                    <input type="hidden" name="me" value="<?php echo $me?>">
+                    <button type="submit" name="goBack" class="btn btn-info center-block" >Back to Image Gallery <span class="glyphicon glyphicon-picture"></span></button>
+                </form>
+
 
             </div>
         </div>

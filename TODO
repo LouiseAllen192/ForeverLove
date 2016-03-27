@@ -22,22 +22,17 @@ User Services:
 
    welcomePage:
     - create log out functionality
+    - display logged in username in nav bar
     - check if users account is not expired on login
     - create forgotten password functionality
 
     ProfilePage:
     - create report user functionality if viewing another users page
     - fix profile image size
+    - set default profile pic
 
     Image gallery:
-    - figure out why upload images occasionally doesn't work
-    - change page to work with logged in user and viewing other users galleries
-
-    View image:
-    - change page to work with logged in user and viewing other users galleries
-    - Add delete image functionality
-    - Add change profile picture functionality
-    - align alert message properly
+    - fix error[3] partial upload error on certain images
 
     Settings:
     - create view Account details page - give option to upgrade

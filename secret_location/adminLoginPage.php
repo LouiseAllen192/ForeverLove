@@ -3,19 +3,23 @@
 
 <head>
     <?php
-    require_once 'core/init.php';
-    include("includes/metatags.html");
+    require_once '../core/init.php';
+    include("../includes/metatags.html");
+    include("../includes/fonts.html");
+
+    $successfulLogin = true;
+    if($successfulLogin){
+        session_start();
+        $_SESSION['permissions'] = 'admin';
+    }
     ?>
     <title>Admin Login Page</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/custom-admin.css" rel="stylesheet">
-    <?php include("includes/fonts.html"); ?>
-    <?php include("includes/navbarAdmin.html"); ?>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/custom-admin.css" rel="stylesheet">
 
 </head>
 
 <body class="full">
-
 <!--Main page content-->
 
 <div class="container">
@@ -29,7 +33,7 @@
                 </h2>
                 <hr class="tagline-divider">
                 <p>
-                <form onsubmit=""(); return false; id="form" action="adminLoginPage.php" method="post" enctype="multipart/form-data">
+                <form onsubmit="" (); return false; id="form" action="adminLoginPage.php" method="post" enctype="multipart/form-data">
                     Username: <input type="text" name="username" />
                     <br>
                     Password:<input type="password" name="password" />
@@ -42,7 +46,7 @@
             </div>
     </div>
 </div>
-<?php include("includes/footer.html"); ?>
+<?php include("../includes/footer.html"); ?>
 </body>
 
 </html>
