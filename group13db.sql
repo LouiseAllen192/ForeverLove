@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 26, 2016 at 09:58 PM
+-- Generation Time: Mar 27, 2016 at 12:38 PM
 -- Server version: 5.7.9
 -- PHP Version: 5.6.16
 
@@ -74,11 +74,14 @@ CREATE TABLE IF NOT EXISTS `banned_reports` (
   `report_id` int(11) NOT NULL AUTO_INCREMENT,
   `reporter_id` int(11) NOT NULL,
   `reportee_id` int(11) NOT NULL,
+  `priority` int(11) NOT NULL DEFAULT '1',
   `content` text NOT NULL,
+  `date_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `resolved` tinyint(1) NOT NULL,
   PRIMARY KEY (`report_id`),
   KEY `Reporter_id` (`reporter_id`),
-  KEY `Reportee_id` (`reportee_id`)
+  KEY `Reportee_id` (`reportee_id`),
+  KEY `priority` (`priority`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -91,8 +94,9 @@ DROP TABLE IF EXISTS `banned_users`;
 CREATE TABLE IF NOT EXISTS `banned_users` (
   `user_id` int(11) NOT NULL,
   `report_id` int(11) NOT NULL,
-  `start_date` date NOT NULL,
-  `end_date` date NOT NULL,
+  `start_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `end_date` datetime NOT NULL,
+  `permanent` tinyint(1) NOT NULL DEFAULT '0',
   KEY `User_id` (`user_id`),
   KEY `Report_id` (`report_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -599,6 +603,30 @@ INSERT INTO `preference_details` (`user_id`, `tag_line`, `city`, `gender`, `seek
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `priority`
+--
+
+DROP TABLE IF EXISTS `priority`;
+CREATE TABLE IF NOT EXISTS `priority` (
+  `id` int(11) NOT NULL,
+  `choice` varchar(32) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `priority`
+--
+
+INSERT INTO `priority` (`id`, `choice`) VALUES
+(1, 'Unselected'),
+(2, 'Minor'),
+(3, 'Normal'),
+(4, 'High'),
+(5, 'Highest');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `registration_details`
 --
 
@@ -1010,7 +1038,8 @@ ALTER TABLE `account_details`
 --
 ALTER TABLE `banned_reports`
   ADD CONSTRAINT `banned_reports_ibfk_1` FOREIGN KEY (`reporter_id`) REFERENCES `registration_details` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `banned_reports_ibfk_2` FOREIGN KEY (`reportee_id`) REFERENCES `registration_details` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `banned_reports_ibfk_2` FOREIGN KEY (`reportee_id`) REFERENCES `registration_details` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `banned_reports_ibfk_3` FOREIGN KEY (`priority`) REFERENCES `priority` (`id`);
 
 --
 -- Constraints for table `banned_users`

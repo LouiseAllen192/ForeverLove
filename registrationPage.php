@@ -30,14 +30,14 @@
         <div class="box">
             <div class="col-lg-12 text-center">
                 <br><br>
+                <hr class="tagline-divider">
                 <h2>
                     <small>
-                        <strong>Please Complete Registration</strong>
+                        <strong>Complete Registration</strong>
                     </small>
                 </h2>
                 <hr class="tagline-divider">
-                <p>
-                    <br>
+                <p><br>
 
                 <form id="reg_form" class="form-horizontal" role="form" method="post">
                     <fieldset>
