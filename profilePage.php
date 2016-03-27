@@ -21,7 +21,7 @@
     $uid;
 //    user id will come either from $_SESSION['user_id'] (if viewing your own profile)
 //    or $_POST[] if viewing someone elses page
-//    if(!empty($_POST)){
+//    if(isset($_POST['uid'])){
 //        $uid = $_POST['uid'];
 //        $me=false;
 //    }
@@ -30,10 +30,11 @@
 //        $me=true;
 //    }
 
-        $me=false;
+        $me=true;
         $uid = 1;
 
         $images = ImageService::getImages($uid);
+
         $user = new User($uid);
         $dbprf = $user->getUserPrefrences();
         $hobNames = ReturnShortcuts::returnHobbyNames();
@@ -67,14 +68,16 @@
 
     function createSlides($images){
         foreach($images as $key=>$image) {
-            if ($key == "0") {
-                echo '<div class="item active">
-                         <img src="'.$image.'" alt="image zero">
+            if($image != ''){
+                if ($key == "1") {
+                    echo '<div class="item active">
+                         <img src="'.$image.'" alt="image 1">
                         </div>';
-            } else {
-                echo '<div class="item ">
+                } else {
+                    echo '<div class="item ">
                          <img src="'.$image.'" alt="image '.$key.'">
                         </div>';
+                }
             }
         }
     }
@@ -182,7 +185,11 @@
                                 <div class="col-md-8">
                                     <div class="carouselBox">
                                         <div class = "button_center">
-                                            <a href="galleryPage.php" class="btn btn-info center-inline" role="button">Go to Image Gallery  <span class="glyphicon glyphicon-picture"></span></a>
+                                            <form action="galleryPage.php" method="post">
+                                                    <input type="hidden" name="uid" value="<?php echo $uid?>">
+                                                    <input type="hidden" name="me" value="<?php echo $me?>">
+                                                    <button type="submit" name="submit" class="btn btn-info" >Go to Image Gallery <span class="glyphicon glyphicon-picture"></span></button>
+                                            </form>
                                         </div>
                                         <br><br>
 

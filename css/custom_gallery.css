@@ -132,3 +132,8 @@ footer p {
 .popover-content{
     color: black;
 }
+
+.buttons_left{
+    float: left;
+}
+
