@@ -9,6 +9,7 @@ class MessageMgr
     {
         $this->userID = $uid;
     }
+
     public function conversationExists($convoID)
     {
         $ans = DB::getInstance()->query("SELECT * FROM conversations WHERE conversation_id = '$convoID'")->results();
@@ -148,7 +149,7 @@ class MessageMgr
                 <form role =\"form\" class=\"form-inline\" action=\"conversationPage.php?.$convoID.#bottom\" method=\"post\">
                     <textarea rows=\"6\" cols=\"50\" name=\"message\"></textarea><br><br>
                     <input type=\"hidden\" name=\"convoID\" value=$convoID />
-                    <input type=\"submit\" value=\"Submit\">
+                    <input type=\"submit\" value=\"Send\">
                 </form>";
         }
         else //if user just types in URL without following appropriate link
@@ -195,14 +196,14 @@ class MessageMgr
 
     public function blindDateMatch()
     {
-        $alreadyIn = DB::getInstance()->query("SELECT * FROM blind_date WHERE user_id = $this->userID")->results();
-        if(empty($alreadyIn))//THIS IS NOT FINISHED
+        $message = $this->blindDateEligible();
+        if($message == "")
         {
             $user = DB::getInstance()->query("SELECT * FROM preference_details WHERE user_id = $this->userID")->results();
             $seeking = $user[0]->seeking;
             $gender = $user[0]->gender;
-            if(($seeking == 2 || $seeking == 3 || $seeking == 4) && ($gender == 2 || $gender == 3))
-            {
+            /*if(($seeking == 2 || $seeking == 3 || $seeking == 4) && ($gender == 2 || $gender == 3))
+            {*/
                 //get all people from Blind Date table here and try to find an eligible match
                 $allUsers = DB::getInstance()->query("SELECT * FROM blind_date")->results();
                 $matchFound = false;
@@ -231,17 +232,10 @@ class MessageMgr
                        No suitible match availible at the moment, but you will be matched shortly. Keep checking you existing conversations page!
                       </div>";
                 }
-            }
-            else
-                echo "<div class=\"alert alert-danger\">
-                       Gender And/Or Seeking Details Not Specified For Your Profile. You Must Update Them Before You Can Participate In Blind Date.
-                      </div>
-                      <a href =\"updatePreferencesPage\"><h3>Take Me To Update Preferences Page</h3></a></div>";
-
         }
         else
             echo "<div class=\"alert alert-danger\">
-                   You are already signed up to find a blind date. You will be matched with someone shortly!
+                   $message
                   </div>";
     }
     public function isProfileVisible($convo_id)
@@ -258,6 +252,113 @@ class MessageMgr
         $array = DB::getInstance()->query("SELECT COUNT(*) AS 'count' FROM messages where conversation_id = '$convoID'")->results();
         $count = $array[0]->count;
         return $count;
+    }
+
+    public function revealButton($convoID)
+    {
+        $current = DB::getInstance()->query("SELECT reveal FROM conversations WHERE conversation_id = '$convoID'")->results();
+        if($current[0]->reveal == NULL)
+            DB::getInstance()->query("UPDATE conversations SET reveal = '$this->userID' WHERE conversation_id = $convoID");
+        /*else if($current[0]->reveal == $this->userID)
+            echo "You already pressed the reveal button";*/
+        else
+            DB::getInstance()->query("UPDATE conversations SET profile_visible = '1' WHERE conversation_id = $convoID");
+    }
+
+    public function hasUserPressedReveal($convoID)
+    {
+        $current = DB::getInstance()->query("SELECT reveal FROM conversations WHERE conversation_id = '$convoID'")->results();
+        if($current[0]->reveal == $this->userID)
+            return true;
+        else
+            return false;
+    }
+
+    public function conversationLoader($convoID) //loads everything but heading and back button on conversation page
+    {
+        if ($this->isUserInConversation($convoID) == TRUE)
+        {
+            $this->loadConversation($convoID);
+            $visible = $this->isProfileVisible($convoID);
+            if (!$visible)
+            {
+                $msgCount = $this->messageCount($convoID);
+                echo "Message Count: " . $msgCount;
+                if ($msgCount >= 25 && !($this->hasUserPressedReveal($convoID)))
+                    echo "<form action=\"conversationPage.php?$convoID#bottom\"  method=\"post\">
+                                            <button name=\"reveal\" value=\"reveal\" class=\"btn btn-warning\">Reveal User</button>
+                                           </form><br><br>";
+                else if($this->hasUserPressedReveal($convoID))
+                    echo "<div class=\"alert alert-info\">
+                           You have pressed to reveal your profile to your blind date and to see their profile. If they also press the button then the reveal will take place.
+                          </div>";
+
+                echo "<form action=\"blindDateEndPage.php\" method=\"post\">
+                                        <button name=\"end\" value=\"end\" class=\"btn btn-warning\">End Conversation</button>
+                                        <input type=\"hidden\" name=\"convo_id\" value=$convoID>
+                                       </form>";
+            }
+            else
+            {
+                $uname = $this->getOtherUser($convoID);
+                $uid2 = $this->doesRecipientExist($uname);
+                echo "<br><br><form action=\"profilePage.php\" method=\"post\">
+                        <button name=\"profile\" value=\"Profile\" class=\"btn btn-warning\">Take Me To $uname's Profile Page</button>
+                        <input type=\"hidden\" name=\"uid\" value=$uid2>
+                       </form>";
+            }
+        }
+        else
+            echo "<div class=\"alert alert-danger\">
+                      Error - You are not invloved in this conversation!
+                  </div>";
+    }
+
+    public function blindDateEligible()
+    {
+        $alreadyIn = DB::getInstance()->query("SELECT * FROM blind_date WHERE user_id = $this->userID")->results();
+        $currentBlindDate = DB::getInstance()->query("SELECT * FROM conversations WHERE (user1_id = $this->userID || user2_id = $this->userID) AND profile_visible = '0'")->results();
+        $prefs = DB::getInstance()->query("SELECT * FROM preference_details WHERE user_id = $this->userID")->results();
+        $seeking = $prefs[0]->seeking;
+        $gender = $prefs[0]->gender;
+        if (!empty($alreadyIn))
+            return "We are working on finding you a match at present. Please be patient.";
+        else if($currentBlindDate)
+            return "You currently have a blind date in your existing conversations. You must either reveal your profile to your partner or end the conversation to get another.";
+        else if($seeking == 1 || ($gender == 1 || $gender == 4))
+            return "Gender And/Or Seeking Details Not Specified For Your Profile. You Must Update Them Before You Can Participate In Blind Date.
+                       <a href =\"updatePreferencesPage.php\"><h3>Take Me To Update Preferences Page</h3></a></div>";
+        else
+            return "";
+    }
+
+    public function getOtherUser($convoID)
+    {
+        $convo_details = DB::getInstance()->query("SELECT * FROM conversations WHERE conversation_id = '$convoID'")->results();
+        if($convo_details[0]->user1_id == $this->userID)
+            $otherUID = $convo_details[0]->user2_id;
+        else
+            $otherUID = $convo_details[0]->user1_id;
+        $name = $this->getUsername($otherUID);
+        return $name;
+    }
+
+    public function sendMessageButton($uid2)
+    {
+        $existingConversation = DB::getInstance()->query("SELECT * FROM conversations WHERE ((user1_id = '$this->userID' AND user2_id = '$uid2') OR (user2_id = '$this->userID' AND user1_id = '$uid2')) AND profile_visible = '1'")->results();
+        if(empty($existingConversation))
+         echo "<form action =\"#\", method=\"post\">
+                  <a href=\"reportUserPage.php\" class=\"btn btn-info center-inline\" role=\"button\"><span class=\"glyphicon glyphicon-remove-circle\"></span> Report this user</a>
+                <br><br><a href=\"newMessagePage.php?$uid2\" class=\"btn btn-info center-inline\" role=\"button\"><span class=\"glyphicon glyphicon-envelope\"></span> Send message</a>
+                </form>"; //uid here should be the ID of the user who owns the page, NOT the current logged in user
+        else
+        {
+            $cid = $existingConversation[0]->conversation_id;
+            echo "<form action =\"#\", method=\"post\">
+                      <a href=\"reportUserPage.php\" class=\"btn btn-info center-inline\" role=\"button\"><span class=\"glyphicon glyphicon-remove-circle\"></span> Report this user</a>
+                    <br><br><a href=\"conversationPage.php?$cid#bottom\" class=\"btn btn-info center-inline\" role=\"button\"><span class=\"glyphicon glyphicon-envelope\"></span> Send message</a>
+                    </form>"; //uid here should be the ID of the user who owns the page, NOT the current logged in user
+        }
     }
 }
 ?>

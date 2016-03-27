@@ -21,17 +21,17 @@
     $uid;
 //    user id will come either from $_SESSION['user_id'] (if viewing your own profile)
 //    or $_POST[] if viewing someone elses page
-//    if(!empty($_POST)){
-//        $uid = $_POST['uid'];
-//        $me=false;
-//    }
-//    else{
-//        $uid = $_SESSION['user_id'];
-//        $me=true;
-//    }
+        if(!empty($_POST)){
+            $uid = $_POST['uid'];
+            $me=false;
+        }
+        else{
+            $uid = $_SESSION['user_id'];
+            $me=true;
+        }
 
-        $me=false;
-        $uid = 1;
+        //$me=false;
+        //$uid = 1;
 
         $images = ImageService::getImages($uid);
         $user = new User($uid);
@@ -149,10 +149,12 @@
                                         '<br><br><a href="updateHobbiesPage.php" class="btn btn-info center-inline" role="button"><span class="glyphicon glyphicon-knight"></span> Edit Hobbies</a>';
                                 }
                                 else{
-                                    echo "<form action =\"#\", method=\"post\">
+                                    $MsgMgr = new MessageMgr($_SESSION['user_id']);
+                                    $MsgMgr->sendMessageButton($uid);
+                                   /* echo "<form action =\"#\", method=\"post\">
                                           <a href=\"reportUserPage.php\" class=\"btn btn-info center-inline\" role=\"button\"><span class=\"glyphicon glyphicon-remove-circle\"></span> Report this user</a>
                                         <br><br><a href=\"newMessagePage.php?$uid\" class=\"btn btn-info center-inline\" role=\"button\"><span class=\"glyphicon glyphicon-envelope\"></span> Send message</a>
-                                        </form>"; //uid here should be the ID of the user who owns the page, NOT the current logged in user
+                                        </form>"; //uid here should be the ID of the user who owns the page, NOT the current logged in user*/
                                 }
                                 ?>
                             </div>

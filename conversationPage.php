@@ -34,6 +34,10 @@
                                     $convoID = $_SERVER['QUERY_STRING'];
                                 else
                                     $convoID = ($_POST["convoID"]);
+                                if(isset($_POST['reveal']))
+                                {
+                                    $MsgMgr->revealButton($convoID);
+                                }
                                 if(!empty($convoID))
                                 {
                                     if($MsgMgr->isUserInConversation($convoID)== true)
@@ -59,7 +63,7 @@
                 <p>
                     <br><br>
                     <?php
-                        //$uid = 1; //need to change to global
+                        //$uid = 4; //need to change to global
                         $uid = $_SESSION['user_id'];
                         $MsgMgr = new MessageMgr($uid);
                         if(!isset($_POST['convoID']))
@@ -69,30 +73,9 @@
                             $convoID = ($_POST["convoID"]);
                             $MsgMgr->sendMessage($_POST["message"], $convoID);
                         }
-                        //if(isset($_POST[]))
+
                         if($MsgMgr->conversationExists($convoID))
-                        {
-                            if ($MsgMgr->isUserInConversation($convoID) == TRUE)
-                                $MsgMgr->loadConversation($convoID);
-                            else
-                                echo "<div class=\"alert alert-danger\">
-                                          Error - You are not invloved in this conversation!
-                                      </div>";
-                            $visible = $MsgMgr->isProfileVisible($convoID);
-                            if (!$visible) {
-                                $msgCount = $MsgMgr->messageCount($convoID);
-                                echo "Message Count: " . $msgCount;
-                                /*if($msgCount <= 25)
-                                    echo "<form action=\"conversationPage.php?\".$convoID  method=\"post\">
-                                            <button name=\"end\" value=\"end\" class=\"btn btn-warning\">Reveal User</button>
-                                            <input type=\"hidden\" name=\"convo_id\" value=$convoID>
-                                           </form>";*/
-                                echo "<form action=\"blindDateEndPage.php\" method=\"post\">
-                                        <button name=\"end\" value=\"end\" class=\"btn btn-warning\">End Conversation</button>
-                                        <input type=\"hidden\" name=\"convo_id\" value=$convoID>
-                                       </form>";
-                            }
-                        }
+                            $MsgMgr->conversationLoader($convoID);
                         else
                             echo "<div class=\"alert alert-danger\">
                                    This Conversation Does Not Exist.

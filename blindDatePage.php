@@ -45,7 +45,7 @@
                     <br><br>
                     Blind Date matches you anonymously with another user based soley on your sexual orientation, meaning that you could end up hitting it off with someone just like you, or you could find out if opposites attract!
                     <br><br>
-                    If after a certain amount of messages have been exchanged between the two of you, you may choose to reveal your profiles to one another!
+                    If after 25 messages have been exchanged between the two of you, you may choose to reveal your profiles to one another!
                     <br><br>
                     <?php
                         if(empty($_POST))

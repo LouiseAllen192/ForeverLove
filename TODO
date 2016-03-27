@@ -54,12 +54,8 @@ Message Services:
 		- make offending conversation link a different colour
 		- if in conversation already, reload page?
 	- Figure out how to notify user of new messages
-	- Maybe output user's profile pictures on existing conversations page
 	- Find and eliminate bug that's occasionally creating duplicate conversations
-	
-	Blind date
-	- Add reveal column to Conversations - NULL for regular conversations. For BDs, starts at 0, 1 person clicking changes to 1, if it's 2 then reveal
-	
+	- Handle XSS attacks
 	
 Search Services:
     - Make search bar look prettier (CSS)
