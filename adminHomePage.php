@@ -62,17 +62,6 @@
                         </a>
                     </div>
                 </div>
-
-                <!--<hr class="tagline-divider">
-                <form method="get" action="viewBannedUsersPage.php"><br>
-                <input type="submit" value="View Banned Users" name="bannedUsers"/>
-                </form>
-                <form method="get" action="ChooseReportPage.php">
-                <br>
-                <input type="submit" value="View Unresolved" name="unres"/>
-                <br><br>
-                <input type="submit" value="View Resolved" name="res"/>
-                </form>-->
                 <br><br>
             </div>
         </div>

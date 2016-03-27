@@ -105,24 +105,24 @@ class SearchServiceMgr{
 
     public static function searchablePreferences(){
         return [
-            'Body Type' => self::structureResult('body_type', 'id', 'choice'),
-            'Ethnicity' => self::structureResult('ethnicity', 'id', 'choice'),
-            'Has Children' => self::structureResult('has_children', 'id', 'choice'),
-            'Height' => self::structureResult('height', 'id', 'choice'),
-            'Income' => self::structureResult('income', 'id', 'choice'),
-            'Intent' => self::structureResult('intent', 'id', 'choice'),
-            'Marital Status' => self::structureResult('marital_status', 'id', 'choice'),
-            'Religion' => self::structureResult('religion', 'id', 'choice'),
-            'Smoker' => self::structureResult('smoker', 'id', 'choice'),
-            'Wants Children' => self::structureResult('wants_children', 'id', 'choice')
+            'Body Type' => self::getChoices('body_type'),
+            'Ethnicity' => self::getChoices('ethnicity'),
+            'Has Children' => self::getChoices('has_children'),
+            'Height' => self::getChoices('height'),
+            'Income' => self::getChoices('income'),
+            'Intent' => self::getChoices('intent'),
+            'Marital Status' => self::getChoices('marital_status'),
+            'Religion' => self::getChoices('religion'),
+            'Smoker' => self::getChoices('smoker'),
+            'Wants Children' => self::getChoices('wants_children')
         ];
     }
 
-    private static function structureResult($table, $id, $choice){
-        $results = DB::getInstance()->query("SELECT $id, $choice FROM $table")->results();
+    public static function getChoices($table){
+        $results = DB::getInstance()->query("SELECT id, choice FROM $table")->results();
         $array = [];
         foreach($results as $result){
-            $array[$result->$id] = $result->$choice;
+            $array[$result->id] = $result->choice;
         }
         return $array;
     }

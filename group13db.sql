@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 27, 2016 at 12:48 PM
+-- Generation Time: Mar 27, 2016 at 03:18 PM
 -- Server version: 5.7.9
 -- PHP Version: 5.6.16
 
@@ -76,12 +76,14 @@ CREATE TABLE IF NOT EXISTS `banned_reports` (
   `reportee_id` int(11) NOT NULL,
   `priority` int(11) NOT NULL DEFAULT '1',
   `content` text NOT NULL,
+  `conversation_id` int(11) NOT NULL DEFAULT '0',
   `date_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `resolved` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`report_id`),
   KEY `Reporter_id` (`reporter_id`),
   KEY `Reportee_id` (`reportee_id`),
-  KEY `priority` (`priority`)
+  KEY `priority` (`priority`),
+  KEY `banned_reports_ibfk_4` (`conversation_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1039,7 +1041,8 @@ ALTER TABLE `account_details`
 ALTER TABLE `banned_reports`
   ADD CONSTRAINT `banned_reports_ibfk_1` FOREIGN KEY (`reporter_id`) REFERENCES `registration_details` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `banned_reports_ibfk_2` FOREIGN KEY (`reportee_id`) REFERENCES `registration_details` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `banned_reports_ibfk_3` FOREIGN KEY (`priority`) REFERENCES `priority` (`id`);
+  ADD CONSTRAINT `banned_reports_ibfk_3` FOREIGN KEY (`priority`) REFERENCES `priority` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `banned_reports_ibfk_4` FOREIGN KEY (`conversation_id`) REFERENCES `conversations` (`conversation_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `banned_users`

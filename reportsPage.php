@@ -6,7 +6,9 @@
     include("includes/metatags.html");
     include("includes/fonts.html");
 
-    $result = DB::getInstance()->get('banned_reports', ['resolved', '=', '0'])->results()[0];
+    $db = DB::getInstance();
+    $reports = $db->query("SELECT * FROM banned_reports ORDER BY date_time DESC, priority DESC")->results();
+    $priorities = SearchServiceMgr::getChoices('priority');
     ?>
     <title>Base Page</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -31,34 +33,47 @@
                         <strong>Reports</strong>
                     </small>
                 </h2>
-                <hr class="tagline-divider">
+                <hr class="tagline-divider"><br>
 
                 <div class="row">
                     <p class="col-sm-2 col-xs-1"></p>
                     <div class="col-sm-8 col-xs-10">
-                        <a href="viewReportPage.php?report_id=<?php echo $result->report_id;?>">
-                            <div class="display_box">
-                                <div class="row">
-                                    <div class="col-xs-12">
-                                        <div class="media">
-                                            <!--<div class="media-left">
-                                                <img class="media-object" src="https://s3.amazonaws.com/uifaces/faces/twitter/calebogden/73.jpg"/>
-                                            </div>-->
-                                            <div class="media-body media-left" style="padding-top: 3px;">
-                                                <h4 class="media-heading"><?php echo $result->reportee_id; ?></h4>
-                                            </div>
-                                            <div class="media-body" style="padding-top: 3px;">
-                                                <h4 class="media-heading"><?php echo $result->reporter_id; ?></h4>
-                                                <small style="white-space: nowrap;"><?php echo $result->tag_line; ?></small>
-                                            </div>
-                                            <div class="media-right media-middle">
-                                                <h5 class="media-heading"><?php echo $result->city; ?></h5>
+
+                        <?php
+                        foreach($reports as $report){?>
+                            <a href="viewReportPage.php?report_id=<?php echo $report->report_id;?>">
+                                <div class="display_box">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="media">
+                                                <div class="col-xs-2">
+                                                    <div class="media-left media-middle" style="padding-top: 3px;">
+                                                        <h5 class="media-heading"><?php echo $report->date_time;?></h5>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-4">
+                                                    <div class="media-body" style="padding-top: 3px;">
+                                                        <h6 class="media-heading"><?php echo 'Reporter: '.$db->query("SELECT username FROM registration_details WHERE user_id = '$report->reporter_id'")->results()[0]->username;?></h6>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-4">
+                                                    <div class="media-body" style="padding-top: 3px;">
+                                                        <h6 class="media-heading"><?php echo 'Reportee: '.$db->query("SELECT username FROM registration_details WHERE user_id = '$report->reportee_id'")->results()[0]->username;?></h6>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-2">
+                                                    <div class="media-right media-middle">
+                                                        <h5 class="media-heading"><?php echo $priorities[$report->priority];?></h5>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </a>
+                            </a>
+                            <?php
+                        }
+                        ?>
                     </div>
                 </div>
 
