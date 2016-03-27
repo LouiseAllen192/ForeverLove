@@ -29,13 +29,10 @@ User Services:
     ProfilePage:
     - create report user functionality if viewing another users page
     - fix profile image size
+    - set default profile pic
 
     Image gallery:
     - fix error[3] partial upload error on certain images
-
-    View image:
-    - Add delete image functionality
-    - Add change profile picture functionality
 
     Settings:
     - create view Account details page - give option to upgrade
