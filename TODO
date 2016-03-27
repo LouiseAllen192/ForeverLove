@@ -36,7 +36,6 @@ User Services:
     View image:
     - Add delete image functionality
     - Add change profile picture functionality
-    - align alert message properly
 
     Settings:
     - create view Account details page - give option to upgrade

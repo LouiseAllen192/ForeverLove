@@ -22,9 +22,27 @@ class ImageService
     }
 
 
-    public static function deleteImage($imgNum){
+    public static function deleteImage($imgNum, $uid){
+        $sql = "SELECT image_name " .
+            "FROM images  ".
+            "WHERE user_id = '".$uid."' AND image_id = '".$imgNum."'\";" ;
+        $results = DB::getInstance()->query($sql)->results()[0];
+
+        foreach ($results as $result) {
+           $imgName = $result->image_name;
+        }
+
+//        $path = "userImageUploads/user".$uid."/".$imgName;
+//        unlink($path);
+
+//        $update = array("image_path" => "", "image_name" => "");
+//        $where = "user_id = '".$uid."' AND image_id = '".$imgNum."'";
+//        if(DB::getInstance()->update('images', $where , $update)){
+//            return true;
+//        }
+        //return false;
+
         return true;
-        //todo
     }
 
     public static function uploadImage($uid, $imgNum, $path, $name){

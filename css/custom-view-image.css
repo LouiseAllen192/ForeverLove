@@ -102,5 +102,6 @@ img{
 
 .alert{
     width: 500px;
-    align: center;
+    margin-left: 30%;
+    text-align: center;
 }

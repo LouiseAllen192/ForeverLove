@@ -84,7 +84,7 @@
                 <?php
                 if(isset($_POST['submit'])) {
                     if ($_POST['submit'] == "Delete") {
-                        $success = ImageService::deleteImage($imageNum);
+                        $success = ImageService::deleteImage($imageNum, $uid);
                         if($success){
                             $alertType = "success";
                             $alertMsg = "Image deleted successfully";
