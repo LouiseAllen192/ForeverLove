@@ -210,40 +210,42 @@ class UserServiceMgr
 
     public static function registerUpdateAccount($source, $update = false){
         $validate = new Validate();
-        $validate->check($source, [
-            'email' => [
-                'required' => true,
-                'matches' => '/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/',
-                'unique' => 'registration_details'
-            ],
-            'confirm_email' => [
-                'required' => true,
-                'matches' => '/\b('.$_POST['email'].')\b/'
-            ],
-            'username' => [
-                'required' => true,
-                'matches' => '/^[a-zA-Z0-9_-]{3,32}$/',
-                'unique' => 'registration_details'
-            ],
-            'first_name' => [
-                'required' => true,
-                'matches' => '/^[a-zA-Z]{2,32}$/'
-            ],
-            'last_name' => [
-                'required' => true,
-                'matches' => '/^[a-zA-Z\'-]{2,32}$/'
-            ],
-            'password' => [
-                'required' => true,
-                'matches' => '/^[a-zA-Z0-9_-]{6,32}$/',
-            ],
-            'confirm_password' => [
-                'required' => true,
-                'matches' => '/\b('.$_POST['password'].')\b/'
-            ],
-            'dob' => [
-                'required' => true,
-                'over_18' => true
+        $validate->check(
+            $source,
+            [
+                'email' => [
+                    'required' => true,
+                    'matches' => '/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/',
+                    'unique' => 'registration_details'
+                ],
+                'confirm_email' => [
+                    'required' => true,
+                    'matches' => '/\b('.$_POST['email'].')\b/'
+                ],
+                'username' => [
+                    'required' => true,
+                    'matches' => '/^[a-zA-Z0-9_-]{3,32}$/',
+                    'unique' => 'registration_details'
+                ],
+                'first_name' => [
+                    'required' => true,
+                    'matches' => '/^[a-zA-Z]{2,32}$/'
+                ],
+                'last_name' => [
+                    'required' => true,
+                    'matches' => '/^[a-zA-Z\'-]{2,32}$/'
+                ],
+                'password' => [
+                    'required' => true,
+                    'matches' => '/^[a-zA-Z0-9_-]{6,32}$/',
+                ],
+                'confirm_password' => [
+                    'required' => true,
+                    'matches' => '/\b('.$_POST['password'].')\b/'
+                ],
+                'dob' => [
+                    'required' => true,
+                    'over_18' => true
             ]
         ]);
 
@@ -267,9 +269,28 @@ class UserServiceMgr
             }
             return false;
         }
-        else{
-            return $validate->getErrors();
+        else{ return $validate->getErrors();}
+    }
+
+    public static function validateReport($source){
+        $validate = new Validate();
+        $validate->check(
+            $source,
+            [
+                'priority' => [
+                    'required' => true,
+                ],
+                'content' => [
+                    'required' => true,
+                    'matches' => '/^[a-zA-Z 0-9.,!?\\/]/'
+                ]
+            ]
+        );
+
+        if($validate->passed()){
+            echo 'passed';
         }
+        else{ return $validate->getErrors();}
     }
 
     public static function determineUpdateOrReg($uid){

@@ -1,7 +1,7 @@
 <?php
 class SearchServiceMgr{
 
-    public static function byCriteria($uid, $hobbies, $preferences){
+    public static function byCriteria($uid, $hobbies, $preferences = []){
         $sql = "SELECT d.user_id,d.username,d.tag_line,d.city,d.gender,d.seeking,TIMESTAMPDIFF(YEAR, d.date_of_birth, CURDATE()) AS age,Total";
         $sql .= " FROM (SELECT c.user_id,c.username,c.tag_line,c.city,c.gender,c.seeking,c.date_of_birth,";
         $n = 1;

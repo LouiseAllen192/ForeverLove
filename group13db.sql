@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 27, 2016 at 03:18 PM
+-- Generation Time: Mar 27, 2016 at 10:03 PM
 -- Server version: 5.7.9
 -- PHP Version: 5.6.16
 
@@ -78,6 +78,7 @@ CREATE TABLE IF NOT EXISTS `banned_reports` (
   `content` text NOT NULL,
   `conversation_id` int(11) NOT NULL DEFAULT '0',
   `date_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `view_conversation` tinyint(1) NOT NULL DEFAULT '0',
   `resolved` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`report_id`),
   KEY `Reporter_id` (`reporter_id`),

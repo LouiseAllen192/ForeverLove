@@ -5,7 +5,7 @@
     include("includes/metatags.html");
     include("includes/fonts.html");
 
-    if(Input::exists() && !($errors = UserServiceMgr::registerUpdateAccount($_POST))){
+    if(isset($_POST['continue_button']) && !($errors = UserServiceMgr::registerUpdateAccount($_POST))){
         mkdir("/userImageUploads/user".$_SESSION['user_id'], 0700);
         header('Location: registerAccountTypePage.php');
         die();
@@ -125,7 +125,7 @@
                     </fieldset>
                     <br>
                     <a href="welcomePage.php" class="btn btn-info center-inline" role="button">Return</a>
-                    <input class="btn btn-info center-inline" id="continue_button" type="submit" value="Continue">
+                    <input class="btn btn-info center-inline" id="continue_button" name="continue_button" type="submit" value="Continue">
                 </form>
                 <br><br>
                 <br><br>

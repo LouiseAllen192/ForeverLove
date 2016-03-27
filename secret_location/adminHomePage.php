@@ -50,7 +50,7 @@
                         <div class="dummy"></div>
                         <a href="#" class="thumbnail">
                             <div class="h4">
-                                Suspended Users<span class="badge">3</span>
+                                Suspended Users<span class="badge">3</span>//echo
                             </div>
                         </a>
                     </div>

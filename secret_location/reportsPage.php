@@ -12,7 +12,7 @@
     $reports = $db->query("SELECT * FROM banned_reports ORDER BY date_time DESC, priority DESC")->results();
     $priorities = SearchServiceMgr::getChoices('priority');
     ?>
-    <title>Base Page</title>
+    <title>Reports Page</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/custom-admin.css" rel="stylesheet">
     <link href="../css/custom-base-page.css" rel="stylesheet">
@@ -57,12 +57,12 @@
                                                     </div>
                                                     <div class="col-xs-4">
                                                         <div class="media-body" style="padding-top: 3px;">
-                                                            <h6 class="media-heading"><?php echo 'Reporter: ' . $db->query("SELECT username FROM registration_details WHERE user_id = '$report->reporter_id'")->results()[0]->username; ?></h6>
+                                                            <h6 class="media-heading"><?php echo 'Reporter: '.$db->query("SELECT username FROM registration_details WHERE user_id = '$report->reporter_id'")->results()[0]->username; ?></h6>
                                                         </div>
                                                     </div>
                                                     <div class="col-xs-4">
                                                         <div class="media-body" style="padding-top: 3px;">
-                                                            <h6 class="media-heading"><?php echo 'Reportee: ' . $db->query("SELECT username FROM registration_details WHERE user_id = '$report->reportee_id'")->results()[0]->username; ?></h6>
+                                                            <h6 class="media-heading"><?php echo 'Reportee: '.$db->query("SELECT username FROM registration_details WHERE user_id = '$report->reportee_id'")->results()[0]->username; ?></h6>
                                                         </div>
                                                     </div>
                                                     <div class="col-xs-2">

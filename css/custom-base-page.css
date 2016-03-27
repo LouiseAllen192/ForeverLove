@@ -120,6 +120,10 @@ footer p {
 }
 /*SEARCH BAR END*/
 
+.error{
+    font-size: 12px;
+    color: red;
+}
 @media screen and (min-width:1200px) {
     .box:after {
         content: '';

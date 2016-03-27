@@ -7,6 +7,18 @@
     include("../includes/metatags.html");
     include("../includes/fonts.html");
 
+
+    /*
+     *
+     *
+     *
+     * NOTHING DONE
+     *
+     *
+     *
+     *
+    */
+
     $successfulLogin = true;
     if($successfulLogin){
         session_start();

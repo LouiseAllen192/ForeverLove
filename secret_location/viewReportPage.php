@@ -12,6 +12,10 @@
     $report_id = 1;//$_GET['report_id'];
     $db = DB::getInstance();
     $report = $db->get('banned_reports', ['report_id', '=', $report_id])->results()[0];
+    $priorities = SearchServiceMgr::getChoices('priority');
+    $reporter = $db->query("SELECT username FROM registration_details WHERE user_id = '$report->reporter_id'")->results()[0]->username;
+    $reportee = $db->query("SELECT username FROM registration_details WHERE user_id = '$report->reportee_id'")->results()[0]->username;
+
     ?>
     <title>Report Page</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -34,6 +38,8 @@
                     </small>
                 </h2>
                 <hr class="tagline-divider"><br>
+
+
 
 
             </div>
