@@ -3,21 +3,23 @@
 
 <head>
     <?php
-    require_once 'core/init.php';
-    include("includes/metatags.html");
-    include("includes/fonts.html");
+    session_start();// DELETE
+    $_SESSION['permissions'] = 'admin';// DELETE
+    require_once '../core/init.php';
+    include("../includes/metatags.html");
+    include("../includes/fonts.html");
 
     $unresolved = DB::getInstance()->query("SELECT report_id FROM banned_reports WHERE resolved = '0'")->count();
     if($unresolved == 0){$unresolved = '';}
     ?>
     <title>Admin HomePage</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/custom-admin.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/custom-admin.css" rel="stylesheet">
 
 </head>
 
 <body class="full">
-<?php include("includes/navbarAdmin.html"); ?>
+<?php include("../includes/navbarAdmin.html"); ?>
 
 <!--Main page content-->
 
@@ -67,7 +69,7 @@
         </div>
     </div>
 </div>
-<?php include("includes/footer.html"); ?>
+<?php include("../includes/footer.html"); ?>
 </body>
 
 </html>

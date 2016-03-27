@@ -3,17 +3,23 @@
 
 <head>
     <?php
-    require_once 'core/init.php';
-    include("includes/metatags.html");
-    include("includes/fonts.html");
+    session_start();// DELETE
+    $_SESSION['permissions'] = 'admin';// DELETE
+    require_once '../core/init.php';
+    include("../includes/metatags.html");
+    include("../includes/fonts.html");
+
+    $report_id = 1;//$_GET['report_id'];
+    $db = DB::getInstance();
+    $report = $db->get('banned_reports', ['report_id', '=', $report_id])->results()[0];
     ?>
     <title>Report Page</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/custom-admin.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/custom-admin.css" rel="stylesheet">
 </head>
 
 <body class="full">
-<?php include("includes/navbarAdmin.html"); ?>
+<?php include("../includes/navbarAdmin.html"); ?>
 
 <!--Main page content-->
 
@@ -34,7 +40,7 @@
          </div>
     </div>
 </div>
-<?php include("includes/footer.html"); ?>
+<?php include("../includes/footer.html"); ?>
 </body>
 
 </html>
