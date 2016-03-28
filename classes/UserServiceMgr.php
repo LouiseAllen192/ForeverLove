@@ -295,8 +295,6 @@ class UserServiceMgr
 
     public static function determineUpdateOrReg($uid){
 
-        echo '<br><br><br><br><br><br>';
-
         $sql = "SELECT unique_hobby ".
             "FROM unique_hobby  ".
             "WHERE user_id = '".$uid."'";

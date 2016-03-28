@@ -162,16 +162,26 @@ form.signin input::-webkit-input-placeholder { color:#bbb; text-shadow:0 0 2px #
     margin-top: 20px;
 }
 
-.navBar{
-    height: 80px;
-}
 
 .navbar-nav{
     margin-top: 20px;
 }
 
+
 .search-results{
+    width: 400px;
+    margin-top: 10px;
+    margin-left: 350px;
+    margin-bottom: 10px;
     background-color: white;
     opacity: 0.9;
+    border: solid 1px #dedede;
+    border-top: 0px;
+    overflow: hidden;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    -moz-border-bottom-right-radius: 6px;
+    -moz-border-bottom-left-radius: 6px;
+    box-shadow: 0px 0px 5px #999;
 }
 

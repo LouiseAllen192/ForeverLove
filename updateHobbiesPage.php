@@ -25,7 +25,7 @@
 
     <title><?php echo $regOrUpdate?> Hobbies</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/custom-base-page.css" rel="stylesheet">
+    <link href="css/custom-update.css" rel="stylesheet">
     <link href="css/custom-form-page.css" rel="stylesheet">
     <?php include("includes/fonts.html"); ?>
 
