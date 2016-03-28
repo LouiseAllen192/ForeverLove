@@ -6,8 +6,7 @@ User Services:
 
     regAccTypePage:
     - implement functionality to check credit card info against server
-    - change input of credit card details to match server details
-    - fix js validation on registerAccountTypePage
+    - fix js validation on valid date
 
     updateRegDetailsPage:
     - fix this page
@@ -27,7 +26,7 @@ User Services:
 
     ProfilePage:
     - fix profile image size
-    - set default profile pic
+    - check admin permissions
 
     Image gallery:
     - fix error[3] partial upload error on certain images
