@@ -20,6 +20,14 @@
     if(!empty($_POST)){
         $success = UserServiceMgr::updateUserPreferences($uid, $_POST, $regOrUpdate);
     }
+
+    if(!empty($_POST)) {
+        if ($regOrUpdate == "Register" && $success) {
+            header('Location: ' . 'updateHobbiesPage.php');
+            die();
+        }
+    }
+
     ?>
 
     <title><?php echo $regOrUpdate;?> Preferences</title>
@@ -48,12 +56,7 @@
                     <br>
                     <?php
                     if(!empty($_POST)) {
-                        if ($regOrUpdate == "Register" && $success) {
-                            $dbvalue = ReturnShortcuts::returnPreferences($uid);
-                            header('Location: ' . 'updateHobbiesPage.php');
-                            die();
-                        }
-                        else if ($regOrUpdate == "Update" && $success) {
+                        if ($regOrUpdate == "Update" && $success) {
                             $dbvalue = ReturnShortcuts::returnPreferences($uid);?>
                             <div class= "alert alert-success" role="alert">
                                 <a href="homePage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>

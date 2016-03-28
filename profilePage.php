@@ -19,19 +19,17 @@
 
     $me;
     $uid;
-//    user id will come either from $_SESSION['user_id'] (if viewing your own profile)
-//    or $_POST[] if viewing someone elses page
-//    if(isset($_POST['uid'])){
-//        $uid = $_POST['uid'];
-//        $me=false;
-//    }
-//    else{
-//        $uid = $_SESSION['user_id'];
-//        $me=true;
-//    }
 
+    if(isset($_GET['uid'])){
+        $uid = $_GET['uid'];
         $me=false;
-        $uid = 1;
+    }
+    else{
+        $uid = $_SESSION['user_id'];
+        $me=true;
+    }
+
+
 
         $images = ImageService::getImages($uid);
 

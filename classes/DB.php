@@ -122,7 +122,8 @@ class DB{
                 foreach($hobbies as $hobby){
                     $this->insert('user_hobby_preferences', ['user_id' => $user_id, 'hobby_id' => $hobby->hobby_id, 'hobby_preference' => null]);
                 }
-                for($i = 1; $i <= 16; $i++){
+                $this->insert('images', ['user_id' => $user_id, 'image_id' => 1, 'image_path' => 'includes\pics\default-profile.png', 'image_name' => 'default-profile.png',]);
+                for($i = 2; $i <= 16; $i++){
                     $this->insert('images', ['user_id' => $user_id, 'image_id' => $i, 'image_path' => '', 'image_name' => '',]);
                 }
             }

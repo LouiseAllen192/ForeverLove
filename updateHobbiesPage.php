@@ -57,26 +57,33 @@
                 <?php
                 if(!empty($_POST)) {
                     $dbvalue = ReturnShortcuts::returnHobbies($uid);
-                    if ($regOrUpdate == "Register" && $success) {
-                        echo '<' . 'div class= "alert alert-success" role="alert">
-                                    <a href="homePage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                    Registration completed successfully
-                                    </div>';
-                    }
-                    if ($regOrUpdate == "Update" && $success) {
-                        echo '<' . 'div class= "alert alert-success" role="alert">
-                                    <a href="homePage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                    Hobby Details updated successfully
-                                    </div>';
-                    }
-                    if (!$success) {
-                        echo '<' . 'div class="alert alert-danger">
-                                <a href="UpdateHobbiesPage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                <strong>Error</strong> - Hobby details update was unsuccessful
-                                </div>';
-                    }
+                    if ($regOrUpdate == "Register" && $success) { ?>
+                        <div class= "alert alert-success" role="alert">
+                        <a href="homePage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        Registration completed successfully.
+                            <br><br><a href="homePage.php" class="btn btn-info center-block" style="width:200px;">Go to Home Page <span class="glyphicon glyphicon-home"></span></a>
+                        </div>
+                    <?php }
+                    if ($regOrUpdate == "Update" && $success) { ?>
+                        <div class= "alert alert-success" role="alert">
+                        <a href="homePage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        Hobby Details updated successfully
+                            <br><br><a href="homePage.php" class="btn btn-info center-block" style= "width:200px;" >Go to Home Page <span class="glyphicon glyphicon-home"></span></a>
+
+                        </div>
+                    <?php }
+                    if (!$success) { ?>
+                        <div class="alert alert-danger">
+                        <a href="updateHobbiesPage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Error</strong> - Hobby details update was unsuccessful.
+                            <br><br><a href="updateHobbiesPage.php" class="btn btn-info center-block" style= "width:200px;" >Try again <span class="glyphicon glyphicon-repeat"></span></a>
+
+                        </div>
+                    <?php }
                 }
                 ?>
+
+                <?php if(empty($_POST)){ ?>
 
                 <form role ="form" class="form-inline" action="updateHobbiesPage.php" method="post">
                     <div class="row">
@@ -120,6 +127,8 @@
                     <br><br>
                     <input type="submit" name="Send" class="btn btn-primary" Value="<?php echo $regOrUpdate?> Changes">
                 </form>
+
+                <?php } ?>
 
 
                 <br><br>
