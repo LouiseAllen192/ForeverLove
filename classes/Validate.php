@@ -30,6 +30,16 @@ class Validate{
                             $this->addError($item, 'error_regex');
                         }
                     }
+                    else if($rule == 'valid_date'){
+                        $dateMonth = $source['month'];
+                        $dateYear = $value;
+                        $now = new \DateTime('now');
+                        $curMonth = $now->format('m');
+                        $curYear = $now->format('y');
+
+                        if($curYear<$dateYear){$this->addError($item, 'error_valid_date');}
+                        if($curYear == $dateYear && $dateMonth < $curMonth){$this->addError($item, 'error_valid_date');}
+                    }
                 }
             }
         }

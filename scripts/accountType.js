@@ -6,67 +6,103 @@ $(document).ready(function(){
 
 
     if(page == 'registerAccountTypePage.php') {
-        $('#name_on_card_group').find('#name_on_card').keyup(function () {
-            $('#name_on_card_group > #error_required').removeClass('error').addClass('hide');
+
+        $('#fullname_group').find('#fullname').keyup(function () {
+            $('#fullname_group > #error_required').removeClass('error').addClass('hide');
             var input = $(this).val();
             var pattern = /^[a-z ,.'-]+$/i;
             var valid = pattern.test(input);
             if (valid) {
-                $('#name_on_card_group > #error_regex').removeClass('error').addClass('hide');
+                $('#fullname_group > #error_regex').removeClass('error').addClass('hide');
             }
             else {
-                $('#name_on_card_group > #error_regex').removeClass('hide').addClass('error');
+                $('#fullname_group > #error_regex').removeClass('hide').addClass('error');
             }
         });
 
-        $('#cardnum_group').find('#cardnum').keyup(function(){
-            $('#cardnum_group > #error_required').removeClass('error').addClass('hide');
+        $('#ccNumber_group').find('#ccNumber').keyup(function(){
+            $('#ccNumber_group > #error_required').removeClass('error').addClass('hide');
             var input = $(this).val();
-            //if($('#type').val() == 'Visa') var pattern = /^4[0-9]{12}(?:[0-9]{3})?$/;
-            //if($('#type').val() == 'MasterCard') var pattern = /^5[1-5][0-9]{14}$/;
-            //if($('#type').val() == 'Laser') var pattern = /^(6304|6706|6709|6771)[0-9]{12,15}$/;
-            //if($('#type').val() == 'Maestro') var pattern = /^(5018|5020|5038|6304|6759|6761|6763)[0-9]{8,15}$/;
-            var pattern = /(0-9){13}/;
+            var pattern = /^\d{16}$/;
 
             var valid = pattern.test(input);
             if (valid) {
-                $('#cardnum_group > #error_regex').removeClass('error').addClass('hide');
+                $('#ccNumber_group > #error_regex').removeClass('error').addClass('hide');
             }
             else {
-                $('#cardnum_group > #error_regex').removeClass('hide').addClass('error');
+                $('#ccNumber_group > #error_regex').removeClass('hide').addClass('error');
             }
         });
     }
 
+    if(page == 'registerAccountTypePage.php'){
+
+        $('#month_group').find('#month').keyup(function () {
+            $('#month_group > #error_required').removeClass('error').addClass('hide');
+            var input = $(this).val();
+            var pattern = /^(0[1-9]|1[0-2])$/;
+            var valid = pattern.test(input);
+            if (valid) {
+                $('#month_group > #error_regex').removeClass('error').addClass('hide');
+            }
+            else {
+                $('#month_group > #error_regex').removeClass('hide').addClass('error');
+            }
+        });
+
+        $('#year_group').find('#year').keyup(function () {
+            $('#year_group > #error_required').removeClass('error').addClass('hide');
+            var input = $(this).val();
+            var pattern = /^\d{2}$/;
+            var valid = pattern.test(input);
+            if (valid) {
+                $('#year_group > #error_regex').removeClass('error').addClass('hide');
+            }
+            else {
+                $('#year_group > #error_regex').removeClass('hide').addClass('error');
+            }
+
+            var today = new Date();
+            var currentMonth = today.getMonth();
+            currentMonth = currentMonth++;
+            var currentYear = today.getYear();
+            currentYear  = currentYear .substring(2);
+
+
+            var month = $('#month').val();
+            var year = $(this).val();
+
+            var success = true;
+            if(currentYear > year){ success = false;}
+            if(currentYear == year && month <currentMonth) {success = false;}
+
+            if (success) {
+                $('#dob_group > #error_valid_date').removeClass('hide').addClass('error');
+            }
+            else {
+                $('#dob_group > #error_valid_date').removeClass('error').addClass('hide');
+            }
+        });
+
+
+    }
 
     if(page == 'registerAccountTypePage.php'){
 
-        $('#cvv_group').find('#cvv').keyup(function () {
-            $('#cvv_group > #error_required').removeClass('error').addClass('hide');
+        $('#security_group').find('#security').keyup(function () {
+            $('#security_group > #error_required').removeClass('error').addClass('hide');
             var input = $(this).val();
-            var pattern = /[0-9]{3}$/;
+            var pattern = /^\d{3}$/;
             var valid = pattern.test(input);
             if (valid) {
-                $('#cvv_group > #error_regex').removeClass('error').addClass('hide');
+                $('#security_group > #error_regex').removeClass('error').addClass('hide');
             }
             else {
-                $('#cvv_group > #error_regex').removeClass('hide').addClass('error');
+                $('#security_group > #error_regex').removeClass('hide').addClass('error');
             }
         });
 
 
-        $('#address_group').find('#address').keyup(function () {
-            $('#address_group > #error_required').removeClass('error').addClass('hide');
-            var input = $(this).val();
-            var pattern = /A-Za-z0-9'\.\-\s\,/;
-            var valid = pattern.test(input);
-            if (valid) {
-                $('#address_group > #error_regex').removeClass('error').addClass('hide');
-            }
-            else {
-                $('#address_group > #error_regex').removeClass('hide').addClass('error');
-            }
-        });
     }
 
 

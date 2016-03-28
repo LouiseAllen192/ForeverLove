@@ -1,32 +1,41 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/html">
-
 <head>
 
     <?php
     require_once 'core/init.php';
     include("includes/metatags.html");
-
+    include("includes/fonts.html");
 
     $uid = $_SESSION['user_id'];
-    $uid =6;
 
-    $acc = "";
+    $acc;
     $length;
-    if(!empty($_POST) && !isset($_POST['accType'])) {
-        $errors = UserServiceMgr::errorsExistInCardDetails();
-    }
 
-    ?>
+    $error = array();
+    if(isset($_POST['security']) && !($errors = UserServiceMgr::validateCreditCardDetails($_POST))){
+        echo '<br><br><br><br><br><br><br><br><br><br><br><br><br><br>here!!!!';
+        if(UserServiceMgr::validateCreditCard($uid, $_POST)){
+            $length = $_POST['length'];
+            UserServiceMgr::registerAccountType($uid, $length);
+            echo '<br><br><br><br><br><br><br><br><br><br><br><br><br><br>SUCCESS!!!!';
+//            header('Location: updatePreferencesPage.php');
+//            die();
+        }
+        else{
+            ?>
+            <div class="alert alert-danger">
+                <a href="registerAccountTypePage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <p><strong>Something went wrong</strong> - The Credit Card details you entered are not valid.</p>
+            </div>
+        <?php }
+    } ?>
 
     <title>Select Account type</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/custom-base-page.css" rel="stylesheet">
     <link href="css/custom-form-page.css" rel="stylesheet">
-    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>-->
     <script src="bootstrap_js/jquery.js"></script>
-    <script src="scripts/registrationValidation.js"></script>
-    <?php include("includes/fonts.html"); ?>
+    <script src="scripts/accountType.js"></script>
 
 </head>
 
@@ -47,13 +56,15 @@
                 </h2>
                 <hr class="tagline-divider">
                 <br>
-
+                <?php if(empty($_POST)){ ?>
                 <p>Here at ForeverLove we want to give everyone the best possible chance at happiness. <br>
                     That's why we give all our members a 30 day trial for FREE. <br><br>Find a love that will last a lifetime.<br>Continue your sign up here...</p>
                 <br>
+                <?php }?>
 
                 <?php
-                if(empty($_POST)){?>
+                if(empty($_POST)){
+                    ?>
                     <div class = "panel panel-default">
                         <div class = "panel-body">
                             <form role ="form" class="form-inline" action="registerAccountTypePage.php" method="post" id="accTypeForm">
@@ -94,7 +105,7 @@
 
                     if ($_POST['accType'] == "free") {
                         $successRegisterFree = UserServiceMgr::registerAccountType($uid, 30);
-                        if($successRegisterFree){?>
+                        if($successRegisterFree){ ?>
                             <div class= "alert alert-info" role="alert" id="selectedMessage">
                                 <a href="homePage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                 <p>You have chosen a <?php echo $acc;?> account.</p>
@@ -106,139 +117,99 @@
                                 <br><br><a href="updatePreferencesPage.php" class="btn btn-info" role="button">Continue Registration</a>
                         <?php
                         }
-                        else{?>
+                        else{
+                            ?>
                             <div class="alert alert-danger">
                                 <a href="registerAccountTypePage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                 <p><strong>Something went wrong</strong> - Account details registration was unsuccessful. Please try again</p>
                             </div>
                         <?php
                         }
-                    } else {?>
+                    }
+                    else
+                    {
+                        ?>
 
                         <div class= "alert alert-info" role="alert" id="selectedMessage">
                             <p>You have chosen a <?php echo $acc;?> account.</p>
                         </div><br><br><p>You are on your way to having unlimited access to all of our features.<br></p><br>
                             <div class = "panel panel-default">
-                                <!---------------------------------------------------------------------------------------------------------------------------------------->
                                 <div class = "panel-body">
+
+                                <!---------------------------------------------------------------------------------------------------------------------------------------->
+
                                     <form id="regDetails_form" class="form-horizontal" role="form" method="post">
                                         <fieldset>
                                             <label>Please enter your payment information here:<br><br></label>
                                         </fieldset>
                                             <fieldset>
-                                                <div class="form-group" id="name_on_card_group">
-                                                    <label for="name_on_card" class="col-md-4 col-sm-5 control-label"><b>Name on Card</b></label>
+                                                <div class="form-group" id="fullname_group">
+                                                    <label for="fullname" class="col-md-4 col-sm-5 control-label"><b>Name on Card</b></label>
                                                     <div class="col-md-8 col-sm-7">
-                                                        <input type="text" class="form-control" id="name_on_card" name="name_on_card" maxlength="128" value="<?php echo Input::get('name_on_card');?>">
+                                                        <input type="text" class="form-control" id="fullname" name="fullname" maxlength="128" value="<?php echo Input::get('fullname');?>">
                                                     </div>
                                                     <p class="col-md-4 col-sm-5"></p>
-                                                    <span class="<?php if($errors['name_on_card'] == 'error_required') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_required">Required...</span>
-                                                    <span class="<?php if($errors['name_on_card'] == 'error_regex') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_regex">Invalid format, e.g. John Doe</span>
+                                                    <span class="<?php if($errors['fullname'] == 'error_required') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_required">Required...</span>
+                                                    <span class="<?php if($errors['fullname'] == 'error_regex') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_regex">Invalid format, e.g. John Doe</span>
                                                 </div>
 
-                                                <div class="form-group" id="type_group">
-                                                    <label for="type" class="col-md-4 col-sm-5 control-label"><b>Card type</b></label>
+                                                <div class="form-group" id="ccNumber_group">
+                                                    <label for="ccNumber" class="col-md-4 col-sm-5 control-label"><b>Card number</b></label>
                                                     <div class="col-md-8 col-sm-7">
-                                                        <select name="cardType" id="cardType" class="form-control">
-                                                               <option value="Visa"> Visa</option>
-                                                               <option value="Mastercard"> Mastercard</option>
-                                                               <option value="Laser"> Laser</option>
-                                                               <option value="Maestro"> Maestro</option>
-                                                        </select>
+                                                        <input type="text" class="form-control" id="ccNumber" name="ccNumber" maxlength="128" value="<?php echo Input::get('ccNumber');?>">
                                                     </div>
                                                     <p class="col-md-4 col-sm-5"></p>
+                                                    <span class="<?php if($errors['ccNumber'] == 'error_required') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_required">Required...</span>
+                                                    <span class="<?php if($errors['ccNumber'] == 'error_regex') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_regex">Invalid format, must be 16 digits</span>
                                                 </div>
 
-                                                <div class="form-group" id="cardnum_group">
-                                                    <label for="cardnum" class="col-md-4 col-sm-5 control-label"><b>Card number</b></label>
+                                                <div class="form-group" id="month_group">
+                                                    <label for="month" class="col-md-4 col-sm-5 control-label"><b>Expiry Month</b></label>
                                                     <div class="col-md-8 col-sm-7">
-                                                        <input type="text" class="form-control" id="cardnum" name="cardnum" maxlength="128" value="">
+                                                        <input type="text" class="form-control" id="month" name="month" maxlength="128" value="<?php echo Input::get('month');?>">
                                                     </div>
                                                     <p class="col-md-4 col-sm-5"></p>
-                                                    <span class="<?php if($errors['cardnum'] == 'error_required') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_required">Required...</span>
-                                                    <span class="<?php if($errors['cardnum'] == 'error_regex') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_regex">Invalid format, must be 13 or 16 digits</span>
+                                                    <span class="<?php if($errors['month'] == 'error_required') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_required">Required...</span>
+                                                    <span class="<?php if($errors['month'] == 'error_regex') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_regex">Invalid month, format MM </span>
                                                 </div>
 
-                                                <div class="form-group" id="expiry_group">
-                                                    <label for="expiry" class="col-md-4 col-sm-5 control-label"><b>Expiry Date</b></label>
+                                                <div class="form-group" id="year_group">
+                                                    <label for="year" class="col-md-4 col-sm-5 control-label"><b>Expiry Year</b></label>
                                                     <div class="col-md-8 col-sm-7">
-                                                        <input type="text" class="form-control" id="expiry" name="expiry" maxlength="128" value="">
+                                                        <input type="text" class="form-control" id="year" name="year" maxlength="128" value="<?php echo Input::get('year');?>">
                                                     </div>
                                                     <p class="col-md-4 col-sm-5"></p>
-                                                    <span class="<?php if($errors['expiry'] == 'error_required') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_required">Required...</span>
-                                                    <span class="<?php if($errors['expiry'] == 'error_regex') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_regex">Invalid format, MM/YY </span>
+                                                    <span class="<?php if($errors['year'] == 'error_required') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_required">Required...</span>
+                                                    <span class="<?php if($errors['year'] == 'error_regex') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_regex">Invalid year, format YY </span>
+                                                    <span class="<?php if($errors['year'] == 'error_valid_date') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_regex">Must be a valid date</span>
                                                 </div>
 
-                                                <div class="form-group" id="cvv_group">
-                                                    <label for="cvv" class="col-md-4 col-sm-5 control-label"><b>Security code</b></label>
+                                                <div class="form-group" id="security_group">
+                                                    <label for="security" class="col-md-4 col-sm-5 control-label"><b>Security code</b></label>
                                                     <div class="col-md-8 col-sm-7">
-                                                        <input type="text" class="form-control" id="cvv" name="cvv" maxlength="128" value="">
+                                                        <input type="text" class="form-control" id="security" name="security" maxlength="128" value="<?php echo Input::get('security');?>">
                                                     </div>
                                                     <p class="col-md-4 col-sm-5"></p>
-                                                    <span class="<?php if($errors['cvv'] == 'error_required') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_required">Required...</span>
-                                                    <span class="<?php if($errors['cvv'] == 'error_regex') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_regex">Invalid format, Must be 3 digits </span>
+                                                    <span class="<?php if($errors['security'] == 'error_required') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_required">Required...</span>
+                                                    <span class="<?php if($errors['security'] == 'error_regex') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_regex">Invalid format, Must be 3 digits </span>
                                                 </div>
 
-                                                <div class="form-group" id="address_group">
-                                                    <label for="address" class="col-md-4 col-sm-5 control-label"><b>Billing address</b></label>
-                                                    <div class="col-md-8 col-sm-7">
-                                                        <textarea type="text" class="form-control" name="address" id= "address" rows="3" maxlength="128" value="<?php echo Input::get('address');?>"></textarea>
-                                                    </div>
-                                                    <p class="col-md-4 col-sm-5"></p>
-                                                    <span class="<?php if($errors['address'] == 'error_required') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_required">Required...</span>
+                                                <div class="form-group" id="hidden_group">
+                                                    <input type="hidden" name="length" value="<?php echo $length?>">
                                                 </div>
 
-                                                <div class="form-group" id="address_group">
-                                                    <div class="col-md-8 col-sm-7">
-                                                        <input class="btn btn-info center-inline" id=payment_submit_button" name= "<?php echo $length;?>" type="submit" value="Submit">
-                                                    </div>
-                                                    <p class="col-md-4 col-sm-5"></p>
-                                                    </div>
                                         </fieldset>
-                                     </form>
-                                </div>
-                                <!------------------------------------------------------------------------------------------------------------------------------------------>
-                            </div>
-                        <?php
-                    }
-                }
-                if(isset($_POST['cvv'])){
-                    $length;
-                    foreach($_POST as $key=>$value){
-                        if($value == "Submit"){
-                            $length = $key;
-                        }
-                    }
+                                        <br>
+                                        <input class="btn btn-info center-inline" id=payment_submit_button" name= "submit" type="submit" value="Submit">
+                                    </form>
 
-                    $successValidateCard = UserServiceMgr::validateCreditCard($uid, $_POST);
-                    if(!$successValidateCard){?>
-                        <div class="alert alert-danger">
-                            <a href="registerAccountTypePage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                            <p><strong>Something went wrong</strong> - The Credit Card details you entered are not valid.</p>
-                        </div>
-                    <?php
-                    }
-                    else{
-                        $successRegister = UserServiceMgr::registerAccountType($uid, $length);
-                        if(!$successRegister){?>
-                            <div class="alert alert-danger">
-                                <a href="registerAccountTypePage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                <p><strong>Something went wrong</strong> - Account details registration was unsuccessful. Please try again</p>
+                                <!------------------------------------------------------------------------------------------------------------------------------------------>
+
+                                </div>
                             </div>
                         <?php
-                        }
-                        else{?>
-                            <div class="alert alert-success">
-                                <a href="registerAccountTypePage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                <p><strong>Card Details accepted</strong> <br><br> Account details registration was successful.<br>
-                                Please continue with your registration</p>
-                                <br><br><br>
-                                <a href="updatePreferencesPage.php" class="btn btn-info center-inline" role="button">Continue</a>
-                            </div>
-                        <?php
-                        }
                     }
-                }?>
+                } ?>
 
                 <br><br>
                 <br><br>

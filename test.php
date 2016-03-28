@@ -27,11 +27,6 @@
     <link href="css/custom-form-page.css" rel="stylesheet">
     <?php include("includes/fonts.html");?>
 
-    <?php
-    if(!empty($_POST)){
-        $success = UserServiceMgr::updateUserPreferences($uid, $_POST, $regOrUpdate);
-    }
-    ?>
 
 
 </head>
@@ -48,12 +43,21 @@
                 <br><br>
                 <h2>
                     <small>
-                        <strong><?php echo $regOrUpdate?> Prefrences</strong>
+                        <strong>test</strong>
                     </small>
                 </h2>
                 <hr class="tagline-divider">
                 <p>
                     <br>
+                    <?php
+                    $now = new \DateTime('now');
+                    $curMonth = $now->format('m');
+                    $curYear = $now->format('y');
+
+                    echo 'month:'.$curMonth.'<br>year:'.$curYear;
+
+                    ?>
+                    }
 
                 <br><br>
                 <br><br>

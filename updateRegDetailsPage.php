@@ -141,7 +141,7 @@
                             </div>
 
                             <div class="form-group" id="password_group">
-                                <label for="password" class="col-md-4 col-sm-5 control-label"><b>Password</b></label>
+                                <label for="password" class="col-md-4 col-sm-5 control-label"><b>Enter Password to confirm changes:</b></label>
                                 <div class="col-md-8 col-sm-7">
                                     <input type="password" class="form-control" maxlength="32" id="password" name="password" value="">
                                 </div>

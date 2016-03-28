@@ -9,7 +9,6 @@ class UserServiceMgr
         $this->userID = $uid;
     }
 
-
     public static function login($source){
         if(isset($source['username'])){
             $errors = [];
@@ -34,55 +33,6 @@ class UserServiceMgr
     public static function logout(){
         unset($_SESSION['user_id']);
     }
-
-
-    public static function updateBasicUserDetails($uid, $source){
-
-        if(isset($source['Send'])) unset($source['Send']);
-
-        $requiredConfEmail = false;
-        if(isset($source['email'])) $requiredConfEmail = true;
-        $requiredConfPass = false;
-        if(isset($source['password'])) $requiredConfPass= true;
-
-        $validate = new Validate();
-        $validate->check($source, [
-            'email' => [
-                'matches' => '/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/',
-                'unique' => 'registration_details'
-            ],
-            'confirm_email' => [
-                'required' => $requiredConfEmail,
-                'matches' => '/\b('.$_POST['email'].')\b/'
-            ],
-            'username' => [
-                'matches' => '/^[a-zA-Z0-9_-]{3,32}$/',
-                'unique' => 'registration_details'
-            ],
-            'first_name' => [
-                'matches' => '/^[a-zA-Z]{2,32}$/'
-            ],
-            'last_name' => [
-                'matches' => '/^[a-zA-Z\'-]{2,32}$/'
-            ],
-            'password' => [
-                'matches' => '/^[a-zA-Z0-9_-]{6,32}$/',
-            ],
-            'confirm_password' => [
-                'required' => $requiredConfPass,
-                'matches' => '/\b('.$_POST['password'].')\b/'
-            ]
-        ]);
-
-        if($validate->passed()){
-            DB::getInstance()->update('registration_details', "user_id = '".$uid."'", $source);
-            return false;
-        }
-        else{
-            return $validate->getErrors();
-        }
-    }
-
 
     public static function updateUserHobbies($uid, $postArray){
         $update = array();
@@ -167,9 +117,6 @@ class UserServiceMgr
         }
     }
 
-    public static function updateImageGallery($userid){
-        //todo
-    }
 
     public static function reportUser($reporterUserid, $abuserUserid){
         //todo
@@ -197,10 +144,22 @@ class UserServiceMgr
     }
 
 
+    public static function validateCreditCard($userid, $post){
+//        echo '<br><br><br><br><br><br><br>';
+//        foreach($post as $key=>$value){
+//            echo $key.'---'.$value.'<br>';
+//        }
 
-
-    public static function validateCreditCard($userid){
-        //todo
+//        <a href="../ForeverLove/contactPage.php?loggedin=no">Contact</a>
+//
+//        <form action="cc.php" method=get>
+//            <input type="hidden" name="fullname" value="$post['name_on_card']">
+//             <input type="hidden" name="ccNumber" value="$post['cardnum']">
+//             <input type="hidden" name="month" value="$post['expiry_month']">
+//             <input type="hidden" name="year" value="$post['expiry_year']">
+//             <input type="hidden" name="security" value="$post['cvv']">
+//        </form>
+//
         return true;
     }
 
@@ -216,6 +175,43 @@ class UserServiceMgr
         $username = $results->username;
         return $username;
     }
+
+    public static function validateCreditCardDetails($source){
+        $validate = new Validate(); //value= POST['fullname']
+        $validate->check(
+            $source,
+            [      //item => rules
+                'fullname' => [
+
+                   //rule=> rulevalue
+                    'required' => true,
+                    'matches' => '/^[a-z ,.\'-]+$/i'
+                ],
+                'ccNumber' => [
+                    'required' => true,
+                    'matches' => '/(0-9){16}/'
+                ],
+                'month' => [
+                    'required' => true,
+                    'matches' => '/(0-9){2}/'
+                ],
+                'year' => [
+                    'required' => true,
+                    'matches' => '/(0-9){2}/',
+                    'valid_date' => true
+                ],
+                'security' => [
+                    'required' => true,
+                    'matches' => '/(0-9){3}/'
+                ]
+            ]);
+
+        if($validate->passed()){
+            return false;
+        }
+        else{ return $validate->getErrors();}
+    }
+
 
     public static function registerUpdateAccount($source, $update = false){
         $validate = new Validate();
@@ -339,37 +335,5 @@ class UserServiceMgr
        return $updOrReg;
     }
 
-    public static function errorsExistInCardDetails(){
-        $validate = new Validate();
-        $validate->check($_POST, [
-            'name_on_card' => [
-                'required' => true,
-                'matches' => '/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/',
-            ],
-            'cardnum' => [
-                'required' => true,
-                'matches' => '/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/',
-            ],
-            'expiry' => [
-                'required' => true,
-                'matches' => '/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/',
-            ],
-            'cvv' => [
-                'required' => true,
-                'matches' => '/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/',
-            ],
-            'address' => [
-                'required' => true,
-                'matches' => '/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/',
-            ]
-        ]);
-
-        if($validate->passed()){
-            return false;
-        }
-        else{
-            return $validate->getErrors();
-        }
-    }
 
 }
