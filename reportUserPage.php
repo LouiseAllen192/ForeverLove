@@ -8,23 +8,14 @@
     include("includes/fonts.html");
 
     $_SESSION['user_id'] = 1;
-    $uid = 5;//$_GET['uid'];
+    $reportee = 5;//$_GET['uid'];
 
     $db = DB::getInstance();
-    $username = $db->query("SELECT username FROM registration_details WHERE user_id = '$uid'")->results()[0]->username;
+    $username = $db->query("SELECT username FROM registration_details WHERE user_id = '$reportee'")->results()[0]->username;
     $priorities = SearchServiceMgr::getChoices('priority');
 
     if(isset($_POST['submit_button']) && !($errors = UserServiceMgr::validateReport($_POST))){
-        $db->insert(
-            'banned_reports',
-            [
-                'reporter_id' => $uid,
-                'reportee_id' => $_SESSION['user_id'],
-                'priority' => $_POST['priority'],
-                'content' => $_POST['content'],
-                'view_conversation' => $_POST['view_conversation']
-            ]
-        );
+        UserServiceMgr::addReport($reportee, $_POST);
     }
     ?>
 
@@ -53,6 +44,25 @@
                 </h2>
                 <hr class="tagline-divider">
                 <br>
+
+                <?php
+                if(Input::exists()){
+                    if(!$errors){?>
+                        <div class= "alert alert-success" role="alert">
+                            <a href="homePage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            Successfully reported <?php echo $username;?> to administration
+                        </div>
+                        <?php
+                    }
+                    else{?>
+                        <div class="alert alert-danger">
+                            <a href="settingsPage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <strong>Error</strong> - Report submission was unsuccessful
+                        </div>
+                        <?php
+                    }
+                }
+                ?>
 
                 <form class="form-horizontal" role="form" method="post">
 
