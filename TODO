@@ -22,7 +22,6 @@ User Services:
 
    welcomePage:
     - create log out functionality
-    - display logged in username in nav bar
     - check if users account is not expired on login
     - create forgotten password functionality
 

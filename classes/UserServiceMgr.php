@@ -208,6 +208,15 @@ class UserServiceMgr
         //todo
     }
 
+    public static function getUsername($uid){
+        $sql = "SELECT username " .
+            "FROM registration_details  ".
+            "WHERE user_id = '".$uid."'";
+        $results = DB::getInstance()->query($sql)->results()[0];
+        $username = $results->username;
+        return $username;
+    }
+
     public static function registerUpdateAccount($source, $update = false){
         $validate = new Validate();
         $validate->check(

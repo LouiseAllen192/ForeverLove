@@ -6,6 +6,7 @@
     <script src="scripts/search.js"></script>
 
 </head>
+
 <nav class="navbar navbar-inverse navbar-fixed-top navBar" role="navigation">
     <div class="container">
 
@@ -40,7 +41,17 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class = "nav-text col-md-6 col-sm-6">
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+            <ul class="pull-right">
+                <li><div class = "logged-in">
+                    Logged in as: <?php if(isset($_SESSION['user_id'])){
+                                        echo UserServiceMgr::getUsername($_SESSION['user_id']); }
+                                        else{
+                                        echo 'UNSET';
+                                        }?>
+                    </div>
+                </li>
+                <li> <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right ">
                     <li>
                         <a href="../ForeverLove/homePage.php">Home</a>
@@ -52,7 +63,9 @@
                         <a href="../ForeverLove/contactPage.php">Contact</a>
                     </li>
                 </ul>
-            </div>
+            </div> </li>
+            </ul>
+
         </div>
 
 
