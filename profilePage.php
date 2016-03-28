@@ -30,7 +30,7 @@
 //        $me=true;
 //    }
 
-        $me=true;
+        $me=false;
         $uid = 1;
 
         $images = ImageService::getImages($uid);
@@ -45,7 +45,7 @@
     $age = (date("md", date("U", mktime(0, 0, 0, $birthDate[2], $birthDate[1], $birthDate[0]))) > date("md")
         ? ((date("Y") - $birthDate[0]) - 1)
         : (date("Y") - $birthDate[0]));
-    echo $age;
+    return $age;
     }
 
     function createDisplay($name, $dbhob){
@@ -153,12 +153,13 @@
                                 }
                                 else{
                                     $MsgMgr = new MessageMgr($_SESSION['user_id']);
-                                    $MsgMgr->sendMessageButton($uid);
-                                   /* echo "<form action =\"#\", method=\"post\">
-                                          <a href=\"reportUserPage.php\" class=\"btn btn-info center-inline\" role=\"button\"><span class=\"glyphicon glyphicon-remove-circle\"></span> Report this user</a>
-                                        <br><br><a href=\"newMessagePage.php?$uid\" class=\"btn btn-info center-inline\" role=\"button\"><span class=\"glyphicon glyphicon-envelope\"></span> Send message</a>
-                                        </form>"; //uid here should be the ID of the user who owns the page, NOT the current logged in user*/
-                                }
+                                    ?>
+                                    <form action ="#", method="post">
+                                    <a href="reportUserPage.php" class="btn btn-info center-inline" role="button"><span class="glyphicon glyphicon-remove-circle"></span> Report this user</a>
+                                    <?php  $MsgMgr->sendMessageButton($uid); ?>
+                                    </form>
+
+                                <?php }
                                 ?>
                             </div>
                         </div>

@@ -347,17 +347,11 @@ class MessageMgr
     {
         $existingConversation = DB::getInstance()->query("SELECT * FROM conversations WHERE ((user1_id = '$this->userID' AND user2_id = '$uid2') OR (user2_id = '$this->userID' AND user1_id = '$uid2')) AND profile_visible = '1'")->results();
         if(empty($existingConversation))
-         echo "<form action =\"#\", method=\"post\">
-                  <a href=\"reportUserPage.php\" class=\"btn btn-info center-inline\" role=\"button\"><span class=\"glyphicon glyphicon-remove-circle\"></span> Report this user</a>
-                <br><br><a href=\"newMessagePage.php?$uid2\" class=\"btn btn-info center-inline\" role=\"button\"><span class=\"glyphicon glyphicon-envelope\"></span> Send message</a>
-                </form>"; //uid here should be the ID of the user who owns the page, NOT the current logged in user
+         echo "<br><br><a href=\"newMessagePage.php?$uid2\" class=\"btn btn-info center-inline\" role=\"button\"><span class=\"glyphicon glyphicon-envelope\"></span> Send message</a>";
         else
         {
             $cid = $existingConversation[0]->conversation_id;
-            echo "<form action =\"#\", method=\"post\">
-                      <a href=\"reportUserPage.php\" class=\"btn btn-info center-inline\" role=\"button\"><span class=\"glyphicon glyphicon-remove-circle\"></span> Report this user</a>
-                    <br><br><a href=\"conversationPage.php?$cid#bottom\" class=\"btn btn-info center-inline\" role=\"button\"><span class=\"glyphicon glyphicon-envelope\"></span> Send message</a>
-                    </form>"; //uid here should be the ID of the user who owns the page, NOT the current logged in user
+            echo "<br><br><a href=\"conversationPage.php?$cid#bottom\" class=\"btn btn-info center-inline\" role=\"button\"><span class=\"glyphicon glyphicon-envelope\"></span> Send message</a>";
         }
     }
 }
