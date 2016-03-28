@@ -20,16 +20,17 @@
     $me;
     $uid;
 
-    if(isset($_GET['uid'])){
-        $uid = $_GET['uid'];
-        $me=false;
-    }
-    else{
-        $uid = $_SESSION['user_id'];
-        $me=true;
-    }
+    $uid = $_SESSION['user_id'];
+    $me = true;
 
-
+//    if(isset($_GET['uid'])){
+//        $uid = $_GET['uid'];
+//        $me=false;
+//    }
+//    else{
+//        $uid = $_SESSION['user_id'];
+//        $me=true;
+//    }
 
         $images = ImageService::getImages($uid);
 
@@ -232,7 +233,7 @@
                             <br>
                             <div class = "panel panel-default panel-stretch">
                                 <div class = "panel-body">
-                                    <small class="text-muted"><?php echo ($dbprf['about_me']) // echo ($user->getUserPreferences()->getAboutMe()); ?>
+                                    <small class="text-muted"><?php echo ($dbprf['about_me'])  ?>
                                 </div>
                             </div>
 
@@ -274,8 +275,7 @@
                                     createDisplay("religion", $dbprf);
                                     ?>
                                     <div class="col-md-4">
-                                        <small class="text-muted">Smoker:&emsp;</small><?php echo ($dbprf['smoker'])==1 ? 'Yes' : 'No'
-                                            // echo ($user->getUserPreferences()->getSmoker())==1 ? 'Yes' : 'No';?>
+                                        <small class="text-muted">Smoker:&emsp;</small><?php echo ($dbprf['smoker'])==1 ? 'Yes' : 'No'?>
                                     </div>
                                     <div style="clear:both;"><div></div></div><br>
                                     <?php
@@ -289,7 +289,7 @@
                                     createDisplay("wants_children", $dbprf);
                                     ?>
                                     <div class="col-md-4">
-                                        <small class="text-muted">Income:&emsp;</small><?php echo ($dbprf['income'])// echo ($user->getUserPreferences()->getIncome());?>
+                                        <small class="text-muted">Income:&emsp;</small><?php echo ($dbprf['income'])?>
                                     </div>
                                 </div>
                             </div>
@@ -330,7 +330,7 @@
 
                             <div class = "panel panel-default">
                                 <div class = "panel-body">
-                                    <small class="text-muted">Unique Hobby&emsp;</small><?php echo $user->getUniqueHobby() // echo ($user->getUserPreferences()->getAboutMe()); ?>
+                                    <small class="text-muted">Unique Hobby&emsp;</small><?php echo $user->getUniqueHobby() ?>
                                 </div>
                             </div>
 
