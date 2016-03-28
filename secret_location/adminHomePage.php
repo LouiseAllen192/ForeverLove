@@ -57,7 +57,7 @@
 
                     <div class="col-sm-4 col-xs-6">
                         <div class="dummy"></div>
-                        <a href="reportsPage.php" class="thumbnail">
+                        <a href="viewReportsPage.php" class="thumbnail">
                             <div class="h4">
                                 Reports<span class="badge badge-notify"><?php echo $unresolved;?></span>
                             </div>
