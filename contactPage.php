@@ -10,12 +10,22 @@
     <title>Contact Page</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/custom-base-page.css" rel="stylesheet">
-    <?php include("includes/fonts.html"); ?>
+    <?php include("includes/fonts.html");
+    $loggedin = true;
+
+    if(isset($_GET['loggedin'])){
+        $loggedin = false;
+    }
+    ?>
 
 </head>
 
 <body class="full">
-<?php include("includes/navbar.html"); ?>
+
+<?php
+if($loggedin){ include("includes/navbar.html");}
+else{include("includes/navbarNotLoggedIn.html");}
+ ?>
 
 <!--Main page content-->
 

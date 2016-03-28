@@ -12,6 +12,13 @@
     if(isset($_POST)){
         $errors = UserServiceMgr::login($_POST);
     }
+
+    // Code to make it redirect to home page after login
+//    if(isset($_POST) && !($errors)){
+//        header('Location: homePage.php');
+//        die();
+//    }
+
     ?>
     <title>Welcome Page</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
