@@ -21,12 +21,11 @@ User Services:
      - create and apply js and php validation
 
    welcomePage:
-    - create log out functionality
+    - make sure log out is working
     - check if users account is expired or banned on login
     - create forgotten password functionality
 
     ProfilePage:
-    - create report user functionality if viewing another users page
     - fix profile image size
     - set default profile pic
 
@@ -34,7 +33,6 @@ User Services:
     - fix error[3] partial upload error on certain images
 
     Settings:
-    - create view Account details page - give option to upgrade
     - create update/upgrade account details functionality
     - if signing up for free trial - check if free trial already used for that email address
 
