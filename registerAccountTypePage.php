@@ -8,8 +8,8 @@
     include("includes/metatags.html");
 
 
-//    $uid = $_SESSION['user_id'];
-    $uid =5;
+    $uid = $_SESSION['user_id'];
+    $uid =6;
 
     $acc = "";
     $length;

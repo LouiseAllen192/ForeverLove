@@ -8,6 +8,7 @@
     include("includes/fonts.html");
 
    $uid = $_SESSION['user_id'];
+
     $regOrUpdate = UserServiceMgr::determineUpdateOrReg($uid);
 
     $dbvalue=array();

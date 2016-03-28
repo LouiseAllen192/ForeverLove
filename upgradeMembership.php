@@ -7,10 +7,17 @@
     require_once 'core/init.php';
     include("includes/metatags.html");
     ?>
-    <title>Settings Page</title>
+
+    <title>View Membership status</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/custom-base-page.css" rel="stylesheet">
     <?php include("includes/fonts.html"); ?>
+    <?php
+
+    //$uid = $_SESSION['user_id'];
+    $uid = 6;
+
+    ?>
 
 </head>
 
@@ -26,20 +33,28 @@
                 <br><br>
                 <h2>
                     <small>
-                        <strong>Settings</strong>
+                        <strong>Upgrade Membership status</strong>
                     </small>
                 </h2>
                 <hr class="tagline-divider">
                 <p>
 
                     <br><br>
-                    <a href="viewMembershipStatusPage.php">View membership status</a><br><br>
-                    <a href="updateRegDetailsPage.php">Update your basic account details</a><br><br>
-                    <a href="updatePreferencesPage.php">Update your prefrences</a><br><br>
-                    <a href="updateHobbiesPage.php">Update your hobbies</a><br><br>
 
-                    <br><br>
-                    <br><br>
+                <div class = "panel panel-default">
+                    <div class = "panel-body">
+
+                        <br><br>
+
+                    </div>
+                </div>
+
+
+
+
+
+                <br><br>
+                <br><br>
                 </p>
             </div>
         </div>

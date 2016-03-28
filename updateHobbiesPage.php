@@ -11,7 +11,6 @@
 
 
     $uid = $_SESSION['user_id'];
-    $uid = 5;
 
     $regOrUpdate = UserServiceMgr::determineUpdateOrReg($uid);
     $dbvalue=array();
@@ -63,9 +62,6 @@
                                     <a href="homePage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                     Registration completed successfully
                                     </div>';
-                        sleep(5);
-                        header('Location: ' . 'homePage.php');
-                        die();
                     }
                     if ($regOrUpdate == "Update" && $success) {
                         echo '<' . 'div class= "alert alert-success" role="alert">

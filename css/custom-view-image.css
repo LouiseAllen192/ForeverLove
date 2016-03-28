@@ -134,6 +134,10 @@ img{
     color: white;
     margin-top: 20px;
     margin-left: 20px;
+    font-size: small;
+    font-family: Arial;
+    text-transform: none;
+    font-weight: 100;
 }
 
 li{

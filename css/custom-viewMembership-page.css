@@ -1,7 +1,6 @@
 body {
     margin-top: 50px;
 }
-
 .full {
     background: url('http://gdurl.com/1DKh') no-repeat center center fixed;
     -webkit-background-size: cover;
@@ -10,6 +9,12 @@ body {
     -o-background-size: cover;
 }
 
+
+.profile-pic img{
+    margin: 0 auto;
+    width: 200px;
+    height: auto;
+}
 
 body {
     font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -40,6 +45,11 @@ hr {
     border-color: #999999;
 }
 
+.user-name {
+    text-transform: capitalize;
+    margin: 0;
+    font-size: 4em;
+}
 
 .tagline-divider {
     margin: 15px auto 3px;
@@ -61,7 +71,6 @@ hr {
     letter-spacing: 1px;
 }
 
-
 footer p {
     margin: 0;
     padding: 10px 0;
@@ -71,26 +80,53 @@ footer p {
     font-size: x-small;
 }
 
+/*SEARCH BAR START*/
+/*#input_search{*/
+/*border: solid 1px #000;*/
+/*border-top-right-radius: 6px;*/
+/*border-top-left-radius: 6px;*/
+/*border-bottom-right-radius: 6px;*/
+/*border-bottom-left-radius: 6px;*/
+/*padding: 3px;*/
+/*}*/
 
+/*#search_result{*/
+/*position: absolute;*/
+/*width: 350px;*/
+/*display: none;*/
+/*margin-top: -1px;*/
+/*border: solid 1px #dedede;*/
+/*border-top: 0px;*/
+/*overflow: hidden;*/
+/*border-bottom-right-radius: 6px;*/
+/*border-bottom-left-radius: 6px;*/
+/*-moz-border-bottom-right-radius: 6px;*/
+/*-moz-border-bottom-left-radius: 6px;*/
+/*box-shadow: 0px 0px 5px #999;*/
+/*background-color: white;*/
+/*}*/
 
+/*.display_box{*/
+/*border: solid 1px #dedede;*/
+/*}*/
+
+/*.display_box:hover{*/
+/*background: #3bb998;*/
+/*color: #FFFFFF;*/
+/*cursor: pointer;*/
+/*}*/
+/*SEARCH BAR END*/
+
+.error{
+    font-size: 12px;
+    color: red;
+}
 @media screen and (min-width:1200px) {
     .box:after {
         content: '';
         display: table;
         clear: both;
     }
-}
-
-
-h2, h3{
-    text-transform: uppercase;
-    font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-weight: 700;
-    letter-spacing: 1px;
-}
-
-.img-center {
-    margin: 0 auto;
 }
 
 .searchbar-area{
@@ -119,7 +155,6 @@ h2, h3{
     box-shadow: 0px 0px 5px #999;
 }
 
-
 .logged-in{
     color: white;
     margin-top: 20px;
@@ -142,3 +177,11 @@ li{
     margin-top:10px;
     padding-bottom: 0px;
 }
+
+.line-right{
+    margin-left: 10px;
+}
+
+/*.line-left{*/
+    /*margin-right: 10px;*/
+/*}*/

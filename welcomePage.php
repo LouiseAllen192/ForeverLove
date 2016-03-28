@@ -8,6 +8,11 @@
     include("includes/metatags.html");
     include("includes/fonts.html");
 
+
+    if(isset($_GET['logout'])){
+        UserServiceMgr::logout();
+    }
+
     $errors = [];
     if(isset($_POST)){
         $errors = UserServiceMgr::login($_POST);

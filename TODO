@@ -22,7 +22,7 @@ User Services:
 
    welcomePage:
     - create log out functionality
-    - check if users account is not expired on login
+    - check if users account is expired or banned on login
     - create forgotten password functionality
 
     ProfilePage:

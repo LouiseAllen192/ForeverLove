@@ -44,12 +44,17 @@
 
             <ul class="pull-right">
                 <li><div class = "logged-in">
-                    Logged in as: <?php if(isset($_SESSION['user_id'])){
-                                        echo UserServiceMgr::getUsername($_SESSION['user_id']); }
-                                        else{
-                                        echo 'UNSET';
-                                        }?>
-                    </div>
+                    Logged in as:
+                    <?php
+                    if(isset($_SESSION['user_id'])){
+                         $log =  UserServiceMgr::getUsername($_SESSION['user_id']).'   ';
+                    }else{
+                          $log = 'UNSET';
+                    } echo $log?>
+
+                    <?php echo '<a href="../ForeverLove/welcomePage.php?logout=yes"><span class="glyphicon glyphicon-log-out" tooltip = "popover"  title = "Logout"></span></a>';?>
+
+                </div>
                 </li>
                 <li> <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right ">
@@ -68,8 +73,11 @@
 
         </div>
 
-
-
+        <script>
+            $(document).ready(function(){
+                $('[data-toggle="tooltip"]').tooltip();
+            });
+        </script>
 
     </div>
 </nav>

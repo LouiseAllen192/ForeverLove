@@ -31,8 +31,8 @@ class UserServiceMgr
         return $errors;
     }
 
-    public static function logout($userid){
-        //todo
+    public static function logout(){
+        unset($_SESSION['user_id']);
     }
 
 

@@ -43,6 +43,13 @@ class ReturnShortcuts
 
     }
 
+    public static function returnAccDetails($uid){
+        $accountDetails = DB::getInstance()->get('account_details', ['user_id', '=', $uid])->results()[0];
+        $dbvalue = array("account_type"=>$accountDetails->account_type, "free_trial_used"=>$accountDetails->free_trail_used,
+            "account_expired"=>$accountDetails->account_expired);
+        return $dbvalue;
+    }
+
     public static function returnHobbyNames(){
         $resultFinal = array();
         $sql = "SELECT hobby_name, hobby_id " .
