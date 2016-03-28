@@ -41,7 +41,7 @@
                         <div class="dummy"></div>
                         <a href="#" class="thumbnail">
                             <div class="h4">
-                                Banned Users
+                                Banned Users<span class="badge">2</span>
                             </div>
                         </a>
                     </div>
@@ -50,7 +50,7 @@
                         <div class="dummy"></div>
                         <a href="#" class="thumbnail">
                             <div class="h4">
-                                Suspended Users<span class="badge">3</span>//echo
+                                Suspended Users<span class="badge">3</span>
                             </div>
                         </a>
                     </div>

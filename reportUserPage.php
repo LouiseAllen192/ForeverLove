@@ -7,7 +7,9 @@
     include("includes/metatags.html");
     include("includes/fonts.html");
 
-    $uid = $_GET['uid'];
+    $_SESSION['user_id'] = 1;
+    $uid = 5;//$_GET['uid'];
+
     $db = DB::getInstance();
     $username = $db->query("SELECT username FROM registration_details WHERE user_id = '$uid'")->results()[0]->username;
     $priorities = SearchServiceMgr::getChoices('priority');

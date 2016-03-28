@@ -7,7 +7,7 @@
     include("includes/metatags.html");
     include("includes/fonts.html");
 
-    $uid = $_SESSION['user_id'];
+    $uid = 1;//$_SESSION['user_id'];
 
     $hobbies = DB::getInstance()->query('SELECT * FROM user_hobbies ORDER BY hobby_name')->results();
     $preferences = SearchServiceMgr::searchablePreferences();
@@ -35,6 +35,7 @@
             $results = SearchServiceMgr::filterAge($_POST['age'], $results);
         }
     }
+    print_r($results);
     ?>
     <title>Search Page</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">

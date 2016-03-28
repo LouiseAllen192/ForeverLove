@@ -295,11 +295,9 @@ class UserServiceMgr
                 ]
             ]
         );
-
-        if($validate->passed()){
-            echo 'passed';
+        if(!$validate->passed()){
+            return $validate->getErrors();
         }
-        else{ return $validate->getErrors();}
     }
 
     public static function determineUpdateOrReg($uid){
