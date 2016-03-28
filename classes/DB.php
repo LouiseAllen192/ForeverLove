@@ -149,8 +149,8 @@ class DB{
                     $values .= ', ';
             }
             $sql = "INSERT INTO {$table} (`".implode('`, `', $keys)."`) VALUES ({$values})";
-            if(!$this->query($sql, $fields)->error()) return true;
-            else return true;
+            if(!$this->query($sql, $fields)->error()){ return true;}
+            else{ return true;}
         }
         return false;
     }

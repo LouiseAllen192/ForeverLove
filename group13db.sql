@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 27, 2016 at 10:03 PM
+-- Generation Time: Mar 28, 2016 at 06:56 PM
 -- Server version: 5.7.9
 -- PHP Version: 5.6.16
 
@@ -74,18 +74,17 @@ CREATE TABLE IF NOT EXISTS `banned_reports` (
   `report_id` int(11) NOT NULL AUTO_INCREMENT,
   `reporter_id` int(11) NOT NULL,
   `reportee_id` int(11) NOT NULL,
+  `conversation_id` int(11) NOT NULL DEFAULT '0',
   `priority` int(11) NOT NULL DEFAULT '1',
   `content` text NOT NULL,
-  `conversation_id` int(11) NOT NULL DEFAULT '0',
   `date_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `view_conversation` tinyint(1) NOT NULL DEFAULT '0',
   `resolved` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`report_id`),
   KEY `Reporter_id` (`reporter_id`),
   KEY `Reportee_id` (`reportee_id`),
-  KEY `priority` (`priority`),
-  KEY `banned_reports_ibfk_4` (`conversation_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  KEY `priority` (`priority`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -166,7 +165,7 @@ CREATE TABLE IF NOT EXISTS `conversations` (
   PRIMARY KEY (`conversation_id`),
   KEY `User1_id` (`user1_id`),
   KEY `User2_id` (`user2_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `conversations`
@@ -1042,8 +1041,7 @@ ALTER TABLE `account_details`
 ALTER TABLE `banned_reports`
   ADD CONSTRAINT `banned_reports_ibfk_1` FOREIGN KEY (`reporter_id`) REFERENCES `registration_details` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `banned_reports_ibfk_2` FOREIGN KEY (`reportee_id`) REFERENCES `registration_details` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `banned_reports_ibfk_3` FOREIGN KEY (`priority`) REFERENCES `priority` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `banned_reports_ibfk_4` FOREIGN KEY (`conversation_id`) REFERENCES `conversations` (`conversation_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `banned_reports_ibfk_3` FOREIGN KEY (`priority`) REFERENCES `priority` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `banned_users`
