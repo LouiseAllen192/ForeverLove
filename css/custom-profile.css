@@ -9,9 +9,6 @@ body {
     -o-background-size: cover;
 }
 
-.navbar-nav{
-    margin-top: 30px;
-}
 
 .profile-pic img{
     margin: 0 auto;
@@ -128,6 +125,25 @@ footer p {
 .panel-stretch{
     height: 253px;
 }
+
+.searchbar-area{
+    margin-top: 20px;
+}
+
+.navBar{
+    height: 80px;
+}
+
+.navbar-nav{
+    margin-top: 20px;
+}
+
+.search-results{
+    background-color: white;
+    opacity: 0.9;
+}
+
+
 
 
 

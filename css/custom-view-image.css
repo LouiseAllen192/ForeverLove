@@ -9,9 +9,6 @@ body {
     -o-background-size: cover;
 }
 
-.navbar-nav{
-    margin-top: 30px;
-}
 
 body {
     font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -104,4 +101,21 @@ img{
     width: 500px;
     margin-left: 30%;
     text-align: center;
+}
+
+.searchbar-area{
+    margin-top: 20px;
+}
+
+.navBar{
+    height: 80px;
+}
+
+.navbar-nav{
+    margin-top: 20px;
+}
+
+.search-results{
+    background-color: white;
+    opacity: 0.9;
 }

@@ -10,9 +10,7 @@ body {
     -o-background-size: cover;
 }
 
-.navbar-nav{
-    margin-top: 30px;
-}
+
 
 .nav-text ul{
     text-transform: uppercase;
@@ -160,4 +158,20 @@ form.signin input::-webkit-input-placeholder { color:#bbb; text-shadow:0 0 2px #
 
 .button:hover { background:#ddd; }
 
+.searchbar-area{
+    margin-top: 20px;
+}
+
+.navBar{
+    height: 80px;
+}
+
+.navbar-nav{
+    margin-top: 20px;
+}
+
+.search-results{
+    background-color: white;
+    opacity: 0.9;
+}
 
