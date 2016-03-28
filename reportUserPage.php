@@ -7,7 +7,7 @@
     include("includes/metatags.html");
     include("includes/fonts.html");
 
-    $_SESSION['user_id'] = 1;
+    $_SESSION['user_id'] = 4;
     $reportee = 5;//$_GET['uid'];
 
     $db = DB::getInstance();

@@ -9,8 +9,8 @@ class Validate{
     public function check($source, $items = []){
         foreach($items as $item => $rules){
             foreach($rules as $rule => $ruleValue){
-                $value = $source[$item];
-                if($rule == 'required' && empty($value)){
+                $value = (isset($source[$item])) ? $source[$item] : '';
+                if($rule == 'required' && $value == ''){
                     $this->addError($item, 'error_required');
                 }
                 else if(!empty($value)){

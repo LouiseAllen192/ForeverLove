@@ -283,7 +283,7 @@ class UserServiceMgr
             $source,
             [
                 'priority' => [
-                    'required' => true,
+                    'required' => true
                 ],
                 'content' => [
                     'required' => true,
