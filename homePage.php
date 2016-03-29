@@ -10,7 +10,8 @@
     <title>Home Page</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/custom-home.css" rel="stylesheet">
-    <?php include("includes/fonts.html"); ?>
+    <?php include("includes/fonts.html");
+    ?>
 
 </head>
 

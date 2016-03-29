@@ -189,20 +189,20 @@ class UserServiceMgr
                 ],
                 'ccNumber' => [
                     'required' => true,
-                    'matches' => '/(0-9){16}/'
+                    'matches' => '/^\d{16}$/'
                 ],
                 'month' => [
                     'required' => true,
-                    'matches' => '/(0-9){2}/'
+                    'matches' => '/^\d{2}$/'
                 ],
                 'year' => [
                     'required' => true,
-                    'matches' => '/(0-9){2}/',
+                    'matches' => '/^\d{2}$/',
                     'valid_date' => true
                 ],
                 'security' => [
                     'required' => true,
-                    'matches' => '/(0-9){3}/'
+                    'matches' => '/^\d{3}$/'
                 ]
             ]);
 

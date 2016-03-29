@@ -7,21 +7,22 @@
     include("includes/fonts.html");
 
     $uid = $_SESSION['user_id'];
+    echo '<br><br><br><br><br><br><br><br><br><br>';
 
+    echo var_dump($_POST).'<br><br><br><br>';
     $acc;
     $length;
 
-    $error = array();
-    if(isset($_POST['security']) && !($errors = UserServiceMgr::validateCreditCardDetails($_POST))){
-        echo '<br><br><br><br><br><br><br><br><br><br><br><br><br><br>here!!!!';
+    $errors = UserServiceMgr::validateCreditCardDetails($_POST);
+
+    if(isset($_POST['security']) && !($errors)){
         if(UserServiceMgr::validateCreditCard($uid, $_POST)){
             $length = $_POST['length'];
             UserServiceMgr::registerAccountType($uid, $length);
-            echo '<br><br><br><br><br><br><br><br><br><br><br><br><br><br>SUCCESS!!!!';
-//            header('Location: updatePreferencesPage.php');
-//            die();
+            header('Location: updatePreferencesPage.php');
+            die();
         }
-        else{
+        else{ echo 'Fail!!!!';
             ?>
             <div class="alert alert-danger">
                 <a href="registerAccountTypePage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
