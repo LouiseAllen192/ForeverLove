@@ -5,14 +5,13 @@ include '../classes/Config.php';
 include '../classes/SearchServiceMgr.php';
 
 if(isset($_POST['searchTerm'])){
-    $_SESSION['user_id'] = 1;/***********************************DELETE WHEN LIVE*********************************************/
-    $uid = $_SESSION['user_id'];
+    $me = $_SESSION['user_id'];
     $term = $_POST['searchTerm'];
     $sql = "SELECT user_id, username, email, city, tag_line, gender, seeking";
     $sql .= " FROM registration_details JOIN preference_details USING(user_id)";
-    $sql .= " WHERE user_id != $uid && (username LIKE '%$term%' || email LIKE '%$term%' || city LIKE '%$term%')";
+    $sql .= " WHERE user_id != $me && (username LIKE '%$term%' || email LIKE '%$term%' || city LIKE '%$term%')";
     $sql .= " ORDER BY username LIKE '%$term%' DESC, email LIKE '%$term%' DESC, city LIKE '%$term%' DESC LIMIT 5";
-    $results = SearchServiceMgr::filterSeekingGender($uid, DB::getInstance()->query($sql)->results());
+    $results = SearchServiceMgr::filterSeekingGender($me, DB::getInstance()->query($sql)->results());
     foreach($results as $result){
         ?>
         <a href="profilePage.php?uid=<?php echo $result->user_id;?>">
