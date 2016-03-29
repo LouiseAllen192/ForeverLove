@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 28, 2016 at 06:56 PM
+-- Generation Time: Mar 29, 2016 at 08:58 PM
 -- Server version: 5.7.9
 -- PHP Version: 5.6.16
 
@@ -102,6 +102,31 @@ CREATE TABLE IF NOT EXISTS `banned_users` (
   KEY `User_id` (`user_id`),
   KEY `Report_id` (`report_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ban_length`
+--
+
+DROP TABLE IF EXISTS `ban_length`;
+CREATE TABLE IF NOT EXISTS `ban_length` (
+  `id` int(11) NOT NULL,
+  `choice` varchar(32) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ban_length`
+--
+
+INSERT INTO `ban_length` (`id`, `choice`) VALUES
+(1, '7 Days'),
+(2, '14 Days'),
+(3, '30 Days'),
+(4, '60 Days'),
+(5, '120 Days'),
+(6, 'Permanent');
 
 -- --------------------------------------------------------
 
