@@ -27,6 +27,8 @@ User Services:
     ProfilePage:
     - fix profile image size
     - check admin permissions
+    - workaround for $_SESSION['user_id'] while viewing as admin
+    - add ban user option
 
     Image gallery:
     - fix error[3] partial upload error on certain images
@@ -49,8 +51,7 @@ Message Services:
 	- Handle XSS attacks
 	
 Search Services:
-    - Return search based on intent and gender (and age?? :) )
     - Redirect with results upon enter or click search icon
 
 Admin Services:
-    -
+    - ...

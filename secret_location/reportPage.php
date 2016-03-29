@@ -9,7 +9,7 @@
     include("../includes/metatags.html");
     include("../includes/fonts.html");
 
-    $report_id = 10;//$_GET['report_id'];
+    $report_id = 14;//$_GET['report_id'];
     $db = DB::getInstance();
     $report = $db->get('banned_reports', ['report_id', '=', $report_id])->results()[0];
     $priorities = SearchServiceMgr::getChoices('priority');
@@ -30,18 +30,55 @@
 <div class="container">
     <div class="row">
         <div class="box">
-            <div class="col-lg-12 text-center">
+            <div class="col-lg-12">
                 <br><br>
-                <h2>
+                <hr class="tagline-divider">
+                <h2 class="text-center">
                     <small>
-                        <strong>Report</strong>
+                        <strong>Report id: <?php echo $report->report_id;?></strong>
                     </small>
                 </h2>
                 <hr class="tagline-divider"><br>
 
 
-
-
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading text-center">
+                                Content
+                            </div>
+                            <div class="panel-body">
+                                <div  style="height: 350px;overflow: auto;">
+                                    <p><?php echo nl2br($report->content);?></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading text-center">
+                                Details
+                            </div>
+                            <div class="panel-body">
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading text-center">
+                                        Priority: <?php echo $db->query("SELECT choice FROM priority WHERE id = '$report->priority'")->results()[0]->choice;?>
+                                    </div>
+                                </div>
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading text-center">
+                                        Reporter: <a href="../profilePage.php?uid=<?php echo $report->reporter_id;?>" style="color: gold"><?php echo $reporter;?></a>
+                                    </div>
+                                </div>
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading text-center">
+                                        Reportee: <a href="../profilePage.php?uid=<?php echo $report->reportee_id;?>" style="color: gold"><?php echo $reportee;?></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
          </div>
     </div>

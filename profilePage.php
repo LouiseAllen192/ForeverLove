@@ -23,14 +23,14 @@
     $uid = $_SESSION['user_id'];
     $me = true;
 
-//    if(isset($_GET['uid'])){
-//        $uid = $_GET['uid'];
-//        $me=false;
-//    }
-//    else{
-//        $uid = $_SESSION['user_id'];
-//        $me=true;
-//    }
+    /*if(isset($_GET['uid'])){
+        $uid = $_GET['uid'];
+        $me=false;
+    }
+    else{
+        $uid = $_SESSION['user_id'];
+        $me=true;
+    }*/
 
         $images = ImageService::getImages($uid);
 
