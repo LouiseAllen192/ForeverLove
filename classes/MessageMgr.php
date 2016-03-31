@@ -72,13 +72,27 @@ class MessageMgr
             $tempConvoID = $convos[$i]->conversation_id;
             $linkString = "conversationPage.php?".$tempConvoID."#bottom";
             $vis = $this->isProfileVisible($tempConvoID);
-            if($vis)
-                echo "<a href= '".$linkString."''>$messagedUsers[$i]</a><br><br>";
+            $unreadMessagesArray = DB::getInstance()->query("SELECT COUNT(*) as num FROM messages WHERE recipient_id = '$this->userID' AND seen = '0' AND conversation_id = $tempConvoID")->results();
+            $unreadMessages = $unreadMessagesArray[0]->num;
+            if($vis)//if not a blind date
+            {
+                if ($unreadMessages == 0) //if there's no messages waiting to be read
+                    echo "<a href= \"$linkString\">$messagedUsers[$i]</a><br><br>";
+                else
+                    echo "<a href= \"$linkString.\">$messagedUsers[$i]<span class=\"badge\">$unreadMessages</span></a><br><br>";
+            }
             else
-                echo "<a href= '".$linkString."''>Blind Date</a><br><br>";
+            {
+                if ($unreadMessages == 0)
+                    echo "<a href= \"$linkString\"Blind Date</a><br><br>";
+                else
+                    echo "<a href= \"$linkString\">Blind Date<span class=\"badge\">$unreadMessages</span></a><br><br>";
+            }
         }
         if($i == 0)
-            echo "No existing converations found.";
+            echo "<div class=\"alert alert-danger\">
+                   No Conversations Found.
+                  </div>";
     }
 
     public static function testFunction($changes)
@@ -110,6 +124,7 @@ class MessageMgr
         if(!empty($convoID))
         {
             $messages = DB::getInstance()->query("SELECT * FROM messages WHERE conversation_id = '$convoID' ORDER BY date_received")->results();
+            $this->markMessagesAsRead($convoID);
             $vis = $this->isProfileVisible($convoID);
             if($vis)
             {
@@ -353,6 +368,11 @@ class MessageMgr
             $cid = $existingConversation[0]->conversation_id;
             echo "<br><br><a href=\"conversationPage.php?$cid#bottom\" class=\"btn btn-info center-inline\" role=\"button\"><span class=\"glyphicon glyphicon-envelope\"></span> Send message</a>";
         }
+    }
+
+    public function markMessagesAsRead($convoID)
+    {
+        DB::getInstance()->query("UPDATE messages SET seen = '1' WHERE conversation_id = '$convoID' AND recipient_id = $this->userID");
     }
 }
 ?>

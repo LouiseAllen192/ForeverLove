@@ -23,7 +23,7 @@
 <body class="full">
 
 <?php
-if($loggedin){ include("includes/navbar.html");}
+if($loggedin){ include("includes/navbar.php");}
 else{include("includes/navbarNotLoggedIn.html");}
  ?>
 

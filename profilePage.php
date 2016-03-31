@@ -90,7 +90,7 @@
 </head>
 
 <body class="full">
-    <?php include("includes/navbar.html"); ?>
+    <?php include("includes/navbar.php"); ?>
 
     <!--Main page content-->
     <div class="container">

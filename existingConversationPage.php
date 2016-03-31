@@ -13,7 +13,7 @@
 </head>
 
 <body class="full">
-<?php include("includes/navbar.html"); ?>
+<?php include("includes/navbar.php"); ?>
 
 <!--Main page content-->
 
@@ -32,11 +32,13 @@
 
                     <br><br>
                     <?php
-                        //$uid = 1; //temp
-                        $uid = $_SESSION['user_id'];
+                        $uid = 1; //temp
+                        //$uid = $_SESSION['user_id'];
                         $msgMgr = new MessageMgr($uid);
                         $msgMgr->findConversations();
                     ?>
+
+                    <?php include("includes/navbar.php"); ?>
 
                     <br><br>
                     <br><br>

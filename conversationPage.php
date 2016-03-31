@@ -14,7 +14,7 @@
 
 
 <body class="full">
-<?php include("includes/navbar.html"); ?>
+
 
 <!--Main page content-->
 
@@ -27,8 +27,8 @@
                     <small>
                         <strong>
                             <?php
-                                //$uid = 1; //need to change to global
-                                $uid = $_SESSION['user_id'];
+                                $uid = 1; //need to change to global
+                                //$uid = $_SESSION['user_id'];
                                 $MsgMgr = new MessageMgr($uid);
                                 if(!isset($_POST['convoID']))
                                     $convoID = $_SERVER['QUERY_STRING'];
@@ -63,8 +63,8 @@
                 <p>
                     <br><br>
                     <?php
-                        //$uid = 4; //need to change to global
-                        $uid = $_SESSION['user_id'];
+                        $uid = 1; //need to change to global
+                        //$uid = $_SESSION['user_id'];
                         $MsgMgr = new MessageMgr($uid);
                         if(!isset($_POST['convoID']))
                             $convoID = $_SERVER['QUERY_STRING'];
@@ -85,6 +85,7 @@
                 <div style = "text-align: left">
                     <a href="existingConversationPage.php"><h3>Back To Conversation List</h3></a>
                 </div>
+                <?php include("includes/navbar.php"); ?>
             </div>
         </div>
     </div>
