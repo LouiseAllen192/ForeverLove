@@ -7,9 +7,10 @@
     include("includes/metatags.html");
     include("includes/fonts.html");
 
-    $uid = 1;//$_SESSION['user_id'];
+    $uid = 5;//$_SESSION['user_id'];
 
-    $hobbies = DB::getInstance()->query('SELECT * FROM user_hobbies ORDER BY hobby_name')->results();
+    $db = DB::getInstance();
+    $hobbies = $db->query('SELECT * FROM user_hobbies ORDER BY hobby_name')->results();
     $preferences = SearchServiceMgr::searchablePreferences();
 
     if(isset($_POST['submit'])){
@@ -29,13 +30,12 @@
         else{
             $sql = "SELECT user_id,username,tag_line,city,TIMESTAMPDIFF(YEAR, date_of_birth, CURDATE()) AS age";
             $sql .= " FROM registration_details JOIN preference_details USING(user_id) WHERE user_id != $uid";
-            $results = DB::getInstance()->query($sql)->results();
+            $results = $db->query($sql)->results();
         }
         if(isset($_POST['age'])){
             $results = SearchServiceMgr::filterAge($_POST['age'], $results);
         }
     }
-    print_r($results);
     ?>
     <title>Search Page</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -98,7 +98,7 @@
                                                                 <div class="col-xs-12">
                                                                     <div class="media">
                                                                         <div class="media-left">
-                                                                            <img  height="96" width="96" class="media-object" src="<?php echo DB::getInstance()->query("SELECT image_path FROM images WHERE user_id = '$result->user_id' && image_id = '1'")->results()[0]->image_path;?>"/>
+                                                                            <img  height="96" width="96" class="media-object" src="<?php echo $db->query("SELECT image_path FROM images WHERE user_id = '$result->user_id' && image_id = '1'")->results()[0]->image_path;?>"/>
                                                                         </div>
                                                                         <div class="media-body" style="padding-top: 3px;">
                                                                             <h4 class="media-heading"><?php echo $result->username; ?></h4>

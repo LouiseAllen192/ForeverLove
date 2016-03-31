@@ -10,8 +10,7 @@
     $_SESSION['user_id'] = 4;
     $reportee = 5;//$_GET['uid'];
 
-    $db = DB::getInstance();
-    $username = $db->query("SELECT username FROM registration_details WHERE user_id = '$reportee'")->results()[0]->username;
+    $username = UserServiceMgr::getUsername($reportee);
     $priorities = SearchServiceMgr::getChoices('priority');
 
     if(isset($_POST['submit_button']) && !($errors = UserServiceMgr::validateReport($_POST))){
@@ -39,7 +38,7 @@
                 <hr class="tagline-divider">
                 <h2>
                     <small>
-                        <strong>Report <?php echo $username;?></strong>
+                        <strong>Report <a href="../profilePage.php?uid=<?php echo $reportee;?>" style="color: gold"><?php echo $username;?></a></strong>
                     </small>
                 </h2>
                 <hr class="tagline-divider">

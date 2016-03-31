@@ -8,14 +8,12 @@
     include("../includes/metatags.html");
     include("../includes/fonts.html");
 
-    $db = DB::getInstance();
-    $reports = $db->query("SELECT * FROM banned_reports ORDER BY date_time DESC, priority DESC")->results();
+    $reports = DB::getInstance()->query("SELECT * FROM banned_reports ORDER BY date_time DESC, priority DESC")->results();
     $priorities = SearchServiceMgr::getChoices('priority');
     ?>
     <title>Reports Page</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/custom-admin.css" rel="stylesheet">
-    <link href="../css/custom-base-page.css" rel="stylesheet">
 
 </head>
 
@@ -51,22 +49,22 @@
                                                             <div class="media">
                                                                 <div class="col-xs-2">
                                                                     <div class="media-left media-middle" style="padding-top: 3px;">
-                                                                        <h5 class="media-heading"><?php echo $report->date_time; ?></h5>
+                                                                        <h5 class="media-middle"><?php echo $report->date_time; ?></h5>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-xs-4">
                                                                     <div class="media-body" style="padding-top: 3px;">
-                                                                        <h6 class="media-heading"><?php echo 'Reporter: '.$db->query("SELECT username FROM registration_details WHERE user_id = '$report->reporter_id'")->results()[0]->username; ?></h6>
+                                                                        <h6 class="media-middle"><?php echo 'Reporter: '.UserServiceMgr::getUsername($report->reporter_id);?></h6>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-xs-4">
                                                                     <div class="media-body" style="padding-top: 3px;">
-                                                                        <h6 class="media-heading"><?php echo 'Reportee: '.$db->query("SELECT username FROM registration_details WHERE user_id = '$report->reportee_id'")->results()[0]->username; ?></h6>
+                                                                        <h6 class="media-middle"><?php echo 'Reportee: '.UserServiceMgr::getUsername($report->reportee_id);?></h6>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-xs-2">
                                                                     <div class="media-right media-middle">
-                                                                        <h5 class="media-heading"><?php echo $priorities[$report->priority]; ?></h5>
+                                                                        <h5 class="media-middle"><?php echo $priorities[$report->priority]; ?></h5>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -82,7 +80,7 @@
                         }
                         else{?>
                             <div class= "alert alert-success" role="alert">
-                                <a href="../homePage.php" class="close" data-dismiss="alert" aria-label="close"></a>
+                                <p class="close" data-dismiss="alert" aria-label="close"></p>
                                 All reports have been dealt with...
                             </div>
                         <?php

@@ -10,8 +10,9 @@
 
     $uid = 5;//$_SESSION['user_id'];
 
+    $db = DB::getInstance();
     $sql = "SELECT user_id,username,tag_line,city,gender,seeking FROM registration_details JOIN preference_details USING(user_id) WHERE user_id != '$uid'";
-    $results = SearchServiceMgr::filterSeekingGender($uid, DB::getInstance()->query($sql)->results());
+    $results = SearchServiceMgr::filterSeekingGender($uid, $db->query($sql)->results());
     ?>
     <title>View All Page</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -50,7 +51,7 @@
                                                     <div class="col-xs-12">
                                                         <div class="media">
                                                             <div class="media-left">
-                                                                <img class="media-object" src="https://s3.amazonaws.com/uifaces/faces/twitter/calebogden/73.jpg"/>
+                                                                <img height="96" width="96" class="media-object" src="<?php echo $db->query("SELECT image_path FROM images WHERE user_id = '$result->user_id' && image_id = '1'")->results()[0]->image_path;?>"/>
                                                             </div>
                                                             <div class="media-body" style="padding-top: 3px;">
                                                                 <h4 class="media-heading"><?php echo $result->username; ?></h4>

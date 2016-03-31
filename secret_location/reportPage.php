@@ -9,13 +9,14 @@
     include("../includes/metatags.html");
     include("../includes/fonts.html");
 
-    $report_id = 14;//$_GET['report_id'];
+    $report_id = 1;//$_GET['report_id'];
     $db = DB::getInstance();
     $report = $db->get('banned_reports', ['report_id', '=', $report_id])->results()[0];
     $priorities = SearchServiceMgr::getChoices('priority');
-    $reporter = $db->query("SELECT username FROM registration_details WHERE user_id = '$report->reporter_id'")->results()[0]->username;
-    $reportee = $db->query("SELECT username FROM registration_details WHERE user_id = '$report->reportee_id'")->results()[0]->username;
-
+    $reporter = UserServiceMgr::getUsername($report->reporter_id);
+    $reportee = UserServiceMgr::getUsername($report->reportee_id);
+    $ban_lengths = SearchServiceMgr::getChoices('ban_length');//$db->query('SELECT * FROM ban_length')->results();
+    print_r($ban_lengths);
     ?>
     <title>Report Page</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -73,6 +74,24 @@
                                 <div class="panel panel-primary">
                                     <div class="panel-heading text-center">
                                         Reportee: <a href="../profilePage.php?uid=<?php echo $report->reportee_id;?>" style="color: gold"><?php echo $reportee;?></a>
+                                    </div>
+                                </div>
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading text-center">
+                                        <a href="banUserPage.php?uid=<?php echo $report->reportee_id;?>" style="color: gold"><?php echo 'Ban '.$reportee;?></a>
+                                    </div>
+                                </div>
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        <select class="form-control" name="ban_length">
+                                            <option disabled selected>Ban Reportee</option>
+                                            <?php
+                                            foreach($ban_lengths as $id => $choice){?>
+                                                <option value="<?php echo $id;?>"><?php echo $choice;?></option>
+                                                <?php
+                                            }
+                                            ?>
+                                        </select>
                                     </div>
                                 </div>
                             </div>

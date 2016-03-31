@@ -7,6 +7,7 @@
     include("includes/metatags.html");
     include("includes/fonts.html");
 
+    $db = DB::getInstance();
     $results = SearchServiceMgr::suggestions(/*$_SESSION['user_id']*/5);
     ?>
     <title>Suggestions Page</title>
@@ -46,7 +47,7 @@
                                                     <div class="col-xs-12">
                                                         <div class="media">
                                                             <div class="media-left">
-                                                                <img height="96" width="96" class="media-object" src="<?php echo DB::getInstance()->query("SELECT image_path FROM images WHERE user_id = '$result->user_id' && image_id = '1'")->results()[0]->image_path;?>"/>
+                                                                <img height="96" width="96" class="media-object" src="<?php echo $db->query("SELECT image_path FROM images WHERE user_id = '$result->user_id' && image_id = '1'")->results()[0]->image_path;?>"/>
                                                             </div>
                                                             <div class="media-body" style="padding-top: 3px;">
                                                                 <h4 class="media-heading"><?php echo $result->username; ?></h4>

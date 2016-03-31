@@ -170,11 +170,9 @@ class UserServiceMgr
 
     public static function getUsername($uid){
         $sql = "SELECT username " .
-            "FROM registration_details  ".
+            "FROM registration_details ".
             "WHERE user_id = '".$uid."'";
-        $results = DB::getInstance()->query($sql)->results()[0];
-        $username = $results->username;
-        return $username;
+        return DB::getInstance()->query($sql)->results()[0]->username;
     }
 
     public static function validateCreditCardDetails($source){
