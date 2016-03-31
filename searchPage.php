@@ -98,7 +98,7 @@
                                                                 <div class="col-xs-12">
                                                                     <div class="media">
                                                                         <div class="media-left">
-                                                                            <img class="media-object" src="https://s3.amazonaws.com/uifaces/faces/twitter/calebogden/73.jpg"/>
+                                                                            <img  height="96" width="96" class="media-object" src="<?php echo DB::getInstance()->query("SELECT image_path FROM images WHERE user_id = '$result->user_id' && image_id = '1'")->results()[0]->image_path;?>"/>
                                                                         </div>
                                                                         <div class="media-body" style="padding-top: 3px;">
                                                                             <h4 class="media-heading"><?php echo $result->username; ?></h4>

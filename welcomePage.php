@@ -2,7 +2,6 @@
 <html>
 
 <head>
-
     <?php
     require_once 'core/init.php';
     include("includes/metatags.html");
@@ -14,7 +13,7 @@
     }
 
     $errors = [];
-    if(isset($_POST)){
+    if(isset($_POST['submit_button'])){
         $errors = UserServiceMgr::login($_POST);
     }
 
@@ -62,12 +61,12 @@
 
                                         <label class="password" id="password_group">
                                             <span>Password</span>
-                                            <input id="password" name="password" value="" type="password" placeholder="Password">
+                                            <input id="password" name="password" type="password" placeholder="Password">
                                             <span class="<?php if($errors['password'] == 'error_required') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_required">Required...</span>
                                             <span class="<?php if($errors['password'] == 'error_login') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_login">Password Incorrect...</span>
                                         </label>
 
-                                        <button class="submit button" type="submit">Sign in</button>
+                                        <button class="submit button" name="submit_button" type="submit">Sign in</button>
 
                                         <p>
                                             <a class="forgot" href="#">Forgot your password?</a>

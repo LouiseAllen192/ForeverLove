@@ -10,11 +10,11 @@ class UserServiceMgr
     }
 
     public static function login($source){
-        if(isset($source['username'])){
-            $errors = [];
+        $errors = [];
+        if(isset($source['username']) && $source['username'] != ''){
             $username = $source['username'];
             if(($result = DB::getInstance()->query("SELECT user_id, password FROM registration_details WHERE username = '$username'")->results()[0])) {
-                if(isset($source['password'])){
+                if(isset($source['password']) && $source['password'] != ''){
                     if(password_verify($source['password'], $result->password)){
                         $_SESSION['user_id'] = $result->user_id;
                         header('Location: homePage.php');
@@ -32,6 +32,7 @@ class UserServiceMgr
 
     public static function logout(){
         unset($_SESSION['user_id']);
+        session_destroy();
     }
 
     public static function updateUserHobbies($uid, $postArray){
