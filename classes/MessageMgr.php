@@ -301,8 +301,8 @@ class MessageMgr
                 echo "Message Count: " . $msgCount;
                 if ($msgCount >= 25 && !($this->hasUserPressedReveal($convoID)))
                     echo "<form action=\"conversationPage.php?$convoID#bottom\"  method=\"post\">
-                                            <button name=\"reveal\" value=\"reveal\" class=\"btn btn-warning\">Reveal User</button>
-                                           </form><br><br>";
+                            <button name=\"reveal\" value=\"reveal\" class=\"btn btn-warning\">Reveal User</button>
+                           </form><br><br>";
                 else if($this->hasUserPressedReveal($convoID))
                     echo "<div class=\"alert alert-info\">
                            You have pressed to reveal your profile to your blind date and to see their profile. If they also press the button then the reveal will take place.
@@ -322,6 +322,9 @@ class MessageMgr
                         <input type=\"hidden\" name=\"uid\" value=$uid2>
                        </form>";
             }
+            echo "<br><br><form action=\"conversationPage.php?$convoID#bottom\"  method=\"post\">
+                    <button name=\"reload\" value=\"reload\" class=\"btn btn-warning\">Check For New Messages</button>
+                   </form><br><br>";
         }
         else
             echo "<div class=\"alert alert-danger\">
