@@ -295,29 +295,6 @@ class UserServiceMgr
         }
     }
 
-    public static function addReport($reportee, $source = []){
-        $reporter = $_SESSION['user_id'];
-        $db = DB::getInstance();
-        $cid = 0;
-        if($source['view_conversation']){
-            $sql = "SELECT conversation_id FROM conversations WHERE ((user1_id = '$reporter' && user2_id = '$reportee') || (user1_id = '$reporter' && user2_id = '$reportee'))";
-            if($db->query($sql)->count()){
-                $cid = $db->results()[0]->conversation_id;
-            }
-        }
-        $db->insert(
-            'banned_reports',
-            [
-                'reporter_id' => $reporter,
-                'reportee_id' => $reportee,
-                'conversation_id' => $cid,
-                'priority' => $source['priority'],
-                'content' => $source['content'],
-                'view_conversation' => $source['view_conversation']
-            ]
-        );
-    }
-
     public static function determineUpdateOrReg($uid){
 
         $sql = "SELECT unique_hobby ".

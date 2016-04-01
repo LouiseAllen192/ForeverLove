@@ -55,6 +55,39 @@ class DB{
         return $this;
     }
 
+    public function registerUser($table, $fields = [], $dob = null){
+        $n = count($fields);
+        if($n){
+            $keys = array_keys($fields);
+            $values = '';
+            $x = 1;
+
+            foreach($fields as $field){
+                $values .= '?';
+                if($x++ < $n)
+                    $values .= ', ';
+            }
+            $sql = "INSERT INTO {$table} (`".implode('`, `', $keys)."`) VALUES ({$values})";
+            if($this->query($sql, $fields)->error()) return false;
+            else if($table === 'registration_details'){
+                $user_id = $this->get('registration_details', ['username', '=', $fields['username']])->results()[0]->user_id;
+                $this->registerUser('account_details', ['user_id' => $user_id]);
+                $this->registerUser('preference_details', ['user_id' => $user_id, 'date_of_birth' => $dob]);
+                $this->registerUser('unique_hobby', ['user_id' => $user_id]);
+                $hobbies = $this->get('user_hobbies', ['hobby_id', '>' , 0])->results();
+                foreach($hobbies as $hobby){
+                    $this->insert('user_hobby_preferences', ['user_id' => $user_id, 'hobby_id' => $hobby->hobby_id, 'hobby_preference' => null]);
+                }
+                $this->insert('images', ['user_id' => $user_id, 'image_id' => 1, 'image_path' => 'includes\pics\default-profile.png', 'image_name' => 'default-profile.png',]);
+                for($i = 2; $i <= 16; $i++){
+                    $this->insert('images', ['user_id' => $user_id, 'image_id' => $i, 'image_path' => '', 'image_name' => '',]);
+                }
+            }
+            else return true;
+        }
+        return false;
+    }
+
     //An automated query
     public function action($action, $table, $where = []){
         if(count($where) === 3){
@@ -95,42 +128,6 @@ class DB{
         return $this->action('DELETE', $table, $where);
     }
 
-    /*
-     * Insert new tuple into tables
-     * e.g. insert('registration_details', ['Username' => 'Kevin', 'Password' => 'password']);
-     */
-    public function registerUser($table, $fields = [], $dob = null){
-        $n = count($fields);
-        if($n){
-            $keys = array_keys($fields);
-            $values = '';
-            $x = 1;
-
-            foreach($fields as $field){
-                $values .= '?';
-                if($x++ < $n)
-                    $values .= ', ';
-            }
-            $sql = "INSERT INTO {$table} (`".implode('`, `', $keys)."`) VALUES ({$values})";
-            if($this->query($sql, $fields)->error()) return false;
-            else if($table === 'registration_details'){
-                $user_id = $this->get('registration_details', ['username', '=', $fields['username']])->results()[0]->user_id;
-                $this->registerUser('account_details', ['user_id' => $user_id]);
-                $this->registerUser('preference_details', ['user_id' => $user_id, 'date_of_birth' => $dob]);
-                $this->registerUser('unique_hobby', ['user_id' => $user_id]);
-                $hobbies = $this->get('user_hobbies', ['hobby_id', '>' , 0])->results();
-                foreach($hobbies as $hobby){
-                    $this->insert('user_hobby_preferences', ['user_id' => $user_id, 'hobby_id' => $hobby->hobby_id, 'hobby_preference' => null]);
-                }
-                $this->insert('images', ['user_id' => $user_id, 'image_id' => 1, 'image_path' => 'includes\pics\default-profile.png', 'image_name' => 'default-profile.png',]);
-                for($i = 2; $i <= 16; $i++){
-                    $this->insert('images', ['user_id' => $user_id, 'image_id' => $i, 'image_path' => '', 'image_name' => '',]);
-                }
-            }
-            else return true;
-        }
-        return false;
-    }
 
     /*
      * Insert new tuple into table

@@ -14,7 +14,7 @@
     $priorities = SearchServiceMgr::getChoices('priority');
 
     if(isset($_POST['submit_button']) && !($errors = UserServiceMgr::validateReport($_POST))){
-        UserServiceMgr::addReport($reportee, $_POST);
+        AdminServiceMgr::addReport($reportee, $_POST);
     }
     ?>
 
