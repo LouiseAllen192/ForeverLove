@@ -8,7 +8,8 @@
     include("includes/fonts.html");
 
     $db = DB::getInstance();
-    $results = SearchServiceMgr::suggestions(/*$_SESSION['user_id']*/5);
+    $uid = $_SESSION['user_id'];
+    $results = SearchServiceMgr::suggestions($uid);
     ?>
     <title>Suggestions Page</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -35,38 +36,51 @@
                 <hr class="tagline-divider">
                 <br>
                     <?php
-                    if(isset($results)){
-                        foreach ($results as $result){
-                            ?>
-                            <div class="row">
-                                <div class="col-xs-offset-2">
-                                    <div class="col-xs-10">
-                                        <a href="profilePage.php?uid=<?php echo $result->user_id;?>">
-                                            <div class="display_box">
-                                                <div class="row">
-                                                    <div class="col-xs-12">
-                                                        <div class="media">
-                                                            <div class="media-left">
-                                                                <img height="96" width="96" class="media-object" src="<?php echo $db->query("SELECT image_path FROM images WHERE user_id = '$result->user_id' && image_id = '1'")->results()[0]->image_path;?>"/>
-                                                            </div>
-                                                            <div class="media-body" style="padding-top: 3px;">
-                                                                <h4 class="media-heading"><?php echo $result->username; ?></h4>
-                                                                <small style="white-space: nowrap;"><?php echo $result->tag_line; ?></small>
-                                                            </div>
-                                                            <div class="media-right media-middle">
-                                                                <h5 class="media-heading"><?php echo $result->city; ?></h5>
+                    if($db->query("SELECT account_type FROM account_details WHERE user_id = '$uid'")->results()[0]->account_type == 'Premium'){
+                        if (isset($results)) {
+                            foreach ($results as $result) {
+                                ?>
+                                <div class="row">
+                                    <div class="col-xs-offset-2">
+                                        <div class="col-xs-10">
+                                            <a href="profilePage.php?uid=<?php echo $result->user_id; ?>">
+                                                <div class="display_box">
+                                                    <div class="row">
+                                                        <div class="col-xs-12">
+                                                            <div class="media">
+                                                                <div class="media-left">
+                                                                    <img height="96" width="96" class="media-object"
+                                                                         src="<?php echo $db->query("SELECT image_path FROM images WHERE user_id = '$result->user_id' && image_id = '1'")->results()[0]->image_path; ?>"/>
+                                                                </div>
+                                                                <div class="media-body" style="padding-top: 3px;">
+                                                                    <h4 class="media-heading"><?php echo $result->username; ?></h4>
+                                                                    <small
+                                                                        style="white-space: nowrap;"><?php echo $result->tag_line; ?></small>
+                                                                </div>
+                                                                <div class="media-right media-middle">
+                                                                    <h5 class="media-heading"><?php echo $result->city; ?></h5>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </a>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <?php
+                                <?php
+                            }
                         }
-                    }?>
+                    }else{?>
+                        <a href="upgradeMembership.php">
+                            <div class= "alert alert-success" role="alert">
+                                <p class="close" data-dismiss="alert" aria-label="close"></p>
+                                Please fuck off and upgrade your account
+                            </div>
+                        </a>
+                        <?php
+                    }
+                    ?>
                 <br><br>
                 <br><br>
 
