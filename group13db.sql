@@ -31,7 +31,6 @@ DROP TABLE IF EXISTS `account_details`;
 CREATE TABLE IF NOT EXISTS `account_details` (
   `user_id` int(11) NOT NULL,
   `account_type` varchar(64) DEFAULT NULL,
-  `free_trail_used` tinyint(1) DEFAULT NULL,
   `account_expired` date DEFAULT NULL,
   KEY `User_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -40,12 +39,12 @@ CREATE TABLE IF NOT EXISTS `account_details` (
 -- Dumping data for table `account_details`
 --
 
-INSERT INTO `account_details` (`user_id`, `account_type`, `free_trail_used`, `account_expired`) VALUES
-  (1, 'Premium', NULL, '2016-09-26'),
-  (2, 'Premium', NULL, '2017-03-04'),
-  (3, 'Premium', NULL, '2017-01-06'),
-  (4, 'Premium', NULL, '2016-06-26'),
-  (5, 'Premium', NULL, '2016-06-26');
+INSERT INTO `account_details` (`user_id`, `account_type`, `account_expired`) VALUES
+  (1, 'Premium', '2016-09-26'),
+  (2, 'Premium', '2017-03-04'),
+  (3, 'Premium', '2017-01-06'),
+  (4, 'Premium', '2016-06-26'),
+  (5, 'Premium', '2016-06-26');
 
 -- --------------------------------------------------------
 
