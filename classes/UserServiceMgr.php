@@ -123,8 +123,7 @@ class UserServiceMgr
         //todo
     }
 
-    public static function registerAccountType($uid, $accLength){
-        echo 'In here!<br> length:'.$accLength.'<br>user id: '.$uid;
+    public static function registerUpgradeAccountType($uid, $accLength){
         $date = new DateTime();
         $changes = array();
         if($accLength == 30) {
@@ -165,9 +164,6 @@ class UserServiceMgr
         return true;
     }
 
-    public static function upgradeMembership($userid){
-        //todo
-    }
 
     public static function getUsername($uid){
         $sql = "SELECT username " .

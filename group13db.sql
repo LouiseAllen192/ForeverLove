@@ -39,12 +39,12 @@ CREATE TABLE IF NOT EXISTS `account_details` (
 -- Dumping data for table `account_details`
 --
 
-INSERT INTO `account_details` (`user_id`, `account_type`, `free_trail_used`, `account_expired`) VALUES
-(1, 'Premium', 0, '2016-09-26'),
-(2, 'Premium', 1, '2017-03-04'),
-(3, 'Premium', 0, '2017-01-06'),
-(4, 'Premium', 0, '2016-06-26'),
-(5, 'Premium', 0, '2016-06-26');
+INSERT INTO `account_details` (`user_id`, `account_type`, `account_expired`) VALUES
+(1, 'Premium', '2016-09-26'),
+(2, 'Premium', '2017-03-04'),
+(3, 'Premium', '2017-01-06'),
+(4, 'Premium', '2016-06-26'),
+(5, 'Premium', '2016-06-26');
 
 -- --------------------------------------------------------
 

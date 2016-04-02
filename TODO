@@ -33,9 +33,6 @@ User Services:
     Image gallery:
     - fix error[3] partial upload error on certain images
 
-    Settings:
-    - create update/upgrade account details functionality
-    - if signing up for free trial - check if free trial already used for that email address
 
 
 
