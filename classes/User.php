@@ -85,7 +85,6 @@ class User{
     public function setAcc($accDet, $uid){
         $this->accDetails['userid'] = $uid;
         $this->accDetails['account_type'] = $accDet->account_type;
-        $this->accDetails['free_trail_used'] = $accDet->free_trail_used;
         $this->accDetails['account_expired'] = $accDet->account_expired;
     }
 

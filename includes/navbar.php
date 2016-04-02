@@ -70,6 +70,7 @@
                     Logged in as:
                     <?php
                         if(isset($_SESSION['user_id'])){
+//                            echo 'SESSION:'.$_SESSION['user_id'];
                              $log =  UserServiceMgr::getUsername($_SESSION['user_id']).'   ';
                         }else{
                               $log = 'UNSET';
