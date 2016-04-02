@@ -14,7 +14,7 @@
     $ban_lengths = SearchServiceMgr::getChoices('ban_length');
     $banSuccessful = false;
     if(isset($_POST['apply_ban']) && isset($_POST['ban_length'])){
-        $banSuccessful = AdminServiceMgr::banUser($uid, $_GET['report_id'], $_POST['ban_length']);
+        $banSuccessful = AdminServiceMgr::banUser($uid, isset($_GET['report_id']) ? $_GET['report_id'] : 0, $_POST['ban_length']);
         //mail($results->email, 'Account Suspended', $_POST['message']);
     }
     ?>

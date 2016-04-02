@@ -1,9 +1,10 @@
+
 -- phpMyAdmin SQL Dump
 -- version 4.5.2
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 02, 2016 at 02:33 PM
+-- Generation Time: Apr 02, 2016 at 04:36 PM
 -- Server version: 5.7.9
 -- PHP Version: 5.6.16
 
@@ -30,6 +31,7 @@ DROP TABLE IF EXISTS `account_details`;
 CREATE TABLE IF NOT EXISTS `account_details` (
   `user_id` int(11) NOT NULL,
   `account_type` varchar(64) DEFAULT NULL,
+  `free_trail_used` tinyint(1) DEFAULT NULL,
   `account_expired` date DEFAULT NULL,
   KEY `User_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -38,14 +40,12 @@ CREATE TABLE IF NOT EXISTS `account_details` (
 -- Dumping data for table `account_details`
 --
 
-INSERT INTO `account_details` (`user_id`, `account_type`, `account_expired`) VALUES
-  (1, 'Premium', '2016-09-29'),
-  (2, 'Premium', '2017-03-04'),
-  (3, 'Premium', '2017-01-06'),
-  (4, 'Premium', '2016-06-26'),
-  (5, 'Premium', '2016-06-26'),
-  (6, 'Premium', '2016-10-02'),
-  (7, 'Free', '2016-05-02');
+INSERT INTO `account_details` (`user_id`, `account_type`, `free_trail_used`, `account_expired`) VALUES
+  (1, 'Premium', NULL, '2016-09-26'),
+  (2, 'Premium', NULL, '2017-03-04'),
+  (3, 'Premium', NULL, '2017-01-06'),
+  (4, 'Premium', NULL, '2016-06-26'),
+  (5, 'Premium', NULL, '2016-06-26');
 
 -- --------------------------------------------------------
 
@@ -75,18 +75,17 @@ CREATE TABLE IF NOT EXISTS `banned_reports` (
   `report_id` int(11) NOT NULL AUTO_INCREMENT,
   `reporter_id` int(11) NOT NULL,
   `reportee_id` int(11) NOT NULL,
+  `conversation_id` int(11) NOT NULL DEFAULT '0',
   `priority` int(11) NOT NULL DEFAULT '1',
   `content` text NOT NULL,
-  `conversation_id` int(11) NOT NULL DEFAULT '0',
   `date_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `view_conversation` tinyint(1) NOT NULL DEFAULT '0',
   `resolved` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`report_id`),
   KEY `Reporter_id` (`reporter_id`),
   KEY `Reportee_id` (`reportee_id`),
-  KEY `priority` (`priority`),
-  KEY `banned_reports_ibfk_4` (`conversation_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  KEY `priority` (`priority`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -97,13 +96,46 @@ CREATE TABLE IF NOT EXISTS `banned_reports` (
 DROP TABLE IF EXISTS `banned_users`;
 CREATE TABLE IF NOT EXISTS `banned_users` (
   `user_id` int(11) NOT NULL,
-  `report_id` int(11) NOT NULL,
+  `report_id` int(11) NOT NULL DEFAULT '0',
   `start_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `end_date` datetime NOT NULL,
   `permanent` tinyint(1) NOT NULL DEFAULT '0',
   KEY `User_id` (`user_id`),
   KEY `Report_id` (`report_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `banned_users`
+--
+
+INSERT INTO `banned_users` (`user_id`, `report_id`, `start_date`, `end_date`, `permanent`) VALUES
+  (2, 0, '2016-04-02 17:35:01', '2016-04-09 16:35:01', 0),
+  (1, 0, '2016-04-02 17:35:45', '2016-04-02 16:35:45', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ban_length`
+--
+
+DROP TABLE IF EXISTS `ban_length`;
+CREATE TABLE IF NOT EXISTS `ban_length` (
+  `id` int(11) NOT NULL,
+  `choice` varchar(32) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ban_length`
+--
+
+INSERT INTO `ban_length` (`id`, `choice`) VALUES
+  (1, '7 Days'),
+  (2, '14 Days'),
+  (3, '30 Days'),
+  (4, '60 Days'),
+  (5, '120 Days'),
+  (6, 'Permanent');
 
 -- --------------------------------------------------------
 
@@ -320,7 +352,7 @@ CREATE TABLE IF NOT EXISTS `images` (
 --
 
 INSERT INTO `images` (`user_id`, `image_id`, `image_path`, `image_name`) VALUES
-  (1, 1, 'userImageUploads/user1/undecided.jpg', 'undecided.jpg'),
+  (1, 1, 'userImageUploads/user1/athletic_people.png', 'athletic_people.png'),
   (1, 2, 'userImageUploads/user1/couple.jpg', 'couple.jpg'),
   (1, 3, '', ''),
   (1, 4, 'userImageUploads/user1/emotions.jpg', 'emotions.jpg'),
@@ -333,7 +365,7 @@ INSERT INTO `images` (`user_id`, `image_id`, `image_path`, `image_name`) VALUES
   (1, 11, 'userImageUploads/user1/people.jpg', 'people.jpg'),
   (1, 12, 'userImageUploads/user1/toxic-people.jpg', 'toxic-people.jpg'),
   (1, 13, '', ''),
-  (1, 14, 'userImageUploads/user1/athletic_people.png', 'athletic_people.png'),
+  (1, 14, 'userImageUploads/user1/undecided.jpg', 'undecided.jpg'),
   (1, 15, '', ''),
   (1, 16, '', ''),
   (2, 1, 'userImageUploads/user2/office-people.jpg', 'office-people.jpg'),
@@ -368,7 +400,7 @@ INSERT INTO `images` (`user_id`, `image_id`, `image_path`, `image_name`) VALUES
   (3, 14, '', ''),
   (3, 15, '', ''),
   (3, 16, '', ''),
-  (4, 1, 'includes\\pics\\default-profile.png', 'default-profile.png'),
+  (4, 1, '', ''),
   (4, 2, '', ''),
   (4, 3, '', ''),
   (4, 4, '', ''),
@@ -384,7 +416,7 @@ INSERT INTO `images` (`user_id`, `image_id`, `image_path`, `image_name`) VALUES
   (4, 14, '', ''),
   (4, 15, '', ''),
   (4, 16, '', ''),
-  (5, 1, 'includes\\pics\\default-profile.png', 'default-profile.png'),
+  (5, 1, '', ''),
   (5, 2, '', ''),
   (5, 3, '', ''),
   (5, 4, '', ''),
@@ -399,39 +431,7 @@ INSERT INTO `images` (`user_id`, `image_id`, `image_path`, `image_name`) VALUES
   (5, 13, '', ''),
   (5, 14, '', ''),
   (5, 15, '', ''),
-  (5, 16, '', ''),
-  (6, 1, 'includes\\pics\\default-profile.png', 'default-profile.png'),
-  (6, 2, '', ''),
-  (6, 3, '', ''),
-  (6, 4, '', ''),
-  (6, 5, '', ''),
-  (6, 6, '', ''),
-  (6, 7, '', ''),
-  (6, 8, '', ''),
-  (6, 9, '', ''),
-  (6, 10, '', ''),
-  (6, 11, '', ''),
-  (6, 12, '', ''),
-  (6, 13, '', ''),
-  (6, 14, '', ''),
-  (6, 15, '', ''),
-  (6, 16, '', ''),
-  (7, 1, 'includes\\pics\\default-profile.png', 'default-profile.png'),
-  (7, 2, '', ''),
-  (7, 3, '', ''),
-  (7, 4, '', ''),
-  (7, 5, '', ''),
-  (7, 6, '', ''),
-  (7, 7, '', ''),
-  (7, 8, '', ''),
-  (7, 9, '', ''),
-  (7, 10, '', ''),
-  (7, 11, '', ''),
-  (7, 12, '', ''),
-  (7, 13, '', ''),
-  (7, 14, '', ''),
-  (7, 15, '', ''),
-  (7, 16, '', '');
+  (5, 16, '', '');
 
 -- --------------------------------------------------------
 
@@ -634,9 +634,7 @@ INSERT INTO `preference_details` (`user_id`, `tag_line`, `city`, `gender`, `seek
   (2, 'Hashtag farmer life', 'Sligo', 2, 3, 3, '1980-12-22', 7, 2, 11, 5, 6, 7, 2, 4, 2, 4, 'I''m really only interested in the farming life. Anything to do with farming gets my blood flowing. I love the smell of silage in the morning and grass all day.'),
   (3, 'See you in Ibiza', 'Dublin', 2, 3, 3, '1996-05-19', 4, 2, 9, 2, 2, 3, 3, 3, 2, 4, 'Living for the weekend. Into fast cars and fast women. Hit me up if you like boy race cars, repetitive music and mind numbingly boring conversations'),
   (4, 'I''m Rob, i''m cool', 'Limerick', 2, 2, 3, '1996-10-21', 2, 6, 1, 5, 3, 10, 2, 2, 3, 4, 'Rob Rob ... Robbedy Rob'),
-  (5, 'Living that life', 'Kerry', 3, 2, 2, '1991-02-19', 4, 4, 6, 3, 2, 2, 3, 2, 3, 2, 'MAking my way down town, walking fast, faces past and i''m homebound.... du du du du du du dun'),
-  (6, 'Mary is here', 'Dublin', 3, 4, 2, '1990-03-02', 5, 3, 10, 7, 4, 4, 2, 3, 2, 2, 'I''m Mary and my friends say i''m wild.'),
-  (7, 'Who run the world', 'Texas', 3, 2, 3, '1980-02-02', 2, 6, 1, 4, 3, 11, 2, 2, 3, 3, 'I''m beyonce. You know');
+  (5, 'Living that life', 'Kerry', 3, 2, 2, '1991-02-19', 4, 4, 6, 3, 2, 2, 3, 2, 3, 2, 'MAking my way down town, walking fast, faces past and i''m homebound.... du du du du du du dun');
 
 -- --------------------------------------------------------
 
@@ -678,7 +676,7 @@ CREATE TABLE IF NOT EXISTS `registration_details` (
   `email` varchar(128) NOT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `Username` (`username`,`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `registration_details`
@@ -689,9 +687,7 @@ INSERT INTO `registration_details` (`user_id`, `username`, `first_name`, `last_n
   (2, 'FarmerFred', 'Fred', 'Connors', 'FredConnors1', 'Freddy@yahoo.ie'),
   (3, 'PartyBoy56', 'Jared', 'Armstein', 'JaredArmstein1', 'Jarjar@gmail.com'),
   (4, 'Rob', 'Rob', 'King', '$2y$10$jB8QeMTgCo.ZHotyBWpfeeSdCp6MTYI3E6hAlaW3P.3c9OVNiLbDK', 'robert.king.1996@gmail.com'),
-  (5, 'LouiseA192', 'Louise', 'Allen', '$2y$10$VwuRBBW2rjHUgsRoG1VEo.T48VDcTHc11v3hTw2zUZIrTvp0OMzce', 'louise.allen192@gmail.com'),
-  (6, 'MaryJo4', 'Mary', 'Joeseph', '$2y$10$ZtoYDS5nM/S63h6FRKjEl.2kv5YLKY5bsN5blq.u8XRm6fyb/FlRm', 'mary@yahoo.ie'),
-  (7, 'QueenBey4', 'Beyonce', 'Knowles', '$2y$10$aJgmAHmtSfYpvM5U/i89Ke8tTrYXP2FRzF8yGKRKjhoIgx8TPUi.K', 'beyonce@gmail.com');
+  (5, 'LouiseA192', 'Louise', 'Allen', '$2y$10$VwuRBBW2rjHUgsRoG1VEo.T48VDcTHc11v3hTw2zUZIrTvp0OMzce', 'louise.allen192@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -788,9 +784,7 @@ INSERT INTO `unique_hobby` (`user_id`, `unique_hobby`) VALUES
   (2, 'Sheering sheep'),
   (3, 'Sunbathing'),
   (4, 'CSS'),
-  (5, 'Jumping'),
-  (6, 'Going mad'),
-  (7, 'Running the world');
+  (5, 'Jumping');
 
 -- --------------------------------------------------------
 
@@ -1040,77 +1034,7 @@ INSERT INTO `user_hobby_preferences` (`user_id`, `hobby_id`, `hobby_preference`)
   (5, 32, 0),
   (5, 33, 0),
   (5, 34, 0),
-  (5, 35, 0),
-  (6, 1, 1),
-  (6, 2, 0),
-  (6, 3, 0),
-  (6, 4, 0),
-  (6, 5, 0),
-  (6, 6, 0),
-  (6, 7, 0),
-  (6, 8, 1),
-  (6, 9, 0),
-  (6, 10, 1),
-  (6, 11, 0),
-  (6, 12, 0),
-  (6, 13, 0),
-  (6, 14, 0),
-  (6, 15, 0),
-  (6, 16, 0),
-  (6, 17, 1),
-  (6, 18, 0),
-  (6, 19, 0),
-  (6, 20, 1),
-  (6, 21, 0),
-  (6, 22, 0),
-  (6, 23, 0),
-  (6, 24, 0),
-  (6, 25, 0),
-  (6, 26, 1),
-  (6, 27, 0),
-  (6, 28, 0),
-  (6, 29, 0),
-  (6, 30, 0),
-  (6, 31, 0),
-  (6, 32, 0),
-  (6, 33, 0),
-  (6, 34, 0),
-  (6, 35, 0),
-  (7, 1, 0),
-  (7, 2, 0),
-  (7, 3, 0),
-  (7, 4, 1),
-  (7, 5, 0),
-  (7, 6, 0),
-  (7, 7, 0),
-  (7, 8, 0),
-  (7, 9, 1),
-  (7, 10, 0),
-  (7, 11, 0),
-  (7, 12, 1),
-  (7, 13, 0),
-  (7, 14, 0),
-  (7, 15, 0),
-  (7, 16, 0),
-  (7, 17, 0),
-  (7, 18, 0),
-  (7, 19, 0),
-  (7, 20, 0),
-  (7, 21, 0),
-  (7, 22, 0),
-  (7, 23, 0),
-  (7, 24, 0),
-  (7, 25, 0),
-  (7, 26, 0),
-  (7, 27, 0),
-  (7, 28, 0),
-  (7, 29, 0),
-  (7, 30, 1),
-  (7, 31, 0),
-  (7, 32, 1),
-  (7, 33, 0),
-  (7, 34, 0),
-  (7, 35, 0);
+  (5, 35, 0);
 
 -- --------------------------------------------------------
 
@@ -1151,15 +1075,13 @@ ADD CONSTRAINT `account_details_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `regi
 ALTER TABLE `banned_reports`
 ADD CONSTRAINT `banned_reports_ibfk_1` FOREIGN KEY (`reporter_id`) REFERENCES `registration_details` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
 ADD CONSTRAINT `banned_reports_ibfk_2` FOREIGN KEY (`reportee_id`) REFERENCES `registration_details` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT `banned_reports_ibfk_3` FOREIGN KEY (`priority`) REFERENCES `priority` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT `banned_reports_ibfk_4` FOREIGN KEY (`conversation_id`) REFERENCES `conversations` (`conversation_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ADD CONSTRAINT `banned_reports_ibfk_3` FOREIGN KEY (`priority`) REFERENCES `priority` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `banned_users`
 --
 ALTER TABLE `banned_users`
-ADD CONSTRAINT `banned_users_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `registration_details` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT `banned_users_ibfk_2` FOREIGN KEY (`report_id`) REFERENCES `banned_reports` (`report_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ADD CONSTRAINT `banned_users_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `registration_details` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `conversations`
