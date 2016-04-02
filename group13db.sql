@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 29, 2016 at 08:58 PM
+-- Generation Time: Apr 02, 2016 at 04:36 PM
 -- Server version: 5.7.9
 -- PHP Version: 5.6.16
 
@@ -39,12 +39,12 @@ CREATE TABLE IF NOT EXISTS `account_details` (
 -- Dumping data for table `account_details`
 --
 
-INSERT INTO `account_details` (`user_id`, `account_type`, `account_expired`) VALUES
-(1, 'Premium', '2016-09-26'),
-(2, 'Premium', '2017-03-04'),
-(3, 'Premium', '2017-01-06'),
-(4, 'Premium', '2016-06-26'),
-(5, 'Premium', '2016-06-26');
+INSERT INTO `account_details` (`user_id`, `account_type`, `free_trail_used`, `account_expired`) VALUES
+(1, 'Premium', NULL, '2016-09-26'),
+(2, 'Premium', NULL, '2017-03-04'),
+(3, 'Premium', NULL, '2017-01-06'),
+(4, 'Premium', NULL, '2016-06-26'),
+(5, 'Premium', NULL, '2016-06-26');
 
 -- --------------------------------------------------------
 
@@ -95,13 +95,21 @@ CREATE TABLE IF NOT EXISTS `banned_reports` (
 DROP TABLE IF EXISTS `banned_users`;
 CREATE TABLE IF NOT EXISTS `banned_users` (
   `user_id` int(11) NOT NULL,
-  `report_id` int(11) NOT NULL,
+  `report_id` int(11) NOT NULL DEFAULT '0',
   `start_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `end_date` datetime NOT NULL,
   `permanent` tinyint(1) NOT NULL DEFAULT '0',
   KEY `User_id` (`user_id`),
   KEY `Report_id` (`report_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `banned_users`
+--
+
+INSERT INTO `banned_users` (`user_id`, `report_id`, `start_date`, `end_date`, `permanent`) VALUES
+(2, 0, '2016-04-02 17:35:01', '2016-04-09 16:35:01', 0),
+(1, 0, '2016-04-02 17:35:45', '2016-04-02 16:35:45', 1);
 
 -- --------------------------------------------------------
 
@@ -1072,8 +1080,7 @@ ALTER TABLE `banned_reports`
 -- Constraints for table `banned_users`
 --
 ALTER TABLE `banned_users`
-  ADD CONSTRAINT `banned_users_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `registration_details` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `banned_users_ibfk_2` FOREIGN KEY (`report_id`) REFERENCES `banned_reports` (`report_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `banned_users_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `registration_details` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `conversations`
