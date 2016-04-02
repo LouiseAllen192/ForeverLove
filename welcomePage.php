@@ -12,10 +12,17 @@
         UserServiceMgr::logout();
     }
 
+    $expired=false;
+
     $errors = [];
     if(isset($_POST['submit_button'])){
-        $errors = UserServiceMgr::login($_POST);
+       $errors = UserServiceMgr::login($_POST);
+        if(isset($errors['expired'])){
+            $expired = true;
+        }
     }
+
+
 
     ?>
     <title>Welcome Page</title>
@@ -41,7 +48,28 @@
             <div class="row">
                 <div class="col-lg-8 col-md-11 col-sm-4 col-xs-12">
                     <div class="panel panel-primary panel-transparent">
-                        <div class="panel-body"><p>Find your Forever Love today! <br><br><br> Sign in to meet your perfect match<br><br>
+                        <div class="panel-body">
+
+                            <?php
+                            if($expired){ ?>
+                                <p>The account details you have entered have expired on the
+                                    <?php
+
+                                    $username = $_POST['username'];
+                                    $uid = ReturnShortcuts::getUserID($username);
+                                    $values = ReturnShortcuts::returnAccDetails($uid);
+
+                                    $pieces = explode("-", $values['account_expired']);
+                                    echo $pieces[2].'/'.$pieces[1].'/'.$pieces[0];?>
+                                    <br><br>
+                                    <?php $hrefString = '../ForeverLove/upgradeMembership.php?renew=yes&username='.$username; ?>
+                                Please click <a href= "<?php echo $hrefString?>" >here</a> to renew your account</p>
+
+                            <?php }
+                            else{
+                            ?>
+
+                            <p>Find your Forever Love today! <br><br><br> Sign in to meet your perfect match<br><br>
                                 Not already a member? <br>Register now for a FREE 30 day trial<br><br><br><br></p>
 
 
@@ -57,6 +85,7 @@
                                             <input id="username" name="username" value="<?php echo Input::get('username');?>" type="text" autocomplete="on" placeholder="Username">
                                             <span class="<?php if($errors['username'] == 'error_required') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_required">Required...</span>
                                             <span class="<?php if($errors['username'] == 'error_login') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_login">Username Not Recognised...</span>
+                                            <span class="<?php if($errors['username'] == 'error_banned') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_banned">Account associated with this username is banned. Please contact admin for details</span>
                                         </label>
 
                                         <label class="password" id="password_group">
@@ -74,6 +103,9 @@
                                     </fieldset>
                                 </form>
                             </div>
+
+
+                        <?php } ?>
 
                         </div>
                     </div>

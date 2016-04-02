@@ -20,7 +20,7 @@ User Services:
      - create and apply js and php validation
 
    welcomePage:
-    - make sure log out is working
+    - test if check for banned user works correctly
     - check if users account is expired or banned on login
     - create forgotten password functionality
 
