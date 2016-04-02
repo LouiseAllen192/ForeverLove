@@ -55,13 +55,13 @@
                 <div>
                     <?php
                         if(isset($_SESSION['user_id']))
-                             $userID =  UserServiceMgr::getUsername($_SESSION['user_id']).'   ';
-                        else
-                              $userID = 1; //$_SESSION['user_id'];
-                        $newMessages = DB::getInstance()->query("SELECT COUNT(*) as Number FROM messages WHERE recipient_id = '$userID' AND seen = '0'")->results();
-                        $count = $newMessages[0]->Number;
-                        if($count > 0)
-                            echo "<a href=\"existingConversationPage.php\"><button type=\"button\" class=\"btn btn-primary\">New Messages<span class=\"badge\">$count</span></button></a>";
+                        {
+                            $userID = $_SESSION['user_id'];
+                            $newMessages = DB::getInstance()->query("SELECT COUNT(*) as Number FROM messages WHERE recipient_id = '$userID' AND seen = '0'")->results();
+                            $count = $newMessages[0]->Number;
+                            if ($count > 0)
+                                echo "<a href=\"existingConversationPage.php\"><button type=\"button\" class=\"btn btn-primary\">New Messages<span class=\"badge\">$count</span></button></a>";
+                        }
                     ?>
                 </div>
             </div>
