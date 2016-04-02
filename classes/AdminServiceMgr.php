@@ -45,4 +45,14 @@ class AdminServiceMgr{
             ]
         );
     }
+
+    public static function getBannedUsers(){
+        $db = DB::getInstance();
+        $banned_uids = $db->query("SELECT user_id FROM banned_users WHERE permanent = 1")->results();
+        $results = [];
+        foreach($banned_uids as $uid){
+            $results [] = $db->query("SELECT user_id,username,tag_line,city FROM registration_details JOIN preference_details USING(user_id) WHERE user_id = '$uid->user_id'")->results()[0];
+        }
+        return $results;
+    }
 }
