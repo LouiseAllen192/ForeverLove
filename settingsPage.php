@@ -35,6 +35,7 @@
                     <br><br>
                     <a href="viewMembershipStatusPage.php">View membership status</a><br><br>
                     <a href="updateRegDetailsPage.php">Update your basic account details</a><br><br>
+                    <a href="updatePassword.php">Update your password</a><br><br>
                     <a href="updatePreferencesPage.php">Update your prefrences</a><br><br>
                     <a href="updateHobbiesPage.php">Update your hobbies</a><br><br>
 

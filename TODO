@@ -8,11 +8,6 @@ User Services:
     - implement functionality to check credit card info against server
     - fix js validation on valid date
 
-    updateRegDetailsPage:
-    - fix this page
-    - apply registrationValidation.js to updateRegistration details - FIX (half working)
-    - get passwords to update encrypted
-
     updateHobbysPage:
     - create and apply js and php validation
 

@@ -299,6 +299,41 @@ class UserServiceMgr
         else{ return $validate->getErrors();}
     }
 
+    public static function updatePassword($source){
+        $validate = new Validate();
+        $validate->check(
+            $source,
+            [
+                'old_password' => [
+                    'required' => true,
+                    'matches' => '/^[a-zA-Z0-9_-]{6,32}$/'
+                ],
+                'old_password_confirm' => [
+                    'required' => true,
+                    'matches' => '/\b('.$_POST['old_password'].')\b/'
+                ],
+                'new_password' => [
+                    'required' => true,
+                    'matches' => '/^[a-zA-Z0-9_-]{6,32}$/'
+                ],
+                'new_password_confirm' => [
+                    'required' => true,
+                    'matches' => '/\b('.$_POST['new_password'].')\b/'
+                ]
+            ]);
+
+        if($validate->passed()){
+            $fields = [
+                'password' => password_hash($_POST['new_password'], PASSWORD_DEFAULT)
+            ];
+
+            DB::getInstance()->update('registration_details', 'user_id = '.$_SESSION['user_id'], $fields);
+
+            return false;
+        }
+        else{ return $validate->getErrors();}
+    }
+
     public static function validateReport($source){
         $validate = new Validate();
         $validate->check(
