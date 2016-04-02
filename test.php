@@ -32,7 +32,7 @@
 </head>
 
 <body class="full">
-<?php include("includes/navbar.html"); ?>
+<?php include("includes/navbar.php"); ?>
 
 <!--Main page content-->
 
@@ -50,14 +50,14 @@
                 <p>
                     <br>
                     <?php
-                    $now = new \DateTime('now');
-                    $curMonth = $now->format('m');
-                    $curYear = $now->format('y');
 
-                    echo 'month:'.$curMonth.'<br>year:'.$curYear;
+                    $hobbies = ReturnShortcuts::returnHobbies(6);
 
-                    ?>
+                    foreach($hobbies as $key=>$value){
+                        echo $key.'----'.$value.'<br>';
                     }
+                    ?>
+
 
                 <br><br>
                 <br><br>

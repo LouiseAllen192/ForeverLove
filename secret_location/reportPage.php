@@ -15,8 +15,6 @@
     $priorities = SearchServiceMgr::getChoices('priority');
     $reporter = UserServiceMgr::getUsername($report->reporter_id);
     $reportee = UserServiceMgr::getUsername($report->reportee_id);
-    $ban_lengths = SearchServiceMgr::getChoices('ban_length');//$db->query('SELECT * FROM ban_length')->results();
-    print_r($ban_lengths);
     ?>
     <title>Report Page</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -78,20 +76,7 @@
                                 </div>
                                 <div class="panel panel-primary">
                                     <div class="panel-heading text-center">
-                                        <a href="banUserPage.php?uid=<?php echo $report->reportee_id;?>" style="color: gold"><?php echo 'Ban '.$reportee;?></a>
-                                    </div>
-                                </div>
-                                <div class="panel panel-primary">
-                                    <div class="panel-heading">
-                                        <select class="form-control" name="ban_length">
-                                            <option disabled selected>Ban Reportee</option>
-                                            <?php
-                                            foreach($ban_lengths as $id => $choice){?>
-                                                <option value="<?php echo $id;?>"><?php echo $choice;?></option>
-                                                <?php
-                                            }
-                                            ?>
-                                        </select>
+                                        <a href="banUserPage.php?uid=<?php echo $report->reportee_id;?>&report_id=<?php echo $report_id;?>" style="color: gold"><?php echo 'Ban '.$reportee;?></a>
                                     </div>
                                 </div>
                             </div>

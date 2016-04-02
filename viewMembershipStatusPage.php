@@ -15,7 +15,6 @@
     <?php
 
     $uid = $_SESSION['user_id'];
-    $uid = 6;
     $dbvalues = ReturnShortcuts::returnAccDetails($uid);
     ?>
 
@@ -48,8 +47,8 @@
                             <div class= "line-right"> <strong>Membership type: </strong><br></div>
                             <div class="line-left"><?php echo $dbvalues['account_type'] ?><br><br><br></div>
 
-                            <div class="line-right"> <strong>Free trial used:  </strong><br></div>
-                            <div class="line-left"><?php echo ($dbvalues['free_trial_used'] == 0) ? "No" : "Yes" ?><br><br><br></div>
+<!--                            <div class="line-right"> <strong>Free trial used:  </strong><br></div>-->
+<!--                            <div class="line-left">--><?php //echo ($dbvalues['free_trial_used'] == 0) ? "No" : "Yes" ?><!--<br><br><br></div>-->
 
                             <div class="line-right"> <strong>Account Expiry date:  </strong><br></div>
                             <div class="line-left"><?php echo $dbvalues['account_expired'] ?><br><br><br></div>

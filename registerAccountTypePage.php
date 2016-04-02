@@ -7,22 +7,17 @@
     include("includes/fonts.html");
 
     $uid = $_SESSION['user_id'];
-    echo '<br><br><br><br><br><br><br><br><br><br>';
-
-    echo var_dump($_POST).'<br><br><br><br>';
-    $acc;
-    $length;
 
     $errors = UserServiceMgr::validateCreditCardDetails($_POST);
 
     if(isset($_POST['security']) && !($errors)){
         if(UserServiceMgr::validateCreditCard($uid, $_POST)){
             $length = $_POST['length'];
-            UserServiceMgr::registerAccountType($uid, $length);
+            UserServiceMgr::registerUpgradeAccountType($uid, $length);
             header('Location: updatePreferencesPage.php');
             die();
         }
-        else{ echo 'Fail!!!!';
+        else{
             ?>
             <div class="alert alert-danger">
                 <a href="registerAccountTypePage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -57,6 +52,7 @@
                 </h2>
                 <hr class="tagline-divider">
                 <br>
+
                 <?php if(empty($_POST)){ ?>
                 <p>Here at ForeverLove we want to give everyone the best possible chance at happiness. <br>
                     That's why we give all our members a 30 day trial for FREE. <br><br>Find a love that will last a lifetime.<br>Continue your sign up here...</p>

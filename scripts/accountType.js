@@ -5,7 +5,7 @@ var page = path.substring(path.lastIndexOf('/') + 1);
 $(document).ready(function(){
 
 
-    if(page == 'registerAccountTypePage.php') {
+    if(page == 'registerAccountTypePage.php' || page == 'upgradeMembership.php') {
 
         $('#fullname_group').find('#fullname').keyup(function () {
             $('#fullname_group > #error_required').removeClass('error').addClass('hide');
@@ -35,7 +35,7 @@ $(document).ready(function(){
         });
     }
 
-    if(page == 'registerAccountTypePage.php'){
+    if(page == 'registerAccountTypePage.php' || page == 'upgradeMembership.php'){
 
         $('#month_group').find('#month').keyup(function () {
             $('#month_group > #error_required').removeClass('error').addClass('hide');
@@ -87,7 +87,7 @@ $(document).ready(function(){
 
     }
 
-    if(page == 'registerAccountTypePage.php'){
+    if(page == 'registerAccountTypePage.php' || page == 'upgradeMembership.php'){
 
         $('#security_group').find('#security').keyup(function () {
             $('#security_group > #error_required').removeClass('error').addClass('hide');

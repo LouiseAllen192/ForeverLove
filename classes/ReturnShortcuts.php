@@ -45,8 +45,7 @@ class ReturnShortcuts
 
     public static function returnAccDetails($uid){
         $accountDetails = DB::getInstance()->get('account_details', ['user_id', '=', $uid])->results()[0];
-        $dbvalue = array("account_type"=>$accountDetails->account_type, "free_trial_used"=>$accountDetails->free_trail_used,
-            "account_expired"=>$accountDetails->account_expired);
+        $dbvalue = array("account_type"=>$accountDetails->account_type, "account_expired"=>$accountDetails->account_expired);
         return $dbvalue;
     }
 
@@ -72,5 +71,10 @@ class ReturnShortcuts
             $resultFinal[$result->id] = $result->choice;
         }
         return $resultFinal;
+    }
+
+    public static function getUserID($username){
+        $resultUserId = DB::getInstance()->query("SELECT user_id FROM registration_details WHERE username = '$username'")->results()[0];
+        return $resultUserId->user_id;
     }
 }
