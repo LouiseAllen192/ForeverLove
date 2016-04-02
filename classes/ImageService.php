@@ -76,6 +76,67 @@ class ImageService
         return false;
     }
 
+    public static function uploadFileImage($source, $uid, $images){
+        $infoMsgInfo = array();
+        $infoMsgInfo['type'] = "danger";
+        $infoMsgInfo['msg'] = "UNSET";
+        $error = $source['myimage']['error'];
+
+        if($error == 0) {
+            $imgNum = ImageService::returnFirstEmptySlotNumber($images);
+            $file = $source['myimage']['tmp_name'];
+            $file_name = $source['myimage']['name'];
+            $size = $source["myimage"]["size"];
+            $target_dir = "userImageUploads/user" . $uid . "/";
+            $name = basename($file_name);
+            $target_file = $target_dir . basename($file_name);
+            $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
+
+
+            // Check if image file is an actual image or fake image
+            $check = getimagesize($file);
+            if ($check !== false) {
+                if (file_exists($target_file)) {
+                    $infoMsgInfo['msg'] = "Sorry, an image with that filename already exists for this user. Please upload an image with a unique filename";
+                } else {
+                    if ($size > 500000) {
+                        $infoMsgInfo['msg'] = "Sorry, your file is too large.";
+                    } else {
+                        if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
+                            $infoMsgInfo['msg'] = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+                        } else {
+                            if (move_uploaded_file($file, $target_file)) {
+                                if (ImageService::uploadImage($uid, $imgNum, $target_file, $name)) {
+                                    $infoMsgInfo['msg'] = "The file " . $name . " has been uploaded.";
+                                    $infoMsgInfo['type'] = "success";
+                                } else {
+                                    $infoMsgInfo['msg'] = 'Image not stored in db correctly';
+                                }
+                            } else {
+                                $infoMsgInfo['msg'] = "Sorry, there was an error uploading your file.";
+                            }
+                        }
+                    }
+                }
+            } else {
+                $infoMsgInfo['msg'] = "Error - File is not an image.";
+            }
+        }
+
+        else{
+        if($error == 1){$infoMsgInfo['msg'] = "The uploaded file exceeds the upload_max_filesize directive in php.ini.";}
+        if($error == 2){$infoMsgInfo['msg'] = "The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form.";}
+        if($error == 3){$infoMsgInfo['msg'] = "The uploaded file was only partially uploaded.";}
+        if($error == 4){$infoMsgInfo['msg'] = "No file was uploaded.";}
+        if($error == 5){$infoMsgInfo['msg'] = "Missing a temporary folder";}
+        if($error == 6){$infoMsgInfo['msg'] = "Failed to write file to disk";}
+        if($error == 7){$infoMsgInfo['msg'] = "A PHP extension stopped the file upload. PHP does not provide a way to ascertain which extension caused the file upload to stop; examining the list of loaded extensions with phpinfo() may help.";}
+        }
+        return $infoMsgInfo;
+    }
+
+
+
     public static function checkIfImageGalleryFull($images){
         foreach($images as $key=>$value){
             if($value == ''){
