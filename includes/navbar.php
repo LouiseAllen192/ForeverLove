@@ -5,7 +5,7 @@
     <script src="bootstrap_js/bootstrap.js"></script>
     <script src="scripts/search.js"></script>
 
-    <?php $_SESSION['user_id'] = 5;?>
+<!--    --><?php //$_SESSION['user_id'] = 5;?>
 </head>
 
 <nav class="navbar navbar-inverse navbar-fixed-top navBar" role="navigation">
@@ -55,10 +55,10 @@
                 <div>
                     <?php
                         if(isset($_SESSION['user_id']))
-                             $uid =  UserServiceMgr::getUsername($_SESSION['user_id']).'   ';
+                             $userID =  UserServiceMgr::getUsername($_SESSION['user_id']).'   ';
                         else
-                              $uid = 1; //$_SESSION['user_id'];
-                        $newMessages = DB::getInstance()->query("SELECT COUNT(*) as Number FROM messages WHERE recipient_id = '$uid' AND seen = '0'")->results();
+                              $userID = 1; //$_SESSION['user_id'];
+                        $newMessages = DB::getInstance()->query("SELECT COUNT(*) as Number FROM messages WHERE recipient_id = '$userID' AND seen = '0'")->results();
                         $count = $newMessages[0]->Number;
                         if($count > 0)
                             echo "<a href=\"existingConversationPage.php\"><button type=\"button\" class=\"btn btn-primary\">New Messages<span class=\"badge\">$count</span></button></a>";

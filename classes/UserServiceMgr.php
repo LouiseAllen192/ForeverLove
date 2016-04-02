@@ -124,6 +124,7 @@ class UserServiceMgr
     }
 
     public static function registerAccountType($uid, $accLength){
+        echo 'In here!<br> length:'.$accLength.'<br>user id: '.$uid;
         $date = new DateTime();
         $changes = array();
         if($accLength == 30) {

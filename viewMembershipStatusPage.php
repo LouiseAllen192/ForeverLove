@@ -15,7 +15,6 @@
     <?php
 
     $uid = $_SESSION['user_id'];
-    $uid = 6;
     $dbvalues = ReturnShortcuts::returnAccDetails($uid);
     ?>
 

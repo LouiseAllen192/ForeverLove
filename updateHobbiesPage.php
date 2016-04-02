@@ -10,7 +10,8 @@
     include($_SERVER['DOCUMENT_ROOT'].'/classes/ReturnShortcuts.php');
 
 
-    $uid = $_SESSION['user_id'];
+//    $uid = $_SESSION['user_id'];
+    $uid = 7;
 
     $regOrUpdate = UserServiceMgr::determineUpdateOrReg($uid);
     $dbvalue=array();

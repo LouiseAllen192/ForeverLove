@@ -6,10 +6,9 @@
     include("includes/metatags.html");
     include("includes/fonts.html");
 
-    $uid = $_SESSION['user_id'];
-    echo '<br><br><br><br><br><br><br><br><br><br>';
-
-    echo var_dump($_POST).'<br><br><br><br>';
+    echo '<br><br><br><br><br><br><br><br>';
+//    $uid = $_SESSION['user_id'];
+    $uid = 7;
     $acc;
     $length;
 
