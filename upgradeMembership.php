@@ -7,9 +7,25 @@
     require_once 'core/init.php';
     include("includes/metatags.html");
 
-
-    $uid = $_SESSION['user_id'];
+    $renew=false;
     $finished=false;
+
+    if(isset($_GET['renew'])){
+        $renew=true;
+        $userN = $_GET['username'];
+    }
+    if  (isset($_POST['renew']) ){
+        $renew=true;
+        $userN = $_POST['username'];
+    }
+
+    if(!$renew) {
+        $uid = $_SESSION['user_id'];
+    }
+    else{
+        $uid = ReturnShortcuts::getUserID($userN);
+    }
+
 
     $errors = UserServiceMgr::validateCreditCardDetails($_POST);
 
@@ -17,7 +33,7 @@
         if(UserServiceMgr::validateCreditCard($uid, $_POST)){
             $finished=true;
             $length = $_POST['length'];
-            UserServiceMgr::registerUpgradeAccountType($uid, $length);
+            $success = UserServiceMgr::registerUpgradeAccountType($uid, $length);
         }
         else{
             ?>
@@ -48,7 +64,15 @@
 </head>
 
 <body class="full">
-<?php include("includes/navbar.php"); ?>
+
+<?php
+if($renew){
+    include("includes/navbarNotLoggedIn.html");
+}
+else{
+    include("includes/navbar.php");
+}
+ ?>
 
 <!--Main page content-->
 
@@ -59,7 +83,7 @@
                 <br><br>
                 <h2>
                     <small>
-                        <strong>Upgrade Membership status</strong>
+                        <strong><?php if($renew){echo 'Renew';} else{echo 'Upgrade';}?> Membership status</strong>
                     </small>
                 </h2>
                 <hr class="tagline-divider">
@@ -67,21 +91,38 @@
                     <br><br>
 
                     <?php
+
                     if($finished){ ?>
                         <div class="alert alert-success">
                             <a href="registerAccountTypePage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                            <p><strong>Success</strong> - You are now a Premium user. <br> You can enjoy full access to our site for <?php echo $length;?> months.</p>
+                            <p><strong>Success</strong> - You <?php if($renew){ echo 'have successfully renewed your account';} else{ echo 'are now a Premium user. ';}?><br> You can enjoy full access to our site for <?php echo $length;?> months.</p>
                         </div>
+                        <?php if (!$renew){?>
                          <br><br><a href="viewMembershipStatusPage.php" class="btn btn-info center-inline" role="button">Return to 'View Membership' Page</a>
-
-            <?php }
+                        <?php } else { ?>
+                        <br><br><a href="welcomePage.php" class="btn btn-info center-inline" role="button">Return to welcome Page</a>
+                        <?php   }
+                    }
 
                     ?>
 
 
-                <?php if(empty($_POST)){ ?>
+                <?php if(empty($_POST)){
+
+                if(!$renew){ ?>
                     <p>You have chosen to upgrade your account from a Free membership to a Premium membership. <br>
                         Premium members have full access to all our websites features including Blind Date and Suggestions<br></p>
+                <?php }
+                else{ ?>
+                    <p>
+                        You have chosen to renew your account with us. Continue your search for love with us for a further 3, 6 or 9 months.<br>
+                    </p>
+
+                <?php }
+                    ?>
+
+
+
                     <br><br>
 
                     <div class = "panel panel-default">
@@ -96,6 +137,8 @@
                                     </select>
                                 </fieldset>
                                 <br><br>
+                                <input type="hidden" name="renew" value="yes">
+                                <input type="hidden" name="username" value="<?php echo $userN?>">
                                 <input type="submit" name="Send" id="Send" class="btn btn-primary" Value="Select">
                             </form>
                         </div>
@@ -191,6 +234,8 @@
 
                                     </fieldset>
                                     <br>
+                                    <input type="hidden" name="renew" value="yes">
+                                    <input type="hidden" name="username" value="<?php echo $userN?>">
                                     <input class="btn btn-info center-inline" id=payment_submit_button" name= "submit" type="submit" value="Submit">
                                 </form>
 

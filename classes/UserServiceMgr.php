@@ -14,15 +14,22 @@ class UserServiceMgr
         if(isset($source['username']) && $source['username'] != ''){
             $username = $source['username'];
             if(($result = DB::getInstance()->query("SELECT user_id, password FROM registration_details WHERE username = '$username'")->results()[0])) {
-                if(isset($source['password']) && $source['password'] != ''){
-                    if(password_verify($source['password'], $result->password)){
-                        $_SESSION['user_id'] = $result->user_id;
-                        header('Location: homePage.php');
-                        die();
+                if(! (UserServiceMgr::userAccountExpired($username))) {
+                    if (!(UserServiceMgr::userIsBanned($username))) {
+                        if (isset($source['password']) && $source['password'] != '') {
+                            if (password_verify($source['password'], $result->password)) {
+                                $_SESSION['user_id'] = $result->user_id;
+//                                session_start();
+                                header('Location: homePage.php');
+                                die();
+                            }
+                            else { $errors['password'] = 'error_login';}
+
+                        } else { $errors['password'] = 'error_required';}
                     }
-                    else{ $errors['password'] = 'error_login';}
+                    else { $errors['username'] = 'error_banned';}
                 }
-                else{ $errors['password'] = 'error_required';}
+                else { $errors['expired'] = 'error_expired';}
             }
             else{ $errors['username'] = 'error_login';}
         }
@@ -30,9 +37,30 @@ class UserServiceMgr
         return $errors;
     }
 
+   public static function userIsBanned($username){
+       $uid = ReturnShortcuts::getUserID($username);
+       $resultBanned = DB::getInstance()->query("SELECT user_id FROM banned_users")->results();
+       foreach($resultBanned as $result){
+           if($uid == $result->user_id){
+               return true;
+           }
+       }
+       return false;
+    }
+
+    public static function userAccountExpired($username){
+        $uid = ReturnShortcuts::getUserID($username);
+        $result = DB::getInstance()->query("SELECT account_expired FROM account_details WHERE user_id = '$uid'")->results()[0];
+        $expired = $result->account_expired;
+        if( strtotime($expired) < strtotime('now') ) {
+            return true;
+        }
+        return false;
+    }
+
     public static function logout(){
         unset($_SESSION['user_id']);
-        session_destroy();
+//        session_destroy($_SESSION['user_id']);
     }
 
     public static function updateUserHobbies($uid, $postArray){
@@ -128,13 +156,11 @@ class UserServiceMgr
         $changes = array();
         if($accLength == 30) {
             $changes['account_type']= "Free";
-            $changes['free_trail_used']= 1;
             $date->add(new DateInterval('P'.$accLength.'D'));
             $changes['account_expired']= $date->format('Y-m-d');
         }
         else                {
             $changes['account_type']= "Premium";
-            $changes['free_trail_used']= 0;
             $date->add(new DateInterval('P'.$accLength.'M'));
             $changes['account_expired']= $date->format('Y-m-d');
         }
