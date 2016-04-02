@@ -6,7 +6,6 @@
     include("includes/fonts.html");
 
     if(isset($_POST['continue_button']) && !($errors = UserServiceMgr::registerUpdateAccount($_POST))){
-        mkdir("/userImageUploads/user".$_SESSION['user_id'], 0700);
         header('Location: registerAccountTypePage.php');
         die();
     }

@@ -291,9 +291,10 @@ class UserServiceMgr
             else{
                 DB::getInstance()->registerUser('registration_details', $fields, $_POST['dob']);
             }
-            if(!isset($_SESSION['user_id'])) {
+//            if(!isset($_SESSION['user_id'])) {
                 $_SESSION['user_id'] = DB::getInstance()->get('registration_details', ['username', '=', $_POST['username']])->results()[0]->user_id;
-            }
+                 mkdir("/userImageUploads/user".$_SESSION['user_id'], 0700);
+//            }
             return false;
         }
         else{ return $validate->getErrors();}

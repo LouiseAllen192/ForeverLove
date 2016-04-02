@@ -7,11 +7,11 @@
     include("includes/fonts.html");
 
     $uid = $_SESSION['user_id'];
-
     $results = DB::getInstance()->get('registration_details', ['user_id', '=', $uid])->results()[0];
 
+
     if(Input::exists()){
-        if(isset($_POST['old_password']) && password_verify($_POST['old_password'], $results->password)){
+        if(isset($_POST['old_password']) && $_POST['old_password'] == $results->password){
             $_POST['old_password_confirm'] = $_POST['old_password'];
             $errors = UserServiceMgr::updatePassword($_POST);
         }
