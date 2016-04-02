@@ -339,7 +339,12 @@ class MessageMgr
         $prefs = DB::getInstance()->query("SELECT * FROM preference_details WHERE user_id = $this->userID")->results();
         $seeking = $prefs[0]->seeking;
         $gender = $prefs[0]->gender;
-        if (!empty($alreadyIn))
+        $values = ReturnShortcuts::returnAccDetails($this->userID);
+        $acctype = $values['account_type'];
+        if($acctype == 'Free')
+            return "You must be a premium member to access Blind Date
+                    <a href =\"updateMembership.php\"><h3>Take Me To Upgrade Membership Page</h3></a></div>";
+        else if (!empty($alreadyIn))
             return "We are working on finding you a match at present. Please be patient.";
         else if($currentBlindDate)
             return "You currently have a blind date in your existing conversations. You must either reveal your profile to your partner or end the conversation to get another.";
