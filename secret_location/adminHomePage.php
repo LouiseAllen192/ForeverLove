@@ -9,6 +9,8 @@
     include("../includes/metatags.html");
     include("../includes/fonts.html");
 
+    $banned = DB::getInstance()->query("SELECT DISTINCT user_id FROM banned_users WHERE permanent = '1'")->count();
+    $suspended = DB::getInstance()->query("SELECT DISTINCT user_id FROM banned_users WHERE permanent = '0'")->count();
     $unresolved = DB::getInstance()->query("SELECT report_id FROM banned_reports WHERE resolved = '0'")->count();
     if($unresolved == 0){$unresolved = '';}
     ?>
@@ -39,9 +41,9 @@
                 <div class="row">
                     <div class="col-sm-4 col-xs-6">
                         <div class="dummy"></div>
-                        <a href="#" class="thumbnail">
+                        <a href="viewBannedUsersPage.php" class="thumbnail">
                             <div class="h4">
-                                Banned Users<span class="badge">2</span>
+                                Banned Users<span class="badge"><?php echo $banned;?></span>
                             </div>
                         </a>
                     </div>
@@ -50,7 +52,7 @@
                         <div class="dummy"></div>
                         <a href="#" class="thumbnail">
                             <div class="h4">
-                                Suspended Users<span class="badge">3</span>
+                                Suspended Users<span class="badge"><?php echo $suspended;?></span>
                             </div>
                         </a>
                     </div>

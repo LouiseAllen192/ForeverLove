@@ -35,7 +35,7 @@
                 <hr class="tagline-divider">
                 <br>
                     <?php
-                    if(isset($results)) {
+                    if(isset($results)){
                         foreach ($results as $result){
                             ?>
                             <div class="row">
@@ -73,7 +73,6 @@
             </div>
         </div>
     </div>
-
 </div>
 <?php include("includes/footer.html"); ?>
 </body>
