@@ -28,6 +28,7 @@
         }
     }
 
+
     ?>
 
     <title><?php echo $regOrUpdate;?> Preferences</title>

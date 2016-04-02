@@ -94,6 +94,7 @@
                                     <span class="<?php if($errors['confirm_email'] == 'error_required') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_required">Required...</span>
                                     <span class="<?php if($errors['confirm_email'] == 'error_regex') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_regex">Email addresses do not match...</span>
                                 </div>
+                            </div>
 
                             <div class="form-group" id="username_group">
                                 <label for="username" class="col-md-4 col-sm-5 control-label"><b>Username</b></label>

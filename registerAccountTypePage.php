@@ -101,7 +101,7 @@
                     }
 
                     if ($_POST['accType'] == "free") {
-                        $successRegisterFree = UserServiceMgr::registerAccountType($uid, 30);
+                        $successRegisterFree = UserServiceMgr::registerUpgradeAccountType($uid, 30);
                         if($successRegisterFree){ ?>
                             <div class= "alert alert-info" role="alert" id="selectedMessage">
                                 <a href="homePage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
