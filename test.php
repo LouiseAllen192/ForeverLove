@@ -51,10 +51,14 @@
                     <br>
                     <?php
 
-                    $hobbies = ReturnShortcuts::returnHobbies(6);
+                    $email = 'lilhy@gmail.com';
 
-                    foreach($hobbies as $key=>$value){
-                        echo $key.'----'.$value.'<br>';
+
+                    if(UserServiceMgr::checkIfEmailExists($email)){
+                        echo 'TRUE';
+                    }
+                    else{
+                        echo 'False';
                     }
                     ?>
 

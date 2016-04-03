@@ -393,6 +393,41 @@ class UserServiceMgr
         else{ return $validate->getErrors();}
     }
 
+    public static function getEmailErrors($source){
+        $validate = new Validate();
+        $validate->check(
+            $source,
+            [
+                'email' => [
+                    'required' => true,
+                ]
+            ]);
+        if($validate->passed()){
+            return false;
+        }
+        else{ return $validate->getErrors();}
+    }
+
+    public static function checkIfEmailExists($email){
+        $sql = "SELECT email " .
+            "FROM registration_details  ";
+
+        $results = DB::getInstance()->query($sql)->results();
+        foreach ($results as $result) {
+            if(strcmp($result->email, $email) == 0){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static function getUserIdFromEmail($email){
+        $sql = "SELECT user_id " .
+            "FROM registration_details ".
+            "WHERE email = '".$email."'";
+        return DB::getInstance()->query($sql)->results()[0]->user_id;
+    }
+
     public static function validateReport($source){
         $validate = new Validate();
         $validate->check(

@@ -98,7 +98,7 @@
                                         <button class="submit button" name="submit_button" type="submit">Sign in</button>
 
                                         <p>
-                                            <a class="forgot" href="#">Forgot your password?</a>
+                                            <a class="forgot" href="forgottenPasswordPage.php">Forgot your password?</a>
                                         </p>
                                     </fieldset>
                                 </form>
