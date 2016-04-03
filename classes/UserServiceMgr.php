@@ -128,6 +128,7 @@ class UserServiceMgr
             }
         }
         $where = "user_id = '".$userid."'";
+
         $success = DB::getInstance()->update('preference_details', $where, $changes);
         if($success) return true;
         else return false;
@@ -295,6 +296,35 @@ class UserServiceMgr
                 $_SESSION['user_id'] = DB::getInstance()->get('registration_details', ['username', '=', $_POST['username']])->results()[0]->user_id;
                  mkdir("/userImageUploads/user".$_SESSION['user_id'], 0700);
 //            }
+            return false;
+        }
+        else{ return $validate->getErrors();}
+    }
+
+    public static function getPreferencesValidationErrors($source, $update){
+       $required = true;
+        if($update){
+            $required=false;
+        }
+        $validate = new Validate();
+        $validate->check(
+            $source,
+            [
+                'tag_line' => [
+                    'required' => $required,
+                    'matches' => '/^[a-zA-Z.\\- ,\']{2,256}$/',
+                ],
+                'city' => [
+                    'required' => $required,
+                    'matches' => '/^[a-zA-Z ]{2,32}$/'
+                ],
+                'about_me' => [
+                    'required' => $required,
+                    'matches' => '/^[a-zA-Z0-9 \\-,.\']{2,256}$/',
+                ]
+            ]);
+
+        if($validate->passed()){
             return false;
         }
         else{ return $validate->getErrors();}

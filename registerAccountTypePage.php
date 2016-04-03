@@ -31,7 +31,7 @@
     <link href="css/custom-base-page.css" rel="stylesheet">
     <link href="css/custom-form-page.css" rel="stylesheet">
     <script src="bootstrap_js/jquery.js"></script>
-    <script src="scripts/accountType.js"></script>
+    <script src="scripts/creditCardValidation.js"></script>
 
 </head>
 
