@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 03, 2016 at 06:32 PM
+-- Generation Time: Apr 03, 2016 at 07:23 PM
 -- Server version: 5.7.9
 -- PHP Version: 5.6.16
 
@@ -67,7 +67,14 @@ CREATE TABLE IF NOT EXISTS `admin` (
   `email` varchar(128) NOT NULL,
   PRIMARY KEY (`admin_id`),
   UNIQUE KEY `Email` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`admin_id`, `first_name`, `last_name`, `password`, `email`) VALUES
+(1, 'Kevin', 'O''Brien', '$2y$10$s5c2pSVqAxZirU8m3OWJneRJ2Qep3w6GSx4oOoHxEoAi2IVzxFdQW', 'kfcobrien@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -664,7 +671,7 @@ INSERT INTO `messages` (`message_id`, `conversation_id`, `sender_id`, `recipient
 (6, 11, 3, 1, '2016-03-22 19:37:16', 'pop', 1),
 (7, 11, 1, 3, '2016-03-23 21:30:18', 'Well Lad', 1),
 (8, 11, 1, 3, '2016-03-23 21:33:05', 'Why do they call you party boy?', 1),
-(9, 11, 1, 3, '2016-03-23 21:33:59', 'Once upon a time not so long ago\r\n\r\nTommy used to work on the docks\r\nUnion''s been on strike\r\nHe''s down on his luck...\r\nIt''s tough, so tough\r\n\r\nGina works the diner all day\r\nWorking for her man,\r\nShe brings home her pay\r\nFor love, for love\r\n\r\nShe says, "We''ve gotta hold on to what we''ve got.\r\nIt doesn''t make a difference if we make it or not.\r\nWe''ve got each other and that''s a lot.\r\nFor love we''ll give it a shot."\r\n\r\n[Chorus:]\r\nWhoa, we''re half way there\r\nWhoa, livin'' on a prayer\r\nTake my hand and we''ll make it - I swear\r\nWhoa, livin'' on a prayer\r\n\r\nTommy''s got his six string in hock\r\nNow he''s holding in\r\nWhat he used to make it talk\r\nSo tough, it''s tough\r\n\r\nGina dreams of running away\r\nWhen she cries in the night\r\nTommy whispers,\r\n"Baby, it''s okay, someday...\r\n\r\n...We''ve gotta hold on to what we''ve got.\r\nIt doesn''t make a difference if we make it or not.\r\nWe''ve got each other and that''s a lot.\r\nFor love we''ll give it a shot."\r\n\r\n[Chorus]\r\n\r\nLivin'' on a prayer\r\n\r\nWe''ve gotta hold on ready or not\r\nYou live for the fight when it''s all that you''ve got\r\n', 1),
+(9, 11, 1, 3, '2016-03-23 21:33:59', 'Once upon a time not so long ago\n\nTommy used to work on the docks\nUnion''s been on strike\nHe''s down on his luck...\nIt''s tough, so tough\n\nGina works the diner all day\nWorking for her man,\nShe brings home her pay\nFor love, for love\n\nShe says, "We''ve gotta hold on to what we''ve got.\nIt doesn''t make a difference if we make it or not.\nWe''ve got each other and that''s a lot.\nFor love we''ll give it a shot."\n\n[Chorus:]\nWhoa, we''re half way there\nWhoa, livin'' on a prayer\nTake my hand and we''ll make it - I swear\nWhoa, livin'' on a prayer\n\nTommy''s got his six string in hock\nNow he''s holding in\nWhat he used to make it talk\nSo tough, it''s tough\n\nGina dreams of running away\nWhen she cries in the night\nTommy whispers,\n"Baby, it''s okay, someday...\n\n...We''ve gotta hold on to what we''ve got.\nIt doesn''t make a difference if we make it or not.\nWe''ve got each other and that''s a lot.\nFor love we''ll give it a shot."\n\n[Chorus]\n\nLivin'' on a prayer\n\nWe''ve gotta hold on ready or not\nYou live for the fight when it''s all that you''ve got\n', 1),
 (10, 11, 1, 3, '2016-03-23 21:37:47', 'Once upon a time not so long ago\r\n\r\nTommy used to work on the docks\r\nUnion''s been on strike\r\nHe''s down on his luck...\r\nIt''s tough, so tough\r\n\r\nGina works the diner all day\r\nWorking for her man,\r\nShe brings home her pay\r\nFor love, for love\r\n\r\nShe says, "We''ve gotta hold on to what we''ve got.\r\nIt doesn''t make a difference if we make it or not.\r\nWe''ve got each other and that''s a lot.\r\nFor love we''ll give it a shot."\r\n\r\n[Chorus:]\r\nWhoa, we''re half way there\r\nWhoa, livin'' on a prayer\r\nTake my hand and we''ll make it - I swear\r\nWhoa, livin'' on a prayer\r\n\r\nTommy''s got his six string in hock\r\nNow he''s holding in\r\nWhat he used to make it talk\r\nSo tough, it''s tough\r\n\r\nGina dreams of running away\r\nWhen she cries in the night\r\nTommy whispers,\r\n"Baby, it''s okay, someday...\r\n\r\n...We''ve gotta hold on to what we''ve got.\r\nIt doesn''t make a difference if we make it or not.\r\nWe''ve got each other and that''s a lot.\r\nFor love we''ll give it a shot."\r\n\r\n[Chorus]\r\n\r\nLivin'' on a prayer\r\n\r\nWe''ve gotta hold on ready or not\r\nYou live for the fight when it''s all that you''ve got\r\n', 1),
 (11, 11, 1, 3, '2016-03-23 21:37:52', 'Once upon a time not so long ago\r\n\r\nTommy used to work on the docks\r\nUnion''s been on strike\r\nHe''s down on his luck...\r\nIt''s tough, so tough\r\n\r\nGina works the diner all day\r\nWorking for her man,\r\nShe brings home her pay\r\nFor love, for love\r\n\r\nShe says, "We''ve gotta hold on to what we''ve got.\r\nIt doesn''t make a difference if we make it or not.\r\nWe''ve got each other and that''s a lot.\r\nFor love we''ll give it a shot."\r\n\r\n[Chorus:]\r\nWhoa, we''re half way there\r\nWhoa, livin'' on a prayer\r\nTake my hand and we''ll make it - I swear\r\nWhoa, livin'' on a prayer\r\n\r\nTommy''s got his six string in hock\r\nNow he''s holding in\r\nWhat he used to make it talk\r\nSo tough, it''s tough\r\n\r\nGina dreams of running away\r\nWhen she cries in the night\r\nTommy whispers,\r\n"Baby, it''s okay, someday...\r\n\r\n...We''ve gotta hold on to what we''ve got.\r\nIt doesn''t make a difference if we make it or not.\r\nWe''ve got each other and that''s a lot.\r\nFor love we''ll give it a shot."\r\n\r\n[Chorus]\r\n\r\nLivin'' on a prayer\r\n\r\nWe''ve gotta hold on ready or not\r\nYou live for the fight when it''s all that you''ve got\r\n', 1),
 (13, 11, 1, 3, '2016-03-23 21:38:20', 'hwy', 1),

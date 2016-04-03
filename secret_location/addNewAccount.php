@@ -2,22 +2,19 @@
 <html>
 <head>
     <?php
-    session_start();// DELETE
-    $_SESSION['permissions'] = 'admin';// DELETE
     require_once '../core/init.php';
     include("../includes/metatags.html");
     include("../includes/fonts.html");
 
-//    if(isset($_POST['continue_button']) && !($errors = AdminServiceMgr::registerAdmin($_POST))){
-//        header('Location: adminHomePage.php');
-//        die();
-//    }
-
+    if(isset($_POST['reg_button']) && !($errors = AdminServiceMgr::registerAccount($_POST))){
+        $registered = true;
+    }
     ?>
     <title>Reports Page</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/custom-admin.css" rel="stylesheet">
-<!--    <script src="Scripts\registrationValidation.js"></script>-->
+    <script src="../bootstrap_js/jquery.js"></script>
+    <script src="../scripts/registrationValidation.js"></script>
 
 </head>
 
@@ -39,6 +36,16 @@
                 </h2>
                 <hr class="tagline-divider"><br>
                 <p><br>
+
+                <?php
+                if(isset($registered) && $registered){?>
+                    <div class= "alert alert-success" role="alert">
+                        <p class="close" data-dismiss="alert" aria-label="close"></p>
+                        Registration Successful...
+                    </div>
+                    <?php
+                }
+                ?>
 
                 <form id="reg_form" class="form-horizontal" role="form" method="post">
                     <fieldset>
@@ -111,8 +118,7 @@
                         </div>
                     </fieldset>
                     <br>
-                    <a href="adminLoginPage.php" class="btn btn-info center-inline" role="button">Return</a>
-                    <input class="btn btn-info center-inline" id="continue_button" name="continue_button" type="submit" value="Finish">
+                    <input class="btn btn-info center-inline" id="reg_button" name="reg_button" type="submit" value="Register">
                 </form>
                 <br><br>
                 <br><br>

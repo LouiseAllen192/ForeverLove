@@ -73,7 +73,8 @@ class AdminServiceMgr{
             if(preg_match('/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/', $email)){
                 if($result = DB::getInstance()->query("SELECT admin_id, password FROM admin WHERE email = '$email'")->results()[0]){
                     if (isset($source['password']) && $source['password'] != ''){
-                        if($source['password'] == $result->password/*password_verify($source['password'], $result->password)*/){
+                        if(password_verify($source['password'], $result->password)){
+                            $_SESSION['permissions'] = 'admin';
                             $_SESSION['admin_id'] = $result->admin_id;
                             header('Location: adminHomePage.php');
                             die();
@@ -88,5 +89,51 @@ class AdminServiceMgr{
         }
         else{ $errors['email'] = 'error_required';}
         return $errors;
+    }
+
+    public static function registerAccount($source){
+        $validate = new Validate();
+        $validate->check(
+            $source,
+            [
+                'email' => [
+                    'required' => true,
+                    'matches' => '/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/',
+                    'unique' => 'registration_details'
+                ],
+                'confirm_email' => [
+                    'required' => true,
+                    'matches' => '/\b('.$_POST['email'].')\b/'
+                ],
+                'first_name' => [
+                    'required' => true,
+                    'matches' => '/^[a-zA-Z]{2,32}$/'
+                ],
+                'last_name' => [
+                    'required' => true,
+                    'matches' => '/^[a-zA-Z\'-]{2,32}$/'
+                ],
+                'password' => [
+                    'required' => true,
+                    'matches' => '/^[a-zA-Z0-9_-]{6,32}$/',
+                ],
+                'confirm_password' => [
+                    'required' => true,
+                    'matches' => '/\b('.$_POST['password'].')\b/'
+                ]
+            ]);
+
+        if($validate->passed()){
+            $fields = [
+                'first_name' => $_POST['first_name'],
+                'last_name' => $_POST['last_name'],
+                'password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
+                'email' => $_POST['email']
+            ];
+
+            DB::getInstance()->registerUser('admin', $fields);
+            return false;
+        }
+        else{ return $validate->getErrors();}
     }
 }

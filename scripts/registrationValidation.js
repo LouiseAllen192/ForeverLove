@@ -88,7 +88,7 @@ $(document).ready(function(){
         });
     }
 
-    if(page == 'registrationPage.php' || page == 'updateRegDetailsPage.php' || page == 'updateRegDetailsPage.php'|| page == 'addNewAccount.php') {
+    if(page == 'registrationPage.php' || page == 'updateRegDetailsPage.php' || page == 'addNewAccount.php') {
         $('#first_name_group:has(div[id=errors])').find('#first_name').keyup(function () {
             $('#first_name_group > #errors > #error_required').removeClass('error').addClass('hide');
             var input = $(this).val();
