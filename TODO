@@ -5,12 +5,6 @@ User Services:
     - implement functionality to check credit card info against server
     - fix js validation on valid date
 
-    updateHobbysPage:
-    - create and apply js and php validation
-
-     updatePrefPage:
-     - create and apply js and php validation
-
    welcomePage:
     - create forgotten password functionality
 
