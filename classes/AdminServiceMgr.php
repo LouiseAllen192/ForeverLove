@@ -55,4 +55,28 @@ class AdminServiceMgr{
         }
         return $results;
     }
+
+    public static function login($source){
+        $errors = [];
+        if(isset($source['email']) && $source['email'] != ''){
+            $email = $source['email'];
+            if(preg_match('/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/', $email)){
+                if($result = DB::getInstance()->query("SELECT admin_id, password FROM admin WHERE email = '$email'")->results()[0]){
+                    if (isset($source['password']) && $source['password'] != ''){
+                        if(password_verify($source['password'], $result->password)){
+                            $_SESSION['admin_id'] = $result->admin_id;
+                            header('Location: adminHomePage.php');
+                            die();
+                        }
+                        else { $errors['password'] = 'error_login';}
+
+                    } else { $errors['password'] = 'error_required';}
+                }
+                else{ $errors['email'] = 'error_login';}
+            }
+            else{ $errors['email'] = 'error_regex';}
+        }
+        else{ $errors['email'] = 'error_required';}
+        return $errors;
+    }
 }

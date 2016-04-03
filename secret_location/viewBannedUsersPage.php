@@ -3,8 +3,6 @@
 
 <head>
     <?php
-    session_start();// DELETE
-    $_SESSION['permissions'] = 'admin';// DELETE
     require_once '../core/init.php';
     include("../includes/metatags.html");
     include("../includes/fonts.html");

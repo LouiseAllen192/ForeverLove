@@ -8,7 +8,7 @@
     include("includes/fonts.html");
 
 
-    if(isset($_GET['logout']) || isset($_POST['submit_button'])){
+    if(isset($_GET['logout'])/* || isset($_POST['submit_button'])*/){
         UserServiceMgr::logout();
     }
 
