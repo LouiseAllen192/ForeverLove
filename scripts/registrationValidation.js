@@ -4,7 +4,7 @@ var page = path.substring(path.lastIndexOf('/') + 1);
 
 $(document).ready(function(){
 
-    if(page == 'registrationPage.php' || page == 'updateRegDetailsPage.php'){
+    if(page == 'registrationPage.php' || page == 'updateRegDetailsPage.php'|| page == 'addNewAccount.php'){
         $('#email_group:has(div[id=errors])').find('#email').keyup(function(){
             $('#email_group > #errors > #error_required').removeClass('error').addClass('hide');
             var input = $(this).val();
@@ -88,7 +88,7 @@ $(document).ready(function(){
         });
     }
 
-    if(page == 'registrationPage.php' || page == 'updateRegDetailsPage.php' || page == 'updateRegDetailsPage.php') {
+    if(page == 'registrationPage.php' || page == 'updateRegDetailsPage.php' || page == 'addNewAccount.php') {
         $('#first_name_group:has(div[id=errors])').find('#first_name').keyup(function () {
             $('#first_name_group > #errors > #error_required').removeClass('error').addClass('hide');
             var input = $(this).val();
@@ -116,7 +116,7 @@ $(document).ready(function(){
         });
     }
 
-    if(page == 'registrationPage.php'){
+    if(page == 'registrationPage.php'|| page == 'addNewAccount.php' ){
         $('#password_group:has(div[id=errors])').find('#password').keyup(function(){
             $('#password_group > #errors > #error_required').removeClass('error').addClass('hide');
             var input = $(this).val();

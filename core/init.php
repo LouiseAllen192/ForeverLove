@@ -11,7 +11,7 @@ $GLOBALS['config'] = [
 ];
 
 
-if(isset($_SESSION['permissions']) && $_SESSION['permissions'] == 'admin'){
+if((isset($_SESSION['permissions']) && $_SESSION['permissions'] == 'admin') || (isset($GLOBALS['adminLogin']) && $GLOBALS['adminLogin'])){
     spl_autoload_register(function($class){
         require_once '../classes/'.$class.'.php';
     });

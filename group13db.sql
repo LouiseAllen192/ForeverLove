@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 02, 2016 at 09:51 PM
+-- Generation Time: Apr 03, 2016 at 07:23 PM
 -- Server version: 5.7.9
 -- PHP Version: 5.6.16
 
@@ -48,7 +48,9 @@ INSERT INTO `account_details` (`user_id`, `account_type`, `account_expired`) VAL
 (7, 'Free', '2016-05-02'),
 (8, 'Premium', '2016-07-02'),
 (9, 'Premium', '2016-10-02'),
-(10, 'Free', '2016-05-02');
+(10, 'Free', '2016-05-02'),
+(11, 'Premium', '2016-10-03'),
+(12, 'Premium', '2016-10-03');
 
 -- --------------------------------------------------------
 
@@ -65,7 +67,14 @@ CREATE TABLE IF NOT EXISTS `admin` (
   `email` varchar(128) NOT NULL,
   PRIMARY KEY (`admin_id`),
   UNIQUE KEY `Email` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`admin_id`, `first_name`, `last_name`, `password`, `email`) VALUES
+(1, 'Kevin', 'O''Brien', '$2y$10$s5c2pSVqAxZirU8m3OWJneRJ2Qep3w6GSx4oOoHxEoAi2IVzxFdQW', 'kfcobrien@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -202,7 +211,7 @@ CREATE TABLE IF NOT EXISTS `conversations` (
   PRIMARY KEY (`conversation_id`),
   KEY `User1_id` (`user1_id`),
   KEY `User2_id` (`user2_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `conversations`
@@ -212,7 +221,8 @@ INSERT INTO `conversations` (`conversation_id`, `user1_id`, `user2_id`, `profile
 (11, 1, 3, 1, NULL),
 (12, 3, 3, 1, NULL),
 (16, 1, 1, 1, NULL),
-(17, 1, 4, 1, NULL);
+(17, 1, 4, 1, NULL),
+(18, 11, 12, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -514,7 +524,39 @@ INSERT INTO `images` (`user_id`, `image_id`, `image_path`, `image_name`) VALUES
 (10, 13, '', ''),
 (10, 14, '', ''),
 (10, 15, '', ''),
-(10, 16, '', '');
+(10, 16, '', ''),
+(11, 1, 'includes\\pics\\default-profile.png', 'default-profile.png'),
+(11, 2, '', ''),
+(11, 3, '', ''),
+(11, 4, '', ''),
+(11, 5, '', ''),
+(11, 6, '', ''),
+(11, 7, '', ''),
+(11, 8, '', ''),
+(11, 9, '', ''),
+(11, 10, '', ''),
+(11, 11, '', ''),
+(11, 12, '', ''),
+(11, 13, '', ''),
+(11, 14, '', ''),
+(11, 15, '', ''),
+(11, 16, '', ''),
+(12, 1, 'includes\\pics\\default-profile.png', 'default-profile.png'),
+(12, 2, '', ''),
+(12, 3, '', ''),
+(12, 4, '', ''),
+(12, 5, '', ''),
+(12, 6, '', ''),
+(12, 7, '', ''),
+(12, 8, '', ''),
+(12, 9, '', ''),
+(12, 10, '', ''),
+(12, 11, '', ''),
+(12, 12, '', ''),
+(12, 13, '', ''),
+(12, 14, '', ''),
+(12, 15, '', ''),
+(12, 16, '', '');
 
 -- --------------------------------------------------------
 
@@ -617,7 +659,7 @@ CREATE TABLE IF NOT EXISTS `messages` (
   KEY `Sender_id` (`sender_id`),
   KEY `Recipient_id` (`recipient_id`),
   KEY `Conversation_id` (`conversation_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `messages`
@@ -629,7 +671,7 @@ INSERT INTO `messages` (`message_id`, `conversation_id`, `sender_id`, `recipient
 (6, 11, 3, 1, '2016-03-22 19:37:16', 'pop', 1),
 (7, 11, 1, 3, '2016-03-23 21:30:18', 'Well Lad', 1),
 (8, 11, 1, 3, '2016-03-23 21:33:05', 'Why do they call you party boy?', 1),
-(9, 11, 1, 3, '2016-03-23 21:33:59', 'Once upon a time not so long ago\r\n\r\nTommy used to work on the docks\r\nUnion''s been on strike\r\nHe''s down on his luck...\r\nIt''s tough, so tough\r\n\r\nGina works the diner all day\r\nWorking for her man,\r\nShe brings home her pay\r\nFor love, for love\r\n\r\nShe says, "We''ve gotta hold on to what we''ve got.\r\nIt doesn''t make a difference if we make it or not.\r\nWe''ve got each other and that''s a lot.\r\nFor love we''ll give it a shot."\r\n\r\n[Chorus:]\r\nWhoa, we''re half way there\r\nWhoa, livin'' on a prayer\r\nTake my hand and we''ll make it - I swear\r\nWhoa, livin'' on a prayer\r\n\r\nTommy''s got his six string in hock\r\nNow he''s holding in\r\nWhat he used to make it talk\r\nSo tough, it''s tough\r\n\r\nGina dreams of running away\r\nWhen she cries in the night\r\nTommy whispers,\r\n"Baby, it''s okay, someday...\r\n\r\n...We''ve gotta hold on to what we''ve got.\r\nIt doesn''t make a difference if we make it or not.\r\nWe''ve got each other and that''s a lot.\r\nFor love we''ll give it a shot."\r\n\r\n[Chorus]\r\n\r\nLivin'' on a prayer\r\n\r\nWe''ve gotta hold on ready or not\r\nYou live for the fight when it''s all that you''ve got\r\n', 1),
+(9, 11, 1, 3, '2016-03-23 21:33:59', 'Once upon a time not so long ago\n\nTommy used to work on the docks\nUnion''s been on strike\nHe''s down on his luck...\nIt''s tough, so tough\n\nGina works the diner all day\nWorking for her man,\nShe brings home her pay\nFor love, for love\n\nShe says, "We''ve gotta hold on to what we''ve got.\nIt doesn''t make a difference if we make it or not.\nWe''ve got each other and that''s a lot.\nFor love we''ll give it a shot."\n\n[Chorus:]\nWhoa, we''re half way there\nWhoa, livin'' on a prayer\nTake my hand and we''ll make it - I swear\nWhoa, livin'' on a prayer\n\nTommy''s got his six string in hock\nNow he''s holding in\nWhat he used to make it talk\nSo tough, it''s tough\n\nGina dreams of running away\nWhen she cries in the night\nTommy whispers,\n"Baby, it''s okay, someday...\n\n...We''ve gotta hold on to what we''ve got.\nIt doesn''t make a difference if we make it or not.\nWe''ve got each other and that''s a lot.\nFor love we''ll give it a shot."\n\n[Chorus]\n\nLivin'' on a prayer\n\nWe''ve gotta hold on ready or not\nYou live for the fight when it''s all that you''ve got\n', 1),
 (10, 11, 1, 3, '2016-03-23 21:37:47', 'Once upon a time not so long ago\r\n\r\nTommy used to work on the docks\r\nUnion''s been on strike\r\nHe''s down on his luck...\r\nIt''s tough, so tough\r\n\r\nGina works the diner all day\r\nWorking for her man,\r\nShe brings home her pay\r\nFor love, for love\r\n\r\nShe says, "We''ve gotta hold on to what we''ve got.\r\nIt doesn''t make a difference if we make it or not.\r\nWe''ve got each other and that''s a lot.\r\nFor love we''ll give it a shot."\r\n\r\n[Chorus:]\r\nWhoa, we''re half way there\r\nWhoa, livin'' on a prayer\r\nTake my hand and we''ll make it - I swear\r\nWhoa, livin'' on a prayer\r\n\r\nTommy''s got his six string in hock\r\nNow he''s holding in\r\nWhat he used to make it talk\r\nSo tough, it''s tough\r\n\r\nGina dreams of running away\r\nWhen she cries in the night\r\nTommy whispers,\r\n"Baby, it''s okay, someday...\r\n\r\n...We''ve gotta hold on to what we''ve got.\r\nIt doesn''t make a difference if we make it or not.\r\nWe''ve got each other and that''s a lot.\r\nFor love we''ll give it a shot."\r\n\r\n[Chorus]\r\n\r\nLivin'' on a prayer\r\n\r\nWe''ve gotta hold on ready or not\r\nYou live for the fight when it''s all that you''ve got\r\n', 1),
 (11, 11, 1, 3, '2016-03-23 21:37:52', 'Once upon a time not so long ago\r\n\r\nTommy used to work on the docks\r\nUnion''s been on strike\r\nHe''s down on his luck...\r\nIt''s tough, so tough\r\n\r\nGina works the diner all day\r\nWorking for her man,\r\nShe brings home her pay\r\nFor love, for love\r\n\r\nShe says, "We''ve gotta hold on to what we''ve got.\r\nIt doesn''t make a difference if we make it or not.\r\nWe''ve got each other and that''s a lot.\r\nFor love we''ll give it a shot."\r\n\r\n[Chorus:]\r\nWhoa, we''re half way there\r\nWhoa, livin'' on a prayer\r\nTake my hand and we''ll make it - I swear\r\nWhoa, livin'' on a prayer\r\n\r\nTommy''s got his six string in hock\r\nNow he''s holding in\r\nWhat he used to make it talk\r\nSo tough, it''s tough\r\n\r\nGina dreams of running away\r\nWhen she cries in the night\r\nTommy whispers,\r\n"Baby, it''s okay, someday...\r\n\r\n...We''ve gotta hold on to what we''ve got.\r\nIt doesn''t make a difference if we make it or not.\r\nWe''ve got each other and that''s a lot.\r\nFor love we''ll give it a shot."\r\n\r\n[Chorus]\r\n\r\nLivin'' on a prayer\r\n\r\nWe''ve gotta hold on ready or not\r\nYou live for the fight when it''s all that you''ve got\r\n', 1),
 (13, 11, 1, 3, '2016-03-23 21:38:20', 'hwy', 1),
@@ -664,7 +706,9 @@ INSERT INTO `messages` (`message_id`, `conversation_id`, `sender_id`, `recipient
 (43, 17, 1, 4, '2016-03-25 18:34:06', 'This conversation already exists.', 1),
 (44, 16, 1, 1, '2016-03-25 18:40:04', 'This convo exists', 1),
 (45, 17, 1, 4, '2016-03-25 18:40:15', 'This exists too', 1),
-(46, 17, 1, 4, '2016-03-25 18:40:30', 'Get this', 1);
+(46, 17, 1, 4, '2016-03-25 18:40:30', 'Get this', 1),
+(47, 18, 11, 12, '2016-04-03 18:28:55', 'hey there', 1),
+(48, 18, 12, 11, '2016-04-03 18:30:17', 'hey how are you', 0);
 
 -- --------------------------------------------------------
 
@@ -722,7 +766,9 @@ INSERT INTO `preference_details` (`user_id`, `tag_line`, `city`, `gender`, `seek
 (7, 'John loves fun', 'Limerick', 2, 2, 2, '1980-02-02', 4, 2, 12, 5, 3, 9, 2, 3, 2, 3, 'I''m John, I''m a big fan of the craic'),
 (8, 'Disneyland rules', 'Disneyworld', 3, 2, 5, '1991-03-02', 2, 7, 11, 2, 7, 5, 2, 3, 2, 4, 'I love hanging out with Daffy and Mickey and Goofy'),
 (9, 'Hov in the house', 'Brooklyn', 2, 3, 2, '1970-05-04', 7, 6, 6, 4, 3, 11, 2, 2, 2, 2, 'I got 99 problems but a b***h aint one'),
-(10, 'I''m a wizard', 'Diagon Alley', 2, 3, 2, '1990-04-04', 3, 4, 3, 3, 7, 2, 3, 3, 3, 3, 'My best friends are Hermoine and Ron. No muggles please. Only interested in pure bread wizards like myself');
+(10, 'I''m a wizard', 'Diagon Alley', 2, 3, 2, '1990-04-04', 3, 4, 3, 3, 7, 2, 3, 3, 3, 3, 'My best friends are Hermoine and Ron. No muggles please. Only interested in pure bread wizards like myself'),
+(11, 'boom boom shake shake the room ', 'Limerick', 3, 4, 4, '1982-01-12', 4, 4, 3, 2, 2, 2, 2, 2, 2, 2, 'im just a chilled out girl in a crazy world '),
+(12, 'The milkman kid', 'craggy island', 2, 3, 3, '1942-02-27', 5, 5, 4, 7, 2, 5, 2, 3, 2, 4, 'im the best milkman on craggy island ');
 
 -- --------------------------------------------------------
 
@@ -764,7 +810,7 @@ CREATE TABLE IF NOT EXISTS `registration_details` (
   `email` varchar(128) NOT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `Username` (`username`,`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `registration_details`
@@ -780,7 +826,9 @@ INSERT INTO `registration_details` (`user_id`, `username`, `first_name`, `last_n
 (7, 'John1', 'John', 'Doe', '$2y$10$/pNqE3mtP80vi5A0FrY57uWKMvvJ7Rlvo9/HuBePESxBDc4.ltsz6', 'bla@bla.com'),
 (8, 'minnieM', 'Minnie', 'Mousekateer', '$2y$10$BRGZrNsnDwC6YD6Y4KAzMewqQu.9HzSXrjIObybt2RFZD5ghDO1be', 'minnie@disney.com'),
 (9, 'JayZ12', 'Jay', 'Zee', '$2y$10$dwOyJwYz0rRpGRx3GIs0leyFDw9MsJlNI4ycuhwlDuIohWfM8SeS6', 'fun@gmail.com'),
-(10, 'HarryP', 'Harry', 'Potter', '$2y$10$QRLMBlB0z/hQxAOCCqyBZO7iBwq4iFh2R4BkZV99nuV29K.4ih1qK', 'harry@hogwarts.com');
+(10, 'HarryP', 'Harry', 'Potter', '$2y$10$QRLMBlB0z/hQxAOCCqyBZO7iBwq4iFh2R4BkZV99nuV29K.4ih1qK', 'harry@hogwarts.com'),
+(11, 'sarahj', 'Sarah', 'Jane', '$2y$10$BLZIYeSWRKKn/xTvwVsGauTrPDt2YELhLNuEbzEg5S0S7ZxEwYPzS', 'sarahjane@example.com'),
+(12, 'patmustard', 'pat', 'mustard', '$2y$10$ksSGzExR0jF5ll68jkxnZOU59sUuLVa2o1OVzOAeqEq.577VmVd1.', 'patmustard@example.com');
 
 -- --------------------------------------------------------
 
@@ -882,7 +930,9 @@ INSERT INTO `unique_hobby` (`user_id`, `unique_hobby`) VALUES
 (7, 'MMA'),
 (8, 'Playing'),
 (9, 'Rapping'),
-(10, 'Magic');
+(10, 'Magic'),
+(11, NULL),
+(12, NULL);
 
 -- --------------------------------------------------------
 
@@ -1307,7 +1357,77 @@ INSERT INTO `user_hobby_preferences` (`user_id`, `hobby_id`, `hobby_preference`)
 (10, 32, 0),
 (10, 33, 0),
 (10, 34, 0),
-(10, 35, 0);
+(10, 35, 0),
+(11, 1, 1),
+(11, 2, 0),
+(11, 3, 0),
+(11, 4, 0),
+(11, 5, 0),
+(11, 6, 0),
+(11, 7, 0),
+(11, 8, 0),
+(11, 9, 0),
+(11, 10, 0),
+(11, 11, 0),
+(11, 12, 0),
+(11, 13, 0),
+(11, 14, 1),
+(11, 15, 0),
+(11, 16, 0),
+(11, 17, 1),
+(11, 18, 0),
+(11, 19, 0),
+(11, 20, 1),
+(11, 21, 0),
+(11, 22, 0),
+(11, 23, 1),
+(11, 24, 0),
+(11, 25, 0),
+(11, 26, 1),
+(11, 27, 0),
+(11, 28, 0),
+(11, 29, 1),
+(11, 30, 0),
+(11, 31, 0),
+(11, 32, 1),
+(11, 33, 0),
+(11, 34, 0),
+(11, 35, 0),
+(12, 1, 0),
+(12, 2, 0),
+(12, 3, 0),
+(12, 4, 1),
+(12, 5, 0),
+(12, 6, 0),
+(12, 7, 0),
+(12, 8, 0),
+(12, 9, 0),
+(12, 10, 1),
+(12, 11, 0),
+(12, 12, 0),
+(12, 13, 0),
+(12, 14, 0),
+(12, 15, 1),
+(12, 16, 0),
+(12, 17, 0),
+(12, 18, 0),
+(12, 19, 0),
+(12, 20, 0),
+(12, 21, 0),
+(12, 22, 0),
+(12, 23, 0),
+(12, 24, 0),
+(12, 25, 0),
+(12, 26, 0),
+(12, 27, 0),
+(12, 28, 0),
+(12, 29, 0),
+(12, 30, 0),
+(12, 31, 0),
+(12, 32, 0),
+(12, 33, 0),
+(12, 34, 0),
+(12, 35, 0);
 
 -- --------------------------------------------------------
 

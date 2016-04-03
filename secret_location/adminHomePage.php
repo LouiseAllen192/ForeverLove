@@ -6,7 +6,6 @@
     require_once '../core/init.php';
     include("../includes/metatags.html");
     include("../includes/fonts.html");
-    echo $_SESSION['admin_id'];
 
     $banned = DB::getInstance()->query("SELECT DISTINCT user_id FROM banned_users WHERE permanent = '1'")->count();
     $suspended = DB::getInstance()->query("SELECT DISTINCT user_id FROM banned_users WHERE permanent = '0'")->count();
@@ -60,6 +59,16 @@
                         <a href="viewReportsPage.php" class="thumbnail">
                             <div class="h4">
                                 Reports<span class="badge badge-notify"><?php echo $unresolved;?></span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4 col-xs-6">
+                        <div class="dummy"></div>
+                        <a href="addNewAccount.php" class="thumbnail">
+                            <div class="h4">
+                                Register New Admin
                             </div>
                         </a>
                     </div>

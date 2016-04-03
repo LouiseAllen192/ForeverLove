@@ -37,7 +37,7 @@ class UserServiceMgr
         return $errors;
     }
 
-   public static function userIsBanned($username){
+    public static function userIsBanned($username){
        $uid = ReturnShortcuts::getUserID($username);
        $resultBanned = DB::getInstance()->query("SELECT user_id FROM banned_users")->results();
        foreach($resultBanned as $result){
@@ -288,7 +288,8 @@ class UserServiceMgr
             $fields = [
                 'username' => $_POST['username'],
                 'password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
-                'first_name' => $_POST['first_name'], 'last_name' => $_POST['last_name'],
+                'first_name' => $_POST['first_name'],
+                'last_name' => $_POST['last_name'],
                 'email' => $_POST['email']
             ];
 

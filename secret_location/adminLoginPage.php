@@ -3,8 +3,7 @@
 
 <head>
     <?php
-    session_start();
-    $_SESSION['permissions'] = 'admin';
+    $GLOBALS['adminLogin'] = true;
     require_once '../core/init.php';
     include("../includes/metatags.html");
     include("../includes/fonts.html");
@@ -60,6 +59,7 @@
                             </div>
                         </div>
                         <input class="btn btn-info center-inline" id="login_button" name="login_button" type="submit" value="Login">
+                        <a href="addNewAccount.php" class="btn btn-info center-inline" role="button">Register</a>
                     </fieldset>
                 </form>
 

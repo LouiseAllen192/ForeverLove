@@ -2,8 +2,6 @@
 <html>
 <head>
     <?php
-    session_start();
-    $_SESSION['permissions'] = 'admin';
     require_once '../core/init.php';
     include("../includes/metatags.html");
     include("../includes/fonts.html");
