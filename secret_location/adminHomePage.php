@@ -17,10 +17,7 @@
     <title>Admin HomePage</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/custom-admin.css" rel="stylesheet">
-
-
-
-
+    
 </head>
 
 <body class="full">
