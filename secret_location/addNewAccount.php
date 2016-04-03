@@ -17,7 +17,6 @@
     <title>Reports Page</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/custom-admin.css" rel="stylesheet">
-<!--    <script src="bootstrap_js/jquery.js"></script>-->
 <!--    <script src="Scripts\registrationValidation.js"></script>-->
 
 </head>

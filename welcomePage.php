@@ -62,7 +62,7 @@
                                     $pieces = explode("-", $values['account_expired']);
                                     echo $pieces[2].'/'.$pieces[1].'/'.$pieces[0];?>
                                     <br><br>
-                                    <?php $hrefString = '../ForeverLove/upgradeMembership.php?renew=yes&username='.$username; ?>
+                                    <?php $hrefString = '../ForeverLove/upgradeMembership.php?renew=1&username='.$username; ?>
                                 Please click <a href= "<?php echo $hrefString?>" >here</a> to renew your account</p>
 
                             <?php }

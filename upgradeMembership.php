@@ -7,15 +7,18 @@
     require_once 'core/init.php';
     include("includes/metatags.html");
 
-    $renew=false;
     $finished=false;
+    $renew=false;
 
-    if(isset($_GET['renew'])){
-        $renew=true;
+    if(isset($_GET['internal'])){
         $userN = $_GET['username'];
     }
-    if  (isset($_POST['renew']) ){
-        $renew=true;
+    if(isset($_GET['renew'])){
+        $renew = $_GET['renew'];
+        $userN = $_GET['username'];
+    }
+    if (isset($_POST['renew']) ){
+        $renew = $_POST['renew'];
         $userN = $_POST['username'];
     }
 
@@ -97,7 +100,8 @@ else{
                             <a href="registerAccountTypePage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                             <p><strong>Success</strong> - You <?php if($renew){ echo 'have successfully renewed your account';} else{ echo 'are now a Premium user. ';}?><br> You can enjoy full access to our site for <?php echo $length;?> months.</p>
                         </div>
-                        <?php if (!$renew){?>
+                        <?php
+                        if (!$renew){  ?>
                          <br><br><a href="viewMembershipStatusPage.php" class="btn btn-info center-inline" role="button">Return to 'View Membership' Page</a>
                         <?php } else { ?>
                         <br><br><a href="welcomePage.php" class="btn btn-info center-inline" role="button">Return to welcome Page</a>
@@ -137,7 +141,7 @@ else{
                                     </select>
                                 </fieldset>
                                 <br><br>
-                                <input type="hidden" name="renew" value="yes">
+                                <input type="hidden" name="renew" value="<?php echo $renew?>">
                                 <input type="hidden" name="username" value="<?php echo $userN?>">
                                 <input type="submit" name="Send" id="Send" class="btn btn-primary" Value="Select">
                             </form>
@@ -234,7 +238,7 @@ else{
 
                                     </fieldset>
                                     <br>
-                                    <input type="hidden" name="renew" value="yes">
+                                    <input type="hidden" name="renew" value="<?php echo $renew?>">
                                     <input type="hidden" name="username" value="<?php echo $userN?>">
                                     <input class="btn btn-info center-inline" id=payment_submit_button" name= "submit" type="submit" value="Submit">
                                 </form>
