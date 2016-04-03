@@ -17,7 +17,7 @@
     <title>Admin HomePage</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/custom-admin.css" rel="stylesheet">
-
+    
 </head>
 
 <body class="full">
@@ -37,7 +37,6 @@
                     </small>
                 </h2>
                 <hr class="tagline-divider">
-
                 <div class="row">
                     <div class="col-sm-4 col-xs-6">
                         <div class="dummy"></div>
