@@ -11,13 +11,42 @@
 
 
     $uid = $_SESSION['user_id'];
+    $displayForm = true;
 
+
+    $update=false;
     $regOrUpdate = UserServiceMgr::determineUpdateOrReg($uid);
-    $dbvalue=array();
-
     if($regOrUpdate == "Update"){
+        $update=true;
+    }
+
+    $dbvalue=array();
+    if($update){
         $dbvalue = ReturnShortcuts::returnHobbies($uid);
     }
+
+
+    $errors = array();
+    if(!empty($_POST)) {
+        $errors = UserServiceMgr::getHobbiesValidationErrors($_POST, $update);
+
+        if($errors != false){
+            foreach($errors as $k=>$v){
+                echo $k.'---'.$v.'<br>';
+            }
+        }
+    }
+
+
+
+    if(!empty($_POST) && !$errors){
+        $success = UserServiceMgr::updateUserHobbies($uid, $_POST);
+    }
+
+    if($update){
+        $uniqueH = UserServiceMgr::getUniqueHobby($uid);
+    }
+
 
     $hobbyNames = ReturnShortcuts::returnHobbyNames();
     ?>
@@ -28,11 +57,7 @@
     <link href="css/custom-form-page.css" rel="stylesheet">
     <?php include("includes/fonts.html"); ?>
 
-    <?php
-    if(!empty($_POST)){
-        $success = UserServiceMgr::updateUserHobbies($uid, $_POST);
-    }
-    ?>
+
 
 </head>
 
@@ -55,16 +80,16 @@
                 <br>
 
                 <?php
-                if(!empty($_POST)) {
+                if(!empty($_POST) && !$errors) {
                     $dbvalue = ReturnShortcuts::returnHobbies($uid);
-                    if ($regOrUpdate == "Register" && $success) { ?>
+                    if (!$update && $success) { $displayForm=false;?>
                         <div class= "alert alert-success" role="alert">
                         <a href="homePage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                         Registration completed successfully.
                             <br><br><a href="homePage.php" class="btn btn-info center-block" style="width:200px;">Go to Home Page <span class="glyphicon glyphicon-home"></span></a>
                         </div>
                     <?php }
-                    if ($regOrUpdate == "Update" && $success) { ?>
+                    if ($update && $success) { $displayForm=false;?>
                         <div class= "alert alert-success" role="alert">
                         <a href="homePage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                         Hobby Details updated successfully
@@ -83,7 +108,7 @@
                 }
                 ?>
 
-                <?php if(empty($_POST)){ ?>
+                <?php if($displayForm){ ?>
 
                 <form role ="form" class="form-inline" action="updateHobbiesPage.php" method="post">
                     <div class="row">
@@ -117,10 +142,29 @@
                             </fieldset>
 
                             <br>
-                            <fieldset class="form-group">
-                                <label for="uniqueHobbyLabel">Unique Hobby</label>
-                                <input type="text"  name="unique_hobby" class="form-control" maxlength="256"  placeholder="<?php echo isset($dbvalue['unique_hobby']) ? $dbvalue['unique_hobby'] : "Enter new unique hobby"?>"><br /><br>
-                            </fieldset>
+
+                            <div class="form-group" id="unique_hobby_group">
+                                <label for="unique_hobby" class="col-md-4 col-sm-5 control-label"><b>Unique Hobby</b></label>
+                                <div class="col-md-8 col-sm-7">
+                                    <input type="text" class="form-control" id="unique_hobby" name="unique_hobby" maxlength="256"
+                                        <?php if ($update && Input::get('unique_hobby') != ''){
+                                            echo 'value="'.Input::get('unique_hobby').'"';
+                                        }
+                                        if($update &&  Input::get('unique_hobby') == '' ) {
+                                            echo 'value="'.$uniqueH.'"';
+                                        }
+                                        ?>
+                                    >
+                                </div>
+                                <div class="col-md-offset-4 col-sm-offset-5" id="errors">
+                                    <span class="<?php if($errors['unique_hobby'] == 'error_required') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_required">Required...</span>
+                                    <span class="<?php if($errors['unique_hobby'] == 'error_regex') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_regex">Invalid format, can only contain a-z, A-Z or whitespace</span>
+                                </div>
+                            </div>
+
+
+                            <br><br><br>
+
                         </div>
                         <div style="clear:both;"><div></div></div>
                     </div>

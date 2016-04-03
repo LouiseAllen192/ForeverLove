@@ -199,6 +199,13 @@ class UserServiceMgr
         return DB::getInstance()->query($sql)->results()[0]->username;
     }
 
+    public static function getUniqueHobby($uid){
+        $sql = "SELECT unique_hobby " .
+            "FROM unique_hobby ".
+            "WHERE user_id = '".$uid."'";
+        return DB::getInstance()->query($sql)->results()[0]->unique_hobby;
+    }
+
     public static function validateCreditCardDetails($source){
         $validate = new Validate(); //value= POST['fullname']
         $validate->check(
@@ -321,6 +328,27 @@ class UserServiceMgr
                 'about_me' => [
                     'required' => $required,
                     'matches' => '/^[a-zA-Z0-9 \\-,.\']{2,256}$/',
+                ]
+            ]);
+
+        if($validate->passed()){
+            return false;
+        }
+        else{ return $validate->getErrors();}
+    }
+
+    public static function getHobbiesValidationErrors($source, $update){
+        $required = true;
+        if($update){
+            $required=false;
+        }
+        $validate = new Validate();
+        $validate->check(
+            $source,
+            [
+                'unique_hobby' => [
+                    'required' => $required,
+                    'matches' => '/^[a-zA-Z ]{2,256}$/',
                 ]
             ]);
 
