@@ -26,12 +26,6 @@
     $errors = array();
     if(!empty($_POST)) {
         $errors = UserServiceMgr::getPreferencesValidationErrors($_POST, $update);
-
-        if ($errors != false) {
-            foreach ($errors as $k => $v) {
-                echo $k . '----' . $v . '<br>';
-            }
-        }
     }
 
 
