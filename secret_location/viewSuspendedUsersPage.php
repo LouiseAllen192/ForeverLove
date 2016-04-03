@@ -9,7 +9,7 @@
     include("../includes/metatags.html");
     include("../includes/fonts.html");
 
-    $results = AdminServiceMgr::getBannedUsers();
+    $results = AdminServiceMgr::getSuspendedUsers();
     ?>
     <title>Banned Users Page</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -71,7 +71,7 @@
                 else{?>
                     <div class= "alert alert-success" role="alert">
                         <p class="close" data-dismiss="alert" aria-label="close"></p>
-                        Currently no banned users...
+                        Currently no suspended users...
                     </div>
                     <?php
                 }

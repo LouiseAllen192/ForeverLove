@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 $GLOBALS['config'] = [
     'mysql' => [
         'host' => '127.0.0.1',

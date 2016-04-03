@@ -18,7 +18,7 @@ class UserServiceMgr
                     if (!(UserServiceMgr::userIsBanned($username))) {
                         if (isset($source['password']) && $source['password'] != '') {
                             if (password_verify($source['password'], $result->password)) {
-                                session_start();
+                                $_SESSION['permissions'] = 'user';
                                 $_SESSION['user_id'] = $result->user_id;
                                 header('Location: homePage.php');
                                 die();

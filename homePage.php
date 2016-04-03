@@ -2,16 +2,14 @@
 <html lang="en">
 
 <head>
-
     <?php
         require_once 'core/init.php';
         include("includes/metatags.html");
+        include("includes/fonts.html");
     ?>
     <title>Home Page</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/custom-home.css" rel="stylesheet">
-    <?php include("includes/fonts.html");
-    ?>
 
 </head>
 

@@ -56,6 +56,16 @@ class AdminServiceMgr{
         return $results;
     }
 
+    public static function getSuspendedUsers(){
+        $db = DB::getInstance();
+        $banned_uids = $db->query("SELECT user_id FROM banned_users WHERE permanent = 0")->results();
+        $results = [];
+        foreach($banned_uids as $uid){
+            $results [] = $db->query("SELECT user_id,username,tag_line,city FROM registration_details JOIN preference_details USING(user_id) WHERE user_id = '$uid->user_id'")->results()[0];
+        }
+        return $results;
+    }
+
     public static function login($source){
         $errors = [];
         if(isset($source['email']) && $source['email'] != ''){
@@ -63,7 +73,7 @@ class AdminServiceMgr{
             if(preg_match('/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/', $email)){
                 if($result = DB::getInstance()->query("SELECT admin_id, password FROM admin WHERE email = '$email'")->results()[0]){
                     if (isset($source['password']) && $source['password'] != ''){
-                        if(password_verify($source['password'], $result->password)){
+                        if($source['password'] == $result->password/*password_verify($source['password'], $result->password)*/){
                             $_SESSION['admin_id'] = $result->admin_id;
                             header('Location: adminHomePage.php');
                             die();
