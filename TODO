@@ -5,8 +5,8 @@ User Services:
     - implement functionality to check credit card info against server
     - fix js validation on valid date
 
-   welcomePage:
-    - create forgotten password functionality
+   updatePassword:
+    - fix
 
     ProfilePage:
     - fix profile image size
