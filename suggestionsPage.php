@@ -8,8 +8,8 @@
     include("includes/fonts.html");
 
     $db = DB::getInstance();
-    $uid = $_SESSION['user_id'];
-    $results = SearchServiceMgr::suggestions($uid);
+    $me = $_SESSION['user_id'];
+    $results = SearchServiceMgr::suggestions($me);
     ?>
     <title>Suggestions Page</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -36,8 +36,8 @@
                 <hr class="tagline-divider">
                 <br>
                     <?php
-                    if($db->query("SELECT account_type FROM account_details WHERE user_id = '$uid'")->results()[0]->account_type == 'Premium'){
-                        if (isset($results)) {
+                    if($db->query("SELECT account_type FROM account_details WHERE user_id = '$me'")->results()[0]->account_type == 'Premium'){
+                        if(isset($results)){
                             foreach ($results as $result) {
                                 ?>
                                 <div class="row">
@@ -75,7 +75,7 @@
                         <a href="upgradeMembership.php">
                             <div class= "alert alert-success" role="alert">
                                 <p class="close" data-dismiss="alert" aria-label="close"></p>
-                                Please fuck off and upgrade your account
+                                Please upgrade your account to avail of these services...
                             </div>
                         </a>
                         <?php

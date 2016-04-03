@@ -2,24 +2,24 @@
 <html>
 
 <head>
+
     <?php
-    session_start();// DELETE
-    $_SESSION['permissions'] = 'admin';// DELETE
-    require_once '../core/init.php';
-    include("../includes/metatags.html");
-    include("../includes/fonts.html");
+    require_once 'core/init.php';
+    include("includes/metatags.html");
+    include("includes/fonts.html");
 
-    $results = AdminServiceMgr::getBannedUsers();
+    if(isset($_GET['searchTerm'])){
+        $results = SearchServiceMgr::searchTerm($_GET['searchTerm']);
+    }
     ?>
-    <title>Banned Users Page</title>
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/custom-admin.css" rel="stylesheet">
-
+    <title>Search Results Page</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/custom-base-page.css" rel="stylesheet">
 
 </head>
 
 <body class="full">
-<?php include("../includes/navbarAdmin.html"); ?>
+<?php include("includes/navbar.php"); ?>
 
 <!--Main page content-->
 
@@ -31,24 +31,25 @@
                 <hr class="tagline-divider">
                 <h2>
                     <small>
-                        <strong>Banned Users</strong>
+                        <strong>Search Results</strong>
                     </small>
                 </h2>
-                <hr class="tagline-divider"><br>
+                <hr class="tagline-divider">
+                <br><br>
                 <?php
-                if(isset($results)){
+                if(isset($results) && !empty($results)){
                     foreach ($results as $result){
                         ?>
                         <div class="row">
                             <div class="col-xs-offset-2">
                                 <div class="col-xs-10">
-                                    <a href="../profilePage.php?uid=<?php echo $result->user_id;?>">
+                                    <a href="profilePage.php?uid=<?php echo $result->user_id;?>">
                                         <div class="display_box">
                                             <div class="row">
                                                 <div class="col-xs-12">
                                                     <div class="media">
                                                         <div class="media-left">
-                                                            <img height="48" width="48" class="media-object" src="../<?php echo DB::getInstance()->query("SELECT image_path FROM images WHERE user_id = '$result->user_id' && image_id = '1'")->results()[0]->image_path;?>"/>
+                                                            <img height="96" width="96" class="media-object" src="<?php echo DB::getInstance()->query("SELECT image_path FROM images WHERE user_id = '$result->user_id' && image_id = '1'")->results()[0]->image_path;?>"/>
                                                         </div>
                                                         <div class="media-body" style="padding-top: 3px;">
                                                             <h4 class="media-heading"><?php echo $result->username; ?></h4>
@@ -71,19 +72,18 @@
                 else{?>
                     <div class= "alert alert-success" role="alert">
                         <p class="close" data-dismiss="alert" aria-label="close"></p>
-                        Currently no banned users...
+                        No matching results found...
                     </div>
                     <?php
                 }
                 ?>
-
                 <br><br>
                 <br><br>
             </div>
         </div>
     </div>
 </div>
-<?php include("../includes/footer.html"); ?>
+<?php include("includes/footer.html"); ?>
 </body>
 
 </html>

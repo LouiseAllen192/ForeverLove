@@ -7,8 +7,7 @@
     include("includes/metatags.html");
     include("includes/fonts.html");
 
-    $_SESSION['user_id'] = 4;
-    $reportee = 5;//$_GET['uid'];
+    $reportee = $_GET['uid'];
 
     $username = UserServiceMgr::getUsername($reportee);
     $priorities = SearchServiceMgr::getChoices('priority');

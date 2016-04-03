@@ -7,7 +7,7 @@
     include("includes/metatags.html");
     include("includes/fonts.html");
 
-    $uid = 5;//$_SESSION['user_id'];
+    $me = $_SESSION['user_id'];
 
     $db = DB::getInstance();
     $hobbies = $db->query('SELECT * FROM user_hobbies ORDER BY hobby_name')->results();
@@ -22,14 +22,14 @@
             }
         }
         if(isset($_POST['list'])){
-            $results = SearchServiceMgr::byCriteria($uid, $_POST['list'], $selectedPreferences);
+            $results = SearchServiceMgr::byCriteria($me, $_POST['list'], $selectedPreferences);
         }
         else if(count($selectedPreferences)){
-            $results = SearchServiceMgr::byCriteria($uid, [], $selectedPreferences);
+            $results = SearchServiceMgr::byCriteria($me, [], $selectedPreferences);
         }
         else{
             $sql = "SELECT user_id,username,tag_line,city,TIMESTAMPDIFF(YEAR, date_of_birth, CURDATE()) AS age";
-            $sql .= " FROM registration_details JOIN preference_details USING(user_id) WHERE user_id != $uid";
+            $sql .= " FROM registration_details JOIN preference_details USING(user_id) WHERE user_id != $me";
             $results = $db->query($sql)->results();
         }
         if(isset($_POST['age'])){

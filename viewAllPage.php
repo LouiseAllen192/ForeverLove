@@ -8,11 +8,11 @@
     include("includes/metatags.html");
     include("includes/fonts.html");
 
-    $uid = 5;//$_SESSION['user_id'];
+    $me = $_SESSION['user_id'];
 
     $db = DB::getInstance();
-    $sql = "SELECT user_id,username,tag_line,city,gender,seeking FROM registration_details JOIN preference_details USING(user_id) WHERE user_id != '$uid'";
-    $results = SearchServiceMgr::filterSeekingGender($uid, $db->query($sql)->results());
+    $sql = "SELECT user_id,username,tag_line,city,gender,seeking FROM registration_details JOIN preference_details USING(user_id) WHERE user_id != '$me'";
+    $results = SearchServiceMgr::filterSeekingGender($me, $db->query($sql)->results());
     ?>
     <title>View All Page</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -37,7 +37,7 @@
                     </small>
                 </h2>
                 <hr class="tagline-divider">
-                <br><br>
+                <br>
                     <?php
                     if(isset($results)){
                         foreach ($results as $result){

@@ -5,16 +5,18 @@
     <script src="bootstrap_js/bootstrap.js"></script>
     <script src="scripts/search.js"></script>
 
-<!--    --><?php //$_SESSION['user_id'] = 5;?>
+    <?php
+    if(isset($_GET['search_submit_button'])){
+        header('Location: searchResultsPage.php?searchTerm='.$_GET['input_search']);
+        die();
+    }
+    ?>
 </head>
 
 <nav class="navbar navbar-inverse navbar-fixed-top navBar" role="navigation">
     <div class="container">
-
         <div class = "row">
-
             <div class="col-md-2">
-
                 <div class="col-md-2 col-sm-2 pull-left">
                     <img src="includes/pics/logo.jpg">
                 </div>
@@ -38,9 +40,11 @@
                     <form class="navbar-form" role="search">
                         <div class="input-group">
                             <div class="search-bar" id="search_group">
-                                <input type="text" class="form-control search" placeholder="Search" id="input_search">
+                                <input type="text" class="form-control search" placeholder="Search..." id="input_search" name="input_search">
                                 <div class="input-group-btn">
-                                    <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
+                                    <button class="btn btn-default" id="search_submit_button" name="search_submit_button" type="submit">
+                                        <i class="glyphicon glyphicon-search"></i>
+                                    </button>
                                 </div>
                                 <div id="search_result"></div>
                             </div>
