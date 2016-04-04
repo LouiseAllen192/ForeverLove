@@ -11,8 +11,7 @@
 
 
     if(Input::exists()){
-        if(isset($_POST['old_password']) && $_POST['old_password'] == $results->password){
-            $_POST['old_password_confirm'] = $_POST['old_password'];
+        if(isset($_POST['old_password']) && password_verify ( $_POST['old_password'] , $results->password)){
             $errors = UserServiceMgr::updatePassword($_POST);
         }
         else{

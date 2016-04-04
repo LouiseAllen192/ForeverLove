@@ -113,7 +113,7 @@
                                      </div>
                                  </fieldset>
                                  <a href="welcomePage.php" class="btn btn-info center-inline" role="button">Return</a>
-                                 <input class="btn btn-info center-inline" id="reset_Password" name="reset_password" type="submit" value="Reset Password">
+                                 <input type="submit" class="btn btn-info center-inline" id="reset_Password" name="reset_password"  value="Reset Password">
                              </form>
                         <br><br>
 
@@ -147,7 +147,11 @@
                             </div><br><br>
                             <a href="welcomePage.php" class="btn btn-info center-inline" role="button">Return to Welcome page <span class="glyphicon glyphicon-arrow-left"></span></a>
 
-                        <?php }
+
+                 <?php      unset($_POST['email']);
+                            unset($_POST['reset_password']);
+
+                        }
 
                         ?>
 
