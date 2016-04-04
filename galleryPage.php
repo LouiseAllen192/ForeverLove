@@ -107,25 +107,6 @@
 
 
 
-<!--                --><?php
-//                if(isset($_POST['upload_button_pressed'])){
-//                    if(ImageService::checkIfImageGalleryFull($images)) { ?>
-<!--                        <br> Unfortunately your image gallery is full.-->
-<!--                        You can have a maximum of 16 images. Please delete an image to make room for new uploads.-->
-<!--                    --><?php
-//                    } else {
-//                    ?>
-<!--                    <form method="POST" action="uploadImage.php" enctype="multipart/form-data">-->
-<!--                        <input type="hidden" name="uid" value="--><?php //echo $uid?><!--">-->
-<!--<!--                        <input type="hidden" name="me" value="--><?php ////echo $me?><!--<!--">-->
-<!--<!--                        <input type="hidden" name="form_submitted" value="yes">-->
-<!---->
-<!--                        <input type="file" name="myimage" id="myimage" ">-->
-<!--                        <br><br><button type="submit" name="submit_image" value="submit_image" class="btn btn-primary" >Upload</button>-->
-<!--                    </form>-->
-<!---->
-<!--                --><?php //}
-//                } ?>
 
 
 

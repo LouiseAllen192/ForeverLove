@@ -61,8 +61,8 @@ class ImageService
         }
         else {
             $path = "userImageUploads/user" . $uid . "/" . $imgName;
+            unlink($path);
         }
-        unlink($path);
 
         $update = array("image_path" => "", "image_name" => "");
         $where = "user_id = '".$uid."' AND image_id = '".$imgNum."'";
