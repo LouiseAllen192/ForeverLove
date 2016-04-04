@@ -3,10 +3,6 @@ User Services:
 
     regAccTypePage:
     - implement functionality to check credit card info against server
-    - fix js validation on valid date
-
-   updatePassword:
-    - fix
 
     ProfilePage:
     - fix profile image size

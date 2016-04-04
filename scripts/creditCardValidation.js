@@ -62,26 +62,26 @@ $(document).ready(function(){
                 $('#year_group > #error_regex').removeClass('hide').addClass('error');
             }
 
-            var today = new Date();
-            var currentMonth = today.getMonth();
-            currentMonth = currentMonth++;
-            var currentYear = today.getYear();
-            currentYear  = currentYear .substring(2);
-
-
-            var month = $('#month').val();
-            var year = $(this).val();
-
-            var success = true;
-            if(currentYear > year){ success = false;}
-            if(currentYear == year && month <currentMonth) {success = false;}
-
-            if (success) {
-                $('#dob_group > #error_valid_date').removeClass('hide').addClass('error');
-            }
-            else {
-                $('#dob_group > #error_valid_date').removeClass('error').addClass('hide');
-            }
+            //var today = new Date();
+            //var currentMonth = today.getMonth();
+            //currentMonth = currentMonth++;
+            //var currentYear = today.getYear();
+            //currentYear  = currentYear .substring(2);
+            //
+            //
+            //var month = $('#month').val();
+            //var year = $(this).val();
+            //
+            //var success = true;
+            //if(currentYear > year){ success = false;}
+            //if(currentYear == year && month <currentMonth) {success = false;}
+            //
+            //if (success) {
+            //    $('#dob_group > #error_valid_date').removeClass('hide').addClass('error');
+            //}
+            //else {
+            //    $('#dob_group > #error_valid_date').removeClass('error').addClass('hide');
+            //}
         });
 
 

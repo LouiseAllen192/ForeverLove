@@ -7,10 +7,27 @@
     include("includes/fonts.html");
 
     $uid = $_SESSION['user_id'];
+    $errors = array();
 
-    $errors = UserServiceMgr::validateCreditCardDetails($_POST);
+    if(isset($_POST['month']) && isset($_POST['year'])) {
+        $dateMonth = $_POST['month'];
+        $dateYear = $_POST['year'];
+        $now = new  DateTime('now');
+        $curMonth = $now->format('m');
+        $curYear = $now->format('y');
 
-    if(isset($_POST['security']) && !($errors)){
+        if($curYear<$dateYear){
+            $errors = UserServiceMgr::validateCreditCardDetails($_POST);
+        }
+        else if($curYear == $dateYear && $dateMonth > $curMonth){
+            $errors = UserServiceMgr::validateCreditCardDetails($_POST);
+        }
+        else{
+            $errors['year'] = 'error_valid_date';
+        }
+    }
+
+    if(!empty($_POST) && isset($_POST['payment_submit_button']) && !($errors)){
         if(UserServiceMgr::validateCreditCard($uid, $_POST)){
             $length = $_POST['length'];
             UserServiceMgr::registerUpgradeAccountType($uid, $length);
@@ -81,21 +98,22 @@
                 </div>
                     <?php
                 }
-                if(!empty($_POST) && isset($_POST['accType']) ) {
+                if(!empty($_POST) && (isset($_POST['accType']) || !isset($_POST['payment_submit_button']))) {
+                    $accType = $_POST['accType'];
 
-                    if ($_POST['accType'] == "free") {
+                    if ($accType == "free") {
                         $acc = "Free 30 day trial";
                         $length = 30;
                     }
-                    else if ($_POST['accType'] == "premium3") {
+                    else if ($accType == "premium3") {
                         $acc = "3 month Premium";
                         $length = 3;
                     }
-                    else if ($_POST['accType'] == "premium6") {
+                    else if ($accType == "premium6") {
                         $acc = "6 month Premium";
                         $length = 6;
                     }
-                    else if ($_POST['accType'] == "premium12") {
+                    else if ($accType == "premium12") {
                         $acc = "12 month Premium";
                         $length = 12;
                     }
@@ -125,7 +143,7 @@
                     }
                     else
                     {
-                        ?>
+                        if(isset($_POST['acc'])) $acc = $_POST['acc']; ?>
 
                         <div class= "alert alert-info" role="alert" id="selectedMessage">
                             <p>You have chosen a <?php echo $acc;?> account.</p>
@@ -193,11 +211,13 @@
 
                                                 <div class="form-group" id="hidden_group">
                                                     <input type="hidden" name="length" value="<?php echo $length?>">
+                                                    <input type="hidden" name="acc" value="<?php echo $acc?>">
+                                                    <input type="hidden" name="accType" value="<?php echo $accType?>">
                                                 </div>
 
                                         </fieldset>
                                         <br>
-                                        <input class="btn btn-info center-inline" id=payment_submit_button" name= "submit" type="submit" value="Submit">
+                                        <input class="btn btn-info center-inline" id=payment_submit_button" name= "payment_submit_button" type="submit" value="Submit">
                                     </form>
 
                                 <!------------------------------------------------------------------------------------------------------------------------------------------>

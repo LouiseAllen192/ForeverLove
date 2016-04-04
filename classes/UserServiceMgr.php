@@ -227,8 +227,7 @@ class UserServiceMgr
                 ],
                 'year' => [
                     'required' => true,
-                    'matches' => '/^\d{2}$/',
-                    'valid_date' => true
+                    'matches' => '/^\d{2}$/'
                 ],
                 'security' => [
                     'required' => true,
