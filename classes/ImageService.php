@@ -56,7 +56,12 @@ class ImageService
         $results = DB::getInstance()->query($sql)->results()[0];
         $imgName = $results->image_name;
 
-        $path = "userImageUploads/user".$uid."/".$imgName;
+        if($imgName == "default-profile.png"){
+            $path = "includes\pics\default-profile.png";
+        }
+        else {
+            $path = "userImageUploads/user" . $uid . "/" . $imgName;
+        }
         unlink($path);
 
         $update = array("image_path" => "", "image_name" => "");
@@ -124,13 +129,13 @@ class ImageService
         }
 
         else{
-        if($error == 1){$infoMsgInfo['msg'] = "The uploaded file exceeds the upload_max_filesize directive in php.ini.";}
-        if($error == 2){$infoMsgInfo['msg'] = "The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form.";}
-        if($error == 3){$infoMsgInfo['msg'] = "The uploaded file was only partially uploaded.";}
-        if($error == 4){$infoMsgInfo['msg'] = "No file was uploaded.";}
-        if($error == 5){$infoMsgInfo['msg'] = "Missing a temporary folder";}
-        if($error == 6){$infoMsgInfo['msg'] = "Failed to write file to disk";}
-        if($error == 7){$infoMsgInfo['msg'] = "A PHP extension stopped the file upload. PHP does not provide a way to ascertain which extension caused the file upload to stop; examining the list of loaded extensions with phpinfo() may help.";}
+            if($error == 1){$infoMsgInfo['msg'] = "The uploaded file exceeds the upload_max_filesize directive in php.ini.";}
+            if($error == 2){$infoMsgInfo['msg'] = "The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form.";}
+            if($error == 3){$infoMsgInfo['msg'] = "The uploaded file was only partially uploaded.";}
+            if($error == 4){$infoMsgInfo['msg'] = "No file was uploaded.";}
+            if($error == 5){$infoMsgInfo['msg'] = "Missing a temporary folder";}
+            if($error == 6){$infoMsgInfo['msg'] = "Failed to write file to disk";}
+            if($error == 7){$infoMsgInfo['msg'] = "A PHP extension stopped the file upload. PHP does not provide a way to ascertain which extension caused the file upload to stop; examining the list of loaded extensions with phpinfo() may help.";}
         }
         return $infoMsgInfo;
     }

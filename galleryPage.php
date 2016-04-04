@@ -35,12 +35,12 @@
 
     $images = ImageService::getImages($uid);
 
-    echo '<br><br><br><br><br><br><br><br>';
-    var_dump($_POST);
-    echo '<br><br>';
-    var_dump($_FILES);
-
-    if(empty($_FILES)){echo '<br>EMPTY FILES ARRAY!';}
+//    echo '<br><br><br><br><br><br><br><br>';
+//    var_dump($_POST);
+//    echo '<br><br>';
+//    var_dump($_FILES);
+//    if(empty($_FILES)){echo '<br>EMPTY FILES ARRAY!';}
+//
 
     function createThumbnails($images){
         foreach($images as $img_num=>$img_url) {
@@ -93,99 +93,86 @@
 
                 <?php if($me) { ?>
                     <div class="btn-group galleryButtons" >
-
-<!--                    <button type = "button" class="btn btn-primary" data-toggle = "modal" data-target = "#myModal" > Upload Image </button >-->
-
-                        <form method="post" action="galleryPage.php">
-                            <input type="hidden" name="uid" value="<?php echo $uid?>">
-                            <input type="hidden" name="me" value="<?php echo $me?>">
-                            <input type="hidden" name="upload_button_pressed" value="yes">
-                        <button type = "submit" class="btn btn-primary" name="upload" value="Upload Image">Upload Image</button>
-                        </form>
-
+                    <button type = "button" class="btn btn-primary" data-toggle = "modal" data-target = "#myModal" > Upload Image </button >
+<!--                        <form method="post" action="galleryPage.php">-->
+<!--                            <input type="hidden" name="uid" value="--><?php //echo $uid?><!--">-->
+<!--                            <input type="hidden" name="me" value="--><?php //echo $me?><!--">-->
+<!--                            <input type="hidden" name="upload_button_pressed" value="yes">-->
+<!--                            <button type = "submit" class="btn btn-primary" name="upload" value="Upload Image">Upload Image</button>-->
+<!--                        </form>-->
                     <button type = "button" class="btn btn-primary" data-toggle = "popover"  data-content = "Select image from thumbnails below to delete." > Delete Image </button >
                     <button type = "button" class="btn btn-primary" data-toggle = "popover"  data-content = "Select image from thumbnails below to update profile image" > Update Profile Picture </button >
                 </div >
                 <?php }?>
 
-                <?php
-                if(isset($_POST['upload_button_pressed'])){
-                    if(ImageService::checkIfImageGalleryFull($images)) { ?>
-                        <br> Unfortunately your image gallery is full.
-                        You can have a maximum of 16 images. Please delete an image to make room for new uploads.
-                    <?php
-                    } else {
-                    ?>
-
-                <form method="POST" action="galleryPage.php" enctype="multipart/form-data">
-                    <input type="hidden" name="uid" value="<?php echo $uid?>">
-                    <input type="hidden" name="me" value="<?php echo $me?>">
-                    <input type="hidden" name="form_submitted" value="yes">
-
-                    <input type="file" name="myimage" id="myimage" ">
-                    <br><br><button type="submit" name="submit_image" value="submit_image" class="btn btn-primary" >Upload Image</button>
-                </form>
-                <?php }
-                } ?>
 
 
-
-<!--                <div id="myModal" class="modal fade" role="dialog">-->
-<!--                    <div class="modal-dialog">-->
+<!--                --><?php
+//                if(isset($_POST['upload_button_pressed'])){
+//                    if(ImageService::checkIfImageGalleryFull($images)) { ?>
+<!--                        <br> Unfortunately your image gallery is full.-->
+<!--                        You can have a maximum of 16 images. Please delete an image to make room for new uploads.-->
+<!--                    --><?php
+//                    } else {
+//                    ?>
+<!--                    <form method="POST" action="uploadImage.php" enctype="multipart/form-data">-->
+<!--                        <input type="hidden" name="uid" value="--><?php //echo $uid?><!--">-->
+<!--<!--                        <input type="hidden" name="me" value="--><?php ////echo $me?><!--<!--">-->
+<!--<!--                        <input type="hidden" name="form_submitted" value="yes">-->
 <!---->
-<!--                        <!-- Modal content-->
-<!--                        <div class="modal-content">-->
-<!--                            <div class="modal-header">-->
-<!--                                <button type="button" class="close" data-dismiss="modal">&times;</button>-->
-<!--                                <h4 class="modal-title">Upload Images</h4>-->
-<!--                            </div>-->
-<!--                            <div class="modal-body">-->
-<!--                                <p>-->
-<!--                                    --><?php
-//                                    if(ImageService::checkIfImageGalleryFull($images)) { ?>
-<!--                                        <br> Unfortunately your image gallery is full.-->
-<!--                                        You can have a maximum of 16 images. Please delete an image to make room for new uploads.-->
-<!--                                    --><?php
-//                                    } else {
-//                                    ?>
+<!--                        <input type="file" name="myimage" id="myimage" ">-->
+<!--                        <br><br><button type="submit" name="submit_image" value="submit_image" class="btn btn-primary" >Upload</button>-->
+<!--                    </form>-->
 <!---->
-<!--                                <form method="POST" action="galleryPage.php" enctype="multipart/form-data">-->
-<!--                                    <input type="hidden" name="uid" value="--><?php //echo $uid?><!--">-->
-<!--                                    <input type="hidden" name="me" value="--><?php //echo $me?><!--">-->
-<!--                                    <input type="hidden" name="form_submitted" value="yes">-->
-<!---->
-<!--                                    <input type="file" name="myimage" id="myimage" ">-->
-<!--                                    <br><br><button type="submit" name="submit_image" value="submit_image" class="btn btn-primary" >Upload Image</button>-->
-<!--                                </form>-->
-<!---->
-<!--                                --><?php //} ?>
-<!--                                </p>-->
-<!--                            </div>-->
-<!--                            <div class="modal-footer">-->
-<!--                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!---->
-<!--                    </div>-->
-<!--                </div>-->
+<!--                --><?php //}
+//                } ?>
 
-                <?php if(isset($_POST['form_submitted'])) {
-                    $error = $_FILES['myimage']['error'];
-                    $infoMsgInfo = ImageService::uploadFileImage($_FILES, $uid, $images);
-                }
-                ?>
+
+
+                <div id="myModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+
+<!--                         Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Upload Images</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>
+                                    <?php
+                                    if(ImageService::checkIfImageGalleryFull($images)) { ?>
+                                        <br> Unfortunately your image gallery is full.
+                                        You can have a maximum of 16 images. Please delete an image to make room for new uploads.
+                                    <?php
+                                    } else {
+                                    ?>
+
+                                <form method="POST" action="uploadImage.php" enctype="multipart/form-data">
+                                    <input type="hidden" name="uid" value="<?php echo $uid?>">
+                                    <input type="hidden" name="me" value="<?php echo $me?>">
+                                    <input type="hidden" name="form_submitted" value="yes">
+
+                                    <input type="file" name="myimage" id="myimage" ">
+                                    <br><br><button type="submit" name="submit_image" value="submit_image" class="btn btn-primary" >Upload Image</button>
+                                </form>
+
+                                <?php } ?>
+                                </p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
 
 
                 <br><br><br>
 
-                <?php if(isset($_POST['form_submitted'])){ ?>
-                <div class= "alert alert-<?php echo $infoMsgInfo['type'];?>" role="alert">
-                    <a href="galleryPage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    <?php echo $infoMsgInfo['msg'];?>
-                </div>
-                <?php }
+                <?php
                 $images = ImageService::getImages($uid);
-                unset($_FILES);
                 ?>
 
 
