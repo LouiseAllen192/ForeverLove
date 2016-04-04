@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 03, 2016 at 07:23 PM
+-- Generation Time: Apr 04, 2016 at 01:40 PM
 -- Server version: 5.7.9
 -- PHP Version: 5.6.16
 
@@ -97,7 +97,14 @@ CREATE TABLE IF NOT EXISTS `banned_reports` (
   KEY `Reporter_id` (`reporter_id`),
   KEY `Reportee_id` (`reportee_id`),
   KEY `priority` (`priority`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `banned_reports`
+--
+
+INSERT INTO `banned_reports` (`report_id`, `reporter_id`, `reportee_id`, `conversation_id`, `priority`, `content`, `date_time`, `view_conversation`, `resolved`) VALUES
+(1, 9, 5, 0, 4, 'Nude material', '2016-04-04 14:37:46', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -810,7 +817,7 @@ CREATE TABLE IF NOT EXISTS `registration_details` (
   `email` varchar(128) NOT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `Username` (`username`,`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `registration_details`

@@ -16,7 +16,6 @@ class DB{
         }
     }
 
-    //Only one connection ever needed
     public static function getInstance(){
         if(!isset(self::$instance)){
             self::$instance = new DB();
@@ -27,7 +26,7 @@ class DB{
     /*
      * Query database with either a single sql query or combined with an array
      * in which each element of the array is binded to a "?"
-     * e.g. query("SELECT username FROM users WHERE username='alex' || username='joe'", [])
+     * e.g. query("SELECT username FROM users WHERE username='alex' || username='joe'")
      * e.g. query("SELECT username FROM users WHERE username=? || username=?", ['alex', 'joe'])
      */
     public function query($sql, $params = []){
@@ -43,7 +42,6 @@ class DB{
 
             //echo $this->query->queryString;
 
-            //Returns the result as an object
             if($this->query->execute()){
                 $this->results = $this->query->fetchAll(PDO::FETCH_OBJ);
                 $this->count = $this->query->rowCount();
