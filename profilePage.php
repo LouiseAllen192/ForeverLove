@@ -152,7 +152,7 @@
                                     $MsgMgr = new MessageMgr($_SESSION['user_id']);
                                     ?>
                                     <form action ="#", method="post">
-                                    <a href="reportUserPage.php" class="btn btn-info center-inline" role="button"><span class="glyphicon glyphicon-remove-circle"></span> Report this user</a>
+                                    <a href="reportUserPage.php?uid=<?php echo $user->getUserId()?>" class="btn btn-info center-inline" role="button"><span class="glyphicon glyphicon-remove-circle"></span> Report this user</a>
                                     <?php  $MsgMgr->sendMessageButton($uid); ?>
                                     </form>
 
