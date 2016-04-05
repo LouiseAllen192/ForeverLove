@@ -125,14 +125,20 @@ class SearchServiceMgr{
         return $array;
     }
 
-    public static function searchTerm($term, $limit = 0){
+    public static function searchTerm($term, $limit = 25){
         $me = $_SESSION['user_id'];
-        $sql = "SELECT user_id, username, email, city, tag_line, gender, seeking";
+        $sql = "SELECT user_id, username, city, tag_line, gender, seeking";
         $sql .= " FROM registration_details JOIN preference_details USING(user_id)";
-        $sql .= " WHERE user_id != '$me' && (username LIKE '%$term%' || email LIKE '%$term%' || city LIKE '%$term%')";
-        $sql .= " ORDER BY username LIKE '%$term%' DESC, email LIKE '%$term%' DESC, city LIKE '%$term%' DESC";
-        if($limit != 0){$sql .= " LIMIT $limit";}
-        $results = DB::getInstance()->query($sql)->results();
-        return SearchServiceMgr::filterSeekingGender($me, $results);
+        $sql .= " WHERE user_id != '$me' && (username LIKE '%$term%' || tag_line LIKE '%$term%' || city LIKE '%$term%')";
+        $sql .= " ORDER BY username LIKE '%$term%' DESC, tag_line LIKE '%$term%' DESC, city LIKE '%$term%' DESC";
+        $results = SearchServiceMgr::filterSeekingGender($me, DB::getInstance()->query($sql)->results());
+        if(count($results) > $limit){
+            $finalResults = [];
+            for($i = 0; $i < $limit; $i++){
+                $finalResults[$i] = $results[$i];
+            }
+            return $finalResults;
+        }
+        else{ return $results;}
     }
 }
