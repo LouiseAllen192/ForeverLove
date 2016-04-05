@@ -36,7 +36,7 @@
                 </h2>
                 <hr class="tagline-divider">
                 <div class="row">
-                    <div class="col-sm-4 col-xs-6">
+                    <div class="col-sm-3 col-xs-6">
                         <div class="dummy"></div>
                         <a href="viewBannedUsersPage.php" class="thumbnail">
                             <div class="h4">
@@ -45,7 +45,7 @@
                         </a>
                     </div>
 
-                    <div class="col-sm-4 col-xs-6">
+                    <div class="col-sm-3 col-xs-6">
                         <div class="dummy"></div>
                         <a href="viewSuspendedUsersPage.php" class="thumbnail">
                             <div class="h4">
@@ -54,7 +54,7 @@
                         </a>
                     </div>
 
-                    <div class="col-sm-4 col-xs-6">
+                    <div class="col-sm-3 col-xs-6">
                         <div class="dummy"></div>
                         <a href="viewReportsPage.php" class="thumbnail">
                             <div class="h4">
@@ -62,9 +62,7 @@
                             </div>
                         </a>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-4 col-xs-6">
+                    <div class="col-sm-3 col-xs-6">
                         <div class="dummy"></div>
                         <a href="addNewAccount.php" class="thumbnail">
                             <div class="h4">
@@ -73,6 +71,13 @@
                         </a>
                     </div>
                 </div>
+                <br><br>
+                <br><br>
+                <br><br>
+                <br><br>
+                <br><br>
+                <br><br>
+                <br><br>
                 <br><br>
             </div>
         </div>

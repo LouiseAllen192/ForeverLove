@@ -7,6 +7,8 @@
     include("includes/metatags.html");
     include("includes/fonts.html");
 
+    $_SESSION['user_id'] = 5;
+
     $db = DB::getInstance();
     $me = $_SESSION['user_id'];
     $results = SearchServiceMgr::suggestions($me);
@@ -49,16 +51,17 @@
                                                         <div class="col-xs-12">
                                                             <div class="media">
                                                                 <div class="media-left">
-                                                                    <img height="96" width="96" class="media-object"
-                                                                         src="<?php echo $db->query("SELECT image_path FROM images WHERE user_id = '$result->user_id' && image_id = '1'")->results()[0]->image_path; ?>"/>
+                                                                    <img height="78" width="78" class="media-object" title="Profile Image" src="<?php echo $db->query("SELECT image_path FROM images WHERE user_id = '$result->user_id' && image_id = '1'")->results()[0]->image_path; ?>">
                                                                 </div>
                                                                 <div class="media-body" style="padding-top: 3px;">
-                                                                    <h4 class="media-heading"><?php echo $result->username; ?></h4>
-                                                                    <small
-                                                                        style="white-space: nowrap;"><?php echo $result->tag_line; ?></small>
+                                                                    <h4 class="media-heading" title="Username"><?php echo $result->username; ?></h4>
+                                                                    <small style="white-space: nowrap;" title="Tag Line"><?php echo $result->tag_line; ?></small>
                                                                 </div>
                                                                 <div class="media-right media-middle">
-                                                                    <h5 class="media-heading"><?php echo $result->city; ?></h5>
+                                                                    <h5 class="media-heading" title="Location"><?php echo $result->city; ?></h5>
+                                                                </div>
+                                                                <div class="media-right media-middle">
+                                                                    <span class="badge badge-notify" title="Common Interests"><?php echo $result->Total;?></span>
                                                                 </div>
                                                             </div>
                                                         </div>

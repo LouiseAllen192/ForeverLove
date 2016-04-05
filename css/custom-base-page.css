@@ -166,3 +166,12 @@ footer p {
     line-height: 0px;
 }
 /*SEARCH BAR END*/
+
+.badge{
+    position:relative;
+    bottom: 30px;
+}
+
+.badge-notify{
+    background:gold;
+}
