@@ -13,6 +13,11 @@
     if(isset($_POST['login_button'])){
         $errors = AdminServiceMgr::login($_POST);
     }
+
+    if(isset($_GET['logout'])){
+        AdminServiceMgr::logout();
+    }
+
     ?>
     <title>Admin Login Page</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -59,7 +64,6 @@
                             </div>
                         </div>
                         <input class="btn btn-info center-inline" id="login_button" name="login_button" type="submit" value="Login">
-                        <a href="addNewAccount.php" class="btn btn-info center-inline" role="button">Register</a>
                     </fieldset>
                 </form>
 

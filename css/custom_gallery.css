@@ -206,3 +206,10 @@ footer p {
     line-height: 0px;
 }
 /*SEARCH BAR END*/
+
+.admin_notice{
+    border: solid 1px #761c19;
+    padding: 8px;
+    text-align: center;
+
+}

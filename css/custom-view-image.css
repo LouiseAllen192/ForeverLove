@@ -39,6 +39,12 @@ hr {
     border-color: #999999;
 }
 
+.admin_notice{
+    border: solid 1px #761c19;
+    padding: 8px;
+    text-align: center;
+}
+
 
 .tagline-divider {
     margin: 15px auto 3px;

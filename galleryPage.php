@@ -18,9 +18,11 @@
     <?php
     include($_SERVER['DOCUMENT_ROOT'] . '/classes/User.php');
     include($_SERVER['DOCUMENT_ROOT'] . '/classes/ImageService.php');
+    include($_SERVER['DOCUMENT_ROOT'].'/classes/DB.php');
+    include($_SERVER['DOCUMENT_ROOT'].'/classes/Config.php');
 
 
-    $me;
+    $me; //will be 1-for me, 2-for not me, 3-for admin
     $uid;
      if(!empty($_POST)){
          if(isset($_POST['me'])){
@@ -76,7 +78,8 @@
 </head>
 
 <body class="full">
-<?php include("includes/navbar.php"); ?>
+<?php if($me == 3) {include("includes/navbarAdmin.html");}
+else {include("includes/navbar.php");}?>
 
 <!--Main page content-->
 <div class="container">
@@ -91,21 +94,20 @@
                 <hr class="visible-xs">
                 <br>
 
-                <?php if($me) { ?>
+                <?php if($me == 1) { ?>
                     <div class="btn-group galleryButtons" >
                     <button type = "button" class="btn btn-primary" data-toggle = "modal" data-target = "#myModal" > Upload Image </button >
-<!--                        <form method="post" action="galleryPage.php">-->
-<!--                            <input type="hidden" name="uid" value="--><?php //echo $uid?><!--">-->
-<!--                            <input type="hidden" name="me" value="--><?php //echo $me?><!--">-->
-<!--                            <input type="hidden" name="upload_button_pressed" value="yes">-->
-<!--                            <button type = "submit" class="btn btn-primary" name="upload" value="Upload Image">Upload Image</button>-->
-<!--                        </form>-->
                     <button type = "button" class="btn btn-primary" data-toggle = "popover"  data-content = "Select image from thumbnails below to delete." > Delete Image </button >
                     <button type = "button" class="btn btn-primary" data-toggle = "popover"  data-content = "Select image from thumbnails below to update profile image" > Update Profile Picture </button >
                 </div >
                 <?php }?>
 
 
+                <?php if($me == 3){ ?>
+                    <div class = "admin_notice">
+                        <p><h4>Admin notice:</h4><br>Review user images for offensive material<br> If offensive image found, select image and delete</p>
+                    </div>
+                <?php } ?>
 
 
 
@@ -177,7 +179,7 @@
                             <br><br><br><br><br><br>
 
 
-                            <form action="profilePage.php" method="post">
+                            <form action="profilePage.php?<?php if($me==3){echo 'admin=true&';}?>uid=<?php echo $uid; ?>" method="post">
                                 <input type="hidden" name="uid" value="<?php echo $uid?>">
                                 <input type="hidden" name="me" value="<?php echo $me?>">
                                 <button type="submit" name="goBack" class="btn btn-info buttons_left" >Back to Profile Page <span class="glyphicon glyphicon-user"></span></button>

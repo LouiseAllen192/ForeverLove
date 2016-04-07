@@ -14,6 +14,9 @@
 
     <?php include("includes/fonts.html");
     include($_SERVER['DOCUMENT_ROOT'] . '/classes/User.php');
+    include($_SERVER['DOCUMENT_ROOT'] . '/classes/ImageService.php');
+    include($_SERVER['DOCUMENT_ROOT'].'/classes/DB.php');
+    include($_SERVER['DOCUMENT_ROOT'].'/classes/Config.php');
 
 
     $me;
@@ -51,7 +54,8 @@
 </head>
 
 <body class="full">
-<?php include("includes/navbar.php"); ?>
+<?php if($me == 3) {include("includes/navbarAdmin.html");}
+else {include("includes/navbar.php");}?>
 
 <!--Main page content-->
 <div class="container">
@@ -66,19 +70,20 @@
                 <hr class="visible-xs">
                 <br>
 
-                <?php if($me){ ?>
-                <form action="viewImagePage.php" method="post">
-                <input type="hidden" name="uid" value="<?php echo $uid?>">
-                <input type="hidden" name="me" value="<?php echo $me?>">
-                <input type="hidden" name="imgNum" value="<?php echo $imageNum?>">
+                <?php if($me == 1){ ?>
+                    <form action="viewImagePage.php" method="post">
+                        <input type="hidden" name="uid" value="<?php echo $uid?>">
+                        <input type="hidden" name="me" value="<?php echo $me?>">
+                        <input type="hidden" name="imgNum" value="<?php echo $imageNum?>">
 
-                <div class="btn-group myButtonsLeft">
-                    <button type="submit" name="submit" class="btn btn-primary" Value="Delete" >Delete Image</button>
-                </div>
-                    <div class="btn-group myButtonsRight">
-                        <button type="submit" name="submit"  class="btn btn-primary" Value="ProfilePic" >Set as Profile Picture</button>
-                    </div>
-                </form>
+                        <div class="btn-group myButtonsLeft">
+                            <button type="submit" name="submit" class="btn btn-primary" Value="Delete" >Delete Image</button>
+                        </div>
+
+                        <div class="btn-group myButtonsRight">
+                            <button type="submit" name="submit"  class="btn btn-primary" Value="ProfilePic" >Set as Profile Picture</button>
+                        </div>
+                    </form>
                 <?php } ?>
 
                 <?php
@@ -114,6 +119,20 @@
                 ?>
 
 
+                <?php if($me == 3){ ?>
+                    <div class = "admin_notice">
+                        <p><h4>Admin notice:</h4><br>If user image is offensive delete it using the delete button</p>
+                    </div><br><br>
+
+                    <form action="viewImagePage.php" method="post">
+                        <input type="hidden" name="uid" value="<?php echo $uid?>">
+                        <input type="hidden" name="me" value="<?php echo $me?>">
+                        <input type="hidden" name="imgNum" value="<?php echo $imageNum?>">
+                        <button type="submit" name="submit" class="btn btn-primary center-block" Value="Delete" >Delete Image</button>
+                    </form>
+                <?php } ?>
+
+
                 <br><br><br><br>
                 <?php
                 if(isset($_POST['submit'])) {
@@ -129,7 +148,7 @@
 
                 <br><br><br><br>
 
-                <form action="galleryPage.php" method="post">
+                <form action="galleryPage.php?<?php if($me==3){echo 'admin=true&';}?>uid=<?php echo $uid; ?>" method="post">
                     <input type="hidden" name="uid" value="<?php echo $uid?>">
                     <input type="hidden" name="me" value="<?php echo $me?>">
                     <button type="submit" name="goBack" class="btn btn-info center-block" >Back to Image Gallery <span class="glyphicon glyphicon-picture"></span></button>

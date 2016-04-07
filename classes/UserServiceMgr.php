@@ -60,6 +60,7 @@ class UserServiceMgr
 
     public static function logout(){
         unset($_SESSION['user_id']);
+        unset($_SESSION['permissions']);
 //        session_destroy($_SESSION['user_id']);
     }
 

@@ -5,15 +5,10 @@ User Services:
     - implement functionality to check credit card info against server
 
     ProfilePage:
-    - fix profile image size
-    - check admin permissions
-    - workaround for $_SESSION['user_id'] while viewing as admin
-    - add ban user option
+    - fix profile image size / pixelated images
 
     Image gallery:
-    - fix error[3] partial upload error on certain images
-
-
+    - fix error[3] partial upload error on large images
 
 
 Message Services:
@@ -23,6 +18,7 @@ Message Services:
 	
 Search Services:
     - Redirect with results upon enter or click search icon
+    - Get search bar to work when logged in as admin ?????????
 
 Admin Services:
-    - ...
+    -  ...

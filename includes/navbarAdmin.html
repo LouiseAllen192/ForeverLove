@@ -14,7 +14,7 @@
             <div class="col-md-2">
 
                 <div class="col-md-2 col-sm-2 pull-left">
-                    <img src="../includes/pics/logo.jpg">
+                     <img src="../ForeverLove/includes/pics/logo.jpg" onerror="this.src='../secret_location/logo.jpg'" alt="logo">
                 </div>
 
             </div>
@@ -51,18 +51,10 @@
 
             <div class="col-md-5">
 
-                <!--displays logged in username-->
-                <!--<div class = "logged-in pull-right">
-                    Logged in as:
-                    <?php
-/*                    if(isset($_SESSION['user_id'])){
-                        $log =  UserServiceMgr::getUsername($_SESSION['user_id']).'   ';
-                    }else{
-                        $log = 'UNSET';
-                    } echo $log*/?>
-
-                    <?php /*echo '<a href="../ForeverLove/welcomePage.php?logout=yes"><span class="glyphicon glyphicon-log-out" tooltip = "popover"  title = "Logout"></span></a>';*/?>
-                </div>-->
+                <!--displays logged in-->
+                <div class = "logged-in pull-right">
+                    Logged in as: Admin <br>
+                </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class = "nav-text">
@@ -71,7 +63,10 @@
                             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                                 <ul class="nav navbar-nav navbar-right ">
                                     <li>
-                                        <a href="../secret_location/adminHomePage.php">Home</a>
+                                        <a href="/ForeverLove/secret_location/adminHomePage.php" onerror="this.href='../secret_location/adminHomePage.php'">Home</a>
+                                    </li>
+                                    <li>
+                                        <a href="/ForeverLove/secret_location/adminLoginPage.php?logout=yes" onerror="this.href='../secret_location/adminLoginPage.php?logout=yes'">Logout <span class="glyphicon glyphicon-log-out"></span></a>
                                     </li>
                                 </ul>
                             </div>

@@ -6,15 +6,36 @@
     require_once 'core/init.php';
     include("includes/metatags.html");
     include("includes/fonts.html");
+    include($_SERVER['DOCUMENT_ROOT'].'/classes/User.php');
+    include($_SERVER['DOCUMENT_ROOT'].'/classes/ImageService.php');
+    include($_SERVER['DOCUMENT_ROOT'].'/classes/DB.php');
+    include($_SERVER['DOCUMENT_ROOT'].'/classes/Config.php');
+    include($_SERVER['DOCUMENT_ROOT'].'/classes/ReturnShortcuts.php');
+    include($_SERVER['DOCUMENT_ROOT'].'/classes/Input.php');
+    include($_SERVER['DOCUMENT_ROOT'].'/classes/UserServiceMgr.php');
+    include($_SERVER['DOCUMENT_ROOT'].'/classes/Validate.php');
 
-    $uid = $_SESSION['user_id'];
 
+    $uid;
+    $admin;
+    $update;
+    $regOrUpdate;
     $unselected = false;
 
-    $update=false;
-    $regOrUpdate = UserServiceMgr::determineUpdateOrReg($uid);
-    if($regOrUpdate == "Update"){
-        $update=true;
+    if(isset($_GET['admin']) || isset($_POST['admin'])){
+        $admin = true;
+        $update = true;
+        $regOrUpdate = "Update";
+        if(isset($_GET['admin'])){$uid = $_GET['uid'];}
+        if(isset($_POST['admin'])){$uid = $_POST['uid'];}
+    }
+    else{
+        $uid = $_SESSION['user_id'];
+        $update=false;
+        $regOrUpdate = UserServiceMgr::determineUpdateOrReg($uid);
+        if($regOrUpdate == "Update"){
+            $update=true;
+        }
     }
 
 
@@ -53,7 +74,7 @@
 
     ?>
 
-    <title><?php echo $regOrUpdate;?> Preferences</title>
+    <title><?php if($admin){echo 'Admin edit user';}else{echo $regOrUpdate;}?> Preferences</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/custom-update.css" rel="stylesheet">
     <link href="css/custom-form-page.css" rel="stylesheet">
@@ -61,7 +82,7 @@
 </head>
 
 <body class="full">
-<?php include("includes/navbar.php"); ?>
+<?php if($admin){include("includes/navbarAdmin.html");} else{include("includes/navbar.php");} ?>
 
 <!--Main page content-->
 
@@ -72,13 +93,21 @@
                 <br><br>
                 <h2>
                     <small>
-                        <strong><?php echo $regOrUpdate?> Prefrences</strong>
+                        <strong><?php if($admin){echo 'Admin edit user';}else{echo $regOrUpdate;}?> Preferences</strong>
                     </small>
                 </h2>
                 <hr class="tagline-divider">
                 <p>
                     <br>
                     <?php
+
+                    if($admin && empty($_POST)){ ?>
+                    <div class="admin_notice">
+                        <br><br><p>Admin has access to edit users preferences to remove offensive content. Review this page and edit accordingly </p><br><br>
+                    </div><br><br><br>
+                <?php }
+
+
                     if(!empty($_POST) && !$errors) {
                     if ($unselected) {?>
                         <div class="alert alert-danger">
@@ -91,16 +120,28 @@
                         if ($update && $success) {
                             $dbvalue = ReturnShortcuts::returnPreferences($uid); ?>
                             <div class="alert alert-success" role="alert">
+                                <?php if($admin){ ?>
+                                    <a href="../ForeverLove/secret_location/adminHomePage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                               <?php } else{?>
                                 <a href="homePage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <?php } ?>
                                 Preference Details updated successfully
                             </div>
                             <?php
                         }
                         if (!$success) { ?>
                             <div class="alert alert-danger">
-                                <a href="UpdatePreferencesPage.php" class="close" data-dismiss="alert"
-                                   aria-label="close">&times;</a>
+                                <?php if($admin){ ?>
+                                    <a href="UpdatePreferencesPage.php?admin=true&uid=<?php echo $uid;?>" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <?php } else{?>
+                                    <a href="UpdatePreferencesPage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <?php } ?>
                                 <strong>Error</strong> - Preferences details update was unsuccessful
+                                <?php if($admin){ ?>
+                                    <a href="updatePreferencesPage.php?admin=true&uid=<?php echo $uid;?>" class="btn btn-info center-block" style= "width:200px;" >Try again <span class="glyphicon glyphicon-repeat"></span></a>
+                                <?php } else{?>
+                                    <a href="updatePreferencesPage.php" class="btn btn-info center-block" style= "width:200px;" >Try again <span class="glyphicon glyphicon-repeat"></span></a>
+                                <?php }?>
                             </div>
                             <?php
                         }
@@ -110,8 +151,7 @@
                     ?>
 
 
-                <form id="prefrences" action="updatePreferencesPage.php" id="updateP" method="POST">
-
+                <form id="prefrences" action="updatePreferencesPage.php<?php if($admin) echo '?admin=true&uid='.$uid;?>" id="updateP" method="POST">
                     <div class="form-group" id="tag_line_group">
                         <label for="tag_line" class="col-md-4 col-sm-5 control-label"><b>Tag Line</b></label>
                         <div class="col-md-8 col-sm-7">

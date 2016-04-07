@@ -91,6 +91,15 @@ class AdminServiceMgr{
         return $errors;
     }
 
+    public static function logout(){
+        if(isset($_SESSION['user_id'])){
+            unset($_SESSION['user_id']);
+        }
+        if(isset($_SESSION['permissions'])){
+            unset($_SESSION['permissions']);
+        }
+    }
+
     public static function registerAccount($source){
         $validate = new Validate();
         $validate->check(

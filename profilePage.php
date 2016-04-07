@@ -16,18 +16,36 @@
 
     <?php
         include($_SERVER['DOCUMENT_ROOT'].'/classes/User.php');
+        include($_SERVER['DOCUMENT_ROOT'].'/classes/ImageService.php');
+        include($_SERVER['DOCUMENT_ROOT'].'/classes/DB.php');
+        include($_SERVER['DOCUMENT_ROOT'].'/classes/Config.php');
+        include($_SERVER['DOCUMENT_ROOT'].'/classes/ReturnShortcuts.php');
 
-    $me;
+    $me; //will be 1-for me, 2-for not me, 3-for admin
     $uid;
+    $admin;
 
 
-    if(isset($_GET['uid'])){
-        $uid = $_GET['uid'];
-        $me=false;
-    }
-    else{
-        $uid = $_SESSION['user_id'];
-        $me=true;
+    if(isset($_SESSION['permissions'])){
+        if($_SESSION['permissions'] == "admin"){
+            $admin = true;
+            if(isset($_GET['uid'])){
+                $uid = $_GET['uid'];
+            }
+            $me = 3;
+        }
+        else{
+            if(isset($_GET['uid'])){
+                $uid = $_GET['uid'];
+                $me = 2;
+                $admin = false;
+            }
+            else{
+                $uid = $_SESSION['user_id'];
+                $me = 1;
+                $admin = false;
+            }
+        }
     }
 
         $images = ImageService::getImages($uid);
@@ -88,7 +106,9 @@
 </head>
 
 <body class="full">
-    <?php include("includes/navbar.php"); ?>
+
+    <?php if(!$admin) {include("includes/navbar.php");}
+    else {include("includes/navbarAdmin.html");}?>
 
     <!--Main page content-->
     <div class="container">
@@ -103,7 +123,6 @@
                             <br><br>
                             <div class="profile-pic"><img src="<?php echo $images['1']?>" class="img-responsive" alt="Profile Picture"></div>
                             <br><br>
-
                         </div>
 
                         <div class="col-md-5 col-sm-6 text-center">
@@ -144,15 +163,21 @@
                         <div class="col-md-2 col-sm-6 text-center">
                             <div class = buttons_right>
                                 <?php
-                                if($me){
+                                if($me == 1){
                                     echo '<br><a href="updatePreferencesPage.php" class="btn btn-info center-inline" role="button"><span class="glyphicon glyphicon-heart-empty"></span> Edit Preferences</a>'.
                                         '<br><br><a href="updateHobbiesPage.php" class="btn btn-info center-inline" role="button"><span class="glyphicon glyphicon-knight"></span> Edit Hobbies</a>';
                                 }
-                                else{
+                                if($me == 3){ ?>
+                                    <div class = "admin_notice">
+                                    <p><h4>Admin notice:</h4><br>If users preferences or hobbies contains any offensive material. Remove here:</p>
+                                    <br><a href="updatePreferencesPage.php?admin=true&uid=<?php echo $uid;?>" class="btn btn-danger center-inline" role="button"><span class="glyphicon glyphicon-heart-empty"></span> Edit Preferences</a>
+                                        <br><br><a href="updateHobbiesPage.php?admin=true&uid=<?php echo $uid;?>" class="btn btn-danger center-inline" role="button"><span class="glyphicon glyphicon-knight"></span> Edit Hobbies</a>
+                                    </div>
+                               <?php }
+                                if($me==2){
                                     $MsgMgr = new MessageMgr($_SESSION['user_id']);
                                     ?>
                                     <form action ="#", method="post">
-                                    <a href="reportUserPage.php?uid=<?php echo $user->getUserId()?>" class="btn btn-info center-inline" role="button"><span class="glyphicon glyphicon-remove-circle"></span> Report this user</a>
                                     <?php  $MsgMgr->sendMessageButton($uid); ?>
                                     </form>
 
@@ -168,6 +193,7 @@
                 </div>
             </div>
         </div>
+
 
         <div class = "row">
             <div class="col-md-6">
@@ -336,9 +362,25 @@
                     </div>
 
 
+
+
+
                 </div>
             </div>
+
+
+            <?php if($me == 2){?>
+                <a href="reportUserPage.php?uid=<?php echo $user->getUserId()?>" class="btn btn-danger center-inline" role="button"><span class="glyphicon glyphicon-remove-circle"></span> Report this user</a>
+                <br><br><br><br><br>
+            <?php }
+
+            if($me == 3){?>
+                <a href="secret_location/banUserPage.php?report_id=0&uid=<?php echo $user->getUserId()?>" class="btn btn-danger center-inline" role="button"><span class="glyphicon glyphicon-remove-circle"></span> Ban this user</a>
+                <br><br><br><br><br>
+            <?php } ?>
+
         </div>
+
 
     </div>
     <?php include("includes/footer.html"); ?>
