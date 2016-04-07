@@ -156,6 +156,10 @@ th, td {
 }
 /*SEARCH BAR END*/
 
+.badge{
+    position:relative;
+    bottom: 16px;
+}
 
 .badge-notify{
     background:red;

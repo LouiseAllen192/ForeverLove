@@ -38,27 +38,33 @@
                 <div class="row">
                     <div class="col-sm-3 col-xs-6">
                         <div class="dummy"></div>
-                        <a href="viewBannedUsersPage.php" class="thumbnail">
+                        <a href="viewReportsPage.php" class="thumbnail">
                             <div class="h4">
-                                Banned Users<span class="badge"><?php echo $banned;?></span>
+                                Reports<span class="badge badge-notify"><?php echo $unresolved;?></span>
                             </div>
                         </a>
                     </div>
-
+                    <div class="col-sm-3 col-xs-6">
+                        <div class="dummy"></div>
+                        <a href="viewBannedUsersPage.php" class="thumbnail">
+                            <div class="h4">
+                                Banned<span class="badge"><?php echo $banned;?></span>
+                            </div>
+                        </a>
+                    </div>
                     <div class="col-sm-3 col-xs-6">
                         <div class="dummy"></div>
                         <a href="viewSuspendedUsersPage.php" class="thumbnail">
                             <div class="h4">
-                                Suspended Users<span class="badge"><?php echo $suspended;?></span>
+                                Suspended<span class="badge"><?php echo $suspended;?></span>
                             </div>
                         </a>
                     </div>
-
                     <div class="col-sm-3 col-xs-6">
                         <div class="dummy"></div>
-                        <a href="viewReportsPage.php" class="thumbnail">
+                        <a href="viewAllPage.php" class="thumbnail">
                             <div class="h4">
-                                Reports<span class="badge badge-notify"><?php echo $unresolved;?></span>
+                                View All Users
                             </div>
                         </a>
                     </div>
@@ -71,12 +77,6 @@
                         </a>
                     </div>
                 </div>
-                <br><br>
-                <br><br>
-                <br><br>
-                <br><br>
-                <br><br>
-                <br><br>
                 <br><br>
                 <br><br>
             </div>
