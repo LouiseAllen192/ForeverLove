@@ -317,9 +317,8 @@ class MessageMgr
             {
                 $uname = $this->getOtherUser($convoID);
                 $uid2 = $this->doesRecipientExist($uname);
-                echo "<br><br><form action=\"profilePage.php\" method=\"post\">
+                echo "<br><br><form action=\"profilePage.php?uid=$uid2\" method=\"post\">
                         <button name=\"profile\" value=\"Profile\" class=\"btn btn-warning\">Take Me To $uname's Profile Page</button>
-                        <input type=\"hidden\" name=\"uid\" value=$uid2>
                        </form>";
             }
             echo "<br><br><form action=\"conversationPage.php?$convoID#bottom\"  method=\"post\">
