@@ -6,7 +6,6 @@
     include("includes/fonts.html");
 
     if(isset($_POST['continue_button']) && !($errors = UserServiceMgr::registerUpdateAccount($_POST))){
-
         header('Location: registerAccountTypePage.php?reg=first');
         die();
     }

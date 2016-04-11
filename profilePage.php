@@ -376,10 +376,18 @@
                 <br><br><br><br><br>
             <?php }
 
-            if($me == 3){?>
+            if($me == 3){
+                if(DB::getInstance()->query("SELECT user_id FROM banned_users WHERE user_id = '$uid'")->count()){?>
+                    <a href="secret_location/removeBanPage.php?report_id=0&uid=<?php echo $uid;?>" class="btn btn-danger center-inline" role="button"><span class="glyphicon glyphicon-remove-circle"></span> Remove Ban</a>
+                    <br><br><br><br><br>
+                    <?php
+                }
+                else{?>
                 <a href="secret_location/banUserPage.php?report_id=0&uid=<?php echo $user->getUserId()?>" class="btn btn-danger center-inline" role="button"><span class="glyphicon glyphicon-remove-circle"></span> Ban this user</a>
                 <br><br><br><br><br>
-            <?php } ?>
+                <?php
+                }
+            }?>
 
         </div>
 
