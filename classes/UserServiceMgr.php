@@ -149,10 +149,6 @@ class UserServiceMgr
     }
 
 
-    public static function reportUser($reporterUserid, $abuserUserid){
-        //todo
-    }
-
     public static function registerUpgradeAccountType($uid, $accLength){
         $date = new DateTime();
         $changes = array();
@@ -173,23 +169,23 @@ class UserServiceMgr
     }
 
 
-    public static function validateCreditCard($userid, $post){
-//        echo '<br><br><br><br><br><br><br>';
-//        foreach($post as $key=>$value){
-//            echo $key.'---'.$value.'<br>';
-//        }
+    public static function validateCreditCard($post){
 
-//        <a href="../ForeverLove/contactPage.php?loggedin=no">Contact</a>
-//
-//        <form action="cc.php" method=get>
-//            <input type="hidden" name="fullname" value="$post['name_on_card']">
-//             <input type="hidden" name="ccNumber" value="$post['cardnum']">
-//             <input type="hidden" name="month" value="$post['expiry_month']">
-//             <input type="hidden" name="year" value="$post['expiry_year']">
-//             <input type="hidden" name="security" value="$post['cvv']">
-//        </form>
-//
+        $name = $post['fullname'];
+        $ccn = $post['ccNumber'];
+        $m = $post['month'];
+        $y = $post['year'];
+        $sec = $post['security'];
+
+        echo '<br><br><br><br><br><br><br>';
+        foreach($post as $key=>$value){
+            echo $key.'---'.$value.'<br>';
+        }
+
         return true;
+
+//        header('Location: cc.php?fullname='.$name.'&ccNumber='.$ccn.'&month='.$m.'&year='.$y.'&security='.$sec);
+//        die();
     }
 
 
@@ -302,7 +298,7 @@ class UserServiceMgr
             }
 //            if(!isset($_SESSION['user_id'])) {
                 $_SESSION['user_id'] = DB::getInstance()->get('registration_details', ['username', '=', $_POST['username']])->results()[0]->user_id;
-                 mkdir("/userImageUploads/user".$_SESSION['user_id'], 0700);
+                $_SESSION['permissions'] = 'user';
 //            }
             return false;
         }

@@ -7,7 +7,13 @@
     include("includes/fonts.html");
 
     $uid = $_SESSION['user_id'];
+
+        if(isset($_GET['reg'])){
+            mkdir(dirname(realpath("registerAccountTypePage.php"))."\userImageUploads\user".$uid, 0700);
+        }
+
     $errors = array();
+    $errorMsg = false;
 
     if(isset($_POST['month']) && isset($_POST['year'])) {
         $dateMonth = $_POST['month'];
@@ -28,19 +34,13 @@
     }
 
     if(!empty($_POST) && isset($_POST['payment_submit_button']) && !($errors)){
-        if(UserServiceMgr::validateCreditCard($uid, $_POST)){
+        if(UserServiceMgr::validateCreditCard($_POST)){
             $length = $_POST['length'];
             UserServiceMgr::registerUpgradeAccountType($uid, $length);
             header('Location: updatePreferencesPage.php');
             die();
         }
-        else{
-            ?>
-            <div class="alert alert-danger">
-                <a href="registerAccountTypePage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <p><strong>Something went wrong</strong> - The Credit Card details you entered are not valid.</p>
-            </div>
-        <?php }
+        else{ $errorMsg = true;}
     } ?>
 
     <title>Select Account type</title>
@@ -77,6 +77,15 @@
                 <?php }?>
 
                 <?php
+
+                if($errorMsg){ ?>
+                    <div class="alert alert-danger">
+                        <a href="registerAccountTypePage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <p><strong>Something went wrong</strong> - The Credit Card details you entered are not valid.</p>
+                    </div>
+
+                <?php }
+
                 if(empty($_POST)){
                     ?>
                     <div class = "panel panel-default">

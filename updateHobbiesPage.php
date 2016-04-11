@@ -16,7 +16,7 @@
     include($_SERVER['DOCUMENT_ROOT'].'/classes/Validate.php');
 
 
-    $admin;
+    $admin = false;
     $uid;
     $update;
     $regOrUpdate;
@@ -205,7 +205,7 @@
                         </div>
                         <div style="clear:both;"><div></div></div>
                     </div>
-                    <br><br>
+
                     <input type="submit" name="Send" class="btn btn-primary" Value="<?php echo $regOrUpdate?> Changes">
                 </form>
 

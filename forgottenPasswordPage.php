@@ -6,6 +6,7 @@
     <?php
     require_once 'core/init.php';
     include("includes/metatags.html");
+    include("PHPMailer/PHPMailerAutoload.php");
     include("PHPMailer/class.phpmailer.php");
     include("PHPMailer/class.smtp.php");
 
@@ -55,13 +56,21 @@
    function sendMail($email, $pw) {
 
        $mail = new PHPMailer;
+
+       $mail->isSMTP();
+//       $mail->Host = 'smtp.gmail.com';
+//       $mail->SMTPAuth = true;
+//       $mail->Username = 'foreverlovegroup13@gmail.com';
+//       $mail->Password = 'softwareproject1';
+//       $mail->SMTPSecure = 'tls';
+//       $mail->Port = 465;
+
        $mail->From = "noreply@foreverlove.ddns.net";
        $mail->FromName = "Forever Love";
        $mail->addAddress($email);
-       $mail->Subject = "Reset Password";
+       $mail->Subject = "Reset Password";;
        $mail->Body = "You have requested to reset you password.\n
                     This is your new password to log in: $pw \n\n Once logged in please go to Settings -> Update password to set your own password";
-       $mail->IsSMTP();
 
        if(!$mail->send()) {
            return $mail->ErrorInfo;
@@ -99,6 +108,9 @@
                 <div class = "panel panel-default">
                     <div class = "panel-body">
 
+                        <p>Please enter the email address you would like the reset password instructions to be sent to.<br><br>
+                            Note: Email may be sent to spam folder</p><br><br>
+
                              <form id="reset_password" class="form-horizontal" role="form" method="post">
                                  <fieldset>
                                      <div class="form-group" id="email_group">
@@ -127,7 +139,6 @@
                             $uid = UserServiceMgr::getUserIdFromEmail($_POST['email']);
                             $where = "user_id = '".$uid."'";
 
-                            $success = sendMail($email, $pw);
 
                             $success = DB::getInstance()->update('registration_details', $where , $changes);
                             if ($success) {

@@ -25,7 +25,6 @@
     $uid;
     $admin;
 
-
     if(isset($_SESSION['permissions'])){
         if($_SESSION['permissions'] == "admin"){
             $admin = true;
@@ -46,6 +45,9 @@
                 $admin = false;
             }
         }
+    }
+    else{
+        echo 'unset permissions';
     }
 
         $images = ImageService::getImages($uid);

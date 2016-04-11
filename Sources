@@ -5,7 +5,6 @@ IMAGES
 - background image(all pages) - http://www2.psd100.com/ppp/2013/09/11/1Subtle-Blurred-Glowing-Backgrounds-Set-0911052934.jpg
 - logo: (edited with paint) - http://eskipaper.com/images/wonderful-black-wallpaper-1.jpg
 - default profile pic - https://www.drupal.org/files/profile_default.png
-- profile page ticks & crosses - http://i.istockimg.com/file_thumbview_approve/13980715/3/stock-illustration-13980715-check-mark-tick-and-cross.jpg
 Homepage options:
 - profile: https://40.media.tumblr.com/358bfc466637037bb1b92cbfa0eea88b/tumblr_npt6qfEVwe1s5u2cno1_1280.jpg
 - messages: https://s-media-cache-ak0.pinimg.com/236x/69/6c/5d/696c5d9f6e988bdbbc10d170a794ec8a.jpg
@@ -22,14 +21,112 @@ Contact Options:
 - email: https://farm4.staticflickr.com/3079/3160636432_aac350cea8_o.jpg
 
 Sample images:
-    ("0"=>"https://pearlsofprofundity.files.wordpress.com/2014/01/people-thinking-1a.jpg", "1"=> "http://thirstyturtletimes.com/wp-content/uploads/2013/02/Ravens-undecided.jpg", "2"=> "http://templates.elearningbrothers.com/files/2011/01/athletic_people_images.png", "3"=> "http://blogs-images.forbes.com/travisbradberry/files/2014/10/Toxic_people1.jpg",
-        "4"=> "http://all4desktop.com/data_images/original/4240423-people.jpg", "5"=> "https://c1.staticflickr.com/3/2823/9501964248_a388be25a8.jpg", "6"=> "https://static.pexels.com/photos/1990/man-person-people-emotions.jpg",
-        "7"=> "https://pearlsofprofundity.files.wordpress.com/2014/01/people-thinking-1a.jpg", "8"=> "https://c2.staticflickr.com/8/7151/6424464061_de9d36f647_b.jpg", "9"=> "http://thirstyturtletimes.com/wp-content/uploads/2013/02/Ravens-undecided.jpg",
-        "10"=> "http://templates.elearningbrothers.com/files/2011/01/athletic_people_images.png", "11"=> "http://www.dogoilpress.com/data/wallpapers/6/FDS_377793.jpg", "12"=> "http://all4desktop.com/data_images/original/4240423-people.jpg",
-        "13"=> "", "14"=> "http://templates.elearningbrothers.com/files/2011/01/athletic_people_images.png",
-        "15"=> "http://cdn.playbuzz.com/cdn/2c9b6d1a-61df-4c7a-8d46-6824b5603684/f31e88ef-97df-419d-9414-b1a662266c8e.jpg",
 
-        harry potter: http://www.slashfilm.com/75-photos-harry-potter-and-the-order-of-the-phoenix/
+
+frenchy:        https://s-media-cache-ak0.pinimg.com/236x/f4/37/ce/f437ceb80c4d296b773f185714fe9092.jpg
+                http://www.gunaxin.com/wp-content/uploads/2013/08/a98660_french_people5-480x335.jpg
+                http://i.dailymail.co.uk/i/pix/2012/01/26/article-0-1177100B000005DC-645_634x483.jpg
+phoebe:         https://upload.wikimedia.org/wikipedia/en/f/f6/Friendsphoebe.jpg
+                http://img.emol.com/2010/04/22/File_201042212153.jpg
+                http://images6.fanpop.com/image/photos/37600000/Phoebe-Buffay-friends-37612777-660-495.jpg
+                http://cdn.playbuzz.com/cdn/368252fe-2c30-46ab-8c9f-1142a97d9802/122b0e3e-19c0-45eb-9c3a-391cd81f5c3e.jpg
+                http://sites.psu.edu/goodsonpassionblog/wp-content/uploads/sites/768/2013/01/friends-phoebe.jpg
+linda:          https://upload.wikimedia.org/wikipedia/commons/8/84/Linda_Cardellini_Deauville_2011.jpg
+                http://vignette4.wikia.nocookie.net/ideas/images/2/21/Linda-cardellini.jpg/revision/latest?cb=20150204000031
+rita:           http://assets.rollingstone.com/assets/2013/article/rita-ora-joins-fifty-shades-of-grey-cast-20131202/13647/_original/1035x755-20131202-ritaora-x1800-1386026084.jpg
+                http://fullhdpictures.com/wp-content/uploads/2016/03/Rita-Ora-Images.jpg
+                http://static.independent.co.uk/s3fs-public/thumbnails/image/2015/10/23/03/rita-ora-rex.jpg
+                http://www1.pictures.zimbio.com/bg/Rita+Ora+s+KISS+jumper+k_vyMo_xYj8l.jpg
+                http://i.dailymail.co.uk/i/pix/2013/03/31/article-2301933-1905163F000005DC-372_634x477.jpg
+elton:          http://nepascene.com/wp-content/uploads/2016/03/elton-john-giant-center-hershey.jpg
+                http://i.telegraph.co.uk/multimedia/archive/02660/eltonJohn_2660332b.jpg
+                http://i.telegraph.co.uk/multimedia/archive/02151/davegweneltonget_2151635i.jpg
+                http://media1.popsugar-assets.com/files/2013/02/08/0/192/1922398/703c272dc6e1f27f_162589208.xxxlarge/i/Elton-John-sandwiched-between-Miley-Cyrus-Kelly-Osbourne.jpg
+jLo:            http://i2.cdn.turner.com/cnnnext/dam/assets/150727074426-restricted-jennifer-lopez-birthday-0727-super-169.jpg
+                http://marieclaire.media.ipcdigital.co.uk/11116/00008c82b/2ecf_orh100000w646/jennifer-lopez-LANDSCAPE.jpg
+                http://cos.h-cdn.co/assets/15/19/980x1470/gallery-1431122659-gty-jennifer-lopez-01-150508.jpg
+                http://assets.nydailynews.com/polopoly_fs/1.1401606.1374100151!/img/httpImage/image.jpg_gen/derivatives/article_970/62551035.jpg
+                http://img2-1.timeinc.net/people/i/2015/news/151116/remini-lopez-01-800.jpg
+                http://media4.popsugar-assets.com/files/2012/11/46/5/192/1922398/b58b15eda379869e_jlo_nightclub_2_wenn4178386.xxxlarge/i/Jennifer-Lopez-Casper-Smart-were-toasted-friends.jpg
+miley:          http://www4.pictures.zimbio.com/bg/Miley+in+red+L6TEFy7DSptl.jpg
+                http://images2.fanpop.com/image/photos/9300000/miley-cyrus-and-demi-lovato-friends-miley-cyrus-9311121-420-300.jpg
+                http://cdn02.cdn.justjared.com/wp-content/uploads/2008/09/miley-friend/miley-cyrus-friend-10.jpg
+                http://favim.com/orig/201107/30/bob-miley-cat-cyrus-friends-miau-Favim.com-117184.jpg
+marilyn:        http://a3.files.biography.com/image/upload/c_fit,cs_srgb,dpr_1.0,h_1200,q_80,w_1200/MTE5NTU2MzE2MzIyMTA0ODQz.jpg
+                https://upload.wikimedia.org/wikipedia/commons/8/8d/Marilyn_Monroe_photo_pose_Seven_Year_Itch.jpg
+eminem:         http://thesource.com/wp-content/uploads/2016/03/eminem-5.jpg
+                http://www.teambackpack.net/wp-content/uploads/Eminem2.jpg
+                http://assets.rollingstone.com/assets/images/story/eminem-q-a-exclusive-the-making-of-the-marshall-mathers-lp-2-20131101/110113-eminem-623-1383326611.jpg
+                http://img1.rnkr-static.com/user_node_img/103/2051727/870/snoop-dogg-recording-artists-and-groups-photo-u57.jpg
+                http://www.eonline.com/eol_images/Entire_Site/2014219/rs_560x415-140319150322-1024.50cent-eminem.cm.31914.jpg
+ross:           http://nowhitenoise.com/wp-content/uploads/2013/07/ross-geller.jpg
+                http://hellogiggles.com/wp-content/uploads/2015/06/08/33-of-the-most-memorable-ross-geller-moments-on-friends-34.jpg
+                https://qph.is.quoracdn.net/main-qimg-1496a880445b53791f9471cb129389ab?convert_to_webp=true
+                http://www.hercampus.com/sites/default/files/2014/11/09/Friends-season-10-014.jpg
+rachel:         http://cdn1.theodysseyonline.com/files/2015/02/01/635584233550638565-1596965914_Rachel-Green-rachel-green-34203848-1024-768.png
+                http://lovelace-media.imgix.net/uploads/914/c6476130-e889-0132-c055-0a13eebe068d.jpg?w=684&h=513&fit=crop&crop=faces&auto=format&q=70
+                https://pbs.twimg.com/profile_images/452631409128378368/0rKlBCfq.jpeg
+                https://s-media-cache-ak0.pinimg.com/236x/f1/df/00/f1df00a209b3bf1ee9570ce32a20b0f6.jpg
+wonda:          http://media.boingboing.net/wp-content/uploads/2015/06/WR-7.jpg
+                http://science-all.com/image.php?pic=/images/winona-ryder/winona-ryder-02.jpg
+russell:        https://upload.wikimedia.org/wikipedia/commons/e/ee/Russell_Crowe.jpg
+                http://www.gannett-cdn.com/-mm-/ac1394dbdcca6a36cbf486633b129cd813095ac3/r=x404&c=534x401/local/-/media/USATODAY/GenericImages/2013/05/31/1370032655000-054504GD012-Russell-Crow-1305311638_4_3.jpg
+                https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2015/11/5/1446744553401/9293f89d-b42b-4727-bfba-e4762bb3979d-2060x1236.jpeg?w=620&q=55&auto=format&usm=12&fit=max&s=da61fe14efcd11c3e13961a2ec36e70f
+pat:            http://vignette4.wikia.nocookie.net/fatherted/images/0/0b/Pat_Mustard.jpg/revision/latest?cb=20140915105240
+                http://media.balls.ie/uploads/2012/02/tumblr_lj52ixmZ3G1qdgm48o1_500.png
+                http://patmustard.weebly.com/uploads/2/6/1/0/26106981/1417772_orig.jpg
+sarah:          http://media2.popsugar-assets.com/files/2014/07/04/125/n/1922398/28fa5c0f1756fe6a_10534991_634192576688738_498993040_nScjMqa.xxxlarge/i/Sarah-Hyland-her-friends-created-Independence-Day-girl-group.jpg
+                http://i4.cdnds.net/14/10/618x618/swift-hyland-new-year.jpg
+harry:          http://hellogiggles.com/wp-content/uploads/2014/07/31/harrypotter4.jpg
+                http://cdn.playbuzz.com/cdn/23651551-a1f5-47ad-8709-f3535f0defaf/89ff10dd-aa41-4d17-ae8f-835281ebd3fd.jpg
+                http://vignette1.wikia.nocookie.net/harrypotter/images/c/c1/Harry%2Bpotter-Harry_Potter_HP4_01.jpg/revision/latest?cb=20120207172914
+                http://screenrant.com/wp-content/uploads/harry-potter-play-jk-rowling.jpg
+                http://ichef.bbci.co.uk/news/976/cpsprodpb/947C/production/_86921083_danielrad.jpg
+jayz:           http://a2.files.biography.com/image/upload/c_fill,cs_srgb,dpr_1.0,g_face,h_300,q_80,w_300/MTE5NTU2MzE2MTA0MjYzMTc5.jpg
+                http://science-all.com/image.php?pic=/images/jay-z/jay-z-03.jpg
+                http://www.rapbasement.com/wp-content/uploads/2016/03/jayz.jpg
+                http://www.mtv.com/content/ontv/vma/2014/photos/flipbooks/14-show-highlights/beyonce-jayz-getty-454109532.jpg
+                http://static.spin.com/files/styles/style620_413/public/140812-beyjay-trl.jpg
+Minnie:         http://www.disneyclips.com/imagesnewb/images/minnieface2.gif
+                https://upload.wikimedia.org/wikipedia/en/6/67/Minnie_Mouse.png
+John:           https://pbs.twimg.com/profile_images/661041286942584832/a5SW7Qz5.jpg
+                https://upload.wikimedia.org/wikipedia/commons/a/a0/United_States_Champion_John_Cena_2015_(cropped).jpg
+                http://cdn3.whatculture.com/wp-content/uploads/2015/05/john-cena-heel-turn-600x300.jpg
+Beyonce:        http://cdn.playbuzz.com/cdn/0bc30d0e-ddc0-419a-8476-445417e06631/82247003-1ca1-4f83-b8a7-4e2819ec16f8.jpg
+                https://static-secure.guim.co.uk/sys-images/Arts/Arts_/Pictures/2013/4/24/1366799069485/Beyonce-performs-on-her-M-010.jpg
+                http://cdn.playbuzz.com/cdn/f646d173-985b-4003-b586-3f98854bdf06/1ce39ccc-7500-47f6-ba0e-c294b00dde6f.jpg
+                http://i51.tinypic.com/nn66iq.jpg
+                https://img.buzzfeed.com/buzzfeed-static/static/2014-10/28/15/enhanced/webdr01/enhanced-buzz-wide-17306-1414524499-60.jpg
+                http://img.wennermedia.com/480-width/1392308656_beyonce-knowles-kelly-rowland-birthday-zoom.jpg
+Louise:         https://pbs.twimg.com/profile_images/2029688967/Betty_Photo.jpg
+                http://static.parade.com/wp-content/uploads/2014/01/betty-white-portrait-ftr.jpg
+                https://pbs.twimg.com/profile_images/1125351141/BettyWhite1.jpg
+                http://www.snopes.com/media/graphics/white.jpg
+Rob:            http://i.imgur.com/vNlsRbF.jpg
+                http://science-all.com/image.php?pic=/images/batman/batman-06.jpg
+                http://cdn-static.denofgeek.com/sites/denofgeek/files/2015/10/batman-yellow-west.jpg
+                http://comicsalliance.com/files/2012/07/batman1to1.jpg
+jared:          http://a3.files.biography.com/image/upload/c_fill,cs_srgb,dpr_1.0,g_face,h_300,q_80,w_300/MTE5NDg0MDU1NDMxMzE3MDA3.jpg
+                http://bestin.ua/static/uploads2/2014/may/30/Jared/loptimum-france-magazine-with-jared-leto-5.jpg
+                http://media.gq.com/photos/567a2c0ebc00c1ec1f1400c2/master/pass/GQ1226JaredLeto8.jpg
+                http://www2.pictures.zimbio.com/gi/Weekly+Bucket+7Ct1LuBIAJVl.jpg
+                http://www1.pictures.zimbio.com/pc/Jared+Leto+Jared+Leto+Terry+Richardson+Out+OQLmeeIAXjVl.jpg
+                http://41.media.tumblr.com/48ae5b7faf58737facb1ec48a8574ba7/tumblr_mfymp8mMgM1qzc9e9o1_1280.jpg
+fred:           https://upload.wikimedia.org/wikipedia/commons/8/80/Farmer,_Nicaragua.jpg
+                http://cdn.modernfarmer.com/wp-content/uploads/2015/07/Farmer-Lee-Jones_Infront-of-tractor_08222014.jpg
+                https://regmedia.co.uk/2015/05/01/free_range_chicken_and_farmer_photo_via_shutterstock.jpg?x=1200&y=794
+                http://cdn.images.express.co.uk/img/dynamic/128/590x/Roger-farmer-cpws-441815.jpg
+                https://static-secure.guim.co.uk/sys-images/Lifeandhealth/Pix/pictures/2014/1/10/1389367325081/Farmer-PJ-Ryan-from-Newpo-008.jpg
+Lily:           https://scstylecaster.files.wordpress.com/2015/04/lily-collins.jpg
+                https://scstylecaster.files.wordpress.com/2015/04/x4811.jpg
+                http://images6.fanpop.com/image/photos/36500000/xxMelissa123xx-image-xxmelissa123xx-36543852-2458-3000.jpg
+                https://themortalinstrumentssource.files.wordpress.com/2012/03/nylon_scarpetta_coach_3-6-12_amadekwelcollinscallen-435x580.jpg
+                http://i.dailymail.co.uk/i/pix/2013/10/18/article-2466421-18B61E8200000578-371_634x879.jpg
+                https://s-media-cache-ak0.pinimg.com/236x/f2/76/31/f27631f9495ac14f561e6c7d5ecfc570.jpg
+                https://s-media-cache-ak0.pinimg.com/736x/1c/fe/32/1cfe322b55b52faf6902f91b01677057.jpg
+                http://cdni.condenast.co.uk/810x540/k_n/lily-collins2_glamour_14aug13_pa_b_810x540.jpg
+
+
 
 OTHER:
 bootstrap css, js & fonts: http://getbootstrap.com/getting-started/#template

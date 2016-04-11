@@ -17,7 +17,7 @@
 
 
     $uid;
-    $admin;
+    $admin = false;
     $update;
     $regOrUpdate;
     $unselected = false;
