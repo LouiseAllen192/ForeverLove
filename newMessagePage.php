@@ -10,8 +10,14 @@
     <title>New Message</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/custom-base-page.css" rel="stylesheet">
-    <?php include("includes/fonts.html"); ?>
-
+    <?php include("includes/fonts.html");
+    if(!empty($_POST))
+    {   $uid = $_SESSION['user_id'];
+        $msgMgr = new MessageMgr($uid);
+        $convoID = $msgMgr->sendNewMessage($_POST);
+        if($convoID != false)
+            header("Location: conversationPage.php?$convoID#bottom");
+    }?>
 </head>
 
 <body class="full">
@@ -37,10 +43,9 @@
                     <?php
                     if(!empty($_POST))
                     {
-                        //$uid = 1; //temp - need to get from global array
-                        $uid = $_SESSION['user_id'];
-                        $msgMgr = new MessageMgr($uid);
-                        $msgMgr->sendNewMessage($_POST);
+                        echo "<div class=\"alert alert-danger\">
+                                  Message Not Sent - User Does Not Exist.
+                              </div>";
                     }
                     if(!empty($_SERVER['QUERY_STRING']))
                     {
@@ -61,7 +66,7 @@
                     <br><br>"
                     ?>
                 <div style = "text-align: left">
-                    <a href="messagesPage.php"><h3>Back To Message Page</h3></a>
+                    <a href="messagesPage.php"><h3>Back To Messages Page</h3></a>
                 </div>
                 </p>
             </div>

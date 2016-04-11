@@ -82,6 +82,7 @@
                                   </div>";
                     ?>
                 </p>
+                <a name="bottom"></a>
                 <div style = "text-align: left">
                     <a href="existingConversationPage.php"><h3>Back To Conversation List</h3></a>
                 </div>
@@ -89,7 +90,6 @@
             </div>
         </div>
     </div>
-    <a name="bottom"></a>
 </div>
 <?php include("includes/footer.html"); ?>
 </body>

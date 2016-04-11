@@ -39,10 +39,8 @@ class MessageMgr
         $rec = ($GET["recipient"]);
         $date = date('Y-m-d H:i:s');
         $reciever_id = $this->doesRecipientExist($rec);
-        if(!($reciever_id))
-            echo "<div class=\"alert alert-danger\">
-                      Message Not Sent - User Does Not Exist.
-                  </div>";
+        if(!($reciever_id)) //if reciver doesn't exist
+            return false;
         else
         {
             $convo_id = $this->doesConversationExist($reciever_id);
@@ -51,9 +49,7 @@ class MessageMgr
                 $convo_id = $this->createConversation($reciever_id, 1);
             }
             DB::getInstance()->insert('messages', ['Conversation_id' => $convo_id, 'Sender_id' => $this->userID, 'Recipient_id'  => $reciever_id, 'Date_Received' => $date, 'Message_Text' => $GET["message"], 'seen' => 0]);
-            echo "<div class=\"alert alert-success\">
-                      Message Sent Succesfully.
-                  </div>";
+            return $convo_id;
         }
     }
 
@@ -67,26 +63,49 @@ class MessageMgr
                 $tempUID = $convos[$i]->user2_id;
             else
                 $tempUID = $convos[$i]->user1_id;
-            $convoPartner = DB::getInstance()->query("SELECT username FROM registration_details WHERE user_id = '$tempUID'")->results();
+            $convoPartner = DB::getInstance()->query("SELECT * FROM registration_details WHERE user_id = '$tempUID'")->results();
             $messagedUsers[$i]=$convoPartner[0]->username;
+            $otherUID = $convoPartner[0]->user_id;
             $tempConvoID = $convos[$i]->conversation_id;
             $linkString = "conversationPage.php?".$tempConvoID."#bottom";
             $vis = $this->isProfileVisible($tempConvoID);
             $unreadMessagesArray = DB::getInstance()->query("SELECT COUNT(*) as num FROM messages WHERE recipient_id = '$this->userID' AND seen = '0' AND conversation_id = $tempConvoID")->results();
             $unreadMessages = $unreadMessagesArray[0]->num;
+            $image = DB::getInstance()->query("SELECT image_path FROM images WHERE user_id = $otherUID && image_id = '1'")->results()[0]->image_path;
             if($vis)//if not a blind date
             {
                 if ($unreadMessages == 0) //if there's no messages waiting to be read
-                    echo "<a href= \"$linkString\">$messagedUsers[$i]</a><br><br>";
+                    echo " <div class=\"row\">
+                                <div class=\"well well-lg\">
+                                    <a href= \"$linkString\">
+                                        <div class=\"media - left\">
+                                            <img height=\"78\" width=\"78\" class=\"media - object\" src=\"$image\"/>
+                                        </div>$messagedUsers[$i]</a>
+                                </div>
+                           </div>";
+                    //echo "<a href= \"$linkString\">$messagedUsers[$i]</a><br><br>";
                 else
-                    echo "<a href= \"$linkString.\">$messagedUsers[$i]<span class=\"badge\">$unreadMessages</span></a><br><br>";
+                    echo " <div class=\"row\">
+                                <div class=\"well well-sm\">
+                                    <a href= \"$linkString\">
+                                        <div class=\"media - left\">
+                                            <img height=\"78\" width=\"78\" class=\"media - object\" src=\"$image\"/>
+                                        </div>$messagedUsers[$i]<br><br><br><span class=\"badge\">$unreadMessages</span>
+                                    </a>
+                                </div>
+                           </div>";
+                    //echo "<a href= \"$linkString.\">$messagedUsers[$i]<span class=\"badge\">$unreadMessages</span></a><br><br>";
             }
-            else
+            else //if blind date
             {
                 if ($unreadMessages == 0)
-                    echo "<a href= \"$linkString\"Blind Date</a><br><br>";
+                    echo "<div class=\"well well-lg\">
+                            <a href= \"$linkString\">Blind Date</a>
+                           </div>";
                 else
-                    echo "<a href= \"$linkString\">Blind Date<span class=\"badge\">$unreadMessages</span></a><br><br>";
+                    echo "<div class=\"well well-sm\">
+                            <a href= \"$linkString\">Blind Date<br><br><br><span class=\"badge\">$unreadMessages</span></a>
+                            </div>";
             }
         }
         if($i == 0)
@@ -342,14 +361,14 @@ class MessageMgr
         $acctype = $values['account_type'];
         if($acctype == 'Free')
             return "You must be a premium member to access Blind Date
-                    <a href =\"updateMembership.php\"><h3>Take Me To Upgrade Membership Page</h3></a></div>";
+                    <a href =\"upgradeMembership.php\"><h3>Take Me To Upgrade Membership Page</h3></a>";
         else if (!empty($alreadyIn))
             return "We are working on finding you a match at present. Please be patient.";
         else if($currentBlindDate)
             return "You currently have a blind date in your existing conversations. You must either reveal your profile to your partner or end the conversation to get another.";
         else if($seeking == 1 || ($gender == 1 || $gender == 4))
             return "Gender And/Or Seeking Details Not Specified For Your Profile. You Must Update Them Before You Can Participate In Blind Date.
-                       <a href =\"updatePreferencesPage.php\"><h3>Take Me To Update Preferences Page</h3></a></div>";
+                       <a href =\"updatePreferencesPage.php\"><h3>Take Me To Update Preferences Page</h3></a>";
         else
             return "";
     }
