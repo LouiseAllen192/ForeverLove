@@ -9,10 +9,17 @@
 
     $report_id = $_GET['report_id'];
     $db = DB::getInstance();
+    if(isset($_POST['resolved_button'])){
+        $db->update('banned_reports', 'report_id = '.$report_id, ['resolved' => '1']);
+    }
+    else if(isset($_POST['unresolved_button'])){
+        $db->update('banned_reports', 'report_id = '.$report_id, ['resolved' => '0']);
+    }
     $report = $db->get('banned_reports', ['report_id', '=', $report_id])->results()[0];
     $priorities = SearchServiceMgr::getChoices('priority');
     $reporter = UserServiceMgr::getUsername($report->reporter_id);
     $reportee = UserServiceMgr::getUsername($report->reportee_id);
+
     ?>
     <title>Report Page</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -59,6 +66,11 @@
                             <div class="panel-body">
                                 <div class="panel panel-primary">
                                     <div class="panel-heading text-center">
+                                        Status: <?php if($report->resolved){echo 'Resolved';}else{echo 'Unresolved';}?>
+                                    </div>
+                                </div>
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading text-center">
                                         Priority: <?php echo $db->query("SELECT choice FROM priority WHERE id = '$report->priority'")->results()[0]->choice;?>
                                     </div>
                                 </div>
@@ -78,6 +90,20 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="col-xs-offset-4">
+                            <form class="form-horizontal" method="post">
+                                <?php
+                                if($report->resolved){?>
+                                    <input class="btn btn-info center-inline" id="unresolved_button" name="unresolved_button" type="submit" value="Mark Unresolved">
+                                    <?php
+                                }
+                                else {?>
+                                    <input class="btn btn-info center-inline" id="resolved_button" name="resolved_button" type="submit" value="Mark Resolved">
+                                    <?php
+                                }
+                                ?>
+                            </form>
                         </div>
                     </div>
                 </div>

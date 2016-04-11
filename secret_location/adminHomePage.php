@@ -10,6 +10,7 @@
     $banned = DB::getInstance()->query("SELECT DISTINCT user_id FROM banned_users WHERE permanent = '1'")->count();
     $suspended = DB::getInstance()->query("SELECT DISTINCT user_id FROM banned_users WHERE permanent = '0'")->count();
     $unresolved = DB::getInstance()->query("SELECT report_id FROM banned_reports WHERE resolved = '0'")->count();
+    $resolved = DB::getInstance()->query("SELECT report_id FROM banned_reports WHERE resolved = '1'")->count();
     if($unresolved == 0){$unresolved = '';}
     ?>
     <title>Admin HomePage</title>
@@ -40,7 +41,7 @@
                         <div class="dummy"></div>
                         <a href="viewReportsPage.php" class="thumbnail">
                             <div class="h4">
-                                Reports<span class="badge badge-notify"><?php echo $unresolved;?></span>
+                                Unresolved Reports<span class="badge badge-notify"><?php echo $unresolved;?></span>
                             </div>
                         </a>
                     </div>
@@ -65,6 +66,14 @@
                         <a href="viewAllPage.php" class="thumbnail">
                             <div class="h4">
                                 View All Users
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-sm-3 col-xs-6">
+                        <div class="dummy"></div>
+                        <a href="viewResolvedReportsPage.php" class="thumbnail">
+                            <div class="h4">
+                                Resolved Reports<span class="badge"><?php echo $resolved;?></span>
                             </div>
                         </a>
                     </div>

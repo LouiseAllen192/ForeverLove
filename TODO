@@ -15,10 +15,6 @@ Message Services:
 	- Find and eliminate bug that's occasionally creating duplicate conversations (haven't seen in a while...)
 	- Handle XSS attacks
 	- Find out how to let admin view messages in a conversation
-	
-Search Services:
-    - Redirect with results upon enter or click search icon
-    - Get search bar to work when logged in as admin ?????????
 
 Admin Services:
-    -  ...
+    - Get search bar to work when logged in as admin
