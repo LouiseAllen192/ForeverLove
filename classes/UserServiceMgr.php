@@ -170,12 +170,15 @@ class UserServiceMgr
 
 
     public static function validateCreditCard($post){
-
-        $name = $post['fullname'];
-        $ccn = $post['ccNumber'];
-        $m = $post['month'];
-        $y = $post['year'];
-        $sec = $post['security'];
+//        $values = array (
+//        $fullname = $post['fullname'],
+//        $ccNumber = $post['ccNumber'],
+//        $month = $post['month'],
+//        $year = $post['year'],
+//        $security = $post['security'] );
+//
+//        $c = curl_init("http://amnesia.csisdmz.ul.ie/4014/cc.php?".http_build_query($values));
+//        curl
 
         echo '<br><br><br><br><br><br><br>';
         foreach($post as $key=>$value){
@@ -184,8 +187,7 @@ class UserServiceMgr
 
         return true;
 
-//        header('Location: cc.php?fullname='.$name.'&ccNumber='.$ccn.'&month='.$m.'&year='.$y.'&security='.$sec);
-//        die();
+//
     }
 
 
