@@ -111,7 +111,7 @@ class MessageMgr
         if($i == 0)
             echo "<div class=\"alert alert-danger\">
                    No Conversations Found.
-                  </div>";
+                  </div><br><br><br><br><br><br><br><br>";
     }
 
     public static function testFunction($changes)

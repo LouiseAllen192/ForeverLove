@@ -2,22 +2,13 @@ body {
     margin-top: 50px;
 }
 .full {
-    background: url('http://gdurl.com/gLKH') no-repeat center center fixed;
+    background: url('http://gdurl.com/1DKh') no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
     -o-background-size: cover;
 }
 
-form{
-    width: 50%;
-    display: inline-block;
-    text-align: center;
-}
-
-.navbar-nav{
-    margin-top: 30px;
-}
 
 .profile-pic img{
     margin: 0 auto;
@@ -80,7 +71,6 @@ hr {
     letter-spacing: 1px;
 }
 
-
 footer p {
     margin: 0;
     padding: 10px 0;
@@ -90,28 +80,49 @@ footer p {
     font-size: x-small;
 }
 
-table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
+
+.error{
+    font-size: 12px;
+    color: red;
 }
-th, td {
-    padding: 5px ;
-    text-align: left;
+@media screen and (min-width:1200px) {
+    .box:after {
+        content: '';
+        display: table;
+        clear: both;
+    }
 }
 
-.dummy {
-    margin-top: 100%;
-}
-.thumbnail {
-    position: absolute;
-    top: 15px;
-    bottom: 0px;
-    left: 15px;
-    right: 0px;
-    text-align:center;
-    padding-top:calc(50% - 35px);
+
+.logged-in{
+    color: white;
+    margin-top: 10px;
+    margin-left: 20px;
+    font-size: small;
+    font-family: Arial;
+    text-transform: none;
+    font-weight: 100;
 }
 
+.nav-text li{
+    margin:0px;
+    line-height: 0px;
+    margin-top:0px;
+}
+
+.nav-text ul{
+    margin:0px;
+    line-height: 0px;
+    margin-top:0px;
+}
+
+.navbar-nav{
+    margin-top: 5px;
+    margin:0px;
+    line-height: 0px;
+    margin-top:10px;
+    padding-bottom: 0px;
+}
 
 /*SEARCH BAR START*/
 #input_search{
@@ -158,32 +169,14 @@ th, td {
 
 .badge{
     position:relative;
-    bottom: 16px;
+    bottom: 30px;
 }
 
 .badge-notify{
-    background:red;
+    background:gold;
 }
 
-.error{
-    font-size: 12px;
-    color: red;
-}
-
-@media screen and (min-width:1200px) {
-    .box:after {
-        content: '';
-        display: table;
-        clear: both;
-    }
-}
-
-.logged-in{
-    color: white;
-    margin-top: 10px;
-    margin-left: 20px;
-    font-size: small;
-    font-family: Arial;
-    text-transform: none;
-    font-weight: 100;
+.panel-default{
+    width: 60%;
+    align-content: center;
 }

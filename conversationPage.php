@@ -84,7 +84,7 @@
                 </p>
                 <a name="bottom"></a>
                 <div style = "text-align: left">
-                    <a href="existingConversationPage.php"><h3>Back To Conversation List</h3></a>
+                    <a href="existingConversationPage.php" class="btn btn-info" role="button"><span class="glyphicon glyphicon-chevron-left"></span> Back To Conversation List</a>
                 </div>
                 <?php include("includes/navbar.php"); ?>
             </div>

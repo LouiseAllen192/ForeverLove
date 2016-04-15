@@ -28,8 +28,8 @@
 
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2 class="page-header">Messages</h2>
-                    </div>
+                        <h2 class="page-header">Messages</h2><br>
+                    </div><br><br>
                 </div>
                 <br><br>
                 <div class="row">
@@ -49,7 +49,7 @@
                     <div class="col-lg-6 col-sm-6 text-center">
                         <a href="existingConversationPage.php"><h3>Existing Conversation</h3></a>
                     </div>
-                </div>
+                </div><br><br><br><br>
 
             </div>
         </div>
