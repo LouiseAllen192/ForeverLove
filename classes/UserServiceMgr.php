@@ -170,24 +170,20 @@ class UserServiceMgr
 
 
     public static function validateCreditCard($post){
-//        $values = array (
-//        $fullname = $post['fullname'],
-//        $ccNumber = $post['ccNumber'],
-//        $month = $post['month'],
-//        $year = $post['year'],
-//        $security = $post['security'] );
-//
-//        $c = curl_init("http://amnesia.csisdmz.ul.ie/4014/cc.php?".http_build_query($values));
-//        curl
+        $values = array (
+        'fullname' => $post['fullname'],
+        'ccNumber' => $post['ccNumber'],
+        'month' => $post['month'],
+        'year' => $post['year'],
+        'security' => $post['security'] );
 
-        echo '<br><br><br><br><br><br><br>';
-        foreach($post as $key=>$value){
-            echo $key.'---'.$value.'<br>';
-        }
+        $ch = curl_init("http://amnesia.csisdmz.ul.ie/4014/cc.php?".http_build_query($values));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $result = curl_exec($ch);
+        curl_close($ch);
 
-        return true;
+        return $result; //1 for accept, 0 for fail
 
-//
     }
 
 

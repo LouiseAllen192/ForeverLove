@@ -82,7 +82,17 @@
 </head>
 
 <body class="full">
-<?php if($admin){include("includes/navbarAdmin.html");} else{include("includes/navbar.php");} ?>
+<?php
+
+if($admin){include("includes/navbarAdmin.html");}
+else {
+    if ($update) {
+        include("includes/navbarRegistration.php");
+    } else {
+        include("includes/navbar.php");
+    }
+}
+?>
 
 <!--Main page content-->
 

@@ -34,7 +34,7 @@
     }
 
     if(!empty($_POST) && isset($_POST['payment_submit_button']) && !($errors)){
-        if(UserServiceMgr::validateCreditCard($_POST)){
+        if(UserServiceMgr::validateCreditCard($_POST) == 1){
             $length = $_POST['length'];
             UserServiceMgr::registerUpgradeAccountType($uid, $length);
             header('Location: updatePreferencesPage.php');
@@ -53,7 +53,9 @@
 </head>
 
 <body class="full">
-<?php include("includes/navbar.php"); ?>
+
+<?php
+include("includes/navbarRegistration.php"); ?>
 
 <!--Main page content-->
 
