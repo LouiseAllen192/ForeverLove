@@ -1,12 +1,6 @@
 
 User Services:
 
-    regAccTypePage:
-    - implement functionality to check credit card info against server
-
-    ProfilePage:
-    - fix profile image size / pixelated images
-
     Image gallery:
     - fix error[3] partial upload error on large images
 
