@@ -159,3 +159,7 @@ footer p {
     border: solid 1px #761c19;
 
 }
+
+.buttons-left{
+    float:left;
+}

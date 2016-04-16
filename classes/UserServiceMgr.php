@@ -176,7 +176,6 @@ class UserServiceMgr
         'month' => $post['month'],
         'year' => $post['year'],
         'security' => $post['security'] );
-
         $ch = curl_init("http://amnesia.csisdmz.ul.ie/4014/cc.php?".http_build_query($values));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $result = curl_exec($ch);
@@ -314,7 +313,7 @@ class UserServiceMgr
             [
                 'tag_line' => [
                     'required' => $required,
-                    'matches' => '/^[a-zA-Z.\\- ,\']{2,256}$/',
+                    'matches' => '/^[^<>]{2,256}$/',
                 ],
                 'city' => [
                     'required' => $required,
@@ -322,7 +321,7 @@ class UserServiceMgr
                 ],
                 'about_me' => [
                     'required' => $required,
-                    'matches' => '/^[a-zA-Z0-9 \\-,.\']{2,256}$/',
+                    'matches' => '/^[^<>]{2,256}$/',
                 ]
             ]);
 

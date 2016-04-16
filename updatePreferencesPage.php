@@ -177,7 +177,7 @@ else {
                         </div>
                         <div class="col-md-offset-4 col-sm-offset-5" id="errors">
                             <span class="<?php if($errors['tag_line'] == 'error_required') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_required">Required...</span>
-                            <span class="<?php if($errors['tag_line'] == 'error_regex') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_regex">Invalid format, must be at least 2 characters ...</span>
+                            <span class="<?php if($errors['tag_line'] == 'error_regex') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_regex">Invalid format<br> - Must contain at least two characters<br> Can not contain characters < or >...</span>
                         </div>
                     </div>
                     <br><br><br>
@@ -242,7 +242,7 @@ else {
                             </div>
                             <div class="col-md-offset-4 col-sm-offset-5" id="errors">
                                 <span class="<?php if($errors['about_me'] == 'error_required') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_required">Required...</span>
-                                <span class="<?php if($errors['about_me'] == 'error_regex') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_required">Invalid format. Valid characters(a-z, A-Z, 0-9, whitespace, ', -) <br> Must have at least two characters...</span>
+                                <span class="<?php if($errors['about_me'] == 'error_regex') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_required">Invalid format<br> - Must contain at least two characters<br> Can not contain characters < or >...</span>
                             </div>
                         </div>
 
@@ -252,10 +252,16 @@ else {
                 </form>
 
                     <br><br>
-                    <br><br>
+
                 </p>
             </div>
+
+        <?php if($update){ ?>
+            <a href="settingsPage.php" class="btn btn-info buttons-left" role="button"><span class="glyphicon glyphicon-chevron-left"></span> Back To Settings Page</a>
+        <?php } ?>
+
         </div>
+
     </div>
 
 </div>

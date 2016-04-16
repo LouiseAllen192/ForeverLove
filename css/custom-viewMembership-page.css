@@ -80,6 +80,10 @@ footer p {
     font-size: x-small;
 }
 
+.buttons-left{
+    float: left;
+}
+
 
 
 .error{
