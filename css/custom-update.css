@@ -163,3 +163,5 @@ footer p {
 .buttons-left{
     float:left;
 }
+
+img { -ms-interpolation-mode: bicubic; }

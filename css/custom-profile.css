@@ -111,6 +111,8 @@ footer p {
     font-size: x-small;
 }
 
+img { -ms-interpolation-mode: bicubic; }
+
 @media screen and (min-width:1200px) {
     .box:after {
         content: '';

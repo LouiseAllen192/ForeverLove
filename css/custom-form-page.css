@@ -18,3 +18,5 @@ form{
     font-size: 12px;
     color: red;
 }
+
+img { -ms-interpolation-mode: bicubic; }

@@ -153,13 +153,13 @@
                                                 <div class="col-md-4"></div>
                                                 <div class="col-md-4">
                                                     <div class="col-md-4">
-                                                        <small class="text-muted">Age&emsp;</small><?php echo calculateAge($dbprf['date_of_birth']); ?>
+                                                        <small class="text-muted">Age </small><?php echo calculateAge($dbprf['date_of_birth']); ?>
                                                     </div><br><br>
                                                     <div class="col-md-4">
-                                                        <small class="text-muted">City&emsp;</small><?php echo $dbprf['city'];?>
+                                                        <small class="text-muted">City </small><?php echo $dbprf['city'];?>
                                                     </div><br><br>
                                                     <div class="col-md-4">
-                                                        <small class="text-muted">Gender&emsp;</small><?php echo $dbprf['gender'];?>
+                                                        <small class="text-muted">Gender </small><?php echo $dbprf['gender'];?>
                                                     </div>
                                                     <div style="clear:both;"><div></div></div>
                                                     <br>

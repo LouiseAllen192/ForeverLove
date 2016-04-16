@@ -84,6 +84,8 @@ footer p {
     float: left;
 }
 
+img { -ms-interpolation-mode: bicubic; }
+
 
 
 .error{

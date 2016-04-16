@@ -180,3 +180,5 @@ footer p {
     width: 60%;
     align-content: center;
 }
+
+img { -ms-interpolation-mode: bicubic; }

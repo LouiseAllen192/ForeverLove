@@ -61,6 +61,8 @@ hr {
     letter-spacing: 1px;
 }
 
+img { -ms-interpolation-mode: bicubic; }
+
 
 footer p {
     margin: 0;

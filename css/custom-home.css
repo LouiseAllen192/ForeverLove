@@ -1,6 +1,6 @@
 
 body {
-    padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    padding-top: 70px;
 }
 
 .nav-text ul{
@@ -135,8 +135,17 @@ li{
     padding: 30px 15px;
     background: rgba(255,255,255,0.6);
 
-
+    height: auto !important; /* real browsers */
+    min-height: 100%; /* real browsers */
 }
+
+.container{
+    position: relative; /* needed for footer positioning*/
+    height: auto !important; /* real browsers */
+    min-height: 100%; /* real browsers */
+}
+
+img { -ms-interpolation-mode: bicubic; }
 
 
 

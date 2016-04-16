@@ -187,6 +187,8 @@ h3{
     margin: 0 auto;
 }
 
+img { -ms-interpolation-mode: bicubic; }
+
 .img-circle{
     width: 60%;
     height: 60%;

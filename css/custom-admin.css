@@ -9,6 +9,8 @@ body {
     -o-background-size: cover;
 }
 
+img { -ms-interpolation-mode: bicubic; }
+
 form{
     width: 50%;
     display: inline-block;
