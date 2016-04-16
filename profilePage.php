@@ -118,96 +118,141 @@
         <div class="row">
             <div class="box">
                 <div class="col-lg-12 text-center">
-                    <br><br><br>
-                    <div class = "row">
 
-                        <div class="col-md-5 col-sm-6 text-center">
-                            <br><br>
-                            <div class="profile-pic"><img src="<?php echo $images['1']?>" class="img-responsive" alt="Profile Picture"></div>
-                            <br><br>
-                        </div>
 
-                        <div class="col-md-5 col-sm-6 text-center">
-                            <div class = "panel panel-default">
-                                <div class = "panel-body">
-                                    <br><br>
-                                    <h1 class="user-name"><?php echo ($user->getUsername());?></h1>
-                                    <hr class="tagline-divider">
-                                    <h2>
-                                        <small>
-                                            <strong><?php echo ($dbprf['tag_line'])?></strong>
-                                        </small>
-                                    </h2>
-                                    <br><br>
-                                    <div class = "row">
-                                        <div class="col-md-4"></div>
-                                        <div class="col-md-4">
-                                            <div class="col-md-4">
-                                                <small class="text-muted">Age&emsp;</small><?php echo calculateAge($dbprf['date_of_birth']); ?>
-                                            </div>
-                                            <br><br>
-                                            <div class="col-md-4">
-                                                <small class="text-muted">City&emsp;</small><?php echo $dbprf['city'];?>
-                                            </div>
-                                            <br><br>
-                                            <div class="col-md-4">
-                                                <small class="text-muted">Gender&emsp;</small><?php echo $dbprf['gender'];?>
-                                            </div>
-                                            <div style="clear:both;"><div></div></div>
-                                            <br><br>
-                                        </div>
-                                        <div class="col-md-4"></div>
-                                    </div>
+                    <div class="col-md-4 col-sm-6 text-center">
+                        <div class="text-center">
+                            <div class="special">
+                                <div class="v-m">
+                                    <div class="profile-pic"><br><img src="<?php echo $images['1']?>" class="img-responsive" alt="Profile Picture"></div>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="col-md-2 col-sm-6 text-center">
-                            <div class = buttons_right>
-                                <?php
-                                if($me == 1){
-                                    echo '<br><a href="updatePreferencesPage.php" class="btn btn-info center-inline" role="button"><span class="glyphicon glyphicon-heart-empty"></span> Edit Preferences</a>'.
-                                        '<br><br><a href="updateHobbiesPage.php" class="btn btn-info center-inline" role="button"><span class="glyphicon glyphicon-knight"></span> Edit Hobbies</a>';
-                                }
-                                if($me == 3){ ?>
-                                    <div class = "admin_notice">
-                                    <p><h4>Admin notice:</h4><br>If users preferences or hobbies contains any offensive material. Remove here:</p>
-                                    <br><a href="updatePreferencesPage.php?admin=true&uid=<?php echo $uid;?>" class="btn btn-danger center-inline" role="button"><span class="glyphicon glyphicon-heart-empty"></span> Edit Preferences</a>
-                                        <br><br><a href="updateHobbiesPage.php?admin=true&uid=<?php echo $uid;?>" class="btn btn-danger center-inline" role="button"><span class="glyphicon glyphicon-knight"></span> Edit Hobbies</a>
-                                    </div>
-                               <?php }
-                                if($me==2){
-                                    $MsgMgr = new MessageMgr($_SESSION['user_id']);
-                                    ?>
-                                    <form action ="#", method="post">
-                                    <?php  $MsgMgr->sendMessageButton($uid); ?>
-                                    </form>
-
-                                <?php }
-                                ?>
-                            </div>
-                        </div>
-
                     </div>
 
+
+
+
+
+<!--                        col for preferences-->
+                        <div class="col-md-8 col-sm-10 text-center">
+
+                            <div class="row">
+
+                                <div class="col-md-8"><br><br>
+                                    <div class = "panel panel-default panel-asl">
+                                        <div class = "panel-body"><br>
+                                            <h3 class="user-name"><?php echo ($user->getUsername());?></h3>
+                                            <hr class="tagline-divider">
+                                            <h5>
+                                                <small>
+                                                    <strong><?php echo ($dbprf['tag_line'])?></strong>
+                                                </small>
+                                            </h5>
+                                            <div class = "row">
+                                                <div class="col-md-4"></div>
+                                                <div class="col-md-4">
+                                                    <div class="col-md-4">
+                                                        <small class="text-muted">Age&emsp;</small><?php echo calculateAge($dbprf['date_of_birth']); ?>
+                                                    </div><br><br>
+                                                    <div class="col-md-4">
+                                                        <small class="text-muted">City&emsp;</small><?php echo $dbprf['city'];?>
+                                                    </div><br><br>
+                                                    <div class="col-md-4">
+                                                        <small class="text-muted">Gender&emsp;</small><?php echo $dbprf['gender'];?>
+                                                    </div>
+                                                    <div style="clear:both;"><div></div></div>
+                                                    <br>
+                                                </div>
+                                                <div class="col-md-4"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="buttons_right" >
+                                        <?php echo '<br><br>';
+                                        if($me == 1){
+                                            echo '<a href="updatePreferencesPage.php" class="btn btn-info center-inline" role="button"><span class="glyphicon glyphicon-heart-empty"></span> Edit Preferences</a>'.
+                                                '<br><br><a href="updateHobbiesPage.php" class="btn btn-info center-inline" role="button"><span class="glyphicon glyphicon-knight"></span> Edit Hobbies</a>';
+                                        }
+                                        if($me == 3){ ?>
+                                            <div class = "admin_notice">
+                                                <p><h4>Admin notice:</h4><br>If users preferences or hobbies contains any offensive material. Remove here:</p>
+                                                <a href="updatePreferencesPage.php?admin=true&uid=<?php echo $uid;?>" class="btn btn-danger center-inline" role="button"><span class="glyphicon glyphicon-heart-empty"></span> Edit Preferences</a>
+                                                <br><br><a href="updateHobbiesPage.php?admin=true&uid=<?php echo $uid;?>" class="btn btn-danger center-inline" role="button"><span class="glyphicon glyphicon-knight"></span> Edit Hobbies</a>
+                                            </div>
+                                        <?php }
+                                        if($me==2){
+                                            $MsgMgr = new MessageMgr($_SESSION['user_id']);
+                                            ?>
+                                            <form action ="#", method="post">
+                                                <?php  $MsgMgr->sendMessageButton($uid); ?>
+                                            </form>
+
+                                        <?php } ;
+                                        ?>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="row">
+                            <div class = "panel panel-default">
+                                <div class = "panel-body">
+
+                                    <?php
+                                    createDisplay("height", $dbprf);
+                                    createDisplay("ethnicity", $dbprf);
+                                    createDisplay("body_type", $dbprf);
+                                    ?>
+                                    <div style="clear:both;"><div></div></div><br>
+                                    <?php
+                                    createDisplay("seeking", $dbprf);
+                                    createDisplay("religion", $dbprf);
+                                    ?>
+                                    <div class="col-md-4">
+                                        <small class="text-muted">Smoker:&emsp;</small><?php echo ($dbprf['smoker'])==1 ? 'Yes' : 'No'?>
+                                    </div>
+                                    <div style="clear:both;"><div></div></div><br>
+                                    <?php
+                                    createDisplay("intent", $dbprf);
+                                    createDisplay("has_children", $dbprf);
+                                    createDisplay("drinker", $dbprf);
+                                    ?>
+                                    <div style="clear:both;"><div></div></div><br>
+                                    <?php
+                                    createDisplay("marital_status", $dbprf);
+                                    createDisplay("wants_children", $dbprf);
+                                    ?>
+                                    <div class="col-md-4">
+                                        <small class="text-muted">Income:&emsp;</small><?php echo ($dbprf['income'])?>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+
+
+
+                        </div>
+
+
+                    </div>
                     <br><br>
 
                 </div>
             </div>
-        </div>
 
 
-        <div class = "row">
+        <div class = "row side_by_side">
             <div class="col-md-6">
                 <div class="row">
                     <div class="boxLeft box">
                         <div class="col-lg-12">
-                            <hr>
-                            <h2 class="intro-text text-center">Image Gallery</h2>
-                            <hr>
-                            <hr class="visible-xs">
-                            <br>
-
+                            <hr><h2 class="intro-text text-center">Image Gallery</h2><hr>
+                            <hr class="visible-xs"><br>
                             <div class = "row">
                                 <div class="col-md-2"></div>
                                 <div class="col-md-8">
@@ -220,13 +265,9 @@
                                             </form>
                                         </div>
                                         <br><br>
-
-
                                         <div id="myCarousel" class="carousel slide" data-ride="carousel">
                                             <div class="carousel-inner" role="listbox">
-                                                <?php
-                                                createSlides($images);
-                                                ?>
+                                                <?php createSlides($images); ?>
                                             </div>
                                             <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
                                                 <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
@@ -237,8 +278,6 @@
                                                 <span class="sr-only">Next</span>
                                             </a>
                                         </div>
-
-
                                     </div>
                                 </div>
                                 <div class="col-md-2"></div>
@@ -272,62 +311,6 @@
 
 
 
-
-
-
-
-        <div class="row">
-            <div class="box">
-                <div class="col-lg-12">
-                    <hr>
-                    <h2 class="intro-text text-center">My Details</h2>
-                    <hr>
-                    <hr class="visible-xs">
-                    <br>
-                    <div class="row">
-                        <div class="col-md-12">
-
-                            <div class = "panel panel-default">
-                                <div class = "panel-body">
-
-                                    <?php
-                                    createDisplay("height", $dbprf);
-                                    createDisplay("ethnicity", $dbprf);
-                                    createDisplay("body_type", $dbprf);
-                                    ?>
-                                    <div style="clear:both;"><div></div></div><br>
-                                    <?php
-                                    createDisplay("seeking", $dbprf);
-                                    createDisplay("religion", $dbprf);
-                                    ?>
-                                    <div class="col-md-4">
-                                        <small class="text-muted">Smoker:&emsp;</small><?php echo ($dbprf['smoker'])==1 ? 'Yes' : 'No'?>
-                                    </div>
-                                    <div style="clear:both;"><div></div></div><br>
-                                    <?php
-                                    createDisplay("intent", $dbprf);
-                                    createDisplay("has_children", $dbprf);
-                                    createDisplay("drinker", $dbprf);
-                                    ?>
-                                    <div style="clear:both;"><div></div></div><br>
-                                    <?php
-                                    createDisplay("marital_status", $dbprf);
-                                    createDisplay("wants_children", $dbprf);
-                                    ?>
-                                    <div class="col-md-4">
-                                        <small class="text-muted">Income:&emsp;</small><?php echo ($dbprf['income'])?>
-                                    </div>
-                                </div>
-                            </div>
-                            <br>
-
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
-        </div>
 
 
         <div class="row">
@@ -387,7 +370,11 @@
                 <br><br><br><br><br>
                 <?php
                 }
-            }?>
+            }
+
+            ?>
+
+
 
         </div>
 
