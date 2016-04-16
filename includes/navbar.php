@@ -60,7 +60,7 @@
 
                     <div class="searchbar-area">
                         <form class="navbar-form" role="search">
-                            <div class="input-group" <?php if($browser == 'MF') echo 'style="width: 200px"';?> >
+                            <div class="input-group" <?php if($browser == 'MF') echo 'style="width: 400px"';?> >
                                 <div class="search-bar " id="search_group">
                                     <input type="text" class="form-control search" placeholder="Search..." id="input_search" name="input_search">
                                     <div class="input-group-btn">
@@ -74,7 +74,7 @@
                             </div>
                         </form>
                     </div>
-                
+
                 </div>
 
 
