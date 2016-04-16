@@ -10,6 +10,20 @@ body {
     -o-background-size: cover;
 }
 
+.special {
+    display:table;
+    width:100%;
+    height:70vh;
+}
+.v-m {
+    display:table-cell;
+    vertical-align:middle
+}
+
+.panel-asl{
+    /*width: 300px;*/
+}
+
 
 .profile-pic img{
     margin: 0 auto;
@@ -49,7 +63,6 @@ hr {
 .user-name {
     text-transform: capitalize;
     margin: 0;
-    font-size: 3em;
 }
 
 .tagline-divider {
@@ -77,6 +90,10 @@ hr {
     margin-right: 10px;
 }
 
+.side_by_side{
+    position: relative;
+}
+
 .intro-text {
     text-transform: uppercase;
     font-size: 1.25em;
@@ -94,6 +111,8 @@ footer p {
     font-size: x-small;
 }
 
+img { -ms-interpolation-mode: bicubic; }
+
 @media screen and (min-width:1200px) {
     .box:after {
         content: '';
@@ -104,6 +123,11 @@ footer p {
 
 .buttons_right{
     float: right;
+}
+
+.buttons_left{
+    float: left;
+    display: inline-block
 }
 
 .button_center{

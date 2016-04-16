@@ -10,6 +10,27 @@
         header('Location: searchResultsPage.php?searchTerm='.$_GET['input_search']);
         die();
     }
+
+    $browser = 'unknown';
+            if(strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') !== FALSE)
+                $browser='IE';
+            elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Trident') !== FALSE) //For Supporting IE 11
+                $browser='IE';
+            elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Firefox') !== FALSE)
+                $browser='MF';
+            elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Chrome') !== FALSE)
+                $browser='GC';
+            elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Opera Mini') !== FALSE)
+                $browser="OM";
+            elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Opera') !== FALSE)
+                $browser="O";
+            elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Safari') !== FALSE)
+                $browser="S";
+            else
+                $browser= 'Something else';
+
+
+
     ?>
 </head>
 
@@ -35,24 +56,27 @@
                     </button>
                 </div>
 
-                <!--searchbar area-->
-                <div class="searchbar-area">
-                    <form class="navbar-form" role="search">
-                        <div class="input-group">
-                            <div class="search-bar" id="search_group">
-                                <input type="text" class="form-control search" placeholder="Search..." id="input_search" name="input_search">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-default" id="search_submit_button" name="search_submit_button" type="submit">
-                                        <i class="glyphicon glyphicon-search"></i>
-                                    </button>
+
+
+                    <div class="searchbar-area">
+                        <form class="navbar-form" role="search">
+                            <div class="input-group" <?php if($browser == 'MF') echo 'style="width: 400px"';?> >
+                                <div class="search-bar " id="search_group">
+                                    <input type="text" class="form-control search" placeholder="Search..." id="input_search" name="input_search">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-default" id="search_submit_button" name="search_submit_button" type="submit">
+                                            <i class="glyphicon glyphicon-search"></i>
+                                        </button>
+                                        ?>
+                                    </div>
+                                    <div id="search_result"></div>
                                 </div>
-                                <div id="search_result"></div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
+
                 </div>
 
-            </div>
 
 
             <div class="col-md-5">

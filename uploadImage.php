@@ -18,22 +18,21 @@
     include($_SERVER['DOCUMENT_ROOT'] . '/classes/ImageService.php');
 
 
+
     $me;
     $uid;
     if(!empty($_POST)){
         if(isset($_POST['uid'])){
             $uid = $_POST['uid'];
         }
+        if(isset($_POST['me'])){
+            $me = $_POST['me'];
+        }
 
     }
     $images = ImageService::getImages($uid);
 
 
-//    echo '<br><br><br><br><br><br><br><br>';
-//    var_dump($_POST);
-//    echo '<br><br>';
-//    var_dump($_FILES);
-//    if(empty($_FILES)){echo '<br>EMPTY FILES ARRAY!';}
 
     ?>
 

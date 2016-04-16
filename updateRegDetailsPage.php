@@ -42,7 +42,7 @@
     <div class="row">
         <div class="box">
             <div class="col-lg-12 text-center">
-                <br><br>
+                <br>
                 <h2>
                     <small>
                         <strong>Update Account Details</strong>
@@ -50,7 +50,7 @@
                 </h2>
                 <hr class="tagline-divider">
                 <p>
-                <br><br>
+                <br>
 
                     <?php
                     if(Input::exists()){
@@ -160,6 +160,8 @@
                     <br><br>
                 </p>
             </div>
+
+            <a href="settingsPage.php" class="btn btn-info" role="button"><span class="glyphicon glyphicon-chevron-left"></span> Back To Settings Page</a>
         </div>
     </div>
 

@@ -79,9 +79,9 @@
 if($admin){include("includes/navbarAdmin.html");}
 else {
     if ($update) {
-        include("includes/navbarRegistration.php");
-    } else {
         include("includes/navbar.php");
+    } else {
+        include("includes/navbarRegistration.php");
     }
 }
 
@@ -93,7 +93,7 @@ else {
     <div class="row">
         <div class="box">
             <div class="col-lg-12 text-center">
-                <br><br>
+                <br>
                 <h2>
                     <small>
                         <strong><?php if($admin){echo 'Admin edit user';}else{echo $regOrUpdate;}?> Hobbies</strong>
@@ -212,7 +212,7 @@ else {
                             </div>
 
 
-                            <br><br><br>
+                            <br><br>
 
                         </div>
                         <div style="clear:both;"><div></div></div>
@@ -225,9 +225,13 @@ else {
 
 
                 <br><br>
-                <br><br>
+
                 </p>
             </div>
+
+            <?php if($update){ ?>
+                <a href="settingsPage.php" class="btn btn-info buttons-left" role="button"><span class="glyphicon glyphicon-chevron-left"></span> Back To Settings Page</a>
+            <?php } ?>
         </div>
     </div>
 

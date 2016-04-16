@@ -30,7 +30,7 @@
     <div class="row">
         <div class="box">
             <div class="col-lg-12 text-center">
-                <br><br>
+                <br>
                 <h2>
                     <small>
                         <strong>View Membership status</strong>
@@ -38,8 +38,7 @@
                 </h2>
                 <hr class="tagline-divider">
                 <p>
-
-                    <br><br>
+                    <br>
 
                 <div class = "panel panel-default">
                     <div class = "panel-body">
@@ -56,16 +55,13 @@
                         <?php }?>
                         <br><br>
 
-
                     </div>
                 </div>
+                <br>
+                <a href="settingsPage.php" class="btn btn-info buttons-left" role="button"><span class="glyphicon glyphicon-chevron-left"></span> Back To Settings Page</a>
 
+                <br><br>
 
-
-
-
-                    <br><br>
-                    <br><br>
                 </p>
             </div>
         </div>

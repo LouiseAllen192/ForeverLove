@@ -19,7 +19,9 @@
     <!-- Page Content -->
     <div class="container">
 
-        <div class = "box">
+        <div class = "box"><br><br>
+
+
 
         <div class="row">
 
@@ -69,7 +71,7 @@
                 </div>
             </div>
             <div class="col-lg-1 col-sm-4"></div>
-        </div>
+        </div><br>
 
     </div>
     </div>

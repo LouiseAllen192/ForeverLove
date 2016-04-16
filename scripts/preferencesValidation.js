@@ -10,7 +10,7 @@ $(document).ready(function(){
         $('#tag_line_group:has(div[id=errors])').find('#tag_line').keyup(function () {
             $('#tag_line_group > #errors > #error_required').removeClass('error').addClass('hide');
             var input = $(this).val();
-            var pattern = /^[a-zA-Z'-, .]{2,256}$/;
+            var pattern = /[^<>]{2,256}$/;
             var valid = pattern.test(input);
             if (valid) {
                 $('#tag_line_group > #errors > #error_regex').removeClass('error').addClass('hide');
@@ -37,7 +37,7 @@ $(document).ready(function(){
         $('#about_me_group:has(div[id=errors])').find('#about_me').keyup(function () {
             $('#about_me_group > #errors > #error_required').removeClass('error').addClass('hide');
             var input = $(this).val();
-            var pattern = /^[a-zA-Z0-9,. -]{2,256}$/;
+            var pattern = /[^<>]{2,256}$/;
             var valid = pattern.test(input);
             if (valid) {
                 $('#about_me_group > #errors > #error_regex').removeClass('error').addClass('hide');

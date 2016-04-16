@@ -28,6 +28,8 @@ h1, h2, h3, h4, h5, h6 {
     letter-spacing: 1px;
 }
 
+img { -ms-interpolation-mode: bicubic; }
+
 p {
     font-size: 1.25em;
     line-height: 1.6;

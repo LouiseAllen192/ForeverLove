@@ -37,12 +37,6 @@
 
     $images = ImageService::getImages($uid);
 
-//    echo '<br><br><br><br><br><br><br><br>';
-//    var_dump($_POST);
-//    echo '<br><br>';
-//    var_dump($_FILES);
-//    if(empty($_FILES)){echo '<br>EMPTY FILES ARRAY!';}
-//
 
     function createThumbnails($images){
         foreach($images as $img_num=>$img_url) {

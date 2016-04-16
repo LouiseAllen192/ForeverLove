@@ -38,7 +38,7 @@
     <div class="row">
         <div class="box">
             <div class="col-lg-12 text-center">
-                <br><br>
+                <br>
                 <h2>
                     <small>
                         <strong>Update Password</strong>
@@ -46,7 +46,7 @@
                 </h2>
                 <hr class="tagline-divider">
                 <p>
-                    <br><br>
+                    <br>
 
                     <?php
                     if(Input::exists()){
@@ -67,10 +67,11 @@
                 }
                 ?>
 
-                <form id="reg_form" class="form-horizontal" role="form" method="post">
-                    <fieldset>
+                <div class = "panel panel-default">
+                    <div class = "panel-body"><br>
 
-
+                    <form id="reg_form" class="form-horizontal" role="form" method="post">
+                        <fieldset>
 
                         <div class="form-group" id="old_password_group">
                             <label for="old_password" class="col-md-4 col-sm-5 control-label"><b>Enter old password:</b></label>
@@ -115,10 +116,16 @@
                                 <span class="<?php if($errors['new_password_confirm'] == 'error_regex') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_regex">Passwords do not match...</span>
                             </div>
                         </div>
-                    </fieldset>
-                    <br>
-                    <input class="btn btn-info center-inline" id="continue_button" type="submit" value="Apply Changes">
-                </form>
+                        </fieldset>
+                        <br>
+                        <input class="btn btn-info center-inline" id="continue_button" type="submit" value="Apply Changes">
+                    </form>
+
+                    </div>
+                </div>
+
+
+                <a href="settingsPage.php" class="btn btn-info buttons-left" role="button"><span class="glyphicon glyphicon-chevron-left"></span> Back To Settings Page</a>
 
                 <br><br>
                 <br><br>
