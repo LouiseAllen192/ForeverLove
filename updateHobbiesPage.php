@@ -79,9 +79,9 @@
 if($admin){include("includes/navbarAdmin.html");}
 else {
     if ($update) {
-        include("includes/navbarRegistration.php");
-    } else {
         include("includes/navbar.php");
+    } else {
+        include("includes/navbarRegistration.php");
     }
 }
 
