@@ -3,24 +3,44 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <script src="../bootstrap_js/jquery.js"></script>
     <script src="../bootstrap_js/bootstrap.js"></script>
-    <script src="../scripts/search.js"></script>
+
+    <?php
+    if(isset($_GET['search_submit_button'])){
+        header('Location: viewSearchResultsPage.php?searchTerm='.$_GET['input_search']);
+        die();
+    }
+
+    $browser = 'unknown';
+    if(strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') !== FALSE)
+        $browser='IE';
+    elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Trident') !== FALSE) //For Supporting IE 11
+        $browser='IE';
+    elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Firefox') !== FALSE)
+        $browser='MF';
+    elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Chrome') !== FALSE)
+        $browser='GC';
+    elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Opera Mini') !== FALSE)
+        $browser="OM";
+    elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Opera') !== FALSE)
+        $browser="O";
+    elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Safari') !== FALSE)
+        $browser="S";
+    else
+        $browser= 'Something else';
+    ?>
 
 </head>
+
 <nav class="navbar navbar-inverse navbar-fixed-top navBar" role="navigation">
     <div class="container">
-
         <div class = "row">
-
             <div class="col-md-2">
-
                 <div class="col-md-2 col-sm-2 pull-left">
                      <img src="../ForeverLove/includes/pics/logo.jpg" onerror="this.src='../secret_location/logo.jpg'" alt="logo">
                 </div>
-
             </div>
 
             <div class="col-md-5">
-
                 <!-- This changes the nav bar to a small icon for mobile display -->
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -34,11 +54,14 @@
                 <!--searchbar area-->
                 <div class="searchbar-area">
                     <form class="navbar-form" role="search">
-                        <div class="input-group">
-                            <div class="search-bar" id="search_group">
-                                <input type="text" class="form-control search" placeholder="Search" id="input_search">
+                        <div class="input-group" <?php if($browser == 'MF') echo 'style="width: 400px"';?> >
+                            <div class="search-bar " id="search_group">
+                                <input type="text" class="form-control search" placeholder="(username, tagline, city)" id="input_search" name="input_search">
                                 <div class="input-group-btn">
-                                    <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
+                                    <button class="btn btn-default" id="search_submit_button" name="search_submit_button" type="submit">
+                                        <i class="glyphicon glyphicon-search"></i>
+                                    </button>
+                                    <!--?>-->
                                 </div>
                                 <div id="search_result"></div>
                             </div>
@@ -86,5 +109,31 @@
             });
         </script>
 
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('#input_search').keyup(function () {
+                    $('#search_result').removeClass('hide');
+                    var input = $(this).val();
+                    input = $.trim(input);
+                    if (input != ''){
+                        $.ajax({
+                            type: "post",
+                            url: "../scripts/adminSearch.php",
+                            data: {searchTerm: input},
+                            cache: false,
+                            success: function(response){
+                                $('#search_result').html(response).show();
+                            }
+                        });
+                    }
+                });
+
+                /*$(this).click(function(event){
+                    if(event.target.id != 'input_search' || event.target.id != 'search_result'){
+                        $('#search_result').addClass('hide');
+                    }
+                })*/
+            });
+        </script>
     </div>
 </nav>

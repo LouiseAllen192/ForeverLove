@@ -29,8 +29,6 @@
             else
                 $browser= 'Something else';
 
-
-
     ?>
 </head>
 
@@ -56,24 +54,22 @@
                     </button>
                 </div>
 
-
-
-                    <div class="searchbar-area">
-                        <form class="navbar-form" role="search">
-                            <div class="input-group" <?php if($browser == 'MF') echo 'style="width: 400px"';?> >
-                                <div class="search-bar " id="search_group">
-                                    <input type="text" class="form-control search" placeholder="Search..." id="input_search" name="input_search">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-default" id="search_submit_button" name="search_submit_button" type="submit">
-                                            <i class="glyphicon glyphicon-search"></i>
-                                        </button>
-                                        ?>
-                                    </div>
-                                    <div id="search_result"></div>
+                <div class="searchbar-area">
+                    <form class="navbar-form" role="search">
+                        <div class="input-group" <?php if($browser == 'MF') echo 'style="width: 400px"';?> >
+                            <div class="search-bar " id="search_group">
+                                <input type="text" class="form-control search" placeholder="(username, tagline, city)" id="input_search" name="input_search">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-default" id="search_submit_button" name="search_submit_button" type="submit">
+                                        <i class="glyphicon glyphicon-search"></i>
+                                    </button>
+                                    <!--?>-->
                                 </div>
+                                <div id="search_result"></div>
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
+                </div>
 
                 </div>
 
