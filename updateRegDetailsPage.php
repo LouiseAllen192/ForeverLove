@@ -35,7 +35,9 @@
 
 <body class="full">
 <?php include("includes/navbar.php"); ?>
-
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
 <!--Main page content-->
 
 <div class="container">
@@ -43,6 +45,7 @@
         <div class="box">
             <div class="col-lg-12 text-center">
                 <br>
+                <hr class="tagline-divider">
                 <h2>
                     <small>
                         <strong>Update Account Details</strong>

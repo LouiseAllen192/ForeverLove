@@ -3,7 +3,6 @@ var page = path.substring(path.lastIndexOf('/') + 1);
 
 
 $(document).ready(function(){
-
     if(page == 'registrationPage.php' || page == 'updateRegDetailsPage.php'|| page == 'addNewAccount.php'){
         $('#email_group:has(div[id=errors])').find('#email').keyup(function(){
             $('#email_group > #errors > #error_required').removeClass('error').addClass('hide');
@@ -152,6 +151,12 @@ $(document).ready(function(){
     }
 
     if(page == 'registrationPage.php' || page == 'updateRegDetailsPage.php') {
+        if($('#dob')[0].type != 'date'){
+            $('#dob').datepicker();
+            var arr = $('#dob').val().split('-');
+            $("#dob").val(arr[2] + "/" + arr[1] + "/" + arr[0]);
+        }
+
         $('#dob_group:has(div[id=errors])').find('#dob').change(function () {
             $('#dob_group > #errors > #error_required').removeClass('error').addClass('hide');
             var input = $(this).val();
