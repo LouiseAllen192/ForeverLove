@@ -127,10 +127,10 @@ class SearchServiceMgr{
 
     public static function searchTerm($term, $limit = 25, $filter = true){
         $me = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 0;
-        $sql = "SELECT user_id, username, city, tag_line, gender, seeking";
-        $sql .= " FROM registration_details JOIN preference_details USING(user_id)";
-        $sql .= " WHERE user_id != '$me' && (username LIKE '%$term%' || tag_line LIKE '%$term%' || city LIKE '%$term%')";
-        $sql .= " ORDER BY username LIKE '%$term%' DESC, tag_line LIKE '%$term%' DESC, city LIKE '%$term%' DESC";
+        $sql = "SELECT user_id, username, city, tag_line, unique_hobby, gender, seeking";
+        $sql .= " FROM registration_details JOIN preference_details USING(user_id) JOIN unique_hobby USING(user_id)";
+        $sql .= " WHERE user_id != '$me' && (username LIKE '%$term%' || unique_hobby LIKE '%$term%' || city LIKE '%$term%')";
+        $sql .= " ORDER BY username LIKE '%$term%' DESC, unique_hobby LIKE '%$term%' DESC, city LIKE '%$term%' DESC";
         $results = DB::getInstance()->query($sql)->results();
         if($filter){
             $results = SearchServiceMgr::filterSeekingGender($me, $results);

@@ -11,10 +11,7 @@
         die();
     }
 
-
     $browser = BrowserHelper::getBrowser($_SERVER['HTTP_USER_AGENT']);
-
-
     ?>
 </head>
 
@@ -114,8 +111,6 @@
 
         </div>
     </div>
-
-
         <script>
             $(document).ready(function(){
                 $('[data-toggle="tooltip"]').tooltip();

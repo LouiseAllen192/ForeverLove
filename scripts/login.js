@@ -23,7 +23,7 @@ $(document).ready(function() {
         return false;
     });
 
-    $(this).mouseup(function(event){
+    $(this).mousedown(function(event){
         var container = $('#login-box');
         if(event.target.id == 'close_button' || (!container.is(event.target) && container.has(event.target).length === 0)){
             $('#mask , .login-popup').fadeOut(300 , function() {

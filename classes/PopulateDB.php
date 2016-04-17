@@ -1,10 +1,9 @@
 <?php
 class PopulateDB{
-    private $db, $shuffle;
+    private $db;
 
-    public function __construct($shuffle = false){
+    public function __construct(){
         $this->db = DB::getInstance();
-        $this->shuffle = $shuffle;
     }
 
     public function populateDatabase($start = 26, $amount = 50){
