@@ -70,9 +70,9 @@
 
                     <br><br>"
                     ?>
-                <div style = "text-align: left">
-                    <a href="messagesPage.php" class="btn btn-info" role="button"><span class="glyphicon glyphicon-chevron-left"></span> Back To Messages Page</a>
-                </div>
+                    <div style = "text-align: left">
+                        <a href="messagesPage.php" class="btn btn-info" role="button"><span class="glyphicon glyphicon-chevron-left"></span> Back To Messages Page</a>
+                    </div>
                 </p>
             </div>
         </div>

@@ -31,7 +31,8 @@ class MessageMgr
     public function sendMessage($message, $convoID)
     {
         $reciever_id = $this->getConversationPartner($convoID);
-        $date = date('Y-m-d H:i:s');
+        date_default_timezone_set("Europe/Dublin");
+        $date = date('Y-m-d H:i:s', time());
         DB::getInstance()->insert('messages', ['Conversation_id' => $convoID, 'Sender_id' => $this->userID, 'Recipient_id' => $reciever_id, 'Date_Received' => $date, 'Message_Text' => $message, 'seen' => 0]);
     }
 

@@ -111,7 +111,7 @@
                     {
                         include("includes/navbar.php");
                         echo "<div style = \"text-align: left\">
-                                <a href=\"existingConversationPage.php\"><h3>Back To Conversation List</h3></a>
+                                <a href=\"existingConversationPage.php\" class=\"btn btn-info\" role = \"button\"><span class=\"glyphicon glyphicon-chevron-left\"></span>Back To Conversation List</a>
                             </div>";
                     }
                     else
@@ -120,7 +120,7 @@
                         {
                             $rid = $_POST["report_id"];
                             echo "<div style = \"text-align: left\">
-                                    <a href=\"secret_location/reportPage.php?report_id=$rid\"><h3>Back To Report</h3></a>
+                                    <a href=\"secret_location/reportPage.php?report_id=$rid\"><span class=\"glyphicon glyphicon-chevron-left\"></span>Back To Report</a>
                                 </div>";
                         }
                         include("includes/navbarAdmin.html");
