@@ -64,14 +64,7 @@
                     </div>
                 </div>
                 <div class = "row">
-                    <div class="col-sm-3 col-xs-6">
-                        <div class="dummy"></div>
-                        <a href="viewAllPage.php" class="thumbnail">
-                            <div class="h4">
-                                View All Users
-                            </div>
-                        </a>
-                    </div>
+
                     <div class="col-sm-3 col-xs-6">
                         <div class="dummy"></div>
                         <a href="viewResolvedReportsPage.php" class="thumbnail">
@@ -85,6 +78,14 @@
                         <a href="addNewAccount.php" class="thumbnail">
                             <div class="h4">
                                 Register New Admin
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-sm-3 col-xs-6">
+                        <div class="dummy"></div>
+                        <a href="viewAllPage.php" class="thumbnail">
+                            <div class="h4">
+                                View All Users
                             </div>
                         </a>
                     </div>
