@@ -42,11 +42,9 @@
 
                     <br><br>
                     <br><br>
-                </p>
 
-            </div>
-            <div style = "text-align: left">
-                <a href="messagesPage.php" class="btn btn-info" role="button"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
+                </p>
+                <a href="messagesPage.php" class="btn btn-info" role="button" style = "text-align: left"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
             </div>
         </div>
     </div>
