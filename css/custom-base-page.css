@@ -64,6 +64,10 @@ hr {
     background: rgba(255,255,255,0.9);
 }
 
+.buttons-left{
+    float: left;
+}
+
 .intro-text {
     text-transform: uppercase;
     font-size: 1.25em;
@@ -131,8 +135,11 @@ footer p {
     border-top-left-radius: 6px;
     /*border-bottom-right-radius: 6px;*/
     border-bottom-left-radius: 6px;
-    padding: 3px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+
 }
+
 
 #search_result{
     position: absolute;

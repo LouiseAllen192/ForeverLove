@@ -110,7 +110,7 @@ class MessageMgr
         if($i == 0)
             echo "<div class=\"alert alert-danger\">
                    No Conversations Found.
-                  </div>";
+                  </div><br><br><br><br><br><br><br><br>";
     }
 
     public function doesRecipientExist($recipientName)
@@ -387,7 +387,8 @@ class MessageMgr
 
     public static function loadConversationAdmin($convoID)
     {
-        if (!empty($convoID)) {
+        if (!empty($convoID))
+        {
             $messages = DB::getInstance()->query("SELECT * FROM messages WHERE conversation_id = '$convoID' ORDER BY date_received")->results();
             $firstUser = $messages[0]->sender_id;
             $secondUser = $messages[0]->recipient_id;

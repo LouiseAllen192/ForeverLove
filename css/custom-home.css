@@ -1,6 +1,6 @@
 
 body {
-    padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    padding-top: 70px;
 }
 
 .nav-text ul{
@@ -11,15 +11,28 @@ body {
 }
 
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2,  h4, h5, h6 {
     text-transform: uppercase;
     font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 700;
     letter-spacing: 1px;
 }
 
+h3{
+    text-transform: uppercase;
+    font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+
 .img-center {
 	margin: 0 auto;
+}
+
+.img-circle{
+    width: 60%;
+    height: 60%;
 }
 
 footer p {
@@ -109,3 +122,31 @@ li{
     line-height: 0px;
 }
 /*SEARCH BAR END*/
+
+.full {
+    background: url('http://gdurl.com/O08F') center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+.box {
+    padding: 30px 15px;
+    background: rgba(255,255,255,0.6);
+
+    height: auto !important; /* real browsers */
+    min-height: 100%; /* real browsers */
+}
+
+.container{
+    position: relative; /* needed for footer positioning*/
+    height: auto !important; /* real browsers */
+    min-height: 100%; /* real browsers */
+}
+
+img { -ms-interpolation-mode: bicubic; }
+
+
+
+

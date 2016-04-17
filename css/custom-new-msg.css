@@ -1,7 +1,6 @@
 body {
     margin-top: 50px;
 }
-
 .full {
     background: url('http://gdurl.com/1DKh') no-repeat center center fixed;
     -webkit-background-size: cover;
@@ -10,24 +9,10 @@ body {
     -o-background-size: cover;
 }
 
-.special {
-    display:table;
-    width:100%;
-    height:70vh;
-}
-.v-m {
-    display:table-cell;
-    vertical-align:middle
-}
-
-.panel-asl{
-    /*width: 300px;*/
-}
-
 
 .profile-pic img{
     margin: 0 auto;
-    width: 250px;
+    width: 200px;
     height: auto;
 }
 
@@ -63,16 +48,13 @@ hr {
 .user-name {
     text-transform: capitalize;
     margin: 0;
+    font-size: 4em;
 }
 
 .tagline-divider {
     margin: 15px auto 3px;
     max-width: 250px;
     border-color: #999999;
-}
-
-.info_box{
-    align-content: center;
 }
 
 .box {
@@ -82,25 +64,12 @@ hr {
     background: rgba(255,255,255,0.9);
 }
 
-.boxRight {
-    margin-left: 10px;
-}
-
-.boxLeft{
-    margin-right: 10px;
-}
-
-.side_by_side{
-    position: relative;
-}
-
 .intro-text {
     text-transform: uppercase;
     font-size: 1.25em;
     font-weight: 400;
     letter-spacing: 1px;
 }
-
 
 footer p {
     margin: 0;
@@ -111,8 +80,11 @@ footer p {
     font-size: x-small;
 }
 
-img { -ms-interpolation-mode: bicubic; }
 
+.error{
+    font-size: 12px;
+    color: red;
+}
 @media screen and (min-width:1200px) {
     .box:after {
         content: '';
@@ -121,32 +93,6 @@ img { -ms-interpolation-mode: bicubic; }
     }
 }
 
-.buttons_right{
-    float: right;
-}
-
-.buttons_left{
-    float: left;
-    display: inline-block
-}
-
-.button_center{
-    padding-left: 22%;
-}
-
-.carousel-inner > .item > img,
-.carousel-inner > .item > a > img {
-    line-height: 1;
-    width: 300px;
-}
-
-.carousel-inner > .item > img {
-    margin: 0 auto;
-}
-
-.panel-stretch{
-    height: 253px;
-}
 
 .logged-in{
     color: white;
@@ -157,6 +103,7 @@ img { -ms-interpolation-mode: bicubic; }
     text-transform: none;
     font-weight: 100;
 }
+
 .nav-text li{
     margin:0px;
     line-height: 0px;
@@ -220,8 +167,18 @@ img { -ms-interpolation-mode: bicubic; }
 }
 /*SEARCH BAR END*/
 
-.admin_notice{
-    border: solid 1px #761c19;
-    padding: 8px;
-
+.badge{
+    position:relative;
+    bottom: 30px;
 }
+
+.badge-notify{
+    background:gold;
+}
+
+.panel-default{
+    width: 60%;
+    align-content: center;
+}
+
+img { -ms-interpolation-mode: bicubic; }

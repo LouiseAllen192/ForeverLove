@@ -46,7 +46,7 @@
 
             </div>
             <div style = "text-align: left">
-                <a href="messagesPage.php"><h3>Back</h3></a>
+                <a href="messagesPage.php" class="btn btn-info" role="button"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
             </div>
         </div>
     </div>

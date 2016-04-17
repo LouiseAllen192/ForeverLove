@@ -9,7 +9,7 @@
     ?>
     <title>New Message</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/custom-base-page.css" rel="stylesheet">
+    <link href="css/custom-new-msg.css" rel="stylesheet">
     <?php include("includes/fonts.html");
     if(!empty($_POST))
     {
@@ -58,17 +58,20 @@
                     else
                         $to = "";
 
-                    echo "<form role =\"form\" class=\"form-inline\" action=\"newMessagePage.php\" method=\"post\">
-                        To:<br>
-                        <input type=\"text\" name=\"recipient\" value = $to><br>
-                        Message:<br>
-                        <textarea rows=\"6\" cols=\"50\" name=\"message\"></textarea><br><br>
-                        <input type=\"submit\" value=\"Submit\">
-                    </form>
+                    echo "
+
+                        <form role =\"form\" class=\"form-inline\" action=\"newMessagePage.php\" method=\"post\">
+                            To:<br>
+                            <input type=\"text\" name=\"recipient\" value = $to><br>
+                            Message:<br>
+                            <textarea rows=\"6\" cols=\"50\" name=\"message\"></textarea><br><br>
+                            <input type=\"submit\" value=\"Submit\" class=\"btn btn-info\">
+                        </form>
+
                     <br><br>"
                     ?>
                 <div style = "text-align: left">
-                    <a href="messagesPage.php"><h3>Back To Messages Page</h3></a>
+                    <a href="messagesPage.php" class="btn btn-info" role="button"><span class="glyphicon glyphicon-chevron-left"></span> Back To Messages Page</a>
                 </div>
                 </p>
             </div>

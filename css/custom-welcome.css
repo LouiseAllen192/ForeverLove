@@ -45,6 +45,8 @@ body {
     border-color: #8c8c8c;
 }
 
+img { -ms-interpolation-mode: bicubic; }
+
 .post { margin: 0 auto; padding-bottom: 50px; float: left; width: 960px; }
 
 .btn-sign {

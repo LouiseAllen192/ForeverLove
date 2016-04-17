@@ -82,7 +82,17 @@
 </head>
 
 <body class="full">
-<?php if($admin){include("includes/navbarAdmin.html");} else{include("includes/navbar.php");} ?>
+<?php
+
+if($admin){include("includes/navbarAdmin.html");}
+else {
+    if ($update) {
+        include("includes/navbar.php");
+    } else {
+        include("includes/navbarRegistration.php");
+    }
+}
+?>
 
 <!--Main page content-->
 
@@ -167,7 +177,8 @@
                         </div>
                         <div class="col-md-offset-4 col-sm-offset-5" id="errors">
                             <span class="<?php if($errors['tag_line'] == 'error_required') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_required">Required...</span>
-                            <span class="<?php if($errors['tag_line'] == 'error_regex') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_regex">Invalid format, must be at least 2 characters. Valid characters are: (a-z, A-Z, 0-9, whitespace, ', -) </span>
+
+                            <span class="<?php if($errors['tag_line'] == 'error_regex') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_regex">Invalid format<br> - Must contain at least two characters<br> Can not contain characters < or >...</span>
                         </div>
                     </div>
                     <br><br><br>
@@ -232,7 +243,9 @@
                             </div>
                             <div class="col-md-offset-4 col-sm-offset-5" id="errors">
                                 <span class="<?php if($errors['about_me'] == 'error_required') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_required">Required...</span>
-                                <span class="<?php if($errors['about_me'] == 'error_regex') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_required">Invalid format, must be at least 2 characters. Valid characters are: (a-z, A-Z, 0-9, whitespace, ', -).</span>
+
+                                <span class="<?php if($errors['about_me'] == 'error_regex') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_required">Invalid format<br> - Must contain at least two characters<br> Can not contain characters < or >...</span>
+
                             </div>
                         </div>
 
@@ -242,10 +255,16 @@
                 </form>
 
                     <br><br>
-                    <br><br>
+
                 </p>
             </div>
+
+        <?php if($update){ ?>
+            <a href="settingsPage.php" class="btn btn-info buttons-left" role="button"><span class="glyphicon glyphicon-chevron-left"></span> Back To Settings Page</a>
+        <?php } ?>
+
         </div>
+
     </div>
 
 </div>

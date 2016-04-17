@@ -1,12 +1,11 @@
+FOR MONDAY!!!:
 
-User Services:
-
-    regAccTypePage:
-    - implement functionality to check credit card info against server
-
-    ProfilePage:
-    - fix profile image size / pixelated images
-
+- add 1000 users
+- page thing for search results if 1000 users
+- make sure hmail server works
+- Get search bar to work when logged in as admin
+- Find and eliminate bug that's occasionally creating duplicate conversations (haven't seen this in ages. Maybe I imagined it.)
+- Handle XSS attacks - I think this is covered
     Image gallery:
     - fix error[3] partial upload error on large images
 

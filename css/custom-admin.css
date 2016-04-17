@@ -2,12 +2,14 @@ body {
     margin-top: 50px;
 }
 .full {
-    background: url('http://www.oakdenehouse.org.au/wp-content/uploads/2012/04/Background_Image1.png/') no-repeat center center fixed;
+    background: url('http://gdurl.com/gLKH') no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
     -o-background-size: cover;
 }
+
+img { -ms-interpolation-mode: bicubic; }
 
 form{
     width: 50%;

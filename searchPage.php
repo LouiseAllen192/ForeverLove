@@ -28,9 +28,7 @@
             $results = SearchServiceMgr::byCriteria($me, [], $selectedPreferences);
         }
         else{
-            $sql = "SELECT user_id,username,tag_line,city,TIMESTAMPDIFF(YEAR, date_of_birth, CURDATE()) AS age";
-            $sql .= " FROM registration_details JOIN preference_details USING(user_id) WHERE user_id != $me";
-            $results = $db->query($sql)->results();
+            $results = SearchServiceMgr::suggestions($me);
         }
         if(isset($_POST['age'])){
             $results = SearchServiceMgr::filterAge($_POST['age'], $results);
@@ -89,23 +87,25 @@
                                     <div class="panel-body">
                                         <div style="height: 350px;overflow: auto;">
                                             <?php
-                                            if(isset($results)) {
-                                                foreach ($results as $result){
+                                            if(isset($results)){
+                                                if(($n = count($results)) > 10){$n = 10;}
+                                                for($i = 0; $i < $n; $i++){
                                                     ?>
-                                                    <a href="profilePage.php?uid=<?php echo $result->user_id;?>">
+                                                    <a href="profilePage.php?uid=<?php echo $results[$i]->user_id;?>">
                                                         <div class="display_box">
                                                             <div class="row">
                                                                 <div class="col-xs-12">
                                                                     <div class="media">
                                                                         <div class="media-left">
-                                                                            <img  height="78" width="78" class="media-object" title="Profile Image" src="<?php echo $db->query("SELECT image_path FROM images WHERE user_id = '$result->user_id' && image_id = '1'")->results()[0]->image_path;?>"/>
+                                                                            <?php $result_uid = $results[$i]->user_id; ?>
+                                                                            <img  height="78" width="78" class="media-object" title="Profile Image" src="<?php echo $db->query("SELECT image_path FROM images WHERE user_id = '$result_uid' && image_id = '1'")->results()[0]->image_path;?>"/>
                                                                         </div>
                                                                         <div class="media-body" style="padding-top: 3px;">
-                                                                            <h4 class="media-heading" title="Username"><?php echo $result->username; ?></h4>
-                                                                            <small style="white-space: nowrap;" title="Tag Line"><?php echo $result->tag_line; ?></small>
+                                                                            <h4 class="media-heading" title="Username"><?php echo $results[$i]->username; ?></h4>
+                                                                            <small style="white-space: nowrap;" title="Tag Line"><?php echo $results[$i]->tag_line; ?></small>
                                                                         </div>
                                                                         <div class="media-right media-middle">
-                                                                            <h5 class="media-heading" title="Location"><?php echo $result->city; ?></h5>
+                                                                            <h5 class="media-heading" title="Location"><?php echo $results[$i]->city; ?></h5>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -152,8 +152,6 @@
                             </div>
                         </div>
                     </div>
-
-                        <br>
                     <div class="col-xs-12">
                         <input class="btn btn-info" id="search_button" name="submit" type="submit" value="Search">
                     </div>
