@@ -207,6 +207,32 @@ footer p {
     margin-left: 50px;
     line-height: 0px;
 }
+
+#input_search{
+    display:none;
+}
+
+@media screen and (min-width:768px){
+    #input_search {
+        display:block;
+    }
+}
+
+#search_result{
+    display:none;
+}
+
+@media screen and (min-width:768px){
+    #search_result {
+        display:block;
+    }
+}
+
+@media screen and (max-width:768px){
+    #new_msg_button {
+        margin-top: 12px;
+    }
+}
 /*SEARCH BAR END*/
 
 .admin_notice{

@@ -22,14 +22,14 @@
 
 <div class="container">
     <div class="row">
-        <div class="box">
+        <div class="box page-middle">
             <div class="col-lg-12 text-center">
 
 
                 <div class="row">
                     <div class="col-lg-12">
                         <h2 class="page-header">Messages</h2><br>
-                    </div><br><br>
+                    </div><br><br><br><br>
                 </div>
                 <br><br>
                 <div class="row">
@@ -50,6 +50,7 @@
                         <a href="existingConversationPage.php"><h3>Existing Conversation</h3></a>
                     </div>
                 </div><br><br><br><br>
+                <?php if($browser == 'IE') echo '<br><br><br><br><br>';?>
 
             </div>
         </div>

@@ -19,7 +19,7 @@
     <!-- Page Content -->
     <div class="container">
 
-        <div class = "box"><br><br>
+        <div class = "box"><br>
 
 
 
@@ -71,7 +71,7 @@
                 </div>
             </div>
             <div class="col-lg-1 col-sm-4"></div>
-        </div><br>
+        </div><br><br>
 
     </div>
     </div>
