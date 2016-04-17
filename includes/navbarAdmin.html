@@ -10,26 +10,8 @@
         die();
     }
 
-    $browser = 'unknown';
-    if(strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') !== FALSE)
-        $browser='IE';
-    elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Trident') !== FALSE) //For Supporting IE 11
-        $browser='IE';
-    elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Firefox') !== FALSE)
-        $browser='MF';
-    elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Chrome') !== FALSE)
-        $browser='GC';
-    elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Opera Mini') !== FALSE)
-        $browser="OM";
-    elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Opera') !== FALSE)
-        $browser="O";
-    elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Safari') !== FALSE)
-        $browser="S";
-    else
-        $browser= 'Something else';
+    $browser = BrowserHelper::getBrowser($_SERVER['HTTP_USER_AGENT']);
     ?>
-
-    <?php $browser = BrowserHelper::getBrowser($_SERVER['HTTP_USER_AGENT']); ?>
 
 </head>
 
@@ -58,14 +40,13 @@
                     <form class="navbar-form" role="search">
                         <div class="input-group" <?php if($browser == 'MF') echo 'style="width: 400px"';?> >
                             <div class="search-bar " id="search_group">
-                                <input type="text" class="form-control search" placeholder="(username, tagline, city)" id="input_search" name="input_search">
+                                <input type="text" class="form-control search" placeholder="Search for..." id="input_search" name="input_search" title="Search username, unique hobby and city">
                                 <div class="input-group-btn">
-                                    <button class="btn btn-default" id="search_submit_button" name="search_submit_button" type="submit">
+                                    <button class="btn btn-default" id="search_submit_button" name="search_submit_button" type="submit" title="Search username, unique hobby and city">
                                         <i class="glyphicon glyphicon-search"></i>
                                     </button>
-                                    <!--?>-->
                                 </div>
-                                <div id="search_result"></div>
+                                <div id="search_result" class="hide"></div>
                             </div>
                         </div>
                     </form>

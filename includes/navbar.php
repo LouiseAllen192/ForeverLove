@@ -32,13 +32,13 @@
                     <form class="navbar-form" role="search">
                         <div class="input-group" <?php if($browser == 'MF') echo 'style="width: 260px"';?> >
                             <div class="search-bar " id="search_group">
-                                <input type="text" class="form-control search" placeholder="(username, tagline, city)" id="input_search" name="input_search">
+                                <input type="text" class="form-control search" placeholder="Search for..." id="input_search" name="input_search" title="Search username, unique hobby and city">
                                 <div class="input-group-btn">
-                                    <button class="btn btn-default" id="search_submit_button" name="search_submit_button" type="submit">
+                                    <button class="btn btn-default" id="search_submit_button" name="search_submit_button" type="submit" title="Search username, unique hobby and city">
                                         <i class="glyphicon glyphicon-search"></i>
                                     </button>
                                 </div>
-                                <div id="search_result"></div>
+                                <div id="search_result" class="hide"></div>
                             </div>
                         </div>
                     </form>
@@ -51,8 +51,7 @@
             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-4">
                 <div style="padding-top: 34px">
                     <?php
-                        if(isset($_SESSION['user_id']))
-                        {
+                        if(isset($_SESSION['user_id'])) {
                             $userID = $_SESSION['user_id'];
                             $newMessages = DB::getInstance()->query("SELECT COUNT(*) as Number FROM messages WHERE recipient_id = '$userID' AND seen = '0'")->results();
                             $count = $newMessages[0]->Number;
