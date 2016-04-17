@@ -6,6 +6,7 @@
     require_once 'core/init.php';
     include("includes/metatags.html");
     include("includes/fonts.html");
+    include("Classes/UserServiceMgr.php");
 
 
     if(isset($_GET['logout']) /*|| isset($_POST['submit_button'])*/){
@@ -34,7 +35,7 @@
 </head>
 
 <body class="full">
-    <?php include("includes/navbarNotLoggedIn.html"); ?>
+    <?php include("includes/navbarNotLoggedIn.html");?>
 
     <!--Main page content-->
 

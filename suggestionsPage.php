@@ -10,6 +10,11 @@
     $db = DB::getInstance();
     $me = $_SESSION['user_id'];
     $results = SearchServiceMgr::suggestions($me);
+
+    $perPage = 8;
+    $pageNum = (isset($_GET['pageNum'])) ? $_GET['pageNum'] : 1;
+    $n = count($results);
+    $lastPage = intval(($n % $perPage == 0) ? $n / $perPage : ($n / $perPage) + 1);
     ?>
     <title>Suggestions Page</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -38,28 +43,30 @@
                     <?php
                     if($db->query("SELECT account_type FROM account_details WHERE user_id = '$me'")->results()[0]->account_type == 'Premium'){
                         if(isset($results)){
-                            foreach ($results as $result) {
+                            $endPagination = ($pageNum == $lastPage) ? $n : $pageNum * $perPage;
+                            for($i = ($pageNum * $perPage) - $perPage; $i < $endPagination; $i++){
                                 ?>
                                 <div class="row">
                                     <div class="col-xs-offset-2">
                                         <div class="col-xs-10">
-                                            <a href="profilePage.php?uid=<?php echo $result->user_id; ?>">
+                                            <a href="profilePage.php?uid=<?php echo $results[$i]->user_id; ?>">
                                                 <div class="display_box">
                                                     <div class="row">
                                                         <div class="col-xs-12">
                                                             <div class="media">
                                                                 <div class="media-left">
-                                                                    <img height="78" width="78" class="media-object" title="Profile Image" src="<?php echo $db->query("SELECT image_path FROM images WHERE user_id = '$result->user_id' && image_id = '1'")->results()[0]->image_path; ?>">
+                                                                    <?php $result_uid = $results[$i]->user_id; ?>
+                                                                    <img height="78" width="78" class="media-object" title="Profile Image" src="<?php echo $db->query("SELECT image_path FROM images WHERE user_id = '$result_uid' && image_id = '1'")->results()[0]->image_path; ?>">
                                                                 </div>
                                                                 <div class="media-body" style="padding-top: 3px;">
-                                                                    <h4 class="media-heading" title="Username"><?php echo $result->username; ?></h4>
-                                                                    <small style="white-space: nowrap;" title="Tag Line"><?php echo $result->tag_line; ?></small>
+                                                                    <h4 class="media-heading" title="Username"><?php echo $results[$i]->username; ?></h4>
+                                                                    <small style="white-space: nowrap;" title="Tag Line"><?php echo $results[$i]->tag_line; ?></small>
                                                                 </div>
                                                                 <div class="media-right media-middle">
-                                                                    <h5 class="media-heading" title="Location"><?php echo $result->city; ?></h5>
+                                                                    <h5 class="media-heading" title="Location"><?php echo $results[$i]->city; ?></h5>
                                                                 </div>
                                                                 <div class="media-right media-middle">
-                                                                    <span class="badge badge-notify" title="Common Interests"><?php echo $result->Total;?></span>
+                                                                    <span class="badge badge-notify" title="Common Interests"><?php echo $results[$i]->Total; ?></span>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -68,6 +75,22 @@
                                             </a>
                                         </div>
                                     </div>
+                                </div>
+                                <?php
+                            }
+                            if($n > $perPage){
+                                ?>
+                                <div style="margin: 20px;">
+                                    <ul class="pagination">
+                                        <li><a href="suggestionsPage.php?pageNum=<?php echo 1; ?>">&laquo;</a></li>
+                                        <?php
+                                        for($i = 1; $i <= $lastPage; $i++){?>
+                                            <li><a href="suggestionsPage.php?pageNum=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+                                            <?php
+                                        }
+                                        ?>
+                                        <li><a href="suggestionsPage.php?pageNum=<?php echo $lastPage; ?>">&raquo;</a></li>
+                                    </ul>
                                 </div>
                                 <?php
                             }

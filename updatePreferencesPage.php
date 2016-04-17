@@ -177,6 +177,7 @@ else {
                         </div>
                         <div class="col-md-offset-4 col-sm-offset-5" id="errors">
                             <span class="<?php if($errors['tag_line'] == 'error_required') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_required">Required...</span>
+
                             <span class="<?php if($errors['tag_line'] == 'error_regex') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_regex">Invalid format<br> - Must contain at least two characters<br> Can not contain characters < or >...</span>
                         </div>
                     </div>
@@ -197,7 +198,7 @@ else {
                         </div>
                         <div class="col-md-offset-4 col-sm-offset-5" id="errors">
                             <span class="<?php if($errors['city'] == 'error_required') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_required">Required...</span>
-                            <span class="<?php if($errors['city'] == 'error_regex') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_regex">Invalid format. Valid characters(a-z, A-Z, 0-9, whitespace, ', -) at least two...</span>
+                            <span class="<?php if($errors['city'] == 'error_regex') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_regex">Invalid format, must be at least 2 characters. Valid characters are: (a-z, A-Z, 0-9, whitespace, ', -)</span>
                         </div>
                     </div>
 
@@ -242,7 +243,9 @@ else {
                             </div>
                             <div class="col-md-offset-4 col-sm-offset-5" id="errors">
                                 <span class="<?php if($errors['about_me'] == 'error_required') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_required">Required...</span>
+
                                 <span class="<?php if($errors['about_me'] == 'error_regex') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_required">Invalid format<br> - Must contain at least two characters<br> Can not contain characters < or >...</span>
+
                             </div>
                         </div>
 

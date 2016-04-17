@@ -1,5 +1,3 @@
-
-
 FOR MONDAY!!!:
 
 - add 1000 users
@@ -9,6 +7,16 @@ FOR MONDAY!!!:
 
 - make sure hmail server works
 - Get search bar to work when logged in as admin
-- Find and eliminate bug that's occasionally creating duplicate conversations (haven't seen in a while...)
-- Find out how to let admin view messages in a conversation
 
+
+Message Services:
+	- Find and eliminate bug that's occasionally creating duplicate conversations (haven't seen in a while...)
+	- More button for messages?
+	
+Search Services:
+    - Redirect with results upon enter or click search icon
+    - Get search bar to work when logged in as admin ?????????
+
+
+Admin Services:
+    -  ...
