@@ -171,6 +171,7 @@ else {include("includes/navbar.php");}?>
                             <br><br><br><br><br><br>
                             <br><br><br><br><br><br>
                             <br><br><br><br><br><br>
+                            <br><br><br>
 
 
                             <form action="profilePage.php?<?php if($me==3){echo 'admin=true&';}?>uid=<?php echo $uid; ?>" method="post">

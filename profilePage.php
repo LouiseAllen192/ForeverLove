@@ -148,21 +148,23 @@
                                                 <small>
                                                     <strong><?php echo ($dbprf['tag_line'])?></strong>
                                                 </small>
-                                            </h5>
+                                            </h5><br>
                                             <div class = "row">
                                                 <div class="col-md-4"></div>
                                                 <div class="col-md-4">
-                                                    <div class="col-md-4">
-                                                        <small class="text-muted">Age </small><?php echo calculateAge($dbprf['date_of_birth']); ?>
-                                                    </div><br><br>
-                                                    <div class="col-md-4">
-                                                        <small class="text-muted">City </small><?php echo $dbprf['city'];?>
-                                                    </div><br><br>
-                                                    <div class="col-md-4">
-                                                        <small class="text-muted">Gender </small><?php echo $dbprf['gender'];?>
+                                                    <div class="row">
+                                                        <div class="col-md-6"><small class="text-muted">Age </small></div>
+                                                        <div class="col-md-6"><?php echo calculateAge($dbprf['date_of_birth']); ?></div>
                                                     </div>
-                                                    <div style="clear:both;"><div></div></div>
-                                                    <br>
+                                                    <div class="row">
+                                                        <div class="col-md-6"><small class="text-muted">City </small></div>
+                                                        <div class="col-md-6"><?php echo $dbprf['city'];?></div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6"><small class="text-muted">Gender </small></div>
+                                                        <div class="col-md-6"><?php echo $dbprf['gender'];?></div>
+                                                    </div><br><br>
+
                                                 </div>
                                                 <div class="col-md-4"></div>
                                             </div>

@@ -100,7 +100,7 @@ else {
                     </small>
                 </h2>
                 <hr class="tagline-divider">
-                <br>
+                <br> </form><?php if($browser == 'IE') echo '<br>'?>
 
                 <?php
 
@@ -114,20 +114,22 @@ else {
                 if(!empty($_POST) && !$errors) {
                     $dbvalue = ReturnShortcuts::returnHobbies($uid);
                     if (!$update && $success) { $displayForm=false;?>
+                        <br><br><br><br><br>
                         <div class= "alert alert-success" role="alert">
                         <a href="homePage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                         Registration completed successfully.
-                            <br><br><a href="homePage.php" class="btn btn-info center-block" style="width:200px;">Go to Home Page <span class="glyphicon glyphicon-home"></span></a>
-                        </div>
+                            <br><br><br><br><a href="homePage.php" class="btn btn-info center-block" style="width:200px;">Go to Home Page <span class="glyphicon glyphicon-home"></span></a>
+                        </div><br><br><br><br>
                     <?php }
                     if ($update && $success) { $displayForm=false;?>
+                        <br><br><br><br>
                         <div class= "alert alert-success" role="alert">
                             <?php if($admin){ ?>
                                 <a href="../ForeverLove/secret_location/adminHomePage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                            <?php } else {?>
                         <a href="homePage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                             <?php } ?>
-                        Hobby Details updated successfully<br><br>
+                        Hobby Details updated successfully<br><br><br><br>
                             <?php if($admin){ ?>
                                 <a href="../ForeverLove/secret_location/adminHomePage.php" class="btn btn-info center-block" style= "width:200px;" >Go to Home Page <span class="glyphicon glyphicon-home"></span></a>
                             <?php } else {?>
@@ -136,7 +138,7 @@ else {
 
 
 
-                        </div>
+                        </div><br><br><br><br> <?php if($browser == 'IE') echo '<br><br>'?>
                     <?php }
                     if (!$success) { ?>
                         <div class="alert alert-danger">
@@ -190,7 +192,7 @@ else {
                                 ?>
                             </fieldset>
 
-                            <br>
+                            <br><br>
 
                             <div class="form-group" id="unique_hobby_group">
                                 <label for="unique_hobby" class="col-md-4 col-sm-5 control-label"><b>Unique Hobby</b></label>
@@ -217,9 +219,9 @@ else {
                         </div>
                         <div style="clear:both;"><div></div></div>
                     </div>
-
+                    <?php if($browser == 'IE') echo '<br><br>'?>
                     <input type="submit" name="Send" class="btn btn-primary" Value="<?php echo $regOrUpdate?> Changes">
-                </form>
+                </form><?php if($browser == 'IE') echo '<br>'?>
 
                 <?php } ?>
 
@@ -232,6 +234,8 @@ else {
             <?php if($update){ ?>
                 <a href="settingsPage.php" class="btn btn-info buttons-left" role="button"><span class="glyphicon glyphicon-chevron-left"></span> Back To Settings Page</a>
             <?php } ?>
+
+            <br><br>
         </div>
     </div>
 

@@ -46,7 +46,7 @@
                 </h2>
                 <hr class="tagline-divider">
                 <p>
-                    <br>
+                    <br><br>
 
                     <?php
                     if(Input::exists()){
@@ -124,13 +124,14 @@
                     </div>
                 </div>
 
-
+                <?php if($browser == 'IE') echo '<br><br><br><br>'?>
                 <a href="settingsPage.php" class="btn btn-info buttons-left" role="button"><span class="glyphicon glyphicon-chevron-left"></span> Back To Settings Page</a>
 
                 <br><br>
                 <br><br>
                 </p>
             </div>
+
         </div>
     </div>
 

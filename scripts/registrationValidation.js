@@ -163,11 +163,23 @@ $(document).ready(function(){
                 age--;
             }
             if (age < 18) {
-                $('#dob_group > #errors > #error_regex').removeClass('hide').addClass('error');
+                $('#dob_group > #errors > #error_over18').removeClass('hide').addClass('error');
             }
             else {
+                $('#dob_group > #errors > #error_over18').removeClass('error').addClass('hide');
+            }
+
+            var pattern = /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/;
+            var valid = pattern.test(input);
+            if (dob.getMonth() < 1 || dob.getMonth() > 12){valid=false;}
+            if (dob.getDate() < 1 || dob.getDate() > 31){valid=false;}
+            if (valid) {
                 $('#dob_group > #errors > #error_regex').removeClass('error').addClass('hide');
             }
+            else {
+                $('#dob_group > #errors > #error_regex').removeClass('hide').addClass('error');
+            }
+
         });
     }
 });

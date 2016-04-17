@@ -10,6 +10,9 @@
         header('Location: searchResultsPage.php?searchTerm='.$_GET['input_search']);
         die();
     }
+
+    $browser = BrowserHelper::getBrowser($_SERVER['HTTP_USER_AGENT']);
+
     ?>
 </head>
 

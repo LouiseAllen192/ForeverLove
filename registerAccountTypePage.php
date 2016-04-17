@@ -9,7 +9,9 @@
     $uid = $_SESSION['user_id'];
 
         if(isset($_GET['reg'])){
-            mkdir(dirname(realpath("registerAccountTypePage.php"))."\userImageUploads\user".$uid, 0700);
+            if (!file_exists(dirname(realpath("registerAccountTypePage.php"))."\userImageUploads\user".$uid)) {
+                mkdir(dirname(realpath("registerAccountTypePage.php"))."\userImageUploads\user".$uid, 0700);
+            }
         }
 
     $errors = array();
@@ -73,9 +75,9 @@ include("includes/navbarRegistration.php"); ?>
                 <br>
 
                 <?php if(empty($_POST)){ ?>
-                <p>Here at ForeverLove we want to give everyone the best possible chance at happiness. <br>
+                <br><p>Here at ForeverLove we want to give everyone the best possible chance at happiness. <br>
                     That's why we give all our members a 30 day trial for FREE. <br><br>Find a love that will last a lifetime.<br>Continue your sign up here...</p>
-                <br>
+                <br><br>
                 <?php }?>
 
                 <?php
@@ -94,7 +96,7 @@ include("includes/navbarRegistration.php"); ?>
                         <div class = "panel-body">
                             <form role ="form" class="form-inline" action="registerAccountTypePage.php" method="post" id="accTypeForm">
                                 <fieldset class="form-group">
-                                    <label for="accountType">Please select which type of account you would like:</label>
+                                    <label for="accountType">Please select which type of account you would like:</label><br>
                                     <select name="accType" id="accType" class="form-control">
                                         <option value="free">30 day Free Trial</option>
                                         <option value="premium3">Premiuim Account - 3 months</option>
@@ -243,6 +245,10 @@ include("includes/navbarRegistration.php"); ?>
                 <br><br>
                 </p>
             </div>
+
+            <?php if($browser == 'IE'){ ?>
+                <br><br><br><br><br><br><br><br>
+            <?php } ?>
         </div>
     </div>
 

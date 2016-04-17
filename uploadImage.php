@@ -79,7 +79,7 @@
 
 
                     <br><br><br><br><br><br>
-                    <br><br><br><br><br><br>
+                    <br><br><br><br>
 
 
                     <form action="galleryPage.php" method="post">
@@ -89,13 +89,12 @@
                     </form>
 
 
-                <br><br><br><br><br><br>
+                <br><br><br><br><br>
 
 
 
                     </div>
                 </div>
-                <br><br><br><br>
             </div>
         </div>
     </div>

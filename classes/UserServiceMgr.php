@@ -273,7 +273,8 @@ class UserServiceMgr
                 ],
                 'dob' => [
                     'required' => true,
-                    'over_18' => true
+                    'over_18' => true,
+                    'matches' => '/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/'
             ]
         ]);
 

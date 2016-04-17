@@ -27,7 +27,7 @@ class Validate{
                     }
                     else if($rule == 'over_18'){
                         if(!((new DateTime($value))->diff(new DateTime(date('Y-m-d')))->y >= 18)){
-                            $this->addError($item, 'error_regex');
+                            $this->addError($item, 'error_over18');
                         }
                     }
                 }

@@ -11,24 +11,7 @@
         die();
     }
 
-    $browser = 'unknown';
-            if(strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') !== FALSE)
-                $browser='IE';
-            elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Trident') !== FALSE) //For Supporting IE 11
-                $browser='IE';
-            elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Firefox') !== FALSE)
-                $browser='MF';
-            elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Chrome') !== FALSE)
-                $browser='GC';
-            elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Opera Mini') !== FALSE)
-                $browser="OM";
-            elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Opera') !== FALSE)
-                $browser="O";
-            elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Safari') !== FALSE)
-                $browser="S";
-            else
-                $browser= 'Something else';
-
+    $browser = BrowserHelper::getBrowser($_SERVER['HTTP_USER_AGENT']);
 
 
     ?>

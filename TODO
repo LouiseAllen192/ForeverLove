@@ -4,9 +4,11 @@ FOR MONDAY!!!:
 
 - add 1000 users
 - page thing for search results if 1000 users
+
+- validate DOB properly
+
 - make sure hmail server works
 - Get search bar to work when logged in as admin
 - Find and eliminate bug that's occasionally creating duplicate conversations (haven't seen in a while...)
-- Handle XSS attacks
 - Find out how to let admin view messages in a conversation
 
