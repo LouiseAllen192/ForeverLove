@@ -6,19 +6,22 @@
     <?php
         include("includes/metatags.html");
         require_once 'core/init.php';
+        include("includes/fonts.html");
+        if(!empty($_POST))
+        {
+            if($_POST["message"] != "")
+            {
+                $uid = $_SESSION['user_id'];
+                $msgMgr = new MessageMgr($uid);
+                $convoID = $msgMgr->sendNewMessage($_POST);
+                if ($convoID != false)
+                    header("Location: conversationPage.php?$convoID#bottom");
+            }
+        }
     ?>
     <title>New Message</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/custom-new-msg.css" rel="stylesheet">
-    <?php include("includes/fonts.html");
-    if(!empty($_POST))
-    {
-        $uid = $_SESSION['user_id'];
-        $msgMgr = new MessageMgr($uid);
-        $convoID = $msgMgr->sendNewMessage($_POST);
-        if($convoID != false)
-            header("Location: conversationPage.php?$convoID#bottom");
-    }?>
 </head>
 
 <body class="full">
@@ -44,10 +47,23 @@
                     <?php
                     if(!empty($_POST))
                     {
-                        //if page gets here then message has not sent
-                        echo "<div class=\"alert alert-danger\">
-                                  Message Not Sent - Username Entered Does Not Exist Or Is Your Own.
+                        if($_POST["message"] == "")
+                            echo "<div class=\"alert alert-danger\">
+                                  Message Not Sent - You Cannot Send A Blank Message.
                               </div>";
+                        else
+                        {
+                            $uid = $_SESSION['user_id'];
+                            $uid2 = MessageMgr::doesRecipientExist($_POST["recipient"]);
+                            if ($uid == $uid2)
+                                echo "<div class=\"alert alert-danger\">
+                                  Message Not Sent - You Cannot Message Yourself.
+                                 </div>";
+                            else
+                                echo "<div class=\"alert alert-danger\">
+                                  Message Not Sent - Username Entered Does Not Exist.
+                                 </div>";
+                        }
                     }
                     if(!empty($_SERVER['QUERY_STRING']))
                     {

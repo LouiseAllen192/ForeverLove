@@ -91,7 +91,8 @@
                             $uid = $_SESSION['user_id'];
                             $MsgMgr = new MessageMgr($uid);
                             if (isset($_POST['convoID']))
-                                $MsgMgr->sendMessage($_POST["message"], $convoID);
+                                if($_POST['message'] != "")
+                                    $MsgMgr->sendMessage($_POST["message"], $convoID);
                             if ($MsgMgr->conversationExists($convoID))
                                 $MsgMgr->conversationLoader($convoID);
                             else

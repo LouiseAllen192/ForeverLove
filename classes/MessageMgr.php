@@ -114,7 +114,7 @@ class MessageMgr
                   </div><br><br><br><br><br><br><br><br>";
     }
 
-    public function doesRecipientExist($recipientName)
+    public static function doesRecipientExist($recipientName)
     {
         $ans = DB::getInstance()->query("SELECT * FROM registration_details WHERE Username = '$recipientName'", [])->results();
         if(empty($ans))
@@ -319,7 +319,9 @@ class MessageMgr
                                         <button name=\"end\" value=\"end\" class=\"btn btn-warning\">End Conversation</button>
                                         <input type=\"hidden\" name=\"convo_id\" value=$convoID>
                                        </form>";
-            } else {
+            }
+            else
+            {
                 $uname = $this->getOtherUser($convoID);
                 $uid2 = $this->doesRecipientExist($uname);
                 echo "<br><br><form action=\"profilePage.php?uid=$uid2\" method=\"post\">
@@ -329,7 +331,8 @@ class MessageMgr
             echo "<br><br><form action=\"conversationPage.php?$convoID#bottom\"  method=\"post\">
                     <button name=\"reload\" value=\"reload\" class=\"btn btn-warning\">Check For New Messages</button>
                    </form><br><br>";
-        } else
+        }
+        else
             echo "<div class=\"alert alert-danger\">
                       Error - You are not invloved in this conversation!
                   </div>";
