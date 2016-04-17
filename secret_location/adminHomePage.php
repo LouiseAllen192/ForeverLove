@@ -34,8 +34,9 @@
                     <small>
                         <strong>Administration</strong>
                     </small>
-                </h2>
+                </h2><br>
                 <hr class="tagline-divider">
+                <div class="content-admin">
                 <div class="row">
                     <div class="col-sm-3 col-xs-6">
                         <div class="dummy"></div>
@@ -61,6 +62,8 @@
                             </div>
                         </a>
                     </div>
+                </div>
+                <div class = "row">
                     <div class="col-sm-3 col-xs-6">
                         <div class="dummy"></div>
                         <a href="viewAllPage.php" class="thumbnail">
@@ -86,6 +89,8 @@
                         </a>
                     </div>
                 </div>
+                </div>
+
                 <br><br>
                 <br><br>
             </div>

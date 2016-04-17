@@ -121,6 +121,9 @@
                         </div>
                     </div>
                 </div>
+
+                <a href="../secret_location/adminHomePage.php" class="btn btn-info pull-left" role="button"><span class="glyphicon glyphicon-chevron-left"></span> Back To Menu</a>
+
             </div>
          </div>
     </div>

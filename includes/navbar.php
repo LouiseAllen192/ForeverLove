@@ -33,7 +33,7 @@
             <div class="col-lg-4 col-md-4 col-sm-5 col-xs-3">
                 <div class="searchbar-area">
                     <form class="navbar-form" role="search">
-                        <div class="input-group" <?php if($browser == 'MF') echo 'style="width: 240px"';?> >
+                        <div class="input-group" <?php if($browser == 'MF') echo 'style="width: 260px"';?> >
                             <div class="search-bar " id="search_group">
                                 <input type="text" class="form-control search" placeholder="(username, tagline, city)" id="input_search" name="input_search">
                                 <div class="input-group-btn">
