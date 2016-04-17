@@ -14,6 +14,7 @@
     include($_SERVER['DOCUMENT_ROOT'].'/classes/Input.php');
     include($_SERVER['DOCUMENT_ROOT'].'/classes/UserServiceMgr.php');
     include($_SERVER['DOCUMENT_ROOT'].'/classes/Validate.php');
+    include($_SERVER['DOCUMENT_ROOT'].'/classes/BrowserHelper.php');
 
 
     $uid;
