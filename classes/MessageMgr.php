@@ -18,6 +18,7 @@ class MessageMgr
         else
             return true;
     }
+
     public function doesConversationExist($user2ID)
     {
         $ans = DB::getInstance()->query("SELECT * FROM conversations WHERE (User1_id = $this->userID OR User1_id = $user2ID) AND (User2_id = $this->userID OR User2_id = $user2ID) AND (User1_id <> User2_id) AND profile_visible = '1' ", [])->results();
@@ -31,7 +32,7 @@ class MessageMgr
     {
         $reciever_id = $this->getConversationPartner($convoID);
         $date = date('Y-m-d H:i:s');
-        DB::getInstance()->insert('messages', ['Conversation_id' => $convoID, 'Sender_id' => $this->userID, 'Recipient_id'  => $reciever_id, 'Date_Received' => $date, 'Message_Text' => $message, 'seen' => 0]);
+        DB::getInstance()->insert('messages', ['Conversation_id' => $convoID, 'Sender_id' => $this->userID, 'Recipient_id' => $reciever_id, 'Date_Received' => $date, 'Message_Text' => $message, 'seen' => 0]);
     }
 
     public function sendNewMessage($GET)
@@ -39,16 +40,17 @@ class MessageMgr
         $rec = ($GET["recipient"]);
         $date = date('Y-m-d H:i:s');
         $reciever_id = $this->doesRecipientExist($rec);
-        if(!($reciever_id)) //if reciver doesn't exist
+        $message = ($GET["message"]);
+        if (!($reciever_id) || $reciever_id == $this->userID) //if reciver doesn't exist or is logged in
             return false;
         else
         {
             $convo_id = $this->doesConversationExist($reciever_id);
-            if(!($convo_id))
+            if(!($convo_id)) //if no conversation between the users exists
             {
                 $convo_id = $this->createConversation($reciever_id, 1);
             }
-            DB::getInstance()->insert('messages', ['Conversation_id' => $convo_id, 'Sender_id' => $this->userID, 'Recipient_id'  => $reciever_id, 'Date_Received' => $date, 'Message_Text' => $GET["message"], 'seen' => 0]);
+            DB::getInstance()->insert('messages', ['Conversation_id' => $convo_id, 'Sender_id' => $this->userID, 'Recipient_id' => $reciever_id, 'Date_Received' => $date, 'Message_Text' => $message, 'seen' => 0]);
             return $convo_id;
         }
     }
@@ -56,18 +58,17 @@ class MessageMgr
     public function findConversations()
     {
         $convos = DB::getInstance()->query("SELECT * FROM conversations WHERE (User1_id = $this->userID) OR (User2_id = $this->userID)", [])->results();
-        $messagedUsers = array();
-        for($i = 0; $i < count($convos); $i++)
+        for ($i = 0; $i < count($convos); $i++)
         {
             if($convos[$i]->user1_id == $this->userID)
                 $tempUID = $convos[$i]->user2_id;
             else
                 $tempUID = $convos[$i]->user1_id;
             $convoPartner = DB::getInstance()->query("SELECT * FROM registration_details WHERE user_id = '$tempUID'")->results();
-            $messagedUsers[$i]=$convoPartner[0]->username;
+            $messagedUser = ($convoPartner[0]->username);
             $otherUID = $convoPartner[0]->user_id;
             $tempConvoID = $convos[$i]->conversation_id;
-            $linkString = "conversationPage.php?".$tempConvoID."#bottom";
+            $linkString = "conversationPage.php?" . $tempConvoID . "#bottom";
             $vis = $this->isProfileVisible($tempConvoID);
             $unreadMessagesArray = DB::getInstance()->query("SELECT COUNT(*) as num FROM messages WHERE recipient_id = '$this->userID' AND seen = '0' AND conversation_id = $tempConvoID")->results();
             $unreadMessages = $unreadMessagesArray[0]->num;
@@ -80,21 +81,19 @@ class MessageMgr
                                     <a href= \"$linkString\">
                                         <div class=\"media - left\">
                                             <img height=\"78\" width=\"78\" class=\"media - object\" src=\"$image\"/>
-                                        </div>$messagedUsers[$i]</a>
+                                        </div>$messagedUser</a>
                                 </div>
                            </div>";
-                    //echo "<a href= \"$linkString\">$messagedUsers[$i]</a><br><br>";
                 else
                     echo " <div class=\"row\">
                                 <div class=\"well well-sm\">
                                     <a href= \"$linkString\">
                                         <div class=\"media - left\">
                                             <img height=\"78\" width=\"78\" class=\"media - object\" src=\"$image\"/>
-                                        </div>$messagedUsers[$i]<br><br><br><span class=\"badge\">$unreadMessages</span>
+                                        </div>$messagedUser<br><br><br><span class=\"badge\">$unreadMessages</span>
                                     </a>
                                 </div>
                            </div>";
-                    //echo "<a href= \"$linkString.\">$messagedUsers[$i]<span class=\"badge\">$unreadMessages</span></a><br><br>";
             }
             else //if blind date
             {
@@ -112,14 +111,6 @@ class MessageMgr
             echo "<div class=\"alert alert-danger\">
                    No Conversations Found.
                   </div>";
-    }
-
-    public static function testFunction($changes)
-    {
-        foreach ($changes as $key => $value)
-        {
-            echo $key . ' ---------   ' . $value . '<br>';
-        }
     }
 
     public function doesRecipientExist($recipientName)
@@ -152,17 +143,18 @@ class MessageMgr
             }
             else
                 $partnerName = "Blind Date";
-            echo"<div class = panel-group>";
-            for($i = 0; $i < count($messages); $i++)
+            if(count($messages) > 0)
+                echo "<div class = panel-group>";
+            for ($i = 0; $i < count($messages); $i++)
             {
                 $dateAndTime = explode(" ", ($messages[$i]->date_received));
                 $date = explode("-", $dateAndTime[0]);
-                $tidyDate = $date[2]."/".$date[1]."/".$date[0]; //displays date forwards instead of backwards as it is stored
+                $tidyDate = $date[2] . "/" . $date[1] . "/" . $date[0]; //displays date forwards instead of backwards as it is stored
                 $time = explode(":", $dateAndTime[1]);
-                $tidyTime = $time[0].":".$time[1]; //removes seconds from time, so it's displayed in hours and mins
-                $headerString = $partnerName." at ".$tidyTime." on ".$tidyDate;
-                $messageText = $messages[$i]->message_text;
-                if ($messages[$i]->sender_id == $this->userID)
+                $tidyTime = $time[0] . ":" . $time[1]; //removes seconds from time, so it's displayed in hours and mins
+                $headerString = $partnerName . " at " . $tidyTime . " on " . $tidyDate;
+                $messageText = htmlspecialchars($messages[$i]->message_text, ENT_QUOTES);
+                if ($messages[$i]->sender_id == $this->userID) //if sender is logged in
                 {
                     $sender = "To ";
                     echo "<div class=\"panel panel-success\" style = \"text-align: right\">
@@ -217,9 +209,9 @@ class MessageMgr
     public function isUserInConversation($convoID)
     {
         $usersInConversation = DB::getInstance()->query("SELECT user1_id, user2_id FROM conversations WHERE conversation_id = '$convoID'")->results();
-        if(!empty($usersInConversation))
+        if (!empty($usersInConversation))
         {
-            if($this->userID == $usersInConversation[0]->user1_id || $this->userID == $usersInConversation[0]->user2_id)
+            if ($this->userID == $usersInConversation[0]->user1_id || $this->userID == $usersInConversation[0]->user2_id)
                 return true;
             else
                 return false;
@@ -231,51 +223,49 @@ class MessageMgr
     public function blindDateMatch()
     {
         $message = $this->blindDateEligible();
-        if($message == "")
-        {
+        if ($message == "") {
             $user = DB::getInstance()->query("SELECT * FROM preference_details WHERE user_id = $this->userID")->results();
             $seeking = $user[0]->seeking;
             $gender = $user[0]->gender;
             /*if(($seeking == 2 || $seeking == 3 || $seeking == 4) && ($gender == 2 || $gender == 3))
             {*/
-                //get all people from Blind Date table here and try to find an eligible match
-                $allUsers = DB::getInstance()->query("SELECT * FROM blind_date")->results();
-                $matchFound = false;
-                $i = 0;
-                while (!$matchFound && $i < count($allUsers))
+            //get all people from Blind Date table here and try to find an eligible match
+            $allUsers = DB::getInstance()->query("SELECT * FROM blind_date")->results();
+            $matchFound = false;
+            $i = 0;
+            while (!$matchFound && $i < count($allUsers))
+            {
+                $otherUserSeeking = $allUsers[$i]->seeking;
+                $otherUserGender = $allUsers[$i]->gender;
+                if (($seeking == 4 || $seeking == $otherUserGender) && ($otherUserSeeking == 4 || $otherUserSeeking == $gender))
                 {
-                    $otherUserSeeking = $allUsers[$i]->seeking;
-                    $otherUserGender = $allUsers[$i]->gender;
-                    if (($seeking == 4 || $seeking == $otherUserGender) && ($otherUserSeeking == 4 || $otherUserSeeking == $gender))
-                    {
-                        $matchFound = true;
-                        $this->createConversation($allUsers[$i]->user_id, 0);
-                        $id = $allUsers[$i]->user_id;
-                        DB::getInstance()->query("DELETE FROM blind_date WHERE user_id = $id")->results();
-                        //DB::getInstance()->delete('blind_date', "user_id = $allUsers[$i]->user_id");
-                        echo "<div class=\"alert alert-success\">
+                    $matchFound = true;
+                    $this->createConversation($allUsers[$i]->user_id, 0);
+                    $id = $allUsers[$i]->user_id;
+                    DB::getInstance()->query("DELETE FROM blind_date WHERE user_id = $id")->results();
+                    DB::getInstance()->delete('blind_date', "user_id = $allUsers[$i]->user_id"); //removes user from blind date DB when they've got a match
+                    echo "<div class=\"alert alert-success\">
                                Blind Date Match Made! Go To Your Existing Conversations To Begin Chatting!
                                 <a href=\"existingConversationPage.php\"><h3>Take Me There!</h3></a></div>";
-                    }
-                    $i++;
                 }
-                if(!$matchFound)
-                {
-                    DB::getInstance()->insert('blind_date', ['user_id' => $this->userID, 'seeking' => $seeking, 'gender' => $gender]);
-                    echo "<div class=\"alert alert-success\">
+                $i++;
+            }
+            if (!$matchFound) {
+                DB::getInstance()->insert('blind_date', ['user_id' => $this->userID, 'seeking' => $seeking, 'gender' => $gender]);
+                echo "<div class=\"alert alert-success\">
                        No suitible match availible at the moment, but you will be matched shortly. Keep checking you existing conversations page!
                       </div>";
-                }
-        }
-        else
+            }
+        } else
             echo "<div class=\"alert alert-danger\">
                    $message
                   </div>";
     }
+
     public function isProfileVisible($convo_id)
     {
         $vis = DB::getInstance()->query("SELECT profile_visible FROM conversations WHERE conversation_id = '$convo_id'")->results();
-        if($vis[0]->profile_visible == 1)
+        if ($vis[0]->profile_visible == 1)
             return true;
         else
             return false;
@@ -291,7 +281,7 @@ class MessageMgr
     public function revealButton($convoID)
     {
         $current = DB::getInstance()->query("SELECT reveal FROM conversations WHERE conversation_id = '$convoID'")->results();
-        if($current[0]->reveal == NULL)
+        if ($current[0]->reveal == NULL)
             DB::getInstance()->query("UPDATE conversations SET reveal = '$this->userID' WHERE conversation_id = $convoID");
         /*else if($current[0]->reveal == $this->userID)
             echo "You already pressed the reveal button";*/
@@ -302,7 +292,7 @@ class MessageMgr
     public function hasUserPressedReveal($convoID)
     {
         $current = DB::getInstance()->query("SELECT reveal FROM conversations WHERE conversation_id = '$convoID'")->results();
-        if($current[0]->reveal == $this->userID)
+        if ($current[0]->reveal == $this->userID)
             return true;
         else
             return false;
@@ -310,19 +300,17 @@ class MessageMgr
 
     public function conversationLoader($convoID) //loads everything but heading and back button on conversation page
     {
-        if ($this->isUserInConversation($convoID) == TRUE)
-        {
+        if ($this->isUserInConversation($convoID) == TRUE) {
             $this->loadConversation($convoID);
             $visible = $this->isProfileVisible($convoID);
-            if (!$visible)
-            {
+            if (!$visible) {
                 $msgCount = $this->messageCount($convoID);
                 echo "Message Count: " . $msgCount;
                 if ($msgCount >= 25 && !($this->hasUserPressedReveal($convoID)))
                     echo "<form action=\"conversationPage.php?$convoID#bottom\"  method=\"post\">
                             <button name=\"reveal\" value=\"reveal\" class=\"btn btn-warning\">Reveal User</button>
                            </form><br><br>";
-                else if($this->hasUserPressedReveal($convoID))
+                else if ($this->hasUserPressedReveal($convoID))
                     echo "<div class=\"alert alert-info\">
                            You have pressed to reveal your profile to your blind date and to see their profile. If they also press the button then the reveal will take place.
                           </div>";
@@ -331,9 +319,7 @@ class MessageMgr
                                         <button name=\"end\" value=\"end\" class=\"btn btn-warning\">End Conversation</button>
                                         <input type=\"hidden\" name=\"convo_id\" value=$convoID>
                                        </form>";
-            }
-            else
-            {
+            } else {
                 $uname = $this->getOtherUser($convoID);
                 $uid2 = $this->doesRecipientExist($uname);
                 echo "<br><br><form action=\"profilePage.php?uid=$uid2\" method=\"post\">
@@ -343,8 +329,7 @@ class MessageMgr
             echo "<br><br><form action=\"conversationPage.php?$convoID#bottom\"  method=\"post\">
                     <button name=\"reload\" value=\"reload\" class=\"btn btn-warning\">Check For New Messages</button>
                    </form><br><br>";
-        }
-        else
+        } else
             echo "<div class=\"alert alert-danger\">
                       Error - You are not invloved in this conversation!
                   </div>";
@@ -359,14 +344,14 @@ class MessageMgr
         $gender = $prefs[0]->gender;
         $values = ReturnShortcuts::returnAccDetails($this->userID);
         $acctype = $values['account_type'];
-        if($acctype == 'Free')
+        if ($acctype == 'Free')
             return "You must be a premium member to access Blind Date
                     <a href =\"upgradeMembership.php\"><h3>Take Me To Upgrade Membership Page</h3></a>";
         else if (!empty($alreadyIn))
             return "We are working on finding you a match at present. Please be patient.";
-        else if($currentBlindDate)
+        else if ($currentBlindDate)
             return "You currently have a blind date in your existing conversations. You must either reveal your profile to your partner or end the conversation to get another.";
-        else if($seeking == 1 || ($gender == 1 || $gender == 4))
+        else if ($seeking == 1 || ($gender == 1 || $gender == 4))
             return "Gender And/Or Seeking Details Not Specified For Your Profile. You Must Update Them Before You Can Participate In Blind Date.
                        <a href =\"updatePreferencesPage.php\"><h3>Take Me To Update Preferences Page</h3></a>";
         else
@@ -376,7 +361,7 @@ class MessageMgr
     public function getOtherUser($convoID)
     {
         $convo_details = DB::getInstance()->query("SELECT * FROM conversations WHERE conversation_id = '$convoID'")->results();
-        if($convo_details[0]->user1_id == $this->userID)
+        if ($convo_details[0]->user1_id == $this->userID)
             $otherUID = $convo_details[0]->user2_id;
         else
             $otherUID = $convo_details[0]->user1_id;
@@ -384,13 +369,12 @@ class MessageMgr
         return $name;
     }
 
-    public function sendMessageButton($uid2)
+    public function sendMessageButton($uid2) //adds sendMessage Button with appropriate link to user profile page
     {
         $existingConversation = DB::getInstance()->query("SELECT * FROM conversations WHERE ((user1_id = '$this->userID' AND user2_id = '$uid2') OR (user2_id = '$this->userID' AND user1_id = '$uid2')) AND profile_visible = '1'")->results();
-        if(empty($existingConversation))
-         echo "<br><br><a href=\"newMessagePage.php?$uid2\" class=\"btn btn-info center-inline\" role=\"button\"><span class=\"glyphicon glyphicon-envelope\"></span> Send message</a>";
-        else
-        {
+        if (empty($existingConversation))
+            echo "<br><br><a href=\"newMessagePage.php?$uid2\" class=\"btn btn-info center-inline\" role=\"button\"><span class=\"glyphicon glyphicon-envelope\"></span> Send message</a>";
+        else {
             $cid = $existingConversation[0]->conversation_id;
             echo "<br><br><a href=\"conversationPage.php?$cid#bottom\" class=\"btn btn-info center-inline\" role=\"button\"><span class=\"glyphicon glyphicon-envelope\"></span> Send message</a>";
         }
@@ -399,6 +383,53 @@ class MessageMgr
     public function markMessagesAsRead($convoID)
     {
         DB::getInstance()->query("UPDATE messages SET seen = '1' WHERE conversation_id = '$convoID' AND recipient_id = $this->userID");
+    }
+
+    public static function loadConversationAdmin($convoID)
+    {
+        if (!empty($convoID)) {
+            $messages = DB::getInstance()->query("SELECT * FROM messages WHERE conversation_id = '$convoID' ORDER BY date_received")->results();
+            $firstUser = $messages[0]->sender_id;
+            $secondUser = $messages[0]->recipient_id;
+            echo "<div class = panel-group>";
+            for ($i = 0; $i < count($messages); $i++)
+            {
+                $sender = $messages[$i]->sender_id;
+                $sName = self::findUsername($sender);
+                $dateAndTime = explode(" ", ($messages[$i]->date_received));
+                $date = explode("-", $dateAndTime[0]);
+                $tidyDate = $date[2] . "/" . $date[1] . "/" . $date[0]; //displays date forwards instead of backwards as it is stored
+                $time = explode(":", $dateAndTime[1]);
+                $tidyTime = $time[0] . ":" . $time[1]; //removes seconds from time, so it's displayed in hours and mins
+                $headerString = "From " . $sName . " at " . $tidyTime . " on " . $tidyDate;
+                $messageText = htmlspecialchars($messages[$i]->message_text, ENT_QUOTES);
+                if ($messages[$i]->sender_id == $firstUser) //different users mesages displayed in different colours
+                {
+                    echo "<div class=\"panel panel-info\" style = \"text-align: left\">
+                      <div class=\"panel-heading\">$headerString</div>
+                      <div class=\"panel-body\">$messageText</div>
+                    </div>";
+                }
+                else
+                {
+                    echo "<div class=\"panel panel-success\" style = \"text-align: right\">
+                      <div class=\"panel-heading\">$headerString</div>
+                      <div class=\"panel-body\">$messageText</div>
+                    </div>";
+                }
+            }
+            echo "</div><br>";
+        } else //if user just types in URL without following appropriate link
+            echo "Nothing to see here.";
+    }
+
+    public static function findUsername($uid)
+    {
+        $user = DB::getInstance()->query("SELECT username FROM registration_details WHERE user_id = '$uid'")->results();
+        if (!empty($user))
+            return ($user[0]->username);
+        else
+            return "";
     }
 }
 ?>

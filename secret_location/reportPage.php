@@ -77,6 +77,20 @@
                                         <a href="banUserPage.php?uid=<?php echo $report->reportee_id;?>&report_id=<?php echo $report_id;?>" style="color: gold"><?php echo 'Ban '.$reportee;?></a>
                                     </div>
                                 </div>
+                                <?php
+                                    if($report->view_conversation == '1' && $report->conversation_id != '0')
+                                    {
+                                        echo "<div class=\"panel panel-primary\">
+                                            <div class=\"panel-heading text-center\">
+                                            <form name = \"form\" action = \"../conversationPage.php?$report->conversation_id\" method = \"post\">
+                                                <input type = \"hidden\" name = \"permission\" value = \"1\">
+                                                <input type = \"hidden\" name = \"report_id\" value = $report_id>
+                                                <a href=\"#\"  style=\"color: gold\" onclick=\"document.forms['form'].submit();\">View Conversation</div></a>
+                                                </form>
+                                            </div>
+                                        </div>";
+                                    }
+                                ?>
                             </div>
                         </div>
                     </div>

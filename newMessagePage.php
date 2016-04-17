@@ -12,7 +12,8 @@
     <link href="css/custom-base-page.css" rel="stylesheet">
     <?php include("includes/fonts.html");
     if(!empty($_POST))
-    {   $uid = $_SESSION['user_id'];
+    {
+        $uid = $_SESSION['user_id'];
         $msgMgr = new MessageMgr($uid);
         $convoID = $msgMgr->sendNewMessage($_POST);
         if($convoID != false)
@@ -43,8 +44,9 @@
                     <?php
                     if(!empty($_POST))
                     {
+                        //if page gets here then message has not sent
                         echo "<div class=\"alert alert-danger\">
-                                  Message Not Sent - User Does Not Exist.
+                                  Message Not Sent - Username Entered Does Not Exist Or Is Your Own.
                               </div>";
                     }
                     if(!empty($_SERVER['QUERY_STRING']))

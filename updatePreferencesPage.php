@@ -167,7 +167,7 @@
                         </div>
                         <div class="col-md-offset-4 col-sm-offset-5" id="errors">
                             <span class="<?php if($errors['tag_line'] == 'error_required') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_required">Required...</span>
-                            <span class="<?php if($errors['tag_line'] == 'error_regex') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_regex">Invalid format, must be at least 2 characters ...</span>
+                            <span class="<?php if($errors['tag_line'] == 'error_regex') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_regex">Invalid format, must be at least 2 characters. Valid characters are: (a-z, A-Z, 0-9, whitespace, ', -) </span>
                         </div>
                     </div>
                     <br><br><br>
@@ -187,7 +187,7 @@
                         </div>
                         <div class="col-md-offset-4 col-sm-offset-5" id="errors">
                             <span class="<?php if($errors['city'] == 'error_required') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_required">Required...</span>
-                            <span class="<?php if($errors['city'] == 'error_regex') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_regex">Invalid format. Valid characters(a-z, A-Z, 0-9, whitespace, ', -) at least two...</span>
+                            <span class="<?php if($errors['city'] == 'error_regex') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_regex">Invalid format, must be at least 2 characters. Valid characters are: (a-z, A-Z, 0-9, whitespace, ', -)</span>
                         </div>
                     </div>
 
@@ -232,7 +232,7 @@
                             </div>
                             <div class="col-md-offset-4 col-sm-offset-5" id="errors">
                                 <span class="<?php if($errors['about_me'] == 'error_required') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_required">Required...</span>
-                                <span class="<?php if($errors['about_me'] == 'error_regex') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_required">Invalid format. Valid characters(a-z, A-Z, 0-9, whitespace, ', -) <br> Must have at least two characters...</span>
+                                <span class="<?php if($errors['about_me'] == 'error_regex') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_required">Invalid format, must be at least 2 characters. Valid characters are: (a-z, A-Z, 0-9, whitespace, ', -).</span>
                             </div>
                         </div>
 

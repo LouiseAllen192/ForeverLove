@@ -6,7 +6,7 @@ class AdminServiceMgr{
         $db = DB::getInstance();
         $cid = 0;
         if($source['view_conversation']){
-            $sql = "SELECT conversation_id FROM conversations WHERE ((user1_id = '$reporter' && user2_id = '$reportee') || (user1_id = '$reporter' && user2_id = '$reportee'))";
+            $sql = "SELECT conversation_id FROM conversations WHERE ((user1_id = '$reporter' && user2_id = '$reportee') || (user1_id = '$reporter' && user2_id = '$reportee') && profile_visible = '1')";
             if($db->query($sql)->count()){
                 $cid = $db->results()[0]->conversation_id;
             }
