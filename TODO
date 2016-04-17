@@ -1,9 +1,9 @@
 FOR MONDAY!!!:
 
 - add 1000 users
-- page thing for search results if 1000 users
-- validate DOB properly
-- make sure hmail server works
+- check if pagenation works with 1000 users
+
+- validate DOB properly with javascript
 - Get search bar to work when logged in as admin
 
 
@@ -14,7 +14,3 @@ Message Services:
 Search Services:
     - Redirect with results upon enter or click search icon
     - Get search bar to work when logged in as admin ?????????
-
-
-Admin Services:
-    -  ...

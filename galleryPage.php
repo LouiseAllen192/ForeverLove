@@ -20,6 +20,7 @@
     include($_SERVER['DOCUMENT_ROOT'] . '/classes/ImageService.php');
     include($_SERVER['DOCUMENT_ROOT'].'/classes/DB.php');
     include($_SERVER['DOCUMENT_ROOT'].'/classes/Config.php');
+    include($_SERVER['DOCUMENT_ROOT'].'/classes/BrowserHelper.php');
 
 
     $me; //will be 1-for me, 2-for not me, 3-for admin

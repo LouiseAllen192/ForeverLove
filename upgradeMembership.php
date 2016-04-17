@@ -7,6 +7,11 @@
     require_once 'core/init.php';
     include("includes/metatags.html");
 
+
+    echo '<br><br><br><br><br><br><br><br>';
+    var_dump($_POST);
+
+
     $finished=false;
     $renew=false;
 
@@ -33,7 +38,7 @@
     $errors = UserServiceMgr::validateCreditCardDetails($_POST);
 
     if(isset($_POST['security']) && !($errors)){
-        if(UserServiceMgr::validateCreditCard($uid, $_POST)){
+        if(UserServiceMgr::validateCreditCard($_POST)){
             $finished=true;
             $length = $_POST['length'];
             $success = UserServiceMgr::registerUpgradeAccountType($uid, $length);

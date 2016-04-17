@@ -46,7 +46,7 @@
                         <div class="row">
                             <div class="col-xs-offset-2">
                                 <div class="col-xs-10">
-                                    <a href="../profilePage.php?uid=<?php echo $result->user_id;?>">
+                                    <a href="../profilePage.php?uid=<?php echo $results[$i]->user_id;?>">
                                         <div class="display_box">
                                             <div class="row">
                                                 <div class="col-xs-12">

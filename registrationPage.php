@@ -126,8 +126,7 @@
                             </div>
                             <div class="col-md-offset-4 col-sm-offset-5" id="errors">
                                 <span class="<?php if($errors['dob'] == 'error_required') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_required">Required...</span>
-                                <span class="<?php if($errors['dob'] == 'error_over18') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_regex">Over 18's Only...<br></span>
-                                <span class="<?php if($errors['dob'] == 'error_regex') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_regex">Must be a valid date in the following format<br> YYYY-MM-DD...</span>
+                                <span class="<?php if($errors['dob'] == 'error_regex') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_regex">Over 18's Only...<br></span>
                             </div>
                         </div>
                     </fieldset>

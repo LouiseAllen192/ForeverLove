@@ -14,6 +14,7 @@
             }
         }
 
+
     $errors = array();
     $errorMsg = false;
 
@@ -36,6 +37,10 @@
     }
 
     if(!empty($_POST) && isset($_POST['payment_submit_button']) && !($errors)){
+        echo 'IN HERE';
+        foreach($_POST as $k=>$v){
+            echo '$k'.'----'.$v.'<br>';
+        }
         if(UserServiceMgr::validateCreditCard($_POST) == 1){
             $length = $_POST['length'];
             UserServiceMgr::registerUpgradeAccountType($uid, $length);
