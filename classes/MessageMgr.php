@@ -143,8 +143,7 @@ class MessageMgr
             }
             else
                 $partnerName = "Blind Date";
-            if(count($messages) > 0)
-                echo "<div class = panel-group>";
+            echo "<div class = panel-group>";
             for ($i = 0; $i < count($messages); $i++)
             {
                 $dateAndTime = explode(" ", ($messages[$i]->date_received));
@@ -243,7 +242,7 @@ class MessageMgr
                     $this->createConversation($allUsers[$i]->user_id, 0);
                     $id = $allUsers[$i]->user_id;
                     DB::getInstance()->query("DELETE FROM blind_date WHERE user_id = $id")->results();
-                    DB::getInstance()->delete('blind_date', "user_id = $allUsers[$i]->user_id"); //removes user from blind date DB when they've got a match
+                    DB::getInstance()->delete('blind_date', "user_id = $id"); //removes user from blind date DB when they've got a match
                     echo "<div class=\"alert alert-success\">
                                Blind Date Match Made! Go To Your Existing Conversations To Begin Chatting!
                                 <a href=\"existingConversationPage.php\"><h3>Take Me There!</h3></a></div>";
