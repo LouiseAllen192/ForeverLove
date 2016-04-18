@@ -34,7 +34,7 @@
         $uid = ReturnShortcuts::getUserID($userN);
     }
 
-
+    $somethingWrong = false;
     $errors = UserServiceMgr::validateCreditCardDetails($_POST);
 
     if(isset($_POST['security']) && !($errors)){
@@ -44,11 +44,7 @@
             $success = UserServiceMgr::registerUpgradeAccountType($uid, $length);
         }
         else{
-            ?>
-            <div class="alert alert-danger">
-                <a href="registerAccountTypePage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <p><strong>Something went wrong</strong> - The Credit Card details you entered are not valid.</p>
-            </div>
+            $somethingWrong = true;?>
         <?php }
     }
     ?>
@@ -100,6 +96,13 @@ else{
 
                     <?php
 
+                    if($somethingWrong){ ?>
+                    <div class="alert alert-danger"><a href="registerAccountTypePage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <p><strong>Something went wrong</strong> - The Credit Card details you entered are not valid.</p>
+            </div>
+
+
+                   <?php }
                     if($finished){ ?>
                         <div class="alert alert-success">
                             <a href="registerAccountTypePage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
