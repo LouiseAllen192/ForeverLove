@@ -81,8 +81,7 @@
                                 <?php
                                 if($pageNum > 2){
                                     $i = $pageNum - 2;
-                                    if($i < 3){$n = $i + 5;}
-                                    else{$n = $pageNum + 2;}
+                                    $n = $pageNum + 2;
                                 }
                                 else{$i = 1; $n = 5;}
                                 if($pageNum > ($lastPage - 3)){

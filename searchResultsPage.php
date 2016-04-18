@@ -81,7 +81,16 @@
                             <ul class="pagination">
                                 <li><a href="searchResultsPage.php?pageNum=<?php echo 1; ?>&searchTerm=<?php echo $_GET['searchTerm'];?>">&laquo;</a></li>
                                 <?php
-                                for($i = 1; $i <= $lastPage; $i++){?>
+                                if($pageNum > 2){
+                                    $i = $pageNum - 2;
+                                    $n = $pageNum + 2;
+                                }
+                                else{$i = 1; $n = 5;}
+                                if($pageNum > ($lastPage - 3)){
+                                    $n = $lastPage;
+                                    $i = $n - 4;
+                                }
+                                for(; $i <= $n; $i++){?>
                                     <li><a href="searchResultsPage.php?pageNum=<?php echo $i; ?>&searchTerm=<?php echo $_GET['searchTerm'];?>"><?php echo $i; ?></a></li>
                                     <?php
                                 }
