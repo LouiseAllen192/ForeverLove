@@ -443,5 +443,14 @@ class MessageMgr
         else
             return "";
     }
+
+    public  static  function addMessages()
+    {
+        $date = date('Y-m-d h:i:s', time());
+        for($i = 0; $i < 100; $i++)
+        {
+            DB::getInstance()->query("INSERT INTO messages (conversation_id, sender_id, recipient_id, date_received, message_text, seen) VALUES ('23', '1', '7', '$date', '$i', '0')");
+        }
+    }
 }
 ?>

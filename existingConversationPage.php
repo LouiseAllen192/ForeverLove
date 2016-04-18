@@ -32,7 +32,7 @@
 
                     <br><br>
                     <?php
-                        //$uid = 1; //temp
+
                         $uid = $_SESSION['user_id'];
                         $msgMgr = new MessageMgr($uid);
                         $msgMgr->findConversations();

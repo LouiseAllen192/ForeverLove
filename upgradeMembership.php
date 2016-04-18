@@ -8,8 +8,8 @@
     include("includes/metatags.html");
 
 
-    echo '<br><br><br><br><br><br><br><br>';
-    var_dump($_POST);
+    //echo '<br><br><br><br><br><br><br><br>';
+   // var_dump($_POST);
 
 
     $finished=false;

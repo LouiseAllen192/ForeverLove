@@ -101,7 +101,7 @@
                             $num = 50; //num is number of messages to be loaded
                         $messageCount = MessageMgr::messageCount($convoID);
                         if($messageCount > $num && ($_SESSION["permissions"] == "admin" && $perm == 1 || $_SESSION["permissions"] == "user"))
-                            echo "<form name =\"f\"  action=\"conversationPage.php?$convoID#bottom\" method=\"post\">
+                            echo "<form name =\"f\"  action=\"conversationPage.php?$convoID\" method=\"post\">
                                        <input type = \"hidden\" name = \"num\" value = $num>
                                        <input type = \"hidden\" name = \"permission\" value = $perm>
                                        <a href=\"#\"  role = \"button\" class=\"btn btn-info\" onclick=\"document.forms['f'].submit();\">Load More Messages</a>
