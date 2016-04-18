@@ -3,7 +3,7 @@ class DB{
     private static $instance = null;
     private $pdo, $query, $error = false, $results, $count = 0;
 
-    //Connect to database through localhost database server
+
 //    private function __construct(){
 //        try{
 //            $this->pdo = new PDO(
@@ -17,7 +17,7 @@ class DB{
 //    }
 
 
-     // Connect to database through csis  database server
+
     private function __construct(){
         try{
             $this->pdo = new PDO(
