@@ -98,7 +98,7 @@
                                                 <input type = \"hidden\" name = \"permission\" value = \"1\">
                                                 <input type = \"hidden\" name = \"report_id\" value = $report_id>
                                                 <a href=\"#\"  style=\"color: gold\" onclick=\"document.forms['form'].submit();\">View Conversation</div></a>
-                                                </form>
+                                            </form>
                                             </div>
                                         </div>";
                                     }

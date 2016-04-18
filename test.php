@@ -8,15 +8,18 @@
     include($_SERVER['DOCUMENT_ROOT'] . '/classes/UserServiceMgr.php');
     include($_SERVER['DOCUMENT_ROOT'] . '/classes/ReturnShortcuts.php');
 
-    //$uid = $_SESSION['user_id'];
-    $uid = 5;
 
-    $regOrUpdate = UserServiceMgr::determineUpdateOrReg($uid);
 
-    $dbvalue=array();
 
-    if($regOrUpdate == "Update"){
-        $dbvalue = ReturnShortcuts::returnPreferences($uid);
+    $valid = false;
+    if (isset($source['month'])){$checkmonth = $source['month'];}
+    $curryear = date("y");
+    $currmonth = date("m");
+    $checkyear = $value;
+    if($curryear < $checkyear){$valid=true;}
+    if($curryear == $checkyear && $currmonth < $checkmonth){$valid = true;}
+    if(!$valid){
+        $this->addError($item, 'error_valid_date');
     }
 
     ?>

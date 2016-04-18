@@ -8,10 +8,8 @@
     include("includes/metatags.html");
 
 
-    echo '<br><br><br><br><br><br><br><br>';
-    var_dump($_POST);
-
-
+    if(isset($_POST['acc'])){$acc = $_POST['acc'];}
+    if(isset($_POST['accType'])){$accType = $_POST['accType'];}
     $finished=false;
     $renew=false;
 
@@ -26,7 +24,6 @@
         $renew = $_POST['renew'];
         $userN = $_POST['username'];
     }
-
     if(!$renew) {
         $uid = $_SESSION['user_id'];
     }
@@ -34,8 +31,27 @@
         $uid = ReturnShortcuts::getUserID($userN);
     }
 
+    $somethingWrong = false;
+    $errors = array();
 
-    $errors = UserServiceMgr::validateCreditCardDetails($_POST);
+
+    if(isset($_POST['month']) && isset($_POST['year'])) {
+        $dateMonth = $_POST['month'];
+        $dateYear = $_POST['year'];
+        $now = new  DateTime('now');
+        $curMonth = $now->format('m');
+        $curYear = $now->format('y');
+
+        if($curYear<$dateYear){
+            $errors = UserServiceMgr::validateCreditCardDetails($_POST);
+        }
+        else if($curYear == $dateYear && $dateMonth > $curMonth){
+            $errors = UserServiceMgr::validateCreditCardDetails($_POST);
+        }
+        else{
+            $errors['year'] = 'error_valid_date';
+        }
+    }
 
     if(isset($_POST['security']) && !($errors)){
         if(UserServiceMgr::validateCreditCard($_POST)){
@@ -44,12 +60,8 @@
             $success = UserServiceMgr::registerUpgradeAccountType($uid, $length);
         }
         else{
-            ?>
-            <div class="alert alert-danger">
-                <a href="registerAccountTypePage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <p><strong>Something went wrong</strong> - The Credit Card details you entered are not valid.</p>
-            </div>
-        <?php }
+            $somethingWrong = true;
+        }
     }
     ?>
 
@@ -100,6 +112,12 @@ else{
 
                     <?php
 
+                    if($somethingWrong){ ?>
+                        <div class="alert alert-danger"><a href="registerAccountTypePage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <p><strong>Something went wrong</strong> - The Credit Card details you entered are not valid.</p>
+                        </div><br><br>
+                        <a href="settingsPage.php" class="btn btn-info buttons-left" role="button"><span class="glyphicon glyphicon-chevron-left"></span> Back To Settings Page</a>
+            <?php }
                     if($finished){ ?>
                         <div class="alert alert-success">
                             <a href="registerAccountTypePage.php" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -130,8 +148,6 @@ else{
                 <?php }
                     ?>
 
-
-
                     <br><br>
 
                     <div class = "panel panel-default">
@@ -156,7 +172,7 @@ else{
                 }
 
 
-                if(!empty($_POST) && isset($_POST['accType']) ) {
+                if(!empty($_POST) && isset($_POST['accType']) && !$finished) {
 
                     if ($_POST['accType'] == "premium3") {
                         $acc = "3 month Premium";
@@ -223,8 +239,8 @@ else{
                                             </div>
                                             <p class="col-md-4 col-sm-5"></p>
                                             <span class="<?php if($errors['year'] == 'error_required') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_required">Required...</span>
-                                            <span class="<?php if($errors['year'] == 'error_regex') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_regex">Invalid year, format YY </span>
-                                            <span class="<?php if($errors['year'] == 'error_valid_date') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_regex">Must be a valid date</span>
+                                            <span class="<?php if($errors['year'] == 'error_regex') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_regex">Invalid year, format YY... </span>
+                                            <span class="<?php if($errors['year'] == 'error_valid_date') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_regex">Must be a valid date...</span>
                                         </div>
 
                                         <div class="form-group" id="security_group">
@@ -245,6 +261,8 @@ else{
                                     <br>
                                     <input type="hidden" name="renew" value="<?php echo $renew?>">
                                     <input type="hidden" name="username" value="<?php echo $userN?>">
+                                    <input type="hidden" name="accType" value="<?php echo $_POST['accType']?>">
+                                    <input type="hidden" name="acc" value="<?php echo $acc?>">
                                     <input class="btn btn-info center-inline" id=payment_submit_button" name= "submit" type="submit" value="Submit">
                                 </form>
 
