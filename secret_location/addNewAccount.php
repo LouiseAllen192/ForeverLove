@@ -3,6 +3,7 @@
 <head>
     <?php
     require_once '../core/init.php';
+    include("../classes/BrowserHelper.php");
     include("../includes/metatags.html");
     include("../includes/fonts.html");
 

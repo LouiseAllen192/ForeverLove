@@ -6,8 +6,7 @@
     <?php
     require_once 'core/init.php';
     include("includes/metatags.html");
-
-
+    
 
     if(isset($_POST['acc'])){$acc = $_POST['acc'];}
     if(isset($_POST['accType'])){$accType = $_POST['accType'];}

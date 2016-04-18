@@ -6,7 +6,7 @@
     include("../includes/metatags.html");
     include("../includes/fonts.html");
 
-    $reports = DB::getInstance()->query("SELECT * FROM banned_reports ORDER BY date_time DESC, priority DESC")->results();
+    $reports = DB::getInstance()->query("SELECT * FROM banned_reports WHERE resolved = 0 ORDER BY date_time DESC, priority DESC")->results();
     $priorities = SearchServiceMgr::getChoices('priority');
 
     $perPage = 10;
