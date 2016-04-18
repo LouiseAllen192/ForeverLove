@@ -150,13 +150,23 @@ $(document).ready(function(){
         });
     }
 
-    if(page == 'registrationPage.php' || page == 'updateRegDetailsPage.php') {
+    if(page == 'registrationPage.php'){
+        if($('#dob')[0].type != 'date'){
+            $('#dob').datepicker();
+            var arr = $('#dob').val().split('-');
+            $("#dob").val();
+        }
+    }
+
+    if(page == 'updateRegDetailsPage.php'){
         if($('#dob')[0].type != 'date'){
             $('#dob').datepicker();
             var arr = $('#dob').val().split('-');
             $("#dob").val(arr[2] + "/" + arr[1] + "/" + arr[0]);
         }
+    }
 
+    if(page == 'registrationPage.php' || page == 'updateRegDetailsPage.php') {
         $('#dob_group:has(div[id=errors])').find('#dob').change(function () {
             $('#dob_group > #errors > #error_required').removeClass('error').addClass('hide');
             var input = $(this).val();
