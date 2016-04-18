@@ -11,7 +11,8 @@
     <?php include("includes/fonts.html");
         include("Classes/DB.php");
         include("Classes/Config.php");
-        include("Classes/MessageMgr.php");?>
+        include("Classes/MessageMgr.php");
+        include("Classes/BrowserHelper.php")?>
 
 </head>
 
@@ -79,31 +80,48 @@
                 <p>
                     <br><br>
                     <?php
+                        //if more not pressed
+                        //if more is pressed then the number is passed back
                         if (!isset($_POST['convoID'])) //get conversation id
                             $convoID = $_SERVER['QUERY_STRING'];
                         else
                             $convoID = ($_POST["convoID"]);
+                        if(isset($_POST['permission']))
+                            $perm = 1;
+                        else
+                            $perm = 0;
 
-                        if($_SESSION["permissions"] == "admin" && isset($_POST['permission']))
-                            MessageMgr::loadConversationAdmin($convoID);
+                        if($_SESSION["permissions"] == "admin" && $perm != 1)
+                            echo "<div class=\"alert alert-danger\">
+                                       To View This Conversation, You Must Follow The Appropriate Link In A Report
+                                  </div>";
+                        if(isset($_POST["num"]))
+                            $num = $_POST["num"] + 50;
+                        else
+                            $num = 50; //num is number of messages to be loaded
+                        $messageCount = MessageMgr::messageCount($convoID);
+                        if($messageCount > $num && ($_SESSION["permissions"] == "admin" && $perm == 1 || $_SESSION["permissions"] == "user"))
+                            echo "<form name =\"f\"  action=\"conversationPage.php?$convoID#bottom\" method=\"post\">
+                                       <input type = \"hidden\" name = \"num\" value = $num>
+                                       <input type = \"hidden\" name = \"permission\" value = $perm>
+                                       <a href=\"#\"  role = \"button\" class=\"btn btn-info\" onclick=\"document.forms['f'].submit();\">Load More Messages</a>
+                                   </form><br>";
+                        if($_SESSION["permissions"] == "admin" && $perm == 1)
+                            MessageMgr::loadConversationAdmin($convoID, $num);
                         else if($_SESSION["permissions"] != "admin")
                         {
                             $uid = $_SESSION['user_id'];
                             $MsgMgr = new MessageMgr($uid);
                             if (isset($_POST['convoID']))
-                                if($_POST['message'] != "")
+                                if ($_POST['message'] != "")
                                     $MsgMgr->sendMessage($_POST["message"], $convoID);
                             if ($MsgMgr->conversationExists($convoID))
-                                $MsgMgr->conversationLoader($convoID);
+                                $MsgMgr->conversationLoader($convoID, $num);
                             else
                                 echo "<div class=\"alert alert-danger\">
                                        This Conversation Does Not Exist.
                                       </div>";
                         }
-                        else
-                            echo "<div class=\"alert alert-danger\">
-                                       To View This Conversation, You Must Follow The Appropriate Link In A Report
-                                      </div>";
                     ?>
                     <a name="bottom"></a>
                 </p>

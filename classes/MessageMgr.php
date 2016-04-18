@@ -130,11 +130,12 @@ class MessageMgr
         return ($ans[0]->conversation_id);
     }
 
-    public function loadConversation($convoID)
+    public function loadConversation($convoID, $num)
     {
         if(!empty($convoID))
         {
-            $messages = DB::getInstance()->query("SELECT * FROM messages WHERE conversation_id = '$convoID' ORDER BY date_received")->results();
+            $num = $num++;
+            $messages = DB::getInstance()->query("SELECT * FROM messages WHERE conversation_id = '$convoID' ORDER BY date_received DESC LIMIT $num")->results();
             $this->markMessagesAsRead($convoID);
             $vis = $this->isProfileVisible($convoID);
             if($vis)
@@ -145,7 +146,7 @@ class MessageMgr
             else
                 $partnerName = "Blind Date";
             echo "<div class = panel-group>";
-            for ($i = 0; $i < count($messages); $i++)
+            for ($i = count($messages)-1; $i >= 0; $i--)
             {
                 $dateAndTime = explode(" ", ($messages[$i]->date_received));
                 $date = explode("-", $dateAndTime[0]);
@@ -177,9 +178,13 @@ class MessageMgr
                     <input type=\"hidden\" name=\"convoID\" value=$convoID />
                     <input type=\"submit\" value=\"Send\">
                 </form>";
+            return $num;
         }
-        else //if user just types in URL without following appropriate link
+        else
+        {//if user just types in URL without following appropriate link
             echo "Nothing to see here.";
+            return false;
+        }
     }
 
     public function getConversationPartner($convoID)
@@ -271,7 +276,7 @@ class MessageMgr
             return false;
     }
 
-    public function messageCount($convoID)
+    public static function messageCount($convoID)
     {
         $array = DB::getInstance()->query("SELECT COUNT(*) AS 'count' FROM messages where conversation_id = '$convoID'")->results();
         $count = $array[0]->count;
@@ -298,13 +303,15 @@ class MessageMgr
             return false;
     }
 
-    public function conversationLoader($convoID) //loads everything but heading and back button on conversation page
+    public function conversationLoader($convoID, $num) //loads everything but heading and back button on conversation page
     {
-        if ($this->isUserInConversation($convoID) == TRUE) {
-            $this->loadConversation($convoID);
+        if ($this->isUserInConversation($convoID) == TRUE)
+        {
+            $this->loadConversation($convoID, $num);
             $visible = $this->isProfileVisible($convoID);
-            if (!$visible) {
-                $msgCount = $this->messageCount($convoID);
+            if (!$visible)
+            {
+                $msgCount = self::messageCount($convoID);
                 echo "Message Count: " . $msgCount;
                 if ($msgCount >= 25 && !($this->hasUserPressedReveal($convoID)))
                     echo "<form action=\"conversationPage.php?$convoID#bottom\"  method=\"post\">
@@ -388,15 +395,15 @@ class MessageMgr
         DB::getInstance()->query("UPDATE messages SET seen = '1' WHERE conversation_id = '$convoID' AND recipient_id = $this->userID");
     }
 
-    public static function loadConversationAdmin($convoID)
+    public static function loadConversationAdmin($convoID, $num)
     {
         if (!empty($convoID))
         {
-            $messages = DB::getInstance()->query("SELECT * FROM messages WHERE conversation_id = '$convoID' ORDER BY date_received")->results();
+            $messages = DB::getInstance()->query("SELECT * FROM messages WHERE conversation_id = '$convoID' ORDER BY date_received DESC LIMIT $num")->results();
             $firstUser = $messages[0]->sender_id;
             $secondUser = $messages[0]->recipient_id;
             echo "<div class = panel-group>";
-            for ($i = 0; $i < count($messages); $i++)
+            for ($i = count($messages)-1; $i >= 0; $i--)
             {
                 $sender = $messages[$i]->sender_id;
                 $sName = self::findUsername($sender);
