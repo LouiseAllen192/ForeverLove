@@ -159,12 +159,18 @@ class UserServiceMgr
         }
         else                {
             $changes['account_type']= "Premium";
-            $date->add(new DateInterval('P'.$accLength.'M'));
+            try {
+                $date->add(new DateInterval('P' . $accLength . 'M'));
+            }
+            catch(Exception $e){
+                return false;
+            }
             $changes['account_expired']= $date->format('Y-m-d');
         }
         $where = "user_id = '".$uid."'";
 
         $success = DB::getInstance()->update('account_details', $where, $changes);
+
         return $success;
     }
 
@@ -202,6 +208,14 @@ class UserServiceMgr
     }
 
     public static function validateCreditCardDetails($source){
+        if(isset($source['submit'])){unset($source['submit']);}
+        if(isset($source['length'])){unset($source['length']);}
+        if(isset($source['submit'])){unset($source['submit']);}
+        if(isset($source['submit'])){unset($source['submit']);}
+
+
+
+
         $validate = new Validate(); //value= POST['fullname']
         $validate->check(
             $source,

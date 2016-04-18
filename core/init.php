@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// GLOBALS for localhost
+//// GLOBALS for localhost
 $GLOBALS['config'] = [
     'mysql' => [
         'host' => '127.0.0.1',
