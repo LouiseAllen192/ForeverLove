@@ -6,7 +6,7 @@
     <?php
     require_once 'core/init.php';
     include("includes/metatags.html");
-    
+
 
     if(isset($_POST['acc'])){$acc = $_POST['acc'];}
     if(isset($_POST['accType'])){$accType = $_POST['accType'];}
@@ -172,7 +172,7 @@ else{
                 }
 
 
-                if(!empty($_POST) && isset($_POST['accType'])) {
+                if(!empty($_POST) && isset($_POST['accType']) && !$finished) {
 
                     if ($_POST['accType'] == "premium3") {
                         $acc = "3 month Premium";
