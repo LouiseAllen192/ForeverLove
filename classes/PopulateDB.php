@@ -40,9 +40,9 @@ class PopulateDB{
     private function getRegDetails($i, $fNamesArray, $fn, $lNamesArray, $ln){
         $registrationDetails = [];
         $registrationDetails['user_id'] = $i;
-        $registrationDetails['first_name'] = $fNamesArray[mt_rand(0, $fn - 1)];
-        $registrationDetails['last_name'] = $lNamesArray[mt_rand(0, $ln - 1)];
-        $registrationDetails['username'] = str_replace(' ', '', $registrationDetails['first_name'].$registrationDetails['last_name'].$i);
+        $registrationDetails['first_name'] = trim(preg_replace('/\s+/', '', $fNamesArray[mt_rand(0, $fn - 1)]));
+        $registrationDetails['last_name'] = trim(preg_replace('/\s+/', '', $lNamesArray[mt_rand(0, $ln - 1)]));
+        $registrationDetails['username'] = $registrationDetails['first_name'].$registrationDetails['last_name'].$i;
         $registrationDetails['password'] = password_hash('password', PASSWORD_DEFAULT);
         $registrationDetails['email'] = $registrationDetails['username'].'@gmail.com';
         return $registrationDetails;
@@ -63,7 +63,7 @@ class PopulateDB{
         return [
             'user_id' => $user_id,
             'tag_line' => '',
-            'city' => $citiesArray[array_rand($citiesArray)],
+            'city' => trim(preg_replace('/\s+/', '', $citiesArray[array_rand($citiesArray)])),
             'gender' => mt_rand(2, 3),
             'seeking' => mt_rand(2, 4),
             'intent' => mt_rand(2, 6),
@@ -85,7 +85,7 @@ class PopulateDB{
     private function getUniqueHobbies($user_id, $hobbiesArray){
         return [
             'user_id' => $user_id,
-            'unique_hobby' => $hobbiesArray[array_rand($hobbiesArray)]
+            'unique_hobby' => trim(preg_replace('/\s+/', '', $hobbiesArray[array_rand($hobbiesArray)]))
         ];
     }
 
