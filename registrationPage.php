@@ -126,7 +126,7 @@
                         <div class="form-group" id="dob_group">
                             <label for="dob" class="col-md-4 col-sm-5 control-label"><b>Date Of Birth</b></label>
                             <div class="col-md-8 col-sm-7">
-                                <input type="date" class="form-control" id="dob" name="dob" value="<?php echo Input::get('dob');?>">
+                                <input type="date" class="form-control" id="dob" name="dob" value="">
                             </div>
                             <div class="col-md-offset-4 col-sm-offset-5" id="errors">
                                 <span class="<?php if($errors['dob'] == 'error_required') : ?>error<?php else : ?>hide<?php endif; ?>" id="error_required">Required...</span>

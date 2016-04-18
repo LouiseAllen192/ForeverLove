@@ -3,25 +3,11 @@ class DB{
     private static $instance = null;
     private $pdo, $query, $error = false, $results, $count = 0;
 
-//    //Connect to database through localhost database server
-    private function __construct(){
-        try{
-            $this->pdo = new PDO(
-                'mysql:host='.Config::get('mysql/host').';dbname='.Config::get('mysql/db'),
-                Config::get('mysql/username'),
-                Config::get('mysql/password')
-            );
-        }catch (PDOException $e){
-            die($e->getMessage());
-        }
-    }
-
-
-//     * Connect to database through csis  database server
+    //Connect to database through localhost database server
 //    private function __construct(){
 //        try{
 //            $this->pdo = new PDO(
-//                'mysql:host='.Config::get('mysql/host').';port='.Config::get('mysql/host').';dbname='.Config::get('mysql/db'),
+//                'mysql:host='.Config::get('mysql/host').';dbname='.Config::get('mysql/db'),
 //                Config::get('mysql/username'),
 //                Config::get('mysql/password')
 //            );
@@ -29,6 +15,20 @@ class DB{
 //            die($e->getMessage());
 //        }
 //    }
+
+
+     // Connect to database through csis  database server
+    private function __construct(){
+        try{
+            $this->pdo = new PDO(
+                'mysql:host='.Config::get('mysql/host').';port='.Config::get('mysql/host').';dbname='.Config::get('mysql/db'),
+                Config::get('mysql/username'),
+                Config::get('mysql/password')
+            );
+        }catch (PDOException $e){
+            die($e->getMessage());
+        }
+    }
 
     public static function getInstance(){
         if(!isset(self::$instance)){
