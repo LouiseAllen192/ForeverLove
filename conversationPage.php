@@ -148,7 +148,7 @@
                         {
                             $rid = $_POST["report_id"];
                             echo "<div style = \"text-align: left\">
-                                    <a href=\"secret_location/reportPage.php?report_id=$rid\"role=\"button\"><span class=\"glyphicon glyphicon-chevron-left\"></span>Back to Report</a>
+                                    <a href=\"secret_location/reportPage.php?report_id=$rid\" class=\"btn btn-info\" role=\"button\"><span class=\"glyphicon glyphicon-chevron-left\"></span>Back to Report</a>
                                 </div>";
                         }
                         include("includes/navbarAdmin.html");

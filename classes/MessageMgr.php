@@ -245,13 +245,13 @@ class MessageMgr
                 if (($seeking == 4 || $seeking == $otherUserGender) && ($otherUserSeeking == 4 || $otherUserSeeking == $gender))
                 {
                     $matchFound = true;
-                    $this->createConversation($allUsers[$i]->user_id, 0);
+                    $convoID = $this->createConversation($allUsers[$i]->user_id, 0);
                     $id = $allUsers[$i]->user_id;
                     DB::getInstance()->query("DELETE FROM blind_date WHERE user_id = $id")->results();
                     DB::getInstance()->delete('blind_date', "user_id = $id"); //removes user from blind date DB when they've got a match
                     echo "<div class=\"alert alert-success\">
                                Blind Date Match Made! Go To Your Existing Conversations To Begin Chatting!
-                                <a href=\"existingConversationPage.php\"><h3>Take Me There!</h3></a></div>";
+                                <a href=\"conversationPage.php?$convoID\"><h3>Take Me There!</h3></a></div>";
                 }
                 $i++;
             }
