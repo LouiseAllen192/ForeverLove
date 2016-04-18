@@ -126,7 +126,7 @@ class MessageMgr
     public function createConversation($recieverid, $visible)
     {
         DB::getInstance()->insert('Conversations', ['User1_id' => $this->userID, 'User2_id' => $recieverid, 'profile_visible' => $visible]);
-        $ans = DB::getInstance()->query("SELECT conversation_id FROM conversations WHERE User1_id = '$this->userID' AND User2_id = '$recieverid'")->results();
+        $ans = DB::getInstance()->query("SELECT conversation_id FROM conversations WHERE User1_id = '$this->userID' AND User2_id = '$recieverid' AND profile_visible = '$visible'")->results();
         return ($ans[0]->conversation_id);
     }
 
