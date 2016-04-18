@@ -354,16 +354,17 @@ class MessageMgr
         $gender = $prefs[0]->gender;
         $values = ReturnShortcuts::returnAccDetails($this->userID);
         $acctype = $values['account_type'];
+        $username = $this->getUsername();
         if ($acctype == 'Free')
-            return "You must be a premium member to access Blind Date
-                    <a href =\"upgradeMembership.php\"><h3>Take Me To Upgrade Membership Page</h3></a>";
+            return "You must be a premium member to access Blind Date\r\n
+                 <a href=\"../ForeverLove/upgradeMembership.php?internal=yes&username=$username\"><h4>Take Me To Upgrade Membership Page</h4></a>";
         else if (!empty($alreadyIn))
             return "We are working on finding you a match at present. Please be patient.";
         else if ($currentBlindDate)
             return "You currently have a blind date in your existing conversations. You must either reveal your profile to your partner or end the conversation to get another.";
         else if ($seeking == 1 || ($gender == 1 || $gender == 4))
             return "Gender And/Or Seeking Details Not Specified For Your Profile. You Must Update Them Before You Can Participate In Blind Date.
-                       <a href =\"updatePreferencesPage.php\"><h3>Take Me To Update Preferences Page</h3></a>";
+                       <a href =\"updatePreferencesPage.php\"><h4>Take Me To Update Preferences Page</h4></a>";
         else
             return "";
     }
